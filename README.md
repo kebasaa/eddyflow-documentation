@@ -4,14 +4,43 @@
 
 # EddyFlow Documentation
 
-EddyFlow&reg; is a powerful open source software application for processing eddy covariance data. It computes fluxes of water vapor (evapotranspiration), carbon
-dioxide, and other trace gases, and energy with the Eddy Covariance method.
+EddyFlow&reg; is an open source software application for processing eddy covariance data. It computes fluxes of water vapor, carbon dioxide, other trace gases, and energy with the eddy covariance method.
 
-This repository contains the EddyFlow documentation site for GitHub Pages.
+This repository contains the source for the EddyFlow documentation site published with GitHub Pages.
 
-The entrypoint for ![the documentation is here](docs/index.md).
+## Documentation
+
+- Published documentation: [https://keba_saa.github.io/eddyflow-documentation/](https://keba_saa.github.io/eddyflow-documentation/)
+- Local documentation source: [docs/index.md](docs/index.md)
+
+## Repository Structure
+
+- `docs/`: MkDocs documentation source.
+- `docs/assets/`: images, logo copies, and stylesheet used by the site.
+- `mkdocs.yml`: site configuration and navigation.
+- `.github/workflows/`: GitHub Pages deployment workflow.
+- `img/`: source EddyFlow branding assets used by this repository.
+
+## Local Preview
+
+Install the documentation dependencies:
+
+```bash
+python -m pip install -r requirements-docs.txt
+```
+
+Start a local preview server:
+
+```bash
+mkdocs serve
+```
+
+Build the site strictly:
+
+```bash
+mkdocs build --strict
+```
 
 ## License
 
-This fork of EddyPro 6.2.2 and its documentation are released with and will retain the
-[GNU General Public License (GPL) v3.0](https://github.com/LI-COR/EddyFlow-gui/blob/master/LICENSE).
+This fork of EddyPro 6.2.2 and its documentation are released with and will retain the [GNU General Public License (GPL) v3.0](LICENSE).
