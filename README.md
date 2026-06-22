@@ -1,6 +1,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-![EddyFlow](img/logo/app-logo.svg)
+![EddyFlow](img/app-logo.svg)
 
 # EddyFlow Documentation
 
@@ -8,6 +8,8 @@ EddyFlow&reg; is a powerful open source software application for processing eddy
 dioxide, and other trace gases, and energy with the Eddy Covariance method.
 
 This repository contains the EddyFlow documentation site for GitHub Pages.
+
+The entrypoint for ![the documentation is here](docs/index.md).
 
 ## License
 
