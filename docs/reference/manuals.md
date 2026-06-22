@@ -54,6 +54,8 @@
     - [Calculating fluxes](../topics/calculate-fluxes.md#top)
 
 - A. [References](../topics/references.md#top)
+
+- B. Additional Topics
     - [Analyzing Spectra and Cospectra](../topics/spectral-analysis.md)
     - [Changing Metadata After Collection](../topics/ttp059-how-to-change-metadata.md)
     - [Gas Analyzer Diagnostics](../topics/diagnostics-for-gas-analyzers.md)
