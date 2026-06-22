@@ -1,0 +1,7 @@
+---
+title: "North Offset"
+source_url: "https://www.licor.com/support/EddyPro/topics/north-offset.html"
+---
+# North offset
+
+For post-mounted anemometers (e.g., Gill WindMaster® and Metek USA-1), a tag is normally provided to align the anemometer correctly with respect to due north. The anemometer, however, can be placed in any position. If it is positioned with the north arrow aligned off of north, the yaw offset must be measured and provided here. The offset angle should be provided in degrees past north as a positive value representing the angle from geographic north (from an overhead view, degrees past north are in the clockwise direction). Yoke-mounted anemometers (Gill HS and Campbell® Scientific CSAT3) are normally oriented facing the prevailing wind direction and independently of due north. In these cases, provide the angle between the main axis of the anemometer (pointing away from the support arm) and due north, with the same sign convention as with vertical mounted anemometers.

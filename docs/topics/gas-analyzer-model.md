@@ -1,0 +1,11 @@
+---
+title: "Model (Gas Analyzer)"
+source_url: "https://www.licor.com/support/EddyPro/topics/gas-analyzer-model.html"
+---
+# Model (gas analyzer)
+
+EddyFlow can correctly process data acquired with the original publisher gas analyzers, as well as data from instruments from other manufacturers. Gas analyzers other than the original publisher are considered as "generic analyzers." You can specify a "Generic Open Path" or "Generic Closed Path" analyzer. The main difference between processing data from a the original publisher instrument and a generic instrument is that for the latter ones, there are no model-specific corrections implemented. This means that you can get robust flux estimates from non-the original publisher instruments as long as your data do not need to undergo a processing step that is specific to your instrument. Data from such analyzers are processed in a "standard" way and according to the selected processing options, mainly depending on whether the instrument is open or closed path. Also, for such unknown instruments you need to specify the path lengths and time response, which are needed to estimate the associated high-frequency losses.
+
+As a notable exception, EddyFlow correctly processes data from open and closed path Krypton or Lyman-α hygrometers, by applying the required oxygen correction ([Tanner et al., 1993](references.md#Tanner); [Van Dijk et al., 2003](references.md#vanDijk)).
+
+In the case of a the original publisher instrument, the most suitable corrections are applied automatically (and in the correct sequence) by EddyFlow, ensuring the most accurate flux estimates.

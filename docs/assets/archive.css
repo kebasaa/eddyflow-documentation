@@ -1,0 +1,2 @@
+.md-footer-meta::before{content:'Unofficial EddyFlow documentation archive for research and reproducibility.';display:block;max-width:61rem;margin:0 auto;padding:.6rem .8rem;color:var(--md-footer-fg-color--lighter);}
+.md-typeset blockquote{border-left:.2rem solid var(--md-accent-fg-color);}

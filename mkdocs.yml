@@ -1,0 +1,159 @@
+site_name: EddyFlow Documentation
+site_description: EddyFlow software documentation and physics reference
+site_url: https://jonmuell.github.io/eddyflow-documentation/
+docs_dir: docs
+theme:
+  name: material
+  logo: assets/app-logo.svg
+  favicon: assets/app-logo-mini.svg
+  palette:
+    primary: blue
+    accent: green
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+extra:
+  generator_notice: "EddyFlow documentation"
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+extra_css:
+  - assets/archive.css
+nav:
+  - "Home": index.md
+  - "Operating Instructions": reference/manuals.md
+  - "Provenance": provenance.md
+  - "Documents": reference/docs.md
+  - "FAQs": reference/faqs.md
+  - "EddyFlow Help Center": reference/home.md
+  - "Software": reference/software.md
+  - "EddyFlow Menu":
+    - "Data Processing Reference":
+      - "Preliminary Processing":
+        - "Adjusting the Coordinate System": topics/adjusting-anemometer-coordinate-system.md
+        - "Anemometer Tilt Correction": topics/anemometer-tilt-correction.md
+        - "Angle-of-Attack Correction": topics/angle-of-attack-correction.md
+        - "Calculating Concentrations and Densities": topics/average-gas-concentrations-densities.md
+        - "Calculating Ambient and Cell Parameters": topics/calculate-ambient-and-cell-parameters.md
+        - "Calculating Ambient and Cell Statistics": topics/calculate-ambient-and-cell-statistics.md
+        - "Calculating Cell Temperature": topics/calculate-cell-temperature.md
+        - "Calculating Instrument Separations": topics/calculate-instrument-separation.md
+        - "Calculating Micrometeorological Variables": topics/calculate-micromet-variables.md
+        - "Calculating Spectra, Cospectra and Ogives": topics/calculate-spectra-cospectra-and-ogives.md
+        - "Calculating Turbulent Fluctuations": topics/calculate-turbulent-flux.md
+        - "Converting Raw Data to Mixing Ratios": topics/converting-to-mixing-ratio.md
+        - "Crosswind Correction": topics/cross-wind-correction.md
+        - "Defining the EddyFlow Express Data Set": topics/defining-the-dataset.md
+        - "Despiking and Statistical Screening": topics/despiking-raw-statistical-screening.md
+        - "Ensemble Averaged Spectra and Cospectra": topics/ensemble-averaged-spectra-and-cospectra.md
+        - "QA/QC of Spectra and Cospectra": topics/ensemble-averages.md
+        - "Importing Data": topics/importing-data.md
+        - "Iterative Calculation of Micromet Variables": topics/iterative-calculation-of-micromet-vars.md
+        - "Random Uncertainty Estimation": topics/random-uncertainty-estimation.md
+        - "Detecting and Compensating Time Lags": topics/time-lag-detect-correct.md
+        - "'w-boost' Bug Correction": topics/w-boost-correction.md
+      - "Calculating Fluxes":
+        - "Calculating Multipliers for Spectroscopic Corrections (LI-7700)": topics/calculate-li-7700-multipliers.md
+        - "Calculating Fluxes for the LI-7200 and LI-7700": topics/calculate-flux-7200-and-7700.md
+        - "Calculating Fluxes Level 0 (uncorrected fluxes)": topics/calculate-flux-level-0.md
+        - "Calculating Fluxes Level 1, 2, and 3 (corrected fluxes)": topics/calculate-flux-level-123.md
+        - "Calculating Fluxes for the LI-7500 and LI-7700": topics/calculate-flux-open-path-analyzers.md
+        - "Calculating the Off-season Uptake Correction (LI-7500 only)": topics/calculate-offseason-uptake-correction.md
+        - "Calculating Spectral Correction Factors": topics/calculate-spectral-correction-factors.md
+        - "Estimating the Flux Footprint": topics/estimating-flux-footprint.md
+        - "Flux Quality Flags for Micrometeorological Tests": topics/flux-quality-flags.md
+        - "High-pass Filtering Correction": topics/high-pass-filtering.md
+        - "Low-pass Filtering Correction": topics/low-pass-filtering.md
+      - "Calculating Fluxes": topics/calculate-fluxes.md
+      - "Express Default Settings": topics/express-defaults.md
+      - "Preliminary Processing": topics/preliminary-processing.md
+    - "Using EddyFlow":
+      - "Using Advanced Settings":
+        - "Overview of Advanced Mode": topics/advanced-mode.md
+        - "Advanced Settings: Output Files": topics/advanced-settings-outputs.md
+        - "Advanced Settings: Processing Options": topics/advanced-settings-processing.md
+        - "Advanced Settings: Spectral Corrections": topics/advanced-settings-spectral-corrections.md
+        - "Advanced Settings: Statistical Tests": topics/advanced-settings-statistical-tests.md
+        - "Assessment Tests": topics/assessment-tests.md
+        - "Run EddyFlow from Command Line": topics/command-line.md
+        - "Selecting the Best Processing Settings": topics/selecting-advanced-options.md
+        - "Using Advanced Settings on the SmartFlux System": topics/smarflux-configuration-no-ghg.md
+      - "Supported Biomet Files Formats": topics/biomet-data-format.md
+      - "Dataset Selection Page": topics/dataset-selection-page.md
+      - "Using the Metadata File Editor": topics/metadata-file-editor-using.md
+      - "Metadata Retriever Tool": topics/metadata-retriever-tool.md
+      - "Processing ASCII and TOB1 Files": topics/processing-ascii-and-tob1-files.md
+      - "Running EddyFlow on the SmartFlux System": topics/smartflux-settings.md
+      - "Using Advanced Settings": topics/using-advanced-settings.md
+      - "Using Biomet Data": topics/using-biomet-data.md
+    - "The Interface":
+      - "Interface Reference":
+        - "Axes Alignment": topics/axes-alignment.md
+        - "Beginning of Data Set": topics/beginning-of-dataset.md
+        - "Linear Scaling": topics/conversion-type.md
+        - "Magnetic Declination": topics/declination.md
+        - "Displacement Height": topics/displacement-height.md
+        - "Time-varying (Dynamic) Metadata": topics/dynamic-metadata.md
+        - "Flags": topics/flags.md
+        - "Head or Flow Distortion Correction": topics/flow-distortion-correction.md
+        - "Model (Gas Analyzer)": topics/gas-analyzer-model.md
+        - "Generic Binary File Type": topics/generic-binary-files.md
+        - "GHG File Type": topics/ghg-file-format.md
+        - "Path Lengths and Time Response": topics/longitude-transverse-pathlengths.md
+        - "Use Alternative Metadata File": topics/metadata-file-use-alternative.md
+        - "Nominal Time Lag": topics/nominal-time-lag.md
+        - "North Offset": topics/north-offset.md
+        - "Planar Fit Configuration Dialog": topics/planar-fit.md
+        - "Raw File Name Format": topics/raw-file-name-format.md
+        - "Roughness Length": topics/roughness-length.md
+        - "Sensitive and Non-sensitive Variables": topics/sensitive-and-nonsensitive-variables.md
+        - "Northward, Eastward, and Vertical Separation": topics/sensor-separation.md
+        - "Sonic Firmware Version": topics/sonic-anemometer-firmware-version.md
+        - "TOB1 File Type": topics/tob1-files.md
+        - "Using Results from a Previous Run": topics/using-prev-results.md
+        - "Wind Speed Measurement Offsets": topics/windspeed-offsets.md
+      - "Basic Settings": topics/introduction-dataset-selection.md
+      - "Project Page": topics/introduction-interface.md
+      - "Metadata File Editor": topics/metadata-file-editor.md
+      - "Advanced Settings":
+        - "Output Files": topics/output-files.md
+        - "Spectral Corrections": topics/spectral-corrections.md
+        - "Statistical Tests": topics/statistical-tests.md
+      - "Advanced Settings": topics/raw-processing-options.md
+      - "Interface Reference": topics/software-reference-introduction.md
+    - "Troubleshooting":
+      - "Error Codes": topics/error-codes.md
+    - "5. The Interface": topics/introduction-welcome-page.md
+    - "1. Introduction": topics/introduction.md
+    - "Output Files":
+      - "The Full Output File": topics/output-files-full-output.md
+      - "The Stats Folder": topics/output-files-stats-folder.md
+      - "List of Output Files": topics/outputs.md
+    - "3. Output Files": topics/output-files-overview.md
+    - "A. References": topics/references.md
+    - "6. Data Processing Reference": topics/software-reference.md
+    - "4. Troubleshooting": topics/troubleshooting.md
+    - "2. Using EddyFlow": topics/tutorials.md
+  - "Documents":
+    - "Gas Analyzer Diagnostics": topics/diagnostics-for-gas-analyzers.md
+    - "Analyzing Spectra and Cospectra": topics/spectral-analysis.md
+    - "How to change Metadata": topics/ttp059-how-to-change-metadata.md
+    - "What's New": topics/whats-new.md
+  - "Videos": reference/videos.md
+  - "Videos":
+    - "Abate Processing Time": videos/abate-processing-time.md
+    - "Biomet Data Processing and More in EddyFlow 4.0": videos/biomet-data-processing.md
+    - "Learning EddyFlow": videos/learning-eddypro.md
+    - "EddyFlow Output Files": videos/output-files.md
+    - "Processing .ghg Files": videos/processing-ghg-files.md
+    - "Processing Options": videos/processing-options.md
+    - "Spectral Corrections": videos/spectral-corrections.md
+    - "Statistical Analysis": videos/statistical-analysis.md

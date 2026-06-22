@@ -1,0 +1,28 @@
+---
+title: "Angle-of-Attack Correction"
+source_url: "https://www.licor.com/support/EddyPro/topics/angle-of-attack-correction.html"
+---
+# Angle of attack correction
+
+See [Angle of attack correction for wind components (Gill anemometers only)](selecting-advanced-options.md#Angle) for more information.
+
+The so-called Angle of Attack error arises due to the imperfect sine and cosine response of an anemometer. When the wind approaches the anemometer with a considerable angle of attack (that is, at an angle that deviates significantly from horizontal), the frame of a post-mounted sonic (such as Gill R2, R3, WindMaster, or Metek USA-1) distorts the flow, resulting in inaccurate measurements. Furthermore, the transducer poles create a self-sheltering effect that also affects the measurement. This second effect also occurs with yoke-style anemometer (such as Gill HS and Campbell® Scientific, Inc. CSAT3).
+
+Refining a method first described by [van der Molen et al. (2004)](references.md#vanderMolen), [Nakai et al. (2006)](references.md#Nakai) proposed a correction to compensate for the Angle of Attack error. A FORTRAN implementation, valid for R3-style Gill anemometers (also including R2, WindMaster™ and WindMaster™ Pro), is available at [Taro Nakai's web page](https://sites.google.com/site/micrometeorologist/). The routine, developed by Taro Nakai and translated into FORTRAN by Michiel K. Van der Molen, was embedded into EddyFlow with minor modifications, after explicit authorization by the author.
+
+The correction is implemented in EddyFlow following Eq. 3-6 and bulleted procedure at p. 21 in [Nakai et al. (2006)](references.md#Nakai). It is worthwhile to note that the application of this correction is virtually independent (Taro Nakai, personal communication) from the internal correction "applied to calibrate out the affects of the transducers and head framework" (cited from the [R3/R3A User Manual, Gill Instruments Ltd.](references.md)).
+
+[Nakai and Shimoyama (2012)](references.md#NakaiandShim2012) further refine the correction, by carrying out a field experiment using Gill WindMaster™ anemometers, to overcome the critics of the correction of 2006 being derived from wind tunnel experiments. A C code for this new correction is available at [Taro Nakai's web page](https://sites.google.com/site/micrometeorologist/). That code was translated into FORTRAN by G. Fratini and embedded in EddyFlow after authorization of the author. A stand-alone version of the same FORTRAN code is now also available at Nakai's software web page.
+
+## Applicability of the angle of attack corrections of Nakai and co-authors
+
+Based on the most recent information available to the original publisher at the time of this writing (April 2016), which include the recent discovery of the "w-boost" bug in Gill WM and WMP units produced between 2006 and 2015 ([see Gill's Technical Key Note KN1509v3](http://gillinstruments.com/data/manuals/KN1509_WindMaster_WBug_info.pdf)), we recommend that:
+
+- The correction by Nakai et al. (2006) be applied only to Gill R2 and R3 family anemometers. Special care must be paid to making sure that the correction is applicable to the current dataset, based on the anemometer settings used when collecting the data (e.g. CALIBRATED vs. UNCALIBRATED data) as they compare to the settings used by Nakai and co-author in their wind tunnel experiments. Please contact Taro Nakai or Gill Instruments if in doubt. The wrong application of the correction may result in a systematic flux overestimation of roughly 5-7%.
+- The correction of Nakai and Shimoyama (2012) be applied only to WM and WMP anemometers. The correction needs to be handled differently for data affected or not by the so-called 'w-boost' bug. Please review [W-boost Bug Correction for WindMaster/Pro](w-boost-correction.md#W-boost) to learn more about: (1) the meaning and effects of the 'w-boost bug' in WM and WMP; (2) how to determine if your data is affected by this bug; (3) how to fix affected data in EddyFlow; and (4) how EddyFlow handles the w-boost bug and the Angle of Attack correction in WM and WMP data.
+
+Note: Based on the most up-to-date information available to us, we consider that fixing the w-boost in affected data (e.g. using EddyFlow) guarantees a very high-quality wind and sonic temperature dataset, virtually unaffected by any Angle of Attack effects in the full range specified by Gill Instruments. Applying the Angle of Attack correction of Nakai and Shimoyama (2012) instead of the w-boost does not appear to bring significant improvements to Angle of Attacks of +/- 50 degrees.
+
+If in doubt with Gill WM and WMP, we recommend that you choose "Select automatically" for the Angle of Attack Correction. EddyFlow will determine whether to apply the correction as proposed by Nakai and Shimoyama (2012) based on the firmware version. See also [Entering the sonic anemometer firmware version](sonic-anemometer-firmware-version.md#top).
+
+In Express Mode and by default in SmartFlux, EddyFlow does not apply any Angle of Attack correction, but it does apply the 'w-boost bug' correction to eligible data (see [Identifying affected anemometers](w-boost-correction.md#w-boost_criteria) for eligibility criteria).

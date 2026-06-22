@@ -1,0 +1,13 @@
+---
+title: "Generic Binary File Type"
+source_url: "https://www.licor.com/support/EddyPro/topics/generic-binary-files.html"
+---
+# Generic binary file type
+
+If your raw data are stored in a custom binary format, chances are that EddyFlow can still import and process them. Click the ** Setting…** button to access a dialog that allows you to describe the file format.
+
+First, if your raw files have an ASCII header, specify the number of lines of such headers and their [terminator character](http://en.wikipedia.org/wiki/Newline). Supported terminators are Cr+LF (typical in Windows), LF (Linux and macOS) and CR (Max OS up to version 9 and OS-9). Then, provide the number of bytes reserved for each variable (typically 2 or 4) and the binary words [endianess](http://en.wikipedia.org/wiki/endianess) (that is, the order of the bytes significance): in a multi-bytes binary word, ** little endian ** means that the most significant byte is the last byte (highest address) while ** big endian ** means that the most significant byte is the first byte (lowest address).
+
+** Note:** EddyFlow supports only binary files where all variables are stored as single precision numbers in words of fixed length (fixed number of bytes). If files have words of different lengths (e.g. 2 bytes and 4 bytes) most likely they cannot be interpreted correctly, unless the longest words can be split into dummy variables of the same length of shorter ones, which assumes you don't need to use those variables and they can thus be labeled with "ignore" in the [Raw File Description](metadata-file-editor.md). In our example, each 4 byte word could be thought of as a two byte word, and thus considered as 2 variables, to be ignored.
+
+When you describe generic binary files in the ** Metadata File Editor **, just consider each variable as a "column" (although the term "column" is not appropriate for unformatted binary data), and proceed as you would do with any ASCII file.

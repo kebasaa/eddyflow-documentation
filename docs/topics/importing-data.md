@@ -1,0 +1,11 @@
+---
+title: "Importing Data"
+source_url: "https://www.licor.com/support/EddyPro/topics/importing-data.html"
+---
+# Importing data
+
+When you click the "Run" button in the EddyFlow interface, the program launches the processing module that, as a first step, reads the Processing Project file (".eddypro") compiled by the program, and then reports the settings specified in the graphical interface. Next, the processing module looks in the selected ** Raw data folder ** (and its subfolders if instructed to do so) and detects the names of all available raw files. By interpreting timestamps in the file names, the software prepares a chronological list of the files to be processed and creates a timeline, based on the timestamp of the first file and on the flux averaging interval specified in the interface. From this point forward, the timestamps in the filenames are no longer used as a timeline, but only to correctly time-reference the data in each file. Of course, if the flux averaging period is identical to the raw file duration, a perfect match of files timestamps and the timeline timestamps can be expected.
+
+At this point the software is ready to start iterative processing of all available files. With each iteration, EddyFlow reads files that are consecutive in time and loads the corresponding data. If a lag is found (e.g., because a file is missing) EddyFlow stops the importation process and deals with the data that has been imported up to that point. At the next iteration, it will start from the next file available. After completing importation, EddyFlow has loaded the *merged dataset*, comprised of all data contained in the raw files read for the current iteration.
+
+Once the merged dataset is prepared, EddyFlow extracts the data needed for the first averaging period. In EddyFlow this dataset is called the *averaging dataset*. If the merged dataset is longer than the one needed for the averaging dataset, EddyFlow will make another iteration within the same merged dataset, trying to build up a second (and third, fourth and so on) averaging dataset.
