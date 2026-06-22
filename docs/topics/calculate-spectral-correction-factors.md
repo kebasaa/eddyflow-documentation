@@ -1,7 +1,3 @@
----
-title: "Calculating Spectral Correction Factors"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-spectral-correction-factors.html"
----
 # Calculating Spectral correction factors
 
 Spectral corrections compensate flux underestimations due to two distinct effects:

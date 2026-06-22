@@ -1,7 +1,3 @@
----
-title: "Sensitive and Non-sensitive Variables"
-source_url: "https://www.licor.com/support/EddyPro/topics/sensitive-and-nonsensitive-variables.html"
----
 # Sensitive and non-sensitive variables
 
 In the Metadata File Editor, you can choose to ** Ignore ** a variable, specify if it is ** Numeric ** or not, and specify the ** Variable ** type. Ignore simply tells EddyFlow to ignore the field in processing. Select "yes" for variables that are not needed. This will speed up processing. For numeric variables, select yes to instruct EddyFlow to treat it as a number. For Variable, choose the measurement type from the list.

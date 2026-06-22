@@ -1,7 +1,3 @@
----
-title: "How to change Metadata"
-source_url: "https://www.licor.com/support/EddyPro/topics/ttp059-how-to-change-metadata.html"
----
 [Download](https://licor.app.boxenterprise.net/s/om2q8k9z9uiuubnz7l8t9hvhp7ogbw2w)
 
 # Changing metadata after it has been collected

@@ -1,7 +1,3 @@
----
-title: "Generic Binary File Type"
-source_url: "https://www.licor.com/support/EddyPro/topics/generic-binary-files.html"
----
 # Generic binary file type
 
 If your raw data are stored in a custom binary format, chances are that EddyFlow can still import and process them. Click the ** Setting…** button to access a dialog that allows you to describe the file format.

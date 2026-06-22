@@ -1,7 +1,3 @@
----
-title: "Basic Settings"
-source_url: "https://www.licor.com/support/EddyPro/topics/introduction-dataset-selection.html"
----
 # Basic settings page
 
 This page calls for information about the raw data used in this project. These options are used to specify directories, file length, a subset of data, and the items to include in flux computations.

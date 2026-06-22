@@ -1,7 +1,3 @@
----
-title: "Calculating Turbulent Fluctuations"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-turbulent-flux.html"
----
 # Calculating turbulent fluctuations
 
 See [Turbulent fluctuations](selecting-advanced-options.md#Turbulen) for more information.

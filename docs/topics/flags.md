@@ -1,7 +1,3 @@
----
-title: "Flags"
-source_url: "https://www.licor.com/support/EddyPro/topics/flags.html"
----
 # Filtering raw data records for instrument diagnostics and custom flags
 
 Before calculating fluxes, EddyFlow® Software provides two main mechanisms for excluding raw (high-frequency) data affected by quality issues. This improves the quality and reliability of flux results. These mechanisms are based on (1) instrument diagnostic values and on (2) custom-defined flags. Both are described in the following.

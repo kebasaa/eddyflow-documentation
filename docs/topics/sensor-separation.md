@@ -1,7 +1,3 @@
----
-title: "Northward, Eastward, and Vertical Separation"
-source_url: "https://www.licor.com/support/EddyPro/topics/sensor-separation.html"
----
 # Northward, eastward, and vertical separation
 
 Measurement of the separation between the gas analyzer(s) and the sonic anemometer used is necessary to estimate the high-frequency flux losses due to the distance between the instruments that measured the vertical wind component and the gas concentration(s). Raw files might contain data from more than one anemometer. EddyFlow, however, will calculate fluxes using data from only one anemometer, which you select in the ** Processing Page **.

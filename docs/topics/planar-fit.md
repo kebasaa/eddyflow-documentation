@@ -1,7 +1,3 @@
----
-title: "Planar Fit Configuration Dialog"
-source_url: "https://www.licor.com/support/EddyPro/topics/planar-fit.html"
----
 # Planar fit configuration dialog
 
 Under: Advanced Settings > Raw data processing > Rotation Method

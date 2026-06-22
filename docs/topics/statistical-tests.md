@@ -1,7 +1,3 @@
----
-title: "Statistical Tests"
-source_url: "https://www.licor.com/support/EddyPro/topics/statistical-tests.html"
----
 # Statistical analysis
 
 ## Statistical tests for raw data screening

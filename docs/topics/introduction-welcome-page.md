@@ -1,7 +1,3 @@
----
-title: "5. The Interface"
-source_url: "https://www.licor.com/support/EddyPro/topics/introduction-welcome-page.html"
----
 # Overview of the interface
 
 This section provides a high-level overview of the EddyFlow interface. It should help you become familiar with the menus, toolbars, and the settings that are available on each page of EddyFlow.

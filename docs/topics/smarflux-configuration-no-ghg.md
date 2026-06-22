@@ -1,7 +1,3 @@
----
-title: "Using Advanced Settings on the SmartFlux System"
-source_url: "https://www.licor.com/support/EddyPro/topics/smarflux-configuration-no-ghg.html"
----
 # Using planar fit, in situ spectral corrections and timelag optimization in SmartFlux
 
 In order to use planar-fit, *in situ* spectral corrections or timelag optimization in the SmartFlux System, EddyFlow needs to access the respective "planar_fit", "spectral_assessment" and "timelag_optimization" files, hereafter referred to as "additional configuration files". These files contain summaries of calculations performed on relatively large datasets ([Table 2‑3](#Dataset)) and that also apply to data to be collected in the future.

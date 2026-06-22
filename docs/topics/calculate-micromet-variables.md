@@ -1,7 +1,3 @@
----
-title: "Calculating Micrometeorological Variables"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-micromet-variables.html"
----
 # Calculating micrometeorological variables
 
 Before calculating fluxes, EddyFlow calculates an additional set of micrometeorological parameters, which are used to calculate corrected fluxes or for future analysis of calculated fluxes. These are listed and briefly described here.

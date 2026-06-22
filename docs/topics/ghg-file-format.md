@@ -1,7 +1,3 @@
----
-title: "GHG File Type"
-source_url: "https://www.licor.com/support/EddyPro/topics/ghg-file-format.html"
----
 # .ghg file type
 
 The .ghg format is the the original publisher custom raw file type, consisting of an archive containing the data file (extension ".data") and a .metadata file (extension ".metadata"). If selected, the archive will also contain LI-7700 status records as a separate file. This file format is based on ECO2S ENE format.

@@ -1,7 +1,3 @@
----
-title: "What's New"
-source_url: "https://www.licor.com/support/EddyPro/topics/whats-new.html"
----
 # What's new in this version
 
 ## .9 (current version; 2022-01-27)

@@ -1,7 +1,3 @@
----
-title: "Using Results from a Previous Run"
-source_url: "https://www.licor.com/support/EddyPro/topics/using-prev-results.html"
----
 # Using results from previous runs
 
 Internally, processing raw data to get to corrected fluxes with EddyFlow happens in either 1 single step or 2 separate steps. This is carried out automatically by the software, so that you only need to click ** Run ** once and wait while EddyFlow goes through the whole procedure and computes corrected fluxes. The two steps can be conveniently (though approximately) thought of as:

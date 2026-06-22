@@ -1,7 +1,3 @@
----
-title: "Ensemble Averaged Spectra and Cospectra"
-source_url: "https://www.licor.com/support/EddyPro/topics/ensemble-averaged-spectra-and-cospectra.html"
----
 # Ensemble averaged spectra and cospectra
 
 EddyFlow can calculate averaged spectra and cospectra. However, because these quantities serve different purposes, the procedures for getting spectra and cospectra are different; also, these quantities are screened, sorted and averaged in different ways. So, let's have a look at what EddyFlow does, why it does so, and what is available to you after the run.

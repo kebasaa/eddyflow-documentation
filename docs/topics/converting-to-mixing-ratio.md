@@ -1,7 +1,3 @@
----
-title: "Converting Raw Data to Mixing Ratios"
-source_url: "https://www.licor.com/support/EddyPro/topics/converting-to-mixing-ratio.html"
----
 # Converting concentrations or densities into mixing ratios
 
 See [Compensation of density fluctuations](selecting-advanced-options.md#Compensa) for more information.

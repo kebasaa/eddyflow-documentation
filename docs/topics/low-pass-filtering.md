@@ -1,7 +1,3 @@
----
-title: "Low-pass Filtering Correction"
-source_url: "https://www.licor.com/support/EddyPro/topics/low-pass-filtering.html"
----
 # Low-pass filtering correction
 
 See [High frequency spectral correction](selecting-advanced-options.md#High) for more information.
@@ -130,7 +126,7 @@ The correction procedure is based on the following formulation for the dependenc
 6‑87
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1027.svg)
 
-where F0 is the unattenuated flux for r = 0, and km = 2πnm/z is the wavenumber at the peak of the wavenumber-weighted cospectrum, kCo(k), nm = fm z / U, fm is the frequency at the peak of the cospectrum, and U is the wind speed.
+where F0 is the unattenuated flux for r = 0, and km = 2Ï€nm/z is the wavenumber at the peak of the wavenumber-weighted cospectrum, kCo(k), nm = fm z / U, fm is the frequency at the peak of the cospectrum, and U is the wind speed.
 
 This formulation is then specified in the along-wind, crosswind, and vertical separations. Please refer to [Horst and Lenschow (2009)](references.md#horst2009) for further details.
 

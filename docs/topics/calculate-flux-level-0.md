@@ -1,7 +1,3 @@
----
-title: "Calculating Fluxes Level 0 (uncorrected fluxes)"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-flux-level-0.html"
----
 # Calculating turbulent fluxes level 0 (uncorrected fluxes)
 
 Level 0 fluxes are uncorrected. They are computed according to the following equations:

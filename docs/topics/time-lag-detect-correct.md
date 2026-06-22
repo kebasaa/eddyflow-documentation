@@ -1,7 +1,3 @@
----
-title: "Detecting and Compensating Time Lags"
-source_url: "https://www.licor.com/support/EddyPro/topics/time-lag-detect-correct.html"
----
 # Detecting and compensating for time lags
 
 See [Selecting advanced processing options](selecting-advanced-options.md#top) for more information.

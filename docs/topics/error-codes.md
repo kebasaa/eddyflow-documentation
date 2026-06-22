@@ -1,7 +1,3 @@
----
-title: "Error Codes"
-source_url: "https://www.licor.com/support/EddyPro/topics/error-codes.html"
----
 # Run errors
 
 If an EddyFlow run fails, it typically has to do with the setup or data files being processed. Here are some solutions to common issues.

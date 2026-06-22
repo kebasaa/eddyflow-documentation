@@ -1,7 +1,3 @@
----
-title: "Advanced Settings: Spectral Corrections"
-source_url: "https://www.licor.com/support/EddyPro/topics/advanced-settings-spectral_corrections.html"
----
 # Spectral corrections
 
 Spectral corrections are needed to correct flux estimates for low and high frequency losses due to the instrument setup, intrinsic sampling limits of the instruments, and some data processing choices. An overview and some details about the spectral correction methods available in EddyFlow are provided here. This tutorial focuses on the items available to you, to select and tune the correction procedure.

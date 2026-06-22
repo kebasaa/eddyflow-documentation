@@ -1,7 +1,3 @@
----
-title: "Metadata File Editor"
-source_url: "https://www.licor.com/support/EddyPro/topics/metadata-file-editor.html"
----
 # Metadata file editor
 
 The ** Metadata File Editor ** is part of the Project Creation page. It is used to create and edit metadata for the processing project. Metadata may include site information, station information, and information that describes how data are arranged in data files. If you are processing .ghg files, you may use the ** Metadata File Editor ** to modify the embedded metadata files. If you are processing other file types, use the Metadata File Editor to enter and save metadata. There are three tabs: [Station](#Station), [Instruments](#Instrume), and [Raw File Description](#Raw).

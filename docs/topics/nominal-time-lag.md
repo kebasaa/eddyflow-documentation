@@ -1,7 +1,3 @@
----
-title: "Nominal Time Lag"
-source_url: "https://www.licor.com/support/EddyPro/topics/nominal-time-lag.html"
----
 # Nominal, minimal, and maximum Time Lag
 
 The name ** time lag ** refers to the delay with which the gas analyzer measures ambient quantities (concentrations, temperatures, pressures, etc.), with respect to the anemometer, taken as a reference. The anemometer provides measurements of an air parcel virtually instantaneously. The gas analyzer provides readings for the same parcel with a delay that can be due to: 1) the physical distance from the anemometer; 2) the need to take the air sample to the measuring cell through an intake tube (closed path analyzers).

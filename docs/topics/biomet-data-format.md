@@ -1,7 +1,3 @@
----
-title: "Supported Biomet Files Formats"
-source_url: "https://www.licor.com/support/EddyPro/topics/biomet-data-format.html"
----
 # Supported biomet file formats
 
 EddyFlow supports biomet data in two main formats: embedded in compressed .ghg eddy covariance data files, and as external text files. These are described in detail below.

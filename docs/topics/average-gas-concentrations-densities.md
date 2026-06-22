@@ -1,7 +1,3 @@
----
-title: "Calculating Concentrations and Densities"
-source_url: "https://www.licor.com/support/EddyPro/topics/average-gas-concentrations-densities.html"
----
 # Calculating average gas concentrations and densities
 
 After having calculated ambient and cell molar volumes, for each available gas EddyFlow can calculate average concentrations expressed as mole fractions and mixing ratios, as well as average molar densities. The equations used are:

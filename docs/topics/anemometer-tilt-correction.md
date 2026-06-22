@@ -1,7 +1,3 @@
----
-title: "Anemometer Tilt Correction"
-source_url: "https://www.licor.com/support/EddyPro/topics/anemometer-tilt-correction.html"
----
 # Axis rotation for tilt correction
 
 See [Axis rotation for tilt correction](selecting-advanced-options.md#Axis) for more information.
@@ -26,7 +22,7 @@ The first rotation equations are:
 
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation920.svg)
 
-The second rotation is performed about the new y-axis, using the angle ϕ that nullifies wtmp:
+The second rotation is performed about the new y-axis, using the angle Ï• that nullifies wtmp:
 
 6‑10
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation921.svg)

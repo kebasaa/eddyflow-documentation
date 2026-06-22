@@ -1,7 +1,3 @@
----
-title: "Wind Speed Measurement Offsets"
-source_url: "https://www.licor.com/support/EddyPro/topics/windspeed-offsets.html"
----
 # Wind speed measurement offsets
 
 See also: [Wind speed measurement offsets](selecting-advanced-options.md#Wind).

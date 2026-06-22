@@ -1,7 +1,3 @@
----
-title: "Defining the EddyFlow Express Data Set"
-source_url: "https://www.licor.com/support/EddyPro/topics/defining-the-dataset.html"
----
 # Defining the EddyFlow dataset
 
 The averaging dataset is comprised of all numeric data columns that were found in the raw file(s), including sensitive and non-sensitive variables. From this dataset, the *EddyFlow dataset* (or *EP dataset*) is derived through the following operations:

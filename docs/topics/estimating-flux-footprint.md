@@ -1,7 +1,3 @@
----
-title: "Estimating the Flux Footprint"
-source_url: "https://www.licor.com/support/EddyPro/topics/estimating-flux-footprint.html"
----
 # Estimating the flux footprint
 
 See [Footprint estimation](selecting-advanced-options.md#Footprin) for more information.

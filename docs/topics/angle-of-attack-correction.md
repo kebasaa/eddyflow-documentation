@@ -1,7 +1,3 @@
----
-title: "Angle-of-Attack Correction"
-source_url: "https://www.licor.com/support/EddyPro/topics/angle-of-attack-correction.html"
----
 # Angle of attack correction
 
 See [Angle of attack correction for wind components (Gill anemometers only)](selecting-advanced-options.md#Angle) for more information.

@@ -1,7 +1,3 @@
----
-title: "Calculating Fluxes for the LI-7500 and LI-7700"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-flux-open-path-analyzers.html"
----
 # Calculating turbulent fluxes for a system composed of an LI-7500A/RS/DS and LI-7700
 
 The common example of an open path eddy covariance system is a station equipped with an anemometer, LI-7500, LI-7500A/RS, or LI-7500DS, and LI-7700.

@@ -1,7 +1,3 @@
----
-title: "Assessment Tests"
-source_url: "https://www.licor.com/support/EddyPro/topics/assessment-tests.html"
----
 # Assessment tests
 
 Assessment tests evaluate ancillary files to ensure that they meet certain requirements before processing. The purpose of assessment tests is to reduce processing errors when using EddyFlow for desktop processing, and to ensure the validity of ancillary files prior to uploading them to the SmartFlux System. The ** Format Test ** evaluates the file format by comparing it to a standard, and the ** Scientific Test ** evaluates data by comparing values in the file with known acceptable values.

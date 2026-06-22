@@ -1,7 +1,3 @@
----
-title: "2. Using EddyFlow"
-source_url: "https://www.licor.com/support/EddyPro/topics/tutorials.html"
----
 # Processing eddy covariance datasets
 
 This section describes the basic steps for using EddyFlow.

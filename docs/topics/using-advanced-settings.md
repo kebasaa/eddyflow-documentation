@@ -1,7 +1,3 @@
----
-title: "Using Advanced Settings"
-source_url: "https://www.licor.com/support/EddyPro/topics/using-advanced-settings.html"
----
 # Using advanced settings
 
 The ** Advanced Settings ** page provides a variety of options that make it possible to process the eddy covariance data with customized parameters.

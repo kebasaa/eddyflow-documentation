@@ -1,7 +1,3 @@
----
-title: "High-pass Filtering Correction"
-source_url: "https://www.licor.com/support/EddyPro/topics/high-pass-filtering.html"
----
 # High-pass filtering correction
 
 See [Low frequency spectral correction](selecting-advanced-options.md#Low) for more information.

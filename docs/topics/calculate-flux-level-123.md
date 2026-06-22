@@ -1,7 +1,3 @@
----
-title: "Calculating Fluxes Level 1, 2, and 3 (corrected fluxes)"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-flux-level-123.html"
----
 # Calculating corrected fluxes
 
 Calculating corrected fluxes in EddyFlow involves the application of the following corrections:

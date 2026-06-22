@@ -1,7 +1,3 @@
----
-title: "Advanced Settings: Output Files"
-source_url: "https://www.licor.com/support/EddyPro/topics/advanced-settings-outputs.html"
----
 # Output files
 
 ** Note:** To keep processing time to a minimum, select only the output files that are needed. Selecting *full spectra* and *cospectra* will increase processing time significantly. Therefore, we recommend that you limit the number of these outputs to less than two.

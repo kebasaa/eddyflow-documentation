@@ -1,7 +1,3 @@
----
-title: "Calculating Fluxes"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-fluxes.html"
----
 # Calculating fluxes
 
 After completing preliminary calculations, EddyFlow can start evaluating fluxes, starting from uncorrected fluxes. With 'uncorrected fluxes' gas, energy, and momentum fluxes are obtained by merely adjusting units of relevant covariances, in order to match the desired output units.

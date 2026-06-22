@@ -1,7 +1,3 @@
----
-title: "Running EddyFlow on the SmartFlux System"
-source_url: "https://www.licor.com/support/EddyPro/topics/smartflux-settings.html"
----
 # Running EddyFlow in the SmartFlux System
 
 The SmartFlux® System is an essential component for the original publisher eddy covariance systems that are based upon the LI-7500A/RS/DS and LI-7200/RS gas analyzers. The original SmartFlux System reads the analog signals from the sonic anemometer . It installs in the LI-7550 Analyzer Interface Unit. The SmartFlux 2 and 3 Systems read the digital signal from the sonic anemometer. They install in a the original publisher Biomet enclosure, the original publisher Systems Enclosure, or another suitable enclosure.

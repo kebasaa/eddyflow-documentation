@@ -1,7 +1,3 @@
----
-title: "'w-boost' Bug Correction"
-source_url: "https://www.licor.com/support/EddyPro/topics/w-boost-correction.html"
----
 # W-boost Bug Correction for WindMaster/Pro
 
 In February 2016, Gill Instruments published [Technical Key Note](http://gillinstruments.com/data/manuals/KN1509_WindMaster_WBug_info.pdf) KN1509v3 describing a bug in the computation of the vertical wind component (w) in the firmware of Gill WindMaster/Pro (WM and WMP) anemometers produced between 2006 and 2015. The bug is such that vertical wind speed is underestimated by a factor of 1.166 for positive values and 1.289 for negative values.

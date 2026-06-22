@@ -1,7 +1,3 @@
----
-title: "Using the Metadata File Editor"
-source_url: "https://www.licor.com/support/EddyPro/topics/metadata-file-editor-using.html"
----
 # Using the metadata file editor
 
 The ** Metadata File Editor ** is used to enter site information, instrument information, and a description of the data file structure, if you have not entered this information during the the eddy covariance site setup. This information is required for any dataset processed in EddyFlow. You will use the Metadata File Editor under two circumstances:

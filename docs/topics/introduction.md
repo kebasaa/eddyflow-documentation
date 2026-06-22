@@ -1,7 +1,3 @@
----
-title: "1. Introduction"
-source_url: "https://www.licor.com/support/EddyPro/topics/introduction.html"
----
 # What is EddyFlow?
 
 EddyFlow® Software processes raw eddy covariance (EC) data to compute biospheric/atmospheric fluxes of CO2, H2O, CH4, other trace gases, and energy. It is based on the ECO2S[1 http://gaia.agraria.unitus.it/eco2s](#) package, which was released as free software by the consortium participating in the IMECC-EU European project[2 http://imecc.ipsl.jussieu.fr](#). EddyFlow is customized to efficiently process eddy covariance data logged to the original publisher® gas analyzers. It also supports other raw file types, including data stored as ASCII tables, binary files (including the TOB1 format), and SLT (EddySoft and EdiSol) formats.

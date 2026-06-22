@@ -1,7 +1,3 @@
----
-title: "Advanced Settings: Statistical Tests"
-source_url: "https://www.licor.com/support/EddyPro/topics/advanced-settings-statistical-tests.html"
----
 # Statistical analysis
 
 The ** Statistical Tests ** tab includes all tests recommended by [Vickers and Mahrt (1997)](references.md#Vickers) and [Mauder (2003)](references.md#Mauder2013).

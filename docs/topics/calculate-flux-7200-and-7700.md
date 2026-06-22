@@ -1,7 +1,3 @@
----
-title: "Calculating Fluxes for the LI-7200 and LI-7700"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-flux-7200-and-7700.html"
----
 # Calculating turbulent fluxes for a system composed of an LI-7200/RS and LI-7700
 
 In this situation, corrected fluxes are calculated from uncorrected (fluxes as F0) with the following procedure:

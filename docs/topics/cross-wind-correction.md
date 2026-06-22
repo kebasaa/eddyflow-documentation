@@ -1,7 +1,3 @@
----
-title: "Crosswind Correction"
-source_url: "https://www.licor.com/support/EddyPro/topics/cross-wind-correction.html"
----
 # Crosswind correction
 
 In a 3-dimensional sonic anemometer, the sonic temperature (Tsi) is estimated on each of the three measurement paths. The three estimates are then averaged into a single value of sonic temperature (Ts). The crosswind correction accounts for the effect of a wind component normal to the measurement path on each estimation of the sonic temperature:

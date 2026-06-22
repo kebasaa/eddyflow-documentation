@@ -1,7 +1,3 @@
----
-title: "Dataset Selection Page"
-source_url: "https://www.licor.com/support/EddyPro/topics/dataset-selection-page.html"
----
 # Basic settings
 
 During a data processing session, you will use the ** Basic Settings ** page to specify preferences for your project. For all projects, you enter the ** Basic Settings ** page after completing all required fields in the ** Project Creation ** page and clicking on the button.

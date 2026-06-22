@@ -1,7 +1,3 @@
----
-title: "Calculating the Off-season Uptake Correction (LI-7500 only)"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-offseason-uptake-correction.html"
----
 # Calculating the off-season uptake correction (LI-7500 only)
 
 See [Add instrument sensible heat components (LI-7500)](selecting-advanced-options.md#Add) for more information.

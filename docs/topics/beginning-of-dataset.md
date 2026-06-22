@@ -1,7 +1,3 @@
----
-title: "Beginning of Data Set"
-source_url: "https://www.licor.com/support/EddyPro/topics/beginning-of-dataset.html"
----
 # Beginning of dataset
 
 By convention, all output files of EddyFlow report results for each averaging interval, associating them with the timestamp of the ending minute of each interval, regardless of the convention used in the file names.

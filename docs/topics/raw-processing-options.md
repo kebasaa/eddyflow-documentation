@@ -1,7 +1,3 @@
----
-title: "Advanced Settings"
-source_url: "https://www.licor.com/support/EddyPro/topics/raw-processing-options.html"
----
 # Advanced settings
 
 Advanced Settings are used to configure EddyFlow for customized data processing. The options available here are generally useful for research applications, custom configuration for sites with complex topography, atypical instrument setups, and for advanced users with high-level knowledge of the eddy covariance technique.

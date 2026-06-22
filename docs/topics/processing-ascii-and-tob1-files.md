@@ -1,7 +1,3 @@
----
-title: "Processing ASCII and TOB1 Files"
-source_url: "https://www.licor.com/support/EddyPro/topics/processing-ascii-and-tob1-files.html"
----
 # Processing ASCII and TOB1 raw data files
 
 EddyFlow gets timestamps information from the names of raw flux data files. The file names should have year, month, day, hour, and minute and this should be consistent across all the files. The second is not needed in the file names. The best strategy to process ASCII and TOB1 files is to split them to the same size as the averaging interval since EddyFlow does not read time stamps within a file and any missing data in large is always attributed to the end of the file.

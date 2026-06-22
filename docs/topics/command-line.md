@@ -1,7 +1,3 @@
----
-title: "Run EddyFlow from Command Line"
-source_url: "https://www.licor.com/support/EddyPro/topics/command-line.html"
----
 # Running EddyFlow from command prompt
 
 The EddyFlow engine can be run from a command line interface. This section briefly describes the calls.

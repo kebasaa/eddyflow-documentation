@@ -1,7 +1,3 @@
----
-title: "Magnetic Declination"
-source_url: "https://www.licor.com/support/EddyPro/topics/declination.html"
----
 # Magnetic declination
 
 The field identified as ** North Reference ** is used to tell EddyFlow what to use as North.

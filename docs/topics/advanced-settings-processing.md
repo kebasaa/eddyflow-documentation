@@ -1,7 +1,3 @@
----
-title: "Advanced Settings: Processing Options"
-source_url: "https://www.licor.com/support/EddyPro/topics/advanced-settings-processing.html"
----
 # Processing options
 
 The ** Advanced Settings ** page provides a variety of options that make it possible to process the eddy covariance data with customized parameters.

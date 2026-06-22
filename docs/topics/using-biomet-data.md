@@ -1,7 +1,3 @@
----
-title: "Using Biomet Data"
-source_url: "https://www.licor.com/support/EddyPro/topics/using-biomet-data.html"
----
 # Using biomet data
 
 EddyFlow Software allows you to import and use biomet measurements for improved flux computation and other purposes. Biomet measurements include meteorological as well as ecological (e.g., soil and vegetation) measurements. These data are typically sampled at lower rates than the eddy covariance data (e.g., once per second) and averaged over longer time periods (e.g., 1 to 30 minutes). Traditionally, biomet data—collected by means of a datalogger—are stored in one or more files, distinct from high-speed eddy data. However, the original publisher eddy covariance systems allow you to collect .ghg files, a raw file format that bundles eddy covariance data (and the corresponding metadata) together with biomet data (and, again, the corresponding metadata). The advantages are evident:

@@ -1,7 +1,3 @@
----
-title: "Raw File Name Format"
-source_url: "https://www.licor.com/support/EddyPro/topics/raw-file-name-format.html"
----
 # Raw file name format
 
 In order to correctly detect only valid raw files inside the ** Raw data directory ** (and possibly its subfolder), you need to specify a ** Raw file name format ** that EddyFlow uses as a template to select only files that comply with it. Valid raw files must match this template with respect to three aspects:

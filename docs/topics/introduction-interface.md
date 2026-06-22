@@ -1,7 +1,3 @@
----
-title: "Project Page"
-source_url: "https://www.licor.com/support/EddyPro/topics/introduction-interface.html"
----
 # Project creation page
 
 The Project Creation page is where you specify details about your project, including the project name and raw file format. The visible fields on the projects page depend on the file type you are processing. For .ghg files, under a typical scenario, you will only need to enter the ** Project Name ** before advancing to the ** Basic Settings ** page. Under other circumstances, or any time you are processing a file other than the .ghg file type, you will need to use the ** Metadata File Editor ** to create or modify an existing metadata file.

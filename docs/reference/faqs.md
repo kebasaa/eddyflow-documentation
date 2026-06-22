@@ -1,7 +1,3 @@
----
-title: "FAQs"
-source_url: "https://www.licor.com/support/EddyPro/faqs.html"
----
 # Frequently asked questions
 
 [Why does EddyFlow seem slow sometimes but it works fine other times on the same computer?](#)

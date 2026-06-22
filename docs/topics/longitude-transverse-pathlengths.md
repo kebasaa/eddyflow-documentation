@@ -1,7 +1,3 @@
----
-title: "Path Lengths and Time Response"
-source_url: "https://www.licor.com/support/EddyPro/topics/longitude-transverse-pathlengths.html"
----
 # Longitudinal and transversal path lengths and time response
 
 If you selected a "Generic Anemometer" or a generic gas analyzer (which includes "Generic Open Path", "Generic Closed Path", "OP/CP Krypton hygrometer" and "OP/CP Lyman-α hygrometer"), you need to specify the longitudinal (parallel to the light path for gas analyzers, parallel to a transducer pair for anemometers) and transversal path lengths and time response. Refer to the documentation provided by the instrument manufacturer for this information.

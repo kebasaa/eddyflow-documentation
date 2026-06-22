@@ -1,7 +1,3 @@
----
-title: "Express Default Settings"
-source_url: "https://www.licor.com/support/EddyPro/topics/express-defaults.html"
----
 # Express default settings
 
 The default settings in the ** Advanced Settings ** page correspond with the settings applied in Express Mode. These settings are given in the table below. In Express Mode, EddyFlow ignores any altered settings in the ** Advanced Settings ** page and it generates a predefined set of output files. Express Mode will not alter any user-specified settings in the ** Advanced Settings ** page.

@@ -1,7 +1,3 @@
----
-title: "Use Alternative Metadata File"
-source_url: "https://www.licor.com/support/EddyPro/topics/metadata-file-use-alternative.html"
----
 # Use alternative metadata file
 
 Metadata is simply information about the dataset—or data on the data. It includes site information, instrument information, and a description of the raw file structure.

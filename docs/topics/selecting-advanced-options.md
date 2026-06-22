@@ -1,7 +1,3 @@
----
-title: "Selecting the Best Processing Settings"
-source_url: "https://www.licor.com/support/EddyPro/topics/selecting-advanced-options.html"
----
 # Selecting advanced processing options
 
 In the Advanced Mode, EddyFlow provides several options for many processing steps. It also provides many optional output files. Here we provide suggestions about which processing options are suitable under certain circumstances. While we want to stress that there is no general consensus on the best choice for any given situation, and that often alternative options bring similar results, there are situations in which a better choice can be identified unambiguously.

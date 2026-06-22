@@ -1,7 +1,3 @@
----
-title: "Calculating Ambient and Cell Statistics"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-ambient-and-cell-statistics.html"
----
 # Calculating ambient and cell statistics
 
 At each relevant step of the raw data processing, statistics are calculated for all available variables, either sensitive or non-sensitive. Single-variable statistics include average, standard deviation, skewness, and kurtosis. Relevant covariances are also calculated, notably covariances among vertical wind component w and all other variables. In particular, covariances between w and ambient scalars such as gas concentrations or temperatures, used for flux estimates, are calculated after compensation of scalars time lags.

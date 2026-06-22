@@ -1,7 +1,3 @@
----
-title: "QA/QC of Spectra and Cospectra"
-source_url: "https://www.licor.com/support/EddyPro/topics/ensemble-averages.html"
----
 # QA/QC of spectra and cospectra
 
 Ensemble averaged spectra and cospectra are calculated by EddyFlow, used in some implementations (e.g., spectral corrections) and, if requested, are provided as an output for user analysis. To calculate ensemble averages, EddyFlow uses "individual" spectra and cospectra calculated from all available raw time series. However, a quality screening is applied to these individual (co)spectra to determine if they should enter into the calculation of the ensemble average. In fact, (co)spectra quality may be poor in several respects:

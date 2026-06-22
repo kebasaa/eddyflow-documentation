@@ -1,7 +1,3 @@
----
-title: "Time-varying (Dynamic) Metadata"
-source_url: "https://www.licor.com/support/EddyPro/topics/dynamic-metadata.html"
----
 # Time-varying (dynamic) metadata
 
 Data processing and flux calculation with EddyFlow is based not only on raw data, but also on the metadata describing the site characteristics, the eddy covariance station setup and the raw data files themselves.

@@ -1,7 +1,3 @@
----
-title: "Calculating Instrument Separations"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-instrument-separation.html"
----
 # Calculating relative instrument separations
 
 See [Selecting Advanced Options](selecting-advanced-options.md#Correcti) for guidance with this setting.

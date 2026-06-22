@@ -1,7 +1,3 @@
----
-title: "Calculating Cell Temperature"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-cell-temperature.html"
----
 # Calculating cell temperature (closed path systems only)
 
 The LI-7200 Enclosed CO2/H2O Analyzer features two fast measurements of the cell temperature: one at the inlet (Tin) and one at the outlet (Tout) of the cell. It computes the average cell temperature (Tcell) with a weighted average of these two fast measurements as:

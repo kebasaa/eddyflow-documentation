@@ -1,7 +1,3 @@
----
-title: "Overview of Advanced Mode"
-source_url: "https://www.licor.com/support/EddyPro/topics/advanced-mode.html"
----
 # Overview of advanced processing
 
 Advanced Mode provides you with the high-level capabilities of the EddyFlow Advanced, computing fully corrected flux results in real-time with the processing options of your choice.

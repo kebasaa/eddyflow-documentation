@@ -4,7 +4,7 @@
 
 # EddyFlow Documentation
 
-EddyFlow&reg; is an open source software application for processing eddy covariance data. It computes fluxes of water vapor, carbon dioxide, other trace gases, and energy with the eddy covariance method.
+EddyFlow® is an open source software application for processing eddy covariance data. It computes fluxes of water vapor, carbon dioxide, other trace gases, and energy with the eddy covariance method.
 
 This repository contains the source for the EddyFlow documentation site published with GitHub Pages.
 

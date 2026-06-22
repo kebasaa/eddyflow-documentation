@@ -1,7 +1,3 @@
----
-title: "The Full Output File"
-source_url: "https://www.licor.com/support/EddyPro/topics/output-files-full-output.html"
----
 # The full output file
 
 This is the most comprehensive output file produced by EddyFlow. It contains many of the intermediate and final variables calculated during data processing. Results values are grouped by the first line of the header to facilitate interpretation. Here we provide an overview of available outputs. For more specific descriptions of each variable refer to the [Variables Table](#Variable).

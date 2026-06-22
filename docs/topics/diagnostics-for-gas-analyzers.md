@@ -1,7 +1,3 @@
----
-title: "Gas Analyzer Diagnostics"
-source_url: "https://www.licor.com/support/EddyPro/topics/diagnostics-for-gas-analyzers.html"
----
 # Diagnostic settings for gas analyzers
 
 Diagnostics are used to indicate whether your instrument is operating correctly. The LI-7500A/RS/DS Open Path CO2/H2O Analyzers output integers between 0 and 255 that correspond to as many as 5 diagnostic values. The LI-7200/RS Enclosed CO2/H2O Analyzer outputs integers between 0 and 65535, which corresponds with up to 10 diagnostics. The LI-7700 Open Path CH4 Analyzer outputs integers between 0 and 65535 that indicate up to 16 diagnostics.

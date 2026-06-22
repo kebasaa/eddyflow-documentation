@@ -1,7 +1,3 @@
----
-title: "Analyzing Spectra and Cospectra"
-source_url: "https://www.licor.com/support/EddyPro/topics/spectral-analysis.html"
----
 # Analyzing Spectra and Cospectra in EddyFlow
 
 Spectral analysis determines how variance or covariance distributes over frequency for a finite time series data set. Eddy covariance (EC) spectral analysis can reveal insights that would otherwise not be obvious by looking at data in the time-domain only. Spectral analysis allows you to assess whether the instruments have enough resolution, if a sampling rate is fast enough, and if a flux averaging period is adequate, among other things. Here are the basic steps for doing spectral analysis using EddyFlow:

@@ -1,7 +1,3 @@
----
-title: "Output Files"
-source_url: "https://www.licor.com/support/EddyPro/topics/output-files.html"
----
 # Output files
 
 EddyFlow provides a broad range of file output options. These may seem daunting, so to keep things simple, you can select a predefined set, or you can customize the outputs to meet your needs.

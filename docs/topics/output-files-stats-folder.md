@@ -1,7 +1,3 @@
----
-title: "The Stats Folder"
-source_url: "https://www.licor.com/support/EddyPro/topics/output-files-stats-folder.html"
----
 # Statistics output
 
 Along with the final results files, EddyFlow creates at least one subfolder in the user-specified output folder:

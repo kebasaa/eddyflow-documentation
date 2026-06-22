@@ -1,7 +1,3 @@
----
-title: "Sonic Firmware Version"
-source_url: "https://www.licor.com/support/EddyPro/topics/sonic-anemometer-firmware-version.html"
----
 # Entering the sonic anemometer firmware version
 
 ## Why is the firmware version important?

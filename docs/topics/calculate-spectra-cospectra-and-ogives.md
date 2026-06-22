@@ -1,7 +1,3 @@
----
-title: "Calculating Spectra, Cospectra and Ogives"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-spectra-cospectra-and-ogives.html"
----
 # Calculating spectra, cospectra, and ogives
 
 EddyFlow Software allows calculation and output of most relevant spectra and cospectra. Namely spectra are available for the three wind components, the sonic temperature (or the alternative fast temperature reading used in place of sonic temperature, as applicable) and the gas concentrations or densities. Similarly, cospectra are available for covariances of *w* (vertical wind component) and all such variables. In the remainder of this paragraph we use the wording "(co)spectra" to refer to both spectra and cospectra.

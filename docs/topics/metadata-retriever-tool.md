@@ -1,7 +1,3 @@
----
-title: "Metadata Retriever Tool"
-source_url: "https://www.licor.com/support/EddyPro/topics/metadata-retriever-tool.html"
----
 # Metadata retriever tool
 
 The ** Metadata Retriever ** tool is accessible under the ** Run ** menu in the main menu bar.

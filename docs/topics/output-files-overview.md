@@ -1,7 +1,3 @@
----
-title: "3. Output Files"
-source_url: "https://www.licor.com/support/EddyPro/topics/output-files-overview.html"
----
 # EddyFlow output files
 
 After clicking ** Run **, EddyFlow will generate some temporary intermediate files and compute fluxes based on the information provided in the data and metadata. These files are stored in folders and subfolders in the ** Output Directory ** you assigned in the ** Project Page **.

@@ -1,7 +1,3 @@
----
-title: "Flux Quality Flags for Micrometeorological Tests"
-source_url: "https://www.licor.com/support/EddyPro/topics/flux-quality-flags.html"
----
 # Flux quality flags for micrometeorological tests
 
 See [Quality check](selecting-advanced-options.md#Quality) for more information.

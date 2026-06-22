@@ -1,7 +1,3 @@
----
-title: "Adjusting the Coordinate System"
-source_url: "https://www.licor.com/support/EddyPro/topics/adjusting-anemometer-coordinate-system.html"
----
 # Adjusting the anemometer coordinate system
 
 Each anemometer model adopts a customized convention for providing wind components in an orthogonal coordinate system, so that the user is able to retrieve the actual wind direction with respect to geographic north. Anemometer north is shown by:

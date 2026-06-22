@@ -1,7 +1,3 @@
----
-title: "Despiking and Statistical Screening"
-source_url: "https://www.licor.com/support/EddyPro/topics/despiking-raw-statistical-screening.html"
----
 # Despiking and raw data statistical screening
 
 EddyFlow allows you to perform up to 9 tests to assess the statistical quality of the raw time series. Tests are derived from the paper of [Vickers and Mahrt (1997)](references.md#Vickers), and an additional spike count and removal option from [Mauder (2013)](references.md#Mauder2013). Each test can be individually selected and configured to fit your dataset. EddyFlow provides defaults for all configurable parameters, as derived from the original publication.

@@ -1,7 +1,3 @@
----
-title: "Calculating Ambient and Cell Parameters"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-ambient-and-cell-parameters.html"
----
 # Calculating ambient and cell parameters
 
 The time lag compensation is the last step of raw data reduction. Covariances calculated after time lag compensation will be used to calculate uncorrected and corrected fluxes. Before actually calculating fluxes, EddyFlow evaluates some key average ambient variables such as temperature, pressure, and molar volume. The same quantities are calculated for the cell of each closed path gas analyzer in use (if any).

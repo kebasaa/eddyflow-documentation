@@ -1,7 +1,3 @@
----
-title: "A. References"
-source_url: "https://www.licor.com/support/EddyPro/topics/references.html"
----
 # References
 
 ** Note:** References are linked to the original publication when possible.

@@ -1,7 +1,3 @@
----
-title: "TOB1 File Type"
-source_url: "https://www.licor.com/support/EddyPro/topics/tob1-files.html"
----
 # TOB1 file type
 
 See [Processing ASCII and TOB1 raw data files](processing-ascii-and-tob1-files.md#top) for a tutorial on this procedure.

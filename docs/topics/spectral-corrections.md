@@ -1,7 +1,3 @@
----
-title: "Spectral Corrections"
-source_url: "https://www.licor.com/support/EddyPro/topics/spectral-corrections.html"
----
 # Spectral corrections
 
 ![](../assets/Adv_Settings_SC.png)

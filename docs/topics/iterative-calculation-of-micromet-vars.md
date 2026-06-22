@@ -1,7 +1,3 @@
----
-title: "Iterative Calculation of Micromet Variables"
-source_url: "https://www.licor.com/support/EddyPro/topics/iterative-calculation-of-micromet-vars.html"
----
 # Iterative calculations of micrometeorological variables
 
 If, throughout the calculation of micrometeorological variables, sonic temperature was used as a proxy of air temperature, this is refined at the end to account for the effect of ambient humidity. Thus, an iteration is performed to recalculate all micrometeorological variables (including air temperature) with the refined temperature estimates. One iteration typically improves the estimates by about 1-2%, while further iterations normally do not bring detectable improvements. Obviously, if a "native" ambient air temperature measurement is available, the iteration is not performed.

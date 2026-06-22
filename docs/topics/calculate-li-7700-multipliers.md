@@ -1,7 +1,3 @@
----
-title: "Calculating Multipliers for Spectroscopic Corrections (LI-7700)"
-source_url: "https://www.licor.com/support/EddyPro/topics/calculate-LI-7700-multipliers.html"
----
 # Calculating multipliers for spectroscopic corrections (LI-7700)
 
 When an LI-7700 CH4 analyzer is used, methane fluxes are calculated using Eq. 5.1 of the LI-7700 Instruction Manual. In this equation, which is formulated to highlight the correction terms for air density fluctuations ([Webb et al., 1980](references.md#Webb)), multipliers A, B, and C are specific to the LI-7700 analyzer, accounting for spectroscopic effects of temperature, pressure, and water vapor on methane molar density (A), spectroscopic effects of pressure and water vapor on the latent heat flux (B), and spectroscopic effects of temperature, pressure and water vapor on sensible heat flux (C). These multipliers are defined as:
