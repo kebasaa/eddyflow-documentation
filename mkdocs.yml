@@ -31,10 +31,7 @@ nav:
   - "Home": index.md
   - "Operating Instructions": reference/manuals.md
   - "Provenance": provenance.md
-  - "Documents": reference/docs.md
   - "FAQs": reference/faqs.md
-  - "EddyFlow Help Center": reference/home.md
-  - "Software": reference/software.md
   - "EddyFlow Menu":
     - "Data Processing Reference":
       - "Preliminary Processing":
@@ -54,6 +51,7 @@ nav:
         - "Defining the EddyFlow Express Data Set": topics/defining-the-dataset.md
         - "Despiking and Statistical Screening": topics/despiking-raw-statistical-screening.md
         - "Ensemble Averaged Spectra and Cospectra": topics/ensemble-averaged-spectra-and-cospectra.md
+        - "Analyzing Spectra and Cospectra": topics/spectral-analysis.md
         - "QA/QC of Spectra and Cospectra": topics/ensemble-averages.md
         - "Importing Data": topics/importing-data.md
         - "Iterative Calculation of Micromet Variables": topics/iterative-calculation-of-micromet-vars.md
@@ -90,6 +88,7 @@ nav:
       - "Dataset Selection Page": topics/dataset-selection-page.md
       - "Using the Metadata File Editor": topics/metadata-file-editor-using.md
       - "Metadata Retriever Tool": topics/metadata-retriever-tool.md
+      - "Changing Metadata After Collection": topics/ttp059-how-to-change-metadata.md
       - "Processing ASCII and TOB1 Files": topics/processing-ascii-and-tob1-files.md
       - "Running EddyFlow on the SmartFlux System": topics/smartflux-settings.md
       - "Using Advanced Settings": topics/using-advanced-settings.md
@@ -131,6 +130,7 @@ nav:
       - "Interface Reference": topics/software-reference-introduction.md
     - "Troubleshooting":
       - "Error Codes": topics/error-codes.md
+      - "Gas Analyzer Diagnostics": topics/diagnostics-for-gas-analyzers.md
     - "5. The Interface": topics/introduction-welcome-page.md
     - "1. Introduction": topics/introduction.md
     - "Output Files":
@@ -142,18 +142,3 @@ nav:
     - "6. Data Processing Reference": topics/software-reference.md
     - "4. Troubleshooting": topics/troubleshooting.md
     - "2. Using EddyFlow": topics/tutorials.md
-  - "Documents":
-    - "Gas Analyzer Diagnostics": topics/diagnostics-for-gas-analyzers.md
-    - "Analyzing Spectra and Cospectra": topics/spectral-analysis.md
-    - "How to change Metadata": topics/ttp059-how-to-change-metadata.md
-    - "What's New": topics/whats-new.md
-  - "Videos": reference/videos.md
-  - "Videos":
-    - "Abate Processing Time": videos/abate-processing-time.md
-    - "Biomet Data Processing and More in EddyFlow 4.0": videos/biomet-data-processing.md
-    - "Learning EddyFlow": videos/learning-eddypro.md
-    - "EddyFlow Output Files": videos/output-files.md
-    - "Processing .ghg Files": videos/processing-ghg-files.md
-    - "Processing Options": videos/processing-options.md
-    - "Spectral Corrections": videos/spectral-corrections.md
-    - "Statistical Analysis": videos/statistical-analysis.md
