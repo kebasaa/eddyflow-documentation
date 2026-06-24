@@ -52,6 +52,7 @@
     - [Express default settings](../topics/express-defaults.md#top)
     - [Preliminary processing](../topics/preliminary-processing.md#Prelimin)
     - [Calculating fluxes](../topics/calculate-fluxes.md#top)
+        - [Conditional Eddy Covariance](../topics/conditional-eddy-covariance.md#top)
 
 - A. [References](../topics/references.md#top)
 

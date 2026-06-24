@@ -130,4 +130,4 @@
 
 63. [WindMaster and WindMaster Pro User Manual, Issue 5 1561-PS-0001. 2009. Gill Instruments.](http://www.gill.co.uk/data/manuals/manuals.htm)
 
-64. [Zahn, E., E. Bou-Zeid, S. P. Good, G. G. Katul, C. K. Thomas, K. Ghannam, J. A. Smith, M. Chamecki, N. L. Dias, J. D. Fuentes, J. G. Alfieri, H. Kwon, K. K. Caylor, Z. Gao, K. Soderberg, N. E. Bambach, L. E. Hipps, J. H. Prueger, and W. P. Kustas. 2022. Direct partitioning of eddy-covariance water and carbon dioxide fluxes into ground and plant components. Agricultural and Forest Meteorology, 315: 108790.](https://www.sciencedirect.com/science/article/pii/S0168192321004767)
+64. <span id="Zahn2022"></span> [Zahn, E., E. Bou-Zeid, S. P. Good, G. G. Katul, C. K. Thomas, K. Ghannam, J. A. Smith, M. Chamecki, N. L. Dias, J. D. Fuentes, J. G. Alfieri, H. Kwon, K. K. Caylor, Z. Gao, K. Soderberg, N. E. Bambach, L. E. Hipps, J. H. Prueger, and W. P. Kustas. 2022. Direct partitioning of eddy-covariance water and carbon dioxide fluxes into ground and plant components. Agricultural and Forest Meteorology, 315: 108790.](https://doi.org/10.1016/j.agrformet.2021.108790)

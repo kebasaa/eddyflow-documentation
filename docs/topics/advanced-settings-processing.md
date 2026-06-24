@@ -22,7 +22,8 @@ The ** Processing Options ** tab includes the following settings. Click any of t
 - [Compensation for density fluctuations (WPL terms)](raw-processing-options.md#Compensa)
 - [Add instrument sensible heat components (LI-7500)](selecting-advanced-options.md#Add)
 
-## Quality check and footprint estimation
+## Other options
 
+- [Conditional Eddy Covariance](conditional-eddy-covariance.md#top)
 - [Quality check - flagging policy](raw-processing-options.md#Quality)
 - [Footprint estimation](raw-processing-options.md#Foot)

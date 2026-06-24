@@ -58,6 +58,7 @@ nav:
         - "Detecting and Compensating Time Lags": topics/time-lag-detect-correct.md
         - "'w-boost' Bug Correction": topics/w-boost-correction.md
       - "Calculating Fluxes":
+        - "Conditional Eddy Covariance": topics/conditional-eddy-covariance.md
         - "Calculating Multipliers for Spectroscopic Corrections (LI-7700)": topics/calculate-li-7700-multipliers.md
         - "Calculating Fluxes for the LI-7200 and LI-7700": topics/calculate-flux-7200-and-7700.md
         - "Calculating Fluxes Level 0 (uncorrected fluxes)": topics/calculate-flux-level-0.md

@@ -17,6 +17,10 @@ The first row in the file (when opened in a spreadsheet) gives the top-level hea
 
 - Net vertical turbulent fluxes of momentum, sensible heat, latent heat and all available gases, calculated from uncorrected fluxes, by correcting for spectral attenuations, air density fluctuations and instrument-specific effects, as applicable. Quality flags and random uncertainty estimates are provided for all fluxes.
 
+### Conditional eddy covariance partitioning
+
+- When [Conditional Eddy Covariance](conditional-eddy-covariance.md#top) is activated, the full output includes evapotranspiration partitioned into transpiration and evaporation and net carbon dioxide flux partitioned into photosynthetic uptake and ecosystem respiration.
+
 ### Storage fluxes
 
 - Storage fluxes of sensible and latent heat and for all available gases, estimated from concentrations and based on a 1-point profile.
@@ -122,6 +126,10 @@ The following table summarizes all output results available in the rich output f
 | air_heat_capactiy | J K-1 kg-1 | Specific heat at constant pressure of ambient air |
 | air_molar_volume | m3 mol-1 | Molar volume of ambient air |
 | ET | mm hour-1 | Evapotranspiration flux |
+| GPP_cec | µmol m-2 s-1 | CEC photosynthetic carbon dioxide flux. Negative values indicate ecosystem carbon dioxide uptake. Available when Conditional Eddy Covariance is activated. |
+| Reco_cec | µmol m-2 s-1 | CEC ecosystem respiration. Positive values indicate carbon dioxide release to the atmosphere. Available when Conditional Eddy Covariance is activated. |
+| Tr_cec | mmol m-2 s-1 | CEC transpiration. Positive values indicate an upward water vapor flux. Available when Conditional Eddy Covariance is activated. |
+| E_cec | mmol m-2 s-1 | CEC evaporation. Positive values indicate an upward water vapor flux. Available when Conditional Eddy Covariance is activated. |
 | water_vapor_density | kg m-3 | Ambient mass density of water vapor |
 | e | Pa | Ambient water vapor partial pressure |
 | es | Pa | Ambient water vapor partial pressure at saturation |

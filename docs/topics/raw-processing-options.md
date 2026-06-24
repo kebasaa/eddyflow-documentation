@@ -118,6 +118,12 @@ With a ** closed-path IRGA**, the strategy is to convert raw data to mixing rati
 
 ### Other options
 
+#### Conditional Eddy Covariance
+
+Activate **Conditional Eddy Covariance** to partition evapotranspiration into transpiration and evaporation and to partition net carbon dioxide flux into photosynthetic uptake and ecosystem respiration. CEC requires simultaneous high-frequency measurements of carbon dioxide and water vapor and is disabled by default.
+
+The option is located under **Advanced Settings > Processing Options > Other options > Conditional Eddy Covariance**. See [Conditional Eddy Covariance](conditional-eddy-covariance.md#top) for the method, requirements, limitations, and output variables.
+
 #### Quality check - flagging policy
 
 Select the quality flagging policy. Flux quality flags are obtained from the combination of two partial flags that result from the application of the steady-state and the developed turbulence tests. Select the flag combination policy.

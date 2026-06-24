@@ -3,3 +3,4 @@ site/
 .venv/
 __pycache__/
 /_OLD
+/_TEMP
