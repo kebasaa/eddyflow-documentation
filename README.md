@@ -8,6 +8,16 @@ EddyFlow® is an open source software application for processing eddy covariance
 
 This repository contains the source for the EddyFlow documentation site published with GitHub Pages.
 
+## EddyFlow repositories
+
+EddyFlow consists of 4 repositories:
+
+- [eddyflow-engine](https://github.com/keba_saa/eddyflow-engine): The engine behind it all
+- [eddyflow-gui](https://github.com/keba_saa/eddyflow-gui): The Qt6 GUI
+- [eddyflow-documentation](https://github.com/keba_saa/eddyflow-documentation) (current repository): The documentation of the software and its usage
+- [eddyflow-build-script](https://github.com/keba_saa/eddyflow-build-script): This builds the software binaries (currently Windows only)
+
+
 ## Documentation
 
 - Published documentation: [https://keba_saa.github.io/eddyflow-documentation/](https://keba_saa.github.io/eddyflow-documentation/)
