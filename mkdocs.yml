@@ -34,42 +34,41 @@ nav:
     - "Processing Eddy Covariance Datasets": topics/tutorials.md
     - "Processing ASCII and TOB1 Files": topics/processing-ascii-and-tob1-files.md
     - "Running EddyFlow on the SmartFlux System": topics/smartflux-settings.md
-    - "Dataset Selection Page": topics/dataset-selection-page.md
-    - "Using Biomet Data": topics/using-biomet-data.md
-    - "Supported Biomet File Formats": topics/biomet-data-format.md
     - "Using the Metadata File Editor": topics/metadata-file-editor-using.md
     - "Metadata Retriever Tool": topics/metadata-retriever-tool.md
+    - "Basic Settings":
+      - "Dataset Selection Page": topics/dataset-selection-page.md
+      - "Using Biomet Data": topics/using-biomet-data.md
+      - "Supported Biomet File Formats": topics/biomet-data-format.md
     - "Using Advanced Settings":
       - "Overview": topics/using-advanced-settings.md
-      - "Advanced Mode": topics/advanced-mode.md
-      - "Selecting Advanced Options": topics/selecting-advanced-options.md
       - "SmartFlux Advanced Settings": topics/smarflux-configuration-no-ghg.md
       - "Processing Options": topics/advanced-settings-processing.md
       - "Spectral Corrections": topics/advanced-settings-spectral-corrections.md
       - "Statistical Tests": topics/advanced-settings-statistical-tests.md
       - "Output Files": topics/advanced-settings-outputs.md
       - "Assessment Tests": topics/assessment-tests.md
+      - "Advanced Mode": topics/advanced-mode.md
+      - "Selecting Advanced Options": topics/selecting-advanced-options.md
       - "Command Line": topics/command-line.md
   - "3. Output Files":
     - "Overview": topics/output-files-overview.md
+    - "Time Structure and Common Features": topics/output-files-overview.md
     - "List of Output Files": topics/outputs.md
     - "The Full Output File": topics/output-files-full-output.md
     - "The Stats Folder": topics/output-files-stats-folder.md
   - "4. Troubleshooting":
     - "Troubleshooting and Tips": topics/troubleshooting.md
     - "Error Codes": topics/error-codes.md
-    - "Changing Metadata After Collection": topics/ttp059-how-to-change-metadata.md
-    - "Gas Analyzer Diagnostics": topics/diagnostics-for-gas-analyzers.md
   - "5. The Interface":
     - "Overview of the Interface": topics/introduction-welcome-page.md
     - "Project Page": topics/introduction-interface.md
-    - "Basic Settings": topics/introduction-dataset-selection.md
     - "Metadata File Editor": topics/metadata-file-editor.md
-    - "Advanced Settings":
-      - "Processing Options": topics/raw-processing-options.md
-      - "Output Files": topics/output-files.md
-      - "Spectral Corrections": topics/spectral-corrections.md
-      - "Statistical Tests": topics/statistical-tests.md
+    - "Basic Settings": topics/introduction-dataset-selection.md
+    - "Advanced Settings": topics/raw-processing-options.md
+    - "Statistical Analysis": topics/statistical-tests.md
+    - "Spectral Corrections": topics/spectral-corrections.md
+    - "Output Files": topics/output-files.md
     - "Interface Feature Reference":
       - "Overview": topics/software-reference-introduction.md
       - "Axes Alignment": topics/axes-alignment.md
@@ -117,7 +116,6 @@ nav:
       - "Defining the EddyFlow Express Data Set": topics/defining-the-dataset.md
       - "Despiking and Statistical Screening": topics/despiking-raw-statistical-screening.md
       - "Ensemble Averaged Spectra and Cospectra": topics/ensemble-averaged-spectra-and-cospectra.md
-      - "Analyzing Spectra and Cospectra": topics/spectral-analysis.md
       - "QA/QC of Spectra and Cospectra": topics/ensemble-averages.md
       - "Importing Data": topics/importing-data.md
       - "Iterative Calculation of Micromet Variables": topics/iterative-calculation-of-micromet-vars.md
@@ -139,4 +137,8 @@ nav:
       - "High-pass Filtering Correction": topics/high-pass-filtering.md
       - "Low-pass Filtering Correction": topics/low-pass-filtering.md
   - "A. References": topics/references.md
+  - "B. Additional Topics":
+    - "Analyzing Spectra and Cospectra": topics/spectral-analysis.md
+    - "Changing Metadata After Collection": topics/ttp059-how-to-change-metadata.md
+    - "Gas Analyzer Diagnostics": topics/diagnostics-for-gas-analyzers.md
   - "FAQs": reference/faqs.md
