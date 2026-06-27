@@ -26,7 +26,7 @@ markdown_extensions:
   - toc:
       permalink: true
 extra_css:
-  - assets/archive.css
+  - assets/site.css
 nav:
   - "Home": index.md
   - "1. Introduction": topics/introduction.md
