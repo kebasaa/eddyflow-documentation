@@ -12,15 +12,15 @@ This repository contains the source for the EddyFlow documentation site publishe
 
 EddyFlow consists of 4 repositories:
 
-- [eddyflow-engine](https://github.com/keba_saa/eddyflow-engine): The engine behind it all
-- [eddyflow-gui](https://github.com/keba_saa/eddyflow-gui): The Qt6 GUI
-- [eddyflow-documentation](https://github.com/keba_saa/eddyflow-documentation) (current repository): The documentation of the software and its usage
-- [eddyflow-build-script](https://github.com/keba_saa/eddyflow-build-script): This builds the software binaries (currently Windows only)
+- [eddyflow-engine](https://github.com/kebasaa/eddyflow-engine): The engine behind it all
+- [eddyflow-gui](https://github.com/kebasaa/eddyflow-gui): The Qt6 GUI
+- [eddyflow-documentation](https://github.com/kebasaa/eddyflow-documentation) (current repository): The documentation of the software and its usage
+- [eddyflow-build-script](https://github.com/kebasaa/eddyflow-build-script): This builds the software binaries (currently Windows only)
 
 
 ## Documentation
 
-- Published documentation: [https://keba_saa.github.io/eddyflow-documentation/](https://keba_saa.github.io/eddyflow-documentation/)
+- Published documentation: [https://kebasaa.github.io/eddyflow-documentation/](https://kebasaa.github.io/eddyflow-documentation/)
 - Local documentation source: [docs/index.md](docs/index.md)
 
 ## Repository Structure
