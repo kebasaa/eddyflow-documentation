@@ -74,7 +74,7 @@
 
 34. <span id="Kormann"></span> [Kormann, R. and F. X. Meixner. 2001. An analytical footprint model for nonneutral stratification. Boundary-Layer Meteoroogy, 99:207–224.](http://dx.doi.org/10.1023/A:1018991015119)
 
-34a. <span id="Lenschow"></span> [Lenschow, D. H., V. Wulfmeyer, and C. Senff. 2000. Measuring second- through fourth-order moments in noisy data. Journal of Atmospheric and Oceanic Technology, 17: 1330-1343.](http://dx.doi.org/10.1175/1520-0426(2000)017<1330:MSTFOM>2.0.CO;2)
+34a. <span id="Lenschow"></span> [Lenschow, D. H., V. Wulfmeyer, and C. Senff. 2000. Measuring second- through fourth-order moments in noisy data. Journal of Atmospheric and Oceanic Technology, 17: 1330-1347.](http://dx.doi.org/10.1175/1520-0426(2000)017<1330:MSTFOM>2.0.CO;2)
 
 35. <span id="Lee"></span> [Lee, X., J. Finnigan, and K. T. Paw U. 2004. Coordinate systems and flux bias error, in Handbook of micrometeorology: a guide for surface flux measurements, eds. X., Lee, W. J. Massman, and B. E. Law. Dordrecht, The Netherlands: Kluwer Academic, 33-66.](http://dx.doi.org/DOI:10.1007/1-4020-2265-4)
 
@@ -130,7 +130,7 @@
 
 61. <span id="Webb"></span> [Webb, E. K., G. I. Pearman, and R. Leuning. 1980. Correction of flux measurements for density effects due to heat and water vapor transfer. Quarterly Journal of the Royal Meteorological Society, 106: 85–100.](http://onlinelibrary.wiley.com/doi/10.1002/qj.49710644707/abstract)
 
-61a. <span id="Wienhold1994"></span> [Wienhold, F. G., H. Frahm, and G. W. Harris. 1994. Measurements of N2O fluxes from fertilized grassland using a fast response tunable diode laser spectrometer. Journal of Geophysical Research, 99(D8): 16557-16567.](http://dx.doi.org/10.1029/94JD00951)
+61a. <span id="Wienhold1994"></span> [Wienhold, F. G., H. Frahm, and G. W. Harris. 1994. Measurements of N2O fluxes from fertilized grassland using a fast response tunable diode laser spectrometer. Journal of Geophysical Research: Atmospheres, 99(D8): 16557-16567.](http://dx.doi.org/10.1029/93JD03279)
 
 62. <span id="Wilczak"></span> [Wilczak, J. M., S. P. Oncley, and S. A. Stage. 2001. Sonic anemometer tilt correction algorithms. Boundary-Layer Meteorology, 99: 127-150.](http://www.springerlink.com/content/p32123684246g213/)
 
