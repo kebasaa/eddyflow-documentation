@@ -34,7 +34,7 @@ Files info is where you enter information about the raw files and output files.
 
 **North reference:** Indicate whether you want the output data to be referenced to magnetic or geographic north. If you choose geographic north, EddyFlow can retrieve the Magnetic Declination at your site from NOAA (U.S. National Oceanic and Atmospheric Administration) online resources. You can also enter the magnetic declination manually. EddyFlow assumes that north is assessed at the site using the compass, so that everything you provide to the software is with respect to local geographic north. If your measurements are taken with respect to due (magnetic) north, then just select the option **Use magnetic north** or enter a declination of zero degrees.
 
-**Magnetic Declination:** Based upon the latitude and longitudinal coordinates entered, EddyFlow determines the magnetic declination from the NOAA (U.S. National Oceanic and Atmospheric Organization) internet resources (U.S. National Geophysical Data Center). EddyFlow constrains the date to December 31st, 2023.
+**Magnetic Declination:** Based upon the latitude and longitudinal coordinates entered, EddyFlow determines the magnetic declination from the NOAA (U.S. National Oceanic and Atmospheric Organization) internet resources (U.S. National Geophysical Data Center). The **On** date cannot be set later than December 31st, 2019, which is the most recent date the NOAA declination service accepts; if your dataset ends after that, the declination is retrieved for that date instead.
 
 ## Select items for flux computation
 
@@ -109,10 +109,10 @@ Each column of the raw data file that was not tagged as "to be ignored" can be u
 
 ### Wind Direction Filter
 
-EddyFlow allows for graphical selection of "directions" to filter wind from selected directions under the **Wind Filter** tab.
+EddyFlow allows for graphical selection of "directions" to filter wind from selected directions under the **Wind Filter** tab. Check **Apply Wind Direction Filter** to enable the filter; the sector controls stay inactive until it is checked.
 
-![](../assets/dataset-selection07.png)
+![The Wind Filter tab with the direction filter enabled and no sectors defined](../assets/dataset-selection07.png)
 
-You can add up to 16 segments to the radius of directions. Click **+**to add a segment. By default, the first segment will originate at 0.0 and span 10.0 degrees. You can specify the origin and width of each segment. Click the table of numbers to enter a** Start Angle **and** End Angle **.
+You can add up to 16 segments to the radius of directions. Click **+** to add a segment. By default, the first segment will originate at 0.0 and span 10.0 degrees. You can specify the origin and width of each segment by editing its **Start (°)** and **End (°)** values in the table. Each segment you add is drawn on the compass rose beside the table, so you can see the excluded directions at a glance.
 
-![](../assets/dataset-selection08.png)
+![The Wind Filter tab with three sectors defined, shown in the table and on the compass rose](../assets/dataset-selection08.png)

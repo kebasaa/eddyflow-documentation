@@ -18,7 +18,7 @@ If your files are not in the right format, you can reformat them following the i
                                                                     Open one ASCII sample file in Excel to see the header and the field separator. Here is an example:
 6. ![](../assets/ascii-03.png)
 7. Fill all the required information for **Station**, **Instruments**, **Raw File Description**, and **Raw File Settings…**.
-8. Click the **+**or**-** sign to add or remove a column in raw file description. Use the mouse to a cell to select variable name, measurement type, input unit, etc. from the drop-down menus or directly type in what you need. If a variable such as date or time is non-numeric, it must be specified even if it is ignored. Here is an example of the raw file description with settings for the aforementioned ASCII sample data file.
+8. Click the **+** or **-** sign to add or remove a column in raw file description. Use the mouse to a cell to select variable name, measurement type, input unit, etc. from the drop-down menus or directly type in what you need. If a variable such as date or time is non-numeric, it must be specified even if it is ignored. Here is an example of the raw file description with settings for the aforementioned ASCII sample data file.
 9. ![](../assets/ascii-04.png)
 10. Complete basic settings
 11. Select raw data directory by clicking **Browse…**.

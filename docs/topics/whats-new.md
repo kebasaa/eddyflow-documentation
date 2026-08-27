@@ -663,7 +663,7 @@ EddyFlow version 4.1 introduced 2 new major data processing options, completed a
 
     We recommend using the **Automatic time lag optimization** procedure especially for closed-path setups featuring medium and long (>3-4 m) sampling lines. The bug that affected this option is corrected in EddyFlow 4.1.
 
-**Calculation of average CH** 4 **mole fractions and mixing ratios from the LI-7700**
+**Calculation of average CH4 mole fractions and mixing ratios from the LI-7700**
 
 - **Bug description:** The bug prevented the band-broadening correction from being applied in the calculation of average CH4 concentrations. Note that this did not affect flux calculations, as the band-broadening correction is applied to fluxes separately in EddyFlow 4.0. The effects of this bug were visible especially in conditions of very low ambient pressure with respect to normal values.
 

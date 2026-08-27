@@ -100,7 +100,7 @@ Choose one from among the following detrending methods:
 #### Passive gasses
 
 - **Minimum (absolute) CO2 flux:** CO2 time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
-- **Minimum (absolute) CH** 4 **flux:** CH4 time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
+- **Minimum (absolute) CH4 flux:** CH4 time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
 - **Minimum (absolute) 4th gas flux:** 4th gas time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
 
 #### Time lag searching windows
