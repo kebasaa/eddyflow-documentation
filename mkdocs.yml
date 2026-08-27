@@ -45,8 +45,8 @@ nav:
       - "Overview": topics/using-advanced-settings.md
       - "SmartFlux Advanced Settings": topics/smarflux-configuration-no-ghg.md
       - "Processing Options": topics/advanced-settings-processing.md
-      - "Spectral Corrections": topics/advanced-settings-spectral-corrections.md
-      - "Statistical Tests": topics/advanced-settings-statistical-tests.md
+      - "Statistical Analysis": topics/advanced-settings-statistical-tests.md
+      - "Spectral Analysis and Corrections": topics/advanced-settings-spectral-corrections.md
       - "Output Files": topics/advanced-settings-outputs.md
       - "Assessment Tests": topics/assessment-tests.md
       - "Advanced Mode": topics/advanced-mode.md
@@ -67,7 +67,7 @@ nav:
     - "Basic Settings": topics/introduction-dataset-selection.md
     - "Advanced Settings": topics/raw-processing-options.md
     - "Statistical Analysis": topics/statistical-tests.md
-    - "Spectral Corrections": topics/spectral-corrections.md
+    - "Spectral Analysis and Corrections": topics/spectral-corrections.md
     - "Output Files": topics/output-files.md
     - "Interface Feature Reference":
       - "Overview": topics/software-reference-introduction.md
