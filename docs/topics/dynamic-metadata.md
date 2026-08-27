@@ -37,8 +37,8 @@ The third line says that, starting February 15th, 2011 at 10:30AM, the CO2 analy
 | Format of wind data | master_sonic_wformat | 'uvw''polar_w''axis' | The 'axis' option (wind components aligned with paths of the transducers pairs) applies only to Gill anemometers. |
 | North alignment for wind data | master_sonic_wref | 'spar''axis' | Only applies to Gill anemometers (learn more...). |
 | North misalignment for wind data | master_sonic_north_offset | deg from North | Any misalignment between "anemometer North" and geographic North, in degrees from North (positive if measured eastward). |
-| Manufacturer of gas analyzer for XXX | xxx_irga_manufacturer | variable* | See list of supported manufacturers. |
-| Model of gas analyzer for XXX | xxx_irga_model | variable ** | See list of supported manufacturers. |
+| Manufacturer of gas analyzer for XXX | xxx_irga_manufacturer | variable§ | See list of supported manufacturers. |
+| Model of gas analyzer for XXX | xxx_irga_model | variable¶ | See list of supported models. |
 | Northward separation of XXX analyzer from master anemometer | xxx_irga_northward_separation | cm | Positive if gas analyzer or sample inlet is placed North of anemometer. |
 | Eastward separation of XXX analyzer from master anemometer | xxx_irga_eastward_separation | cm | Positive if gas analyzer or sample inlet is placed East of the master anemometer. |
 | Vertical separation of XXX analyzer from master anemometer | xxx_irga_vertical_separation | cm | Positive if gas analyzer or sample inlet is placed higher than anemometer |
@@ -83,14 +83,14 @@ The third line says that, starting February 15th, 2011 at 10:30AM, the CO2 analy
 | R. M. Young | 81000VRE |
 | Others | generic_sonic |
 
-*Supported Gas Analyzer Manufacturers:
+§Supported Gas Analyzer Manufacturers:
 
 | Manufacturer | Label |
 | --- | --- |
 | LI-COR | licor |
 | others | other |
 
-*Supported Gas Analyzer Models:
+¶Supported Gas Analyzer Models:
 
 | Model | Label |
 | --- | --- |

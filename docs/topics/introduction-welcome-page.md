@@ -4,29 +4,29 @@ This section provides a high-level overview of the EddyFlow interface. It should
 
 ## Welcome page
 
-Upon entering the application, you will see the welcome page, which includes options to start a new project or open an existing project, and the customary [menus](#Menus) and [toolbars](#Toolbars). These include:
+Upon entering the application, you will see the welcome page, which includes options to start a new project or open an existing project, a **Recent Projects** list for reopening recent work, and the customary [menus](#Menus) and [toolbars](#Toolbars). A second tab, **Help and Support**, collects links to the documentation and other resources. Checking **LI-COR Smartflux Configuration** before creating or opening a project puts the interface into SmartFlux mode; see [Running EddyFlow on the SmartFlux System](smartflux-settings.md#top).
 
-![](../assets/SMARTFlux.png)
+![The welcome page](../assets/SMARTFlux.png)
 
 ### Menus
 
 In the top left of the EddyFlow window, you will see four menus.
 
-The **File** menu provides options to create a **New Project**, **Open Project...**, **Open Recent** projects, **Close** the current project, **Save** the current project, or **Save As…** to save a copy with a new file name.
+The **File** menu provides options to create a **New Project** (Ctrl+N), **Open Project...** (Ctrl+O), reopen one from **Open Recent**, **Close** the current project (Ctrl+W), **Save** it (Ctrl+S), or **Save As…** to save a copy with a new file name (Ctrl+Shift+S). It also holds **Import EddyPro Project...** and **Import EddyUH Project...**, which convert a legacy project to the current EddyFlow format (see [Importing EddyPro and EddyUH projects](importing-legacy-projects.md#top)), and **SmartFlux Configuration** (Ctrl+F), which switches the interface into SmartFlux mode.
 
-![](../assets/File_Menu.png)
+![The File menu](../assets/File_Menu.png)
 
-The **View** menu provides navigation between the **Project Creation** page, **Basic Settings** page, **Advanced Settings** page, and **Output Console**. You can also toggle EddyFlow Tooltips and EddyFlow messages. Some of these options are only available after you have entered the software suite.
+The **View** menu navigates between the five pages of the interface: **Welcome** (Alt+1), **Project Creation** (Alt+2), **Basic Settings** (Alt+3), **Advanced Settings** (Alt+4), and **Run Output** (Alt+5). Below those it toggles the **Output Console** and **Messages** panels, **Tooltip Help**, the **Statusbar**, and **Full Screen** (F11). Some entries are unavailable until a project has been opened; the Output Console, for instance, is only active on the Run Output page.
 
-![](../assets/View_Menu.png)
+![The View menu](../assets/View_Menu.png)
 
-Under the **Run** menu you can choose to run a project as **Advanced** or **Express**, or to **Pause/Stop** a run. It also includes the **Metadata Retriever** run option. These options are available after the project has been started.
+Under the **Run** menu you can start a run in **Express Mode** (Ctrl+E) or **Advanced Mode** (Ctrl+A), **Stop** a run in progress (Ctrl+T), or start the **Metadata Retriever** (Ctrl+R). These become available once the project has enough information to run.
 
-![](../assets/Run_Menu.png)
+![The Run menu](../assets/Run_Menu.png)
 
-Under the **Help** menu you can access the online or offline help content, view video tutorials, check for software updates, view information about the application, and view information about the Qt development environment. If you are not online, select **Use Offline Help** to access a version of the help resources that are installed with the EddyFlow application.
+Under the **Help** menu, **EddyFlow Help** (Ctrl+F1) opens this documentation and **Instruction Manual (PDF)** (Ctrl+M) opens the manual; **Getting Started** opens the introductory material. Select **Use Offline Help** to read the copy installed alongside the application rather than the online version. The menu also links to the **EddyFlow Web Page** and **EddyFlow Forum**, checks for new releases with **Check for Updates...** (Ctrl+U), and shows information about the application and about the Qt development environment under **About...** and **About Qt...**.
 
-![](../assets/Help_Menu.png)
+![The Help menu](../assets/Help_Menu.png)
 
 ### Toolbars
 
