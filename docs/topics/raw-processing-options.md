@@ -2,7 +2,7 @@
 
 Advanced Settings are used to configure EddyFlow for customized data processing. The options available here are generally useful for research applications, custom configuration for sites with complex topography, atypical instrument setups, and for advanced users with high-level knowledge of the eddy covariance technique.
 
-The Advanced Settings page includes four tabs: Processing Options, Statistical Tests, Spectral Corrections, and Output Files.
+The Advanced Settings page includes four tabs: **Processing Options**, **Statistical Analysis**, **Spectral Analysis and Corrections**, and **Output Files**.
 
 ## Processing options
 
@@ -25,6 +25,14 @@ Applies only to vertical mount Gill sonic anemometers with the same geometry of 
 - **Select automatically:** Select this option to allow EddyFlow to choose the most appropriate angle of attack correction method based on the anemometer model and—in the case of the WindMaster™ or WindMaster Pro—its firmware version.
 - **Field calibration ([Nakai and Shimoyama, 2012](references.md#NakaiandShim2012)):** Select this option to apply the Angle of attack correction according to the method described in the referenced paper, which makes use of a field calibration instead of the wind tunnel calibration.
 - **Wind tunnel calibration ([Nakai et al., 2006](references.md#Nakai)):** Select this option to apply the Angle of Attack correction according to the method described in the referenced paper, which makes use of a wind tunnel calibration.
+
+#### Metek USA-1 head correction
+
+Applies only to the Metek USA-1. Corrects for flow distortion caused by the instrument's own transducers and supports, using Metek's own wind-tunnel calibration tables. Off by default. See [Metek USA-1 head correction](anemometer-tilt-correction.md#metek-usa-1-head-correction).
+
+#### Inclinometer tilt correction
+
+Corrects for anemometer tilt that changes *within* a flux averaging period, using tilt-angle measurements from an inclinometer logged at the sonic's own sample rate — something double rotation, triple rotation and planar fit cannot do, since each of those removes only the *mean* tilt over the period. Off by default. See [Inclinometer tilt correction](anemometer-tilt-correction.md#inclinometer-tilt-correction).
 
 #### Axis rotation for tilt correction
 
@@ -82,6 +90,18 @@ Choose one from among the following detrending methods:
 - **Automatic time lag optimization:** Select this option and configure it by clicking on the **Time lag optimization Settings...** to instruct EddyFlow to perform a statistical optimization of time lags. It will calculate nominal time lags and plausibility windows and apply them in the raw data processing step. For water vapor, the assessment is performed as a function of relative humidity.
 - **Pre-whitening block-bootstrap:** Select this option and configure it by clicking on the **PWB Time Lag Optimization Settings...** to instruct EddyFlow to detect time lags via pre-whitening and block-bootstrap resampling of the cross-covariance function, based on [Vitale et al. (2024)](references.md#Vitale2024). This method is generally more robust than covariance maximization for noisy or short-tube setups, and also supports conditional lag borrowing between co-located gases sharing an intake tube. See [Detecting and compensating for time lags](time-lag-detect-correct.md#top) and [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top).
 
+#### Conditional lag borrowing
+
+These controls sit alongside the **Time lag detection method** selector and apply regardless of which method is chosen:
+
+- **Subtract the cross-covariance baseline:** Removes the background level of the cross-covariance function before searching it for a peak, which can make a weak peak easier to resolve on a noisy channel.
+- **Borrow a tube-mate's lag below the detection limit:** If a gas's own lag detection does not clear the chosen noise floor, EddyFlow can reuse the lag detected for a better-resolved gas measured on the same intake tube, rather than accept an unreliable detection.
+- **Detection limits to clear:** Multiple of the noise floor that a gas's own detection must exceed before it is trusted; below this threshold, borrowing is considered.
+- **Judged against:** The noise floor a detection is compared to — either the [flux detection limit](flux-detection-limit.md#top) or the Lenschow et al. (2000) instrumental-noise estimate from [random uncertainty estimation](random-uncertainty-estimation.md#top).
+- **Borrow from:** Which gas on the same tube to borrow a lag from — either the best-resolved gas on the analyser, or a specific gas such as carbon dioxide.
+
+A lag is never borrowed from a different instrument, and never from water vapor, since its delay depends on humidity in a way the trace gases' does not.
+
 ### Time lag optimization settings
 
 ![](../assets/Time_Lag_Opt_Window.png)
@@ -118,10 +138,18 @@ With an **open-path IRGA**, only molar density can be treated, and the way densi
 
 With a **closed-path IRGA**, the strategy is to convert raw data to mixing ratio any time it is possible to accurately do so. If that's not possible, the *a posteriori* formulation of [Ibrom et al. (2007)](references.md#Ibrom) - revising WPL for closed-path systems – is applied, including all density fluctuation terms that can be included. Note that here, however, EddyFlow also includes the pressure-induced fluctuations terms, which were instead neglected in the original paper.
 
+**Remove the spectroscopic effect of water vapour:** For closed-path gases, removes the spectroscopic (dilution and pressure-broadening) influence of water vapor on the measured concentration before it is converted to a mixing ratio.
+
+**Also correct the water channel (EddyUH form, unpublished):** Applies an equivalent self-correction to the water vapor channel itself, following an as-yet unpublished EddyUH formulation. Available only when the spectroscopic correction above is active.
+
 **Add instrument sensible heat component (LI-7500 only):** Only applies to the LI-7500. It takes into account air density fluctuations due to temperature fluctuations induced by heat exchange processes at the instrument surfaces, as from [Burba et al. (2008)](references.md#Burba). This may be needed for data collected in very cold environments. See [Calculating the off-season uptake correction (LI-7500 only)](calculate-offseason-uptake-correction.md#top).
 
 - **Simple linear regressions:** Instrument surface temperatures are estimated based on air temperature, using linear regressions as from [Burba et al., 2008](references.md#Burba), eqs. 3-8. Default regression parameters are from Table 3 in the same paper. If you have experimental data for your LI-7500 unit, you may customize those values. Otherwise we suggest using the default values.
 - **Multiple regressions:** Instrument surface temperatures are estimated based on air temperature, global radiation, long-wave radiation and wind speed, as from [Burba et al., 2008](references.md#Burba), Table 2. Default regression parameters are from the same table. If you have experimental data for your LI-7500 unit, you may customize those values. Otherwise we suggest using the default value.
+
+!!! note
+
+    As of engine v8.1.0, **Add instrument sensible heat component** is greyed out automatically when the project's metadata has no LI-7500-family analyzer, since the correction does not apply to any other instrument.
 
 ### Other options
 
