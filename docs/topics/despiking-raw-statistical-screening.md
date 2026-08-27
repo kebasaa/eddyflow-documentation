@@ -12,7 +12,7 @@ EddyFlow does not filter results according to these flags. It is left up to the 
 
 ## Despiking
 
-The ** despiking ** procedure consists of detecting and eliminating short-term outranged values in the time series.
+The **despiking** procedure consists of detecting and eliminating short-term outranged values in the time series.
 
 ![](../assets/spikes.png)
                                                             Figure 6‑3. Spikes in a typical data set.
@@ -34,11 +34,17 @@ As an example, consider the time series in the figure below, where a time series
 
 While despiking, EddyFlow counts the number of spikes found. If, for each variable and for the flux averaging period, the number of spikes is larger than 1% (a user-settable value) of the number of data samples, the variable is hard-flagged for too many spikes.
 
-** Note:** 1, 2, or 3 consecutive outliers are counted as only one spike.
+!!! note
 
-** Note:** At each of the 20 iterations of the procedure, a spike that was detected (and replaced) at the previous repetition can appear again as a spike, due to the changed plausibility range; it is replaced again by linear interpolation, however it is not counted again for the purpose of flagging.
+    1, 2, or 3 consecutive outliers are counted as only one spike.
+
+!!! note
+
+    At each of the 20 iterations of the procedure, a spike that was detected (and replaced) at the previous repetition can appear again as a spike, due to the changed plausibility range; it is replaced again by linear interpolation, however it is not counted again for the purpose of flagging.
 
 Following Mauder (2013), there are no settings to configure except the percent of spikes, and whether to perform linear interpolation between the spikes.
+
+EddyFlow also offers a third despiking method, **consecutive-difference despiking** (engine setting `despike_vm=2`), compatible with the spike-detection algorithm used by EddyUH. Rather than comparing each sample against a plausibility range computed over a moving window, this method flags a spike whenever the absolute difference between two consecutive raw samples exceeds a user-defined threshold. It is thus a simpler, purely local test, as opposed to the window-based approach of Vickers and Mahrt (1997) described above. As with the other despiking methods, detected spikes are counted and, if selected, replaced by linear interpolation of neighboring values.
 
 ## Amplitude resolution
 
@@ -76,7 +82,7 @@ Third and fourth order moments are calculated on the whole time series and varia
 
 The goal of this test is to detect discontinuities that lead to semi-permanent changes, as opposed to sharp changes associated with smaller-scale fluctuations ([Vickers and Mahrt, 1997](references.md#Vickers)). Discontinuities in the data are detected using the Haar transform, which calculates the difference in some quantity over two half-window means. Large values of the transform identify changes that are coherent on the scale of the window.
 
-![](../assets/discontinuites.png)
+![](../assets/discontinuities.png)
                                                             Figure 6‑9. Example of a time series featuring a "permanent" change in the mean value.
 
 ## Time lags
@@ -90,7 +96,7 @@ This test flags the scalar time series if the maximal *w*-covariances, determine
 
 This test calculates sample-wise Angle of Attacks throughout the current flux averaging period, and flags it if the percentage of angles of attack exceeding a user-defined range is beyond a (user-defined) threshold.
 
-![](../assets/angle of attack_with_border.png)
+![](../assets/angle-of-attack-with-border.png)
                                                             Figure 6‑11. The Angle of Attack test.
 
 ## Steadiness of horizontal wind

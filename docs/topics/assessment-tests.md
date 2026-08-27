@@ -1,12 +1,12 @@
 # Assessment tests
 
-Assessment tests evaluate ancillary files to ensure that they meet certain requirements before processing. The purpose of assessment tests is to reduce processing errors when using EddyFlow for desktop processing, and to ensure the validity of ancillary files prior to uploading them to the SmartFlux System. The ** Format Test ** evaluates the file format by comparing it to a standard, and the ** Scientific Test ** evaluates data by comparing values in the file with known acceptable values.
+Assessment tests evaluate ancillary files to ensure that they meet certain requirements before processing. The purpose of assessment tests is to reduce processing errors when using EddyFlow for desktop processing, and to ensure the validity of ancillary files prior to uploading them to the SmartFlux System. The **Format Test** evaluates the file format by comparing it to a standard, and the **Scientific Test** evaluates data by comparing values in the file with known acceptable values.
 
-If the test fails for any reason, you will be notified and provided with information that will help you solve the problem, either by choosing another file or correcting the file that you selected. If you click ** Continue ** after a test fails, EddyFlow will use the default method and will probably not use the file that failed. The default methods are as follows:
+If the test fails for any reason, you will be notified and provided with information that will help you solve the problem, either by choosing another file or correcting the file that you selected. If you click **Continue** after a test fails, EddyFlow will use the default method and will probably not use the file that failed. The default methods are as follows:
 
-- Spectral Correction defaults to ** Moncrieff **
-- Planar Fit (Rotation method) defaults to ** Double Rotation **
-- Automatic time lag optimization (Time lag detection method) defaults to ** Covariance maximization with default **
+- Spectral Correction defaults to **Moncrieff**
+- Planar Fit (Rotation method) defaults to **Double Rotation**
+- Automatic time lag optimization (Time lag detection method) defaults to **Covariance maximization with default**
 
 ## Spectral assessment file
 
@@ -36,8 +36,8 @@ This file has a strictly fixed format: the number of lines and all textual (i.e.
 2. The user may edit the file manually. In this case, all values shall be in the range 0.001 – 10.
 3. Column 'Fc' shall be in the range 0.01 – 10 for good values of column 'fc.'
 
-![](../assets/Test_Spectral_New.PNG)
-                                                            Figure 2‑1. If the Spectral Assessment file fails a test, you can correct the file, choose a different file, or choose an alternate method. If you click ** Continue **, the default method will be used, and EddyFlow will probably not use the file.
+![](../assets/Test_Spectral_New.png)
+                                                            Figure 2‑1. If the Spectral Assessment file fails a test, you can correct the file, choose a different file, or choose an alternate method. If you click **Continue**, the default method will be used, and EddyFlow will probably not use the file.
 
 ## Planar fit file
 
@@ -59,8 +59,8 @@ This file does not have a strictly predefined structure. However, the number of 
 1. At least one wind sector (lines 10 + 1 thru 10+N) should have all three coefficients (B0, B1, B2) ≠ -9999.
 2. For each wind sector having valid coefficients, the corresponding 4-lines group shall contain only numbers ≠ -9999 and at least one number ≠ 0.
 
-![](../assets/Test_Planar_Fit_New.PNG)
-                                                            Figure 2‑2. If the planar fit file fails the test, you can correct the file, choose a different file, or choose an alternate method. If you click ** Continue **, the default method will be used, and EddyFlow will probably not use the file.
+![](../assets/Test_Planar_Fit_New.png)
+                                                            Figure 2‑2. If the planar fit file fails the test, you can correct the file, choose a different file, or choose an alternate method. If you click **Continue**, the default method will be used, and EddyFlow will probably not use the file.
 
 ## Timelag optimization file
 
@@ -84,5 +84,5 @@ This file does not have a strictly predefined structure and the number of lines 
                                                                     In each line it shall be true that; "min _h2o" < "med_h2o" < "max_h2o" (note the header: the "med" is the left one, not the central one!).
                                                                     There shall be at least 3 classes with "class_num" > 30.
 
-![](../assets/Test_timelag_new.PNG)
-                                                            Figure 2‑3. If the Timelag Optimization file fails the test, you can correct the file, choose a different file, or choose an alternate method. If you click ** Continue **, the default method will be used, and EddyFlow will probably not use the file.
+![](../assets/Test_timelag_new.png)
+                                                            Figure 2‑3. If the Timelag Optimization file fails the test, you can correct the file, choose a different file, or choose an alternate method. If you click **Continue**, the default method will be used, and EddyFlow will probably not use the file.

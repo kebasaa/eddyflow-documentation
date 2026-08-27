@@ -1,6 +1,184 @@
 # What's new in this version
 
-## .9 (current version; 2022-01-27)
+EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
+
+## 8.1.0 (2026-08-22)
+
+Engine:
+
+- New feature: Two optional sonic hardware corrections, both off by default: an inclinometer-based tilt correction for tilt that changes within an averaging period, and a Metek USA-1 head correction for flow distortion (requires user-supplied Metek calibration tables, not shipped with EddyFlow).
+- New feature: Optional iterative spectral-correction/stability convergence loop, off by default, that re-evaluates the spectral correction against updated atmospheric stability until the two agree.
+- Fix: Time-lag "borrowing" for weak gas signals can now optionally follow EddyUH's own rules for choosing the noise floor and donor gas; existing projects keep their previous behavior by default.
+- New feature: New random-uncertainty method based on Lenschow et al. (2000) / Mauder et al. (2013) instrument noise.
+- New feature: New consecutive-difference despiking method (EddyUH-style), using absolute per-variable step limits instead of statistical thresholds.
+- New feature: Selectable analytic cospectrum model used to shape spectral corrections (Moncrieff, the default, plus Kaimal, Sakai, Su, Moraes, and Kristensen).
+- New feature: Optional time-lag "borrowing" from a better-resolved tube-mate gas when a species' signal can't be distinguished from noise; off by default, requires the detection-limit method to be enabled.
+- New feature: Optional "de-baselined" covariance maximization for time-lag selection, improving handling of weak fluxes.
+- Fix: Time-lag search no longer returns an undefined or error-coded covariance as the selected lag.
+- New feature: New flux detection-limit method (Wienhold et al. 1994), reporting per-gas noise floors so weak fluxes can be judged resolvable or not.
+- New feature: `-j`/`--jobs` option parallelizes the planar-fit and time-lag pre-passes across CPU cores; output is identical to a serial run.
+- Fix: A command-line switch placed after the project path was previously silently ignored.
+- Fix: Spectral assessment files that failed to open were written to meaningless stray files instead of failing cleanly.
+- New feature: Optional spectroscopic water-vapor correction for closed-path laser analysers, off by default, removing the effect of water on absorption-line broadening from mixing-ratio gas readings (including an optional self-broadening correction for the water channel itself).
+- New feature: Billesbach (2011) random-shuffle noise-floor method added to the random-uncertainty options; the earlier implementation of this method was broken and has been fixed.
+- Fix/Refine: Several correctness fixes and improvements to the EddyPro-project importer, which now produces a fully runnable EddyFlow project without further manual conversion.
+
+GUI:
+
+- New feature: Burba sensible-heat correction control now automatically greys out when no LI-7500-family analyser is present.
+- New feature: New "parallelise the planar fit and time lag pre-passes" processing option (off by default).
+- Fix: Burba multiple-regression day/night tabs were unclickable due to a layout overlap; fixed.
+- New feature: File > Import EddyUH Project — a new importer that brings across site, instrument, column, rotation, and time-lag settings from EddyUH project files, and reports which settings could and could not be converted.
+- New feature: New Advanced Processing Options for Metek USA-1 head correction and inclinometer tilt correction, including guardrails for missing calibration files.
+- New feature: New "Iterate the correction" option (with passes/tolerance) on the Spectral Corrections page.
+- New feature: New controls for time-lag tube-mate borrowing and de-baselined covariance maximization.
+- New feature: New "Remove the spectroscopic effect of water vapour" option with per-column coefficient fields.
+- New feature: New "Flux Detection Limit..." dialog on the Statistical Analysis page.
+- New feature: Lenschow (2000), consecutive-difference despiking, cospectral model choice, and Billesbach (2011) options added to their respective settings menus.
+- Fix: Random-uncertainty dropdown was mapping methods by row position instead of stored value, risking silently running the wrong method; corrected.
+
+## 8.0.0 (2026-08-20)
+
+Engine:
+
+- New feature: Conditional Eddy Covariance (CEC) gained an option to refuse partitioning a flux that isn't statistically distinguishable from zero, avoiding spurious splits during weak turbulence.
+- New feature: Alternate CEC stationarity test that judges stability of the octant split itself, rather than Foken's ratio-based statistic, which was rejecting many valid nighttime periods.
+- New feature: CEC channel pairings can now be defined explicitly, letting a site run several CO2/H2O (and additional species) partitions at once.
+- BREAKING: Conditional Eddy Covariance was substantially rebuilt — new settings, new output column names, and a new essentials-file format. Older engine versions will refuse newer project files.
+- New feature: Direct support for running EddyPro projects — an equivalent EddyFlow project/metadata pair is generated automatically, without a manual conversion step.
+- New feature: Multi-gas/multi-instrument architecture replaces the old fixed-4-gas-slot model, supporting up to 64 gas slots and multiple analysers/hygrometers; the WPL density correction is now tied per-gas to its own water record.
+- New feature: A run log file is now written alongside every run's outputs, recording warnings and skipped periods.
+- New feature: New path-existence validation for project settings.
+- Fix: Several CEC, signal-strength-column (AGC/RSSI), and diagnostic-record correctness fixes, including cases where the signal-strength screen wasn't reading any data at all.
+- Fix: Species molecular weights corrected (CO2 and N2O previously shared an identical, incorrect value).
+- Fix: EddyPro import without an explicit time-lag method now correctly defaults to covariance maximization, matching EddyPro's own default, instead of silently disabling time-lag compensation.
+- Refine: Pre-whitening block-bootstrap (PWB) time-lag optimization now runs as a full pre-pass, so it can correctly fill lag values before the first reliable detection and across gaps; several fidelity fixes bring it closer to reference implementations.
+
+GUI:
+
+- New feature: New "only partition a resolvable flux" and "judge the partition, not the flux" CEC options.
+- New feature: Channel-pairing table added to CEC Settings, letting users explicitly map CO2/H2O channels and additional species.
+- New feature: Direct `.eddypro` project import/auto-conversion; opening an EddyPro project no longer overwrites the original metadata file, and conversion stays in-memory until explicitly saved.
+- New feature: Per-instrument acquisition frequency, sampling mode, and missing-data allowance settings added to the Metadata File Editor and Basic Settings.
+- New feature: Per-species absolute-limit defaults are now seeded with realistic, species-specific values instead of one shared generic pair.
+- Fix: Windows-style file paths in project files were being corrupted by the settings parser; now converted safely, with automatic repair and notification.
+- Change: Retired the non-functional "Detect time lag on raw data" checkbox and PWB "speed options," which were dead or actively harmful.
+
+## 7.2.5 (2026-07-27)
+
+Engine:
+
+- Refine: PWB time-lag detection now runs before flux calculations.
+- New feature: Spectral assessment diagnostics.
+- Refine: More detailed failure message on spectral file creation.
+
+GUI:
+
+- New feature: New options for time-lag and time-lag files in output and spectral settings.
+- New feature: Bundled sample file templates (planar fit, spectral assessment, timelag optimization).
+- Change: PWB now runs before flux calculations.
+- Change: Simplified file opening, with file dialogs narrowed to relevant file types.
+- Change: Allow up to 99% missing samples.
+
+## 7.2.4 (2026-07-07)
+
+Engine:
+
+- Fix: AR max order corrected to match reference implementation.
+- New feature: PWB time-lag detection can optionally run pre-WPL.
+- New feature: Time-lag sharing between co-located sensors on the same instrument.
+
+GUI:
+
+- New feature: Optional pre-whitening block-bootstrap (PWB) time-lag method available in pre-processing.
+- Change: Updated default project settings.
+
+## 7.2.3 (2026-07-02)
+
+Engine:
+
+- Fix: Minor output file naming bugs; corrected gas-4 output units.
+- Change: Renamed `campbell_` prefixes to `csi_`.
+
+GUI:
+
+- New feature: Added configurable Conditional Eddy Covariance settings.
+
+## 7.2.2 (2026-07-01)
+
+GUI:
+
+- Fix: Mandate required output file options for spectral corrections.
+- Fix: Correct links to help documentation.
+
+## 7.2.1 (2026-06-29)
+
+Engine:
+
+- New feature: Pre-Whitening Block-Bootstrap (PWB) time-lag compensation, implemented end-to-end.
+
+GUI:
+
+- New feature: Added controls for pre-whitening block-bootstrap time-lag compensation, with its own settings dialog.
+
+## 7.2.0 (2026-06-25)
+
+Engine:
+
+- New feature: Additional trace gases supported.
+- New feature: Conditional Eddy Covariance (CEC, Zahn et al. 2022) implemented, partitioning the H2O flux into evaporation/transpiration (E_cec/Tr_cec, plus ET forms) and reporting net photosynthesis (P_cec).
+- Fix: NH3 diffusivity coefficient corrected.
+- Fix: Fixed a crash (segmentation fault) in CEC processing.
+
+GUI:
+
+- New feature: Conditional Eddy Covariance (CEC) implemented in the interface, with its own settings dialog and channel-pairing table.
+- New feature: Added warning when both fast temperature and speed-of-sound/sonic-temperature channels are available in data files.
+- Change: Updated copyright notice.
+
+## 7.1.0 (2026-06-23)
+
+Engine:
+
+- Fix: `.ghg` metadata was not detected correctly when both fast-temperature and speed-of-sound channels were present in the file.
+
+## 7.0.4 (2026-06-19)
+
+Engine:
+
+- Fix: Additional fixes to usage of dynamic metadata, including "file_length" and "ac_freq".
+- Fix: Writing of FLUXNET output in RP when only biomet data (no fast EC data) is available.
+- Fix: Harmonized Full Output and FLUXNET output for footprint model selection.
+- Fix: Implementation of Horst and Lenschow (2009) now uses Eq. 16 instead of Eq. 13.
+- Fix: Eliminated spurious Potential Radiation offset.
+- Fix: Reporting of QC flags in FLUXNET output when using the FCC executable; header error with custom variables also fixed.
+- Fix: Reading of full cospectra files fixed for the Fratini et al. (2012) spectral correction method.
+- Fix: Planar fit settings fixed when the fit fails for a sector.
+- Fix: Evapotranspiration (ET) units harmonized to mm/hour throughout output files.
+- Refine: Improved detection of Spectral Assessment file when running in embedded mode (SmartFlux).
+- Refine: Added variable Cp (specific heat at constant pressure) to FLUXNET output.
+- New feature: New wind-direction-sector filtering tool, to exclude raw records from up to 16 specified sectors.
+- New feature: New output file conforming to FLUXNET/Ameriflux standards, with many new intermediate results, statistics, and covariances.
+- New feature: New stationarity test and random-uncertainty method after Mahrt (1998).
+- New feature: New KID (Kurtosis Index on Differenced variable) despiking test.
+- New feature: New test to identify periods of repeated data and drop-outs.
+- New feature: New supported anemometers: Metek uSonic-3 Class A MP and Metek uSonic-3 Cage MP.
+- New feature: ET is now treated as a first-class flux (FLUXNET output only).
+- Refine: More accurate computation of mean wind direction; statistical moment calculations now fully robust to missing data.
+- Change: Removed obsolete GHG-Europe and AmeriFlux outputs.
+
+GUI:
+
+- Fix: Log file directory now created correctly at startup.
+- Fix: Time-lag dialog double popup during file upload fixed.
+- New feature: Added FLUXNET output settings.
+- New feature: New visual tool for wind-direction filtering settings, to specify up to 16 sectors.
+- New feature: Added random uncertainty estimation method after Mahrt (1998).
+- New feature: Added support for Metek uSonic-3 Class A MP and Metek uSonic-3 Cage MP anemometers.
+- Change: Moved random uncertainty settings for backward compatibility.
+- Change: Removed obsolete GHG-Europe and AmeriFlux outputs, and the "previous data results" setting.
+
+## .9 (2022-01-27)
 
 Engine:
 
@@ -57,7 +235,7 @@ GUI
 
 Engine
 
-- Add: Data filtering tool to eliminate raw records corresponding to instantaneous wind directions from specified sectors (under ** Basic Settings > Select Items for Flux Computation > Wind Filter **).
+- Add: Data filtering tool to eliminate raw records corresponding to instantaneous wind directions from specified sectors (under **Basic Settings > Select Items for Flux Computation > Wind Filter**).
 - Add: New output file conforming to FLUXNET and AmeriFlux's FP-In Standards for labels, units, and format. FLUXNET output features a large amount of new output variables, including many intermediate results, statistics on all high-frequency variables, covariances between all high-frequency variables, biomet mean values and metadata, as well as results of new implementations.
 - Add: Stationarity test after Mahrt (1998).
 - Add: Random Uncertainty estimation method after Mahrt (1998).
@@ -127,7 +305,7 @@ Engine
 - Fix: Output of full (co)spectra. The bug was such that there was a misalignment of one data point between frequencies and associated (co)spectra values. The bug did not affect calculation and output of binned cospectra, nor usage of full cospectra in spectral corrections.
 - Fix: Now files with timestamps referring to end of the dataset are processed correctly. The bug did not allow processing them in rather unusual (but not impossible) situations, such as when files shorter than the flux averaging interval were processed.
 - Fix: Handle inconsistent selection of embedded biomet data and non-GHG file type. This pair of inconsistent settings is not possible with the GUI, only with manual editing of the .eddypro file.
-- Fix: Definitions of ** Hamming and Hann ** windows were mistakenly inverted. Now they are correct. The difference between the two windows is minimal and resulting binned (co)spectra are thus only minimally affected, and only at the low frequency end.
+- Fix: Definitions of **Hamming and Hann** windows were mistakenly inverted. Now they are correct. The difference between the two windows is minimal and resulting binned (co)spectra are thus only minimally affected, and only at the low frequency end.
 
 GUI
 
@@ -145,7 +323,7 @@ GUI
 - Add: Change max plausibility range from 12 to 20 sigma as per user request.
 - Add: Enable drag and drop tips on Windows.
 - Add: the registered trademark symbol to the main window title.
-- Add: ** Master Anemometer Flags ** combo in Basic Settings page.
+- Add: **Master Anemometer Flags** combo in Basic Settings page.
 - Add: support for Campbell CSAT-3B.
 - Add: Raise variable flags decimals from 4 to 10 digits.
 - Add: Make anemometer firmware version mandatory for Gill WindMaster/Pro.
@@ -155,18 +333,18 @@ GUI
 
 Version 6.1.0 is a minor update with bug fixes and refinements.
 
-** Engine bugs fixed **
+**Engine bugs fixed**
 
 - FLUXNET biomet output file now contains biomet results also when fast EC data are not available (similar to standard biomet output file). Also fixed initialization, so that if biomet data are not available, FLUXNET biomet output file reports -9999.
 - Detection of EndIndex in the list of binned spectra files when a subperiod is selected, which coincides with the period covered by available spectra files. The bug caused EddyFlow to not create ensemble averaged spectra/cospectra, nor to perform the spectral assessment.
 - SplitCount function, that caused biomet files not to be properly read (and engine to crash) when only one biomet variable is present in the external biomet files, besides the timestamp(s).
 
-** Engine refinements **
+**Engine refinements**
 
 - Added support for new LI-7500RS and LI-7200RS instruments.
 - Introduced a mechanism to allow user to ask EddyFlow to select the most appropriate Angle of Attack (AoA) correction method, based on sonic anemometer model and firmware version. User can also force a selection or disable the correction completely.
 
-** GUI refinements **
+**GUI refinements**
 
 - Added support for new LI-7500RS and LI-7200RS instruments.
 - Added automatic selection for the AoA correction method.
@@ -175,7 +353,7 @@ Version 6.1.0 is a minor update with bug fixes and refinements.
 - Enabled embedded software version (firmware) field for any gas analyzer and changed it to a free text form.
 - Allowed project file opening with double-click on Mac.
 
-** GUI bugs fixed **
+**GUI bugs fixed**
 
 - Spectral file assessment load button not working properly.
 - Essential file path not properly preserved during a run on Windows.
@@ -184,17 +362,17 @@ Version 6.1.0 is a minor update with bug fixes and refinements.
 
 Version 6 is a major release with a number of new features and improvements that enhance the utility of the software for web applications.
 
-** New Features **
+**New Features**
 
 - Mac OS 10.10 version
 
-** Engine bugs fixed **
+**Engine bugs fixed**
 
 - Improved retrieval of dynamic meta data.
 - Missing array allocation reported by Sebastien Lafont (INRA, France). Thanks for reporting this issue!
 - Bug that caused processing to stop under some temperature measurement configurations.
 
-** Engine refinements **
+**Engine refinements**
 
 - Criteria for (co)spectra filtering are now explicitly set by the user.
 - Settings for (co)spectra filtering are now independent from the selection of the spectral correction method and are the same for ensemble averaging, model fit and discrimination between model and direct method in spectral correction after Fratini et al. (2012).
@@ -218,7 +396,7 @@ Version 6 is a major release with a number of new features and improvements that
 - Binned (co)spectra filtering based on results of micro-meteorological tests. Users can select whether to discard (co)spectra when the corresponding period is flagged as moderate or low quality.
 - More explicit start/end period selection when importing binned cospecta files.
 
-** GUI (Graphical User Interface) additions **
+**GUI (Graphical User Interface) additions**
 
 - Implemented drag-and-drop capabilities in supported operating systems,
 - Improved guided mode messages to indicate implausible sensor separation values and flow rates.
@@ -226,7 +404,7 @@ Version 6 is a major release with a number of new features and improvements that
 - New setting for (co)spectra filtering according to Mauder and Foken, 2004.
 - Many other minor additions.
 
-** GUI refinements **
+**GUI refinements**
 
 - Set maximum missing samples allowed to 40%.
 - Improved spectral analysis settings.
@@ -237,15 +415,15 @@ Version 6 is a major release with a number of new features and improvements that
 
 Version 5.2.1 is a minor update with bug fixes and a refinement.
 
-** Engine bug fixed **
+**Engine bug fixed**
 
 Bug causing the engine to hang before run completion if no averaging period could be processed completely. The bug was unlikely to affect EddyFlow desktop users, but could at times show up in the SmartFlux System.
 
-** GUI refinement **
+**GUI refinement**
 
-Added ** Save ** and ** Continue ** buttons to Spectral, Planar fit and Time lag assessment files testing dialog.
+Added **Save** and **Continue** buttons to Spectral, Planar fit and Time lag assessment files testing dialog.
 
-** GUI bugs fixed **
+**GUI bugs fixed**
 
 - Time lag assessment file testing crash in case of missing RH classes
 - Planar fit assessment file testing too restrictive
@@ -256,7 +434,7 @@ Added ** Save ** and ** Continue ** buttons to Spectral, Planar fit and Time lag
 
 Version 5.2 is a minor update with bug fixes, refinements, and a few new features.
 
-** New features **
+**New features**
 
 - Implementation of assessment tests for ancillary files (spectral assessment, planar fit, and timelag optimization).
 - Analytic spectra correction after Massman (2000, 2001).
@@ -264,7 +442,7 @@ Version 5.2 is a minor update with bug fixes, refinements, and a few new feature
 - Option to run engine with command-line specified .eddypro file (full path). See help for usage (run "$eddypro_rp -h").
 - eddypro_rp now edits .eddypro file, so that eddypro_fcc can be launched when eddypro_rp completes, without further interventions. This improves portability and facilitates usages from command line and automation.
 
-** Engine bugs fixed **
+**Engine bugs fixed**
 
 - Bug that caused duplicated biomet outputs when raw biomet data are missing.
 - Bug causing off-season uptake correction to switch to 'simple linear' and stick there, if radiation measurements were missing for just one half-hour.
@@ -279,7 +457,7 @@ Version 5.2 is a minor update with bug fixes, refinements, and a few new feature
 - Module call to m_common_global_var in RenameTmpFilesCommon. The bug was not causing problems because the same module is called by the module that was mistakenly called.
 - Fixed issue that caused biomet output files to be duplicated in some circumstances.
 
-** Engine refinements **
+**Engine refinements**
 
 - Eliminated squared root operating on the transfer function H, in Fratini et al. (2012) spectral correction method. This refinement shall be made publicly available in the form of a corrigendum to the paper. Thanks a lot to Johannes Laubach for suggesting the change, demonstrating its foundation and verifying the new implementation in EddyFlow!
 - Refined format of GHG-Europe output file after specifications from European Database managers.
@@ -306,14 +484,14 @@ Version 5.2 is a minor update with bug fixes, refinements, and a few new feature
 - Eliminated useless output 'Verifying time series integrity' during planar fit data import.
 - Corrected the spelling of subroutine ShrinkString.
 
-** GUI bugs fixed **
+**GUI bugs fixed**
 
 - Improve information available in Run page (for example, show warnings and errors, computation time estimates, etc.).
 - Improve progress bars in Run page.
-- Add separation of standard variables and custom variables in the ** Metadata Editor **; ** Raw File Description **. Provide a ** Clear ** button for the ** Custom ** variables.
+- Add separation of standard variables and custom variables in the **Metadata Editor**; **Raw File Description**. Provide a **Clear** button for the **Custom** variables.
 - Fix minor bugs.
 
-** GUI refinements **
+**GUI refinements**
 
 - Integrate Massman 2000/2001 correction.
 - Implement testing of ancillary files (Spectral correction, Planar fit and Time lag optimization) at loading time.
@@ -325,7 +503,7 @@ Version 5.2 is a minor update with bug fixes, refinements, and a few new feature
 
 Version 5.1.1 is a minor update with bug fixes and refinements.
 
-** Engine bugs fixed **
+**Engine bugs fixed**
 
 - Bug causing EddyFlow to ignore the next raw file when current file is shorter than expected.
 - Bug causing 'full co-spectra' files not to be read in 'eddypro_fcc'.
@@ -334,24 +512,24 @@ Version 5.1.1 is a minor update with bug fixes and refinements.
 
 Version 5.1.0 is a minor update with bug fixes and refinements.
 
-** Engine bugs fixed **
+**Engine bugs fixed**
 
 - Import of TOB1 files, now avoids copying the same TOB1 file multiple times and speeds up processing of long TOB1 files (typical use case).
 - Bug that was causing storage fluxes to be identically zero in most use cases.
 - File in src_common was importing module rp-related (did not cause computation issues).
 
-** Engine refinements **
+**Engine refinements**
 
 - Modified Absolute Limits Statistical test defaults as follows: Minimum sonic temperature set to -40 °C (was -20 °C).Maximum CO2 set to 900 ppm (was 600 ppm)
 - Fixed ranges of accepted biomet values:Changed minimum ambient pressure to 40 kPa (was 80 kPa).Made all interval min/max closed instead of open, most importantly for RH, to include values of 0 and 100.
 - Optimized the output time stamp in case of shorter-than-expected raw files.
 
-** GUI bugs fixed **
+**GUI bugs fixed**
 
 - Improved computation progress bar to represent progress more accurately.
 - Decimal digits of the 4th gas molecular values were lost in the Basic Settings page when saved.
 
-** GUI refinements **
+**GUI refinements**
 
 - Improved information available in Run page.
 - Added default button selection to SmartFlux System package dialog.
@@ -361,14 +539,14 @@ Version 5.1.0 is a minor update with bug fixes and refinements.
 
 EddyFlow Version 5.0 introduces the SmartFlux System configuration file creator.
 
-** GUI**
+**GUI**
 
 - Implemented SmartFlux System bar and file package creation buttons.
 - Removed "Number of files to merge" control.
 - Removed "Gas analyzer height" from Metadata editor.
 - Introduced "Open Sans" font.
 
-** Engine bugs fixed **
+**Engine bugs fixed**
 
 - Bug causing crash on short raw files.
 - Software not reading strings longer than 200 characters in `.eddypro ` file.
@@ -379,7 +557,7 @@ EddyFlow Version 5.0 introduces the SmartFlux System configuration file creator.
 - Bug causing the spectral correction of Fratini et al. (2012) to virtually always use the fallback solution (model) rather than the direct method (thanks Olli Peltola and Ivan Mammarella!).
 - Bug causing the spectral assessment to fail if a large number of spectra files were to be used.
 
-** Engine refinements **
+**Engine refinements**
 
 - Changed units of ET fluxes in the full output file. New units are mm+1hour-1.
 - Changed Express settings. Cross-wind correction is no longer applied by default.
@@ -388,7 +566,7 @@ EddyFlow Version 5.0 introduces the SmartFlux System configuration file creator.
 - Period to be processed extended to include the very last averaging interval, which was excluded from the automatic selection of start&end date performed in the GUI.
 - Initialization of stats and their values when variables are missing.
 
-** Engine new features **
+**Engine new features**
 
 - Creation of unique temp folder for allowing parallel runs.
 - Possibility to process indefinitely long raw files. Possibility to process datasets for multiple years in one session.
@@ -396,7 +574,7 @@ EddyFlow Version 5.0 introduces the SmartFlux System configuration file creator.
 
 ## Version 4.2.1 (2013-10-03)
 
-** GUI improvement **
+**GUI improvement**
 
 EddyFlow update 4.2.1 is a minor update that fixes a GUI bug related to the retrieval of declination correction for magnetic north from the U.S. National Oceanic and Atmospheric Administration (NOAA) website. The update corrects an error that occurs when the website is unavailable.
 
@@ -404,7 +582,7 @@ EddyFlow update 4.2.1 is a minor update that fixes a GUI bug related to the retr
 
 EddyFlow update 4.2 is a minor update that includes several bug fixes and improvements to the processing engine and graphical user interface (GUI), including:
 
-** Engine improvements **
+**Engine improvements**
 
 - Fixed use of "Flags" (set in the "Basic Settings" page) for filtering out individual raw data records.
 - Fixed import of SLT-EddySoft raw files featuring low-resolution data.
@@ -431,7 +609,7 @@ EddyFlow update 4.2 is a minor update that includes several bug fixes and improv
 - Refinement: minor modifications to QC flags to better match flag definitions according to TK3 approach (M. Mauder, personal communications).
 - Refinement: resolving to the Integral Turbulence Time Scale simple definition from [Billesbach (2011)](references.md#Billesbach1) if direct calculation fails.
 
-** GUI improvements **
+**GUI improvements**
 
 - Fixed behavior of North alignment for Generic Anemometer in the Metadata Editor
 - Fixed bug that caused the default Angle of Attack to override user selection when re-opening a saved project.
@@ -460,49 +638,51 @@ EddyFlow update 4.2 is a minor update that includes several bug fixes and improv
 
 EddyFlow version 4.1 introduced 2 new major data processing options, completed a few features already drafted in version 4.0, and fixed a number of bugs found in version 4.0. The improvements in this version include:
 
-** New features **
+**New features**
 
 - Spectral correction scheme, implemented after [Fratini et al. (2012)](references.md#Fratini2012), specifically designed for closed-path systems, but applicable to any eddy covariance setup.
 - New Angle of Attack correction algorithm from [Nakai and Shimoyama (2012)](references.md#NakaiandShim2012).
 
-** Improvements **
+**Improvements**
 
 - Use of previous results to dramatically reduce program execution time.
 - Express processing uses the new Angle of Attack correction algorithm from [Nakai and Shimoyama (2012)](references.md#NakaiandShim2012) rather than the correction from [Nakai et al. (2006)](references.md#Nakai) used in previous versions.
 - Support for binary SLT files containing more than 6 variables.
 - External biomet data files are no longer limited to 18,000 records.
-- Renamed ** Dataset Selection ** page to ** Basic Settings ** page.
+- Renamed **Dataset Selection** page to **Basic Settings** page.
 
-** Major bug fixes **
+**Major bug fixes**
 
-** Automatic time lag optimization **
+**Automatic time lag optimization**
 
-- ** Bug description:** The bug was under the ** Automatic time lag optimization ** procedure (Advanced Settings > Processing Options > Time lag compensation). The bug is such that time lags assessed for H2O (if this gas is treated in flux computation) are erroneously used also for CO2 or CH4. Selection of an erroneous time lag results in flux underestimations: the more the used time lag deviates from the real one, the more fluxes are underestimated.
-- ** Who is affected:** Anyone who used the ** Automatic time lag optimization ** option for flux computations in a previous version of EddyFlow is likely to be affected. However, the severity of the effects depends upon the gas analyzer in use. For open-path analyzers (e.g., LI-7500A), the bias if most likely negligible, if present at all. For enclosed-path analyzers (e.g., LI-7200), the bias is probably detectable but still negligible, because time lags of H2O do not deviate dramatically from those of CO2, especially if conditions of low relative humidity (<50-60%, typically during daytime). In such analyzers, effects are further minimized if a short (< 1 m) and/or heated or insulated sampling line was used. For closed-path analyzers with sampling lines longer than 2 m, (e.g., LI-7000 or LI-6262), the effects are likely to be relevant and we thus recommend that you recalculate fluxes using EddyFlow version 4.1.
-- ** Who is not affected:** All users who ran EddyFlow in Express Mode or those who did not use the ** Automatic time lag optimization **.
+- **Bug description:** The bug was under the **Automatic time lag optimization** procedure (Advanced Settings > Processing Options > Time lag compensation). The bug is such that time lags assessed for H2O (if this gas is treated in flux computation) are erroneously used also for CO2 or CH4. Selection of an erroneous time lag results in flux underestimations: the more the used time lag deviates from the real one, the more fluxes are underestimated.
+- **Who is affected:** Anyone who used the **Automatic time lag optimization** option for flux computations in a previous version of EddyFlow is likely to be affected. However, the severity of the effects depends upon the gas analyzer in use. For open-path analyzers (e.g., LI-7500A), the bias if most likely negligible, if present at all. For enclosed-path analyzers (e.g., LI-7200), the bias is probably detectable but still negligible, because time lags of H2O do not deviate dramatically from those of CO2, especially if conditions of low relative humidity (<50-60%, typically during daytime). In such analyzers, effects are further minimized if a short (< 1 m) and/or heated or insulated sampling line was used. For closed-path analyzers with sampling lines longer than 2 m, (e.g., LI-7000 or LI-6262), the effects are likely to be relevant and we thus recommend that you recalculate fluxes using EddyFlow version 4.1.
+- **Who is not affected:** All users who ran EddyFlow in Express Mode or those who did not use the **Automatic time lag optimization**.
 
-** Note:** We recommend using the ** Automatic time lag optimization ** procedure especially for closed-path setups featuring medium and long (>3-4 m) sampling lines. The bug that affected this option is corrected in EddyFlow 4.1.
+!!! note
 
-** Calculation of average CH** 4 ** mole fractions and mixing ratios from the LI-7700 **
+    We recommend using the **Automatic time lag optimization** procedure especially for closed-path setups featuring medium and long (>3-4 m) sampling lines. The bug that affected this option is corrected in EddyFlow 4.1.
 
-- ** Bug description:** The bug prevented the band-broadening correction from being applied in the calculation of average CH4 concentrations. Note that this did not affect flux calculations, as the band-broadening correction is applied to fluxes separately in EddyFlow 4.0. The effects of this bug were visible especially in conditions of very low ambient pressure with respect to normal values.
+**Calculation of average CH** 4 **mole fractions and mixing ratios from the LI-7700**
 
-** Other bug fixes **
+- **Bug description:** The bug prevented the band-broadening correction from being applied in the calculation of average CH4 concentrations. Note that this did not affect flux calculations, as the band-broadening correction is applied to fluxes separately in EddyFlow 4.0. The effects of this bug were visible especially in conditions of very low ambient pressure with respect to normal values.
+
+**Other bug fixes**
 
 - Fixed bug that caused the program to crash when the number of files selected for planar fit calculations were more than the maximum allowed (3,000). The bug was fixed and this maximum value was increased to 18,000.
 - Fixed bug that caused the calculation of maximum wind speed to fail in cases in which raw data records have at least one wind component set to -9999 (EddyFlow's internal error code). Most often this bug resulted in a maximum wind speed of 17318.7 m/s, that was the result of wind speed calculated from 3 wind components set to -9999. This bug had no effect on fluxes.
 - Fixed bug that caused the crosswind correction of sonic temperature to be calculated erroneously for individual data records that have any wind component set to -9999. This bug resulted in implausible values for sonic temperature and thus either in fluxes set to -9999, or to extremely spiky fluxes. Note that for most anemometers the crosswind correction is applied in the firmware, so there is no need to apply it at processing time with EddyFlow.
-- Fixed bug that caused the header of "full output" file to be erroneous when using the option ** Use standard output format **.
+- Fixed bug that caused the header of "full output" file to be erroneous when using the option **Use standard output format**.
 - Fixed bug that caused the night-time/daytime indication in the "full output" file to fail in some circumstances.
-- Fixed a bug in the ** Random uncertainty estimate **, that caused the software to crash with an "Out of memory" error message.
+- Fixed a bug in the **Random uncertainty estimate**, that caused the software to crash with an "Out of memory" error message.
 
-** GUI changes **
+**GUI changes**
 
-- Added a general ** Restore Default Values ** button to restore all the Advanced Settings to the Express (default) Settings.
-- Added constraints between fields to help fill the ** Metadata File Editor ** tables.
+- Added a general **Restore Default Values** button to restore all the Advanced Settings to the Express (default) Settings.
+- Added constraints between fields to help fill the **Metadata File Editor** tables.
 - Improved management of previous versions of Project and Metadata files for backward compatibility.
-- Added a Software Version field in the ** Metadata File Editor ** IRGA table.
-- Added an automatic ** Detect Dataset Dates ** button for the raw data files.
+- Added a Software Version field in the **Metadata File Editor** IRGA table.
+- Added an automatic **Detect Dataset Dates** button for the raw data files.
 - Prevented wheel mouse scrolling on setting controls.
 - Improved management on low resolution displays.
 - Added automatic saving when exiting sub-dialog.
@@ -515,7 +695,7 @@ EddyFlow version 4.1 introduced 2 new major data processing options, completed a
 
 EddyFlow version 4.0 introduced additional computation options that were limited in the earlier releases of the software known as EddyFlow 3.0 and EddyFlow Express. This version provides a wide variety of options that make it possible to compute eddy covariance fluxes using one of many established techniques.
 
-** New features **
+**New features**
 
 - Support for biomet data (biological and meteorological data) collected from ancillary sensors.
 - Ensemble spectra, cospectra, modeled spectra, and ensemble spectra based on time period.
@@ -526,7 +706,7 @@ EddyFlow version 4.0 introduced additional computation options that were limited
 
 ## Version 3.0.1 (not public)
 
-** Bug fixes **
+**Bug fixes**
 
 - Fixed initialization of latitude, longitude, and altitude when using dynamic metadata.
 - Fixed Kljun et al. (2004) Footprint Estimation: Now uses measurement height minus displacement height to compute footprint. Previously used measurement height.
@@ -536,7 +716,7 @@ EddyFlow version 4.0 introduced additional computation options that were limited
 
 ## Version 3.0.0 (2012-02-06)
 
-** New features **
+**New features**
 
 - Support for additional raw data file types, including ASCII Table, TOB1, SLT (EddySoft), SLT (EdiRe), Generic binary.
 - Support for the "dynamic metadata," or site parameters that change over time.
@@ -551,14 +731,14 @@ First public release of 3.0.0 Beta. This version introduced the Advanced Options
 
 ## 2.3.0 (2011-07-20)
 
-** Major bug fixes **
+**Major bug fixes**
 
 - An error occurred in the calculation of corrected fluxes if the N2O analyzer was a closed-path one, while the CH4 analyzer was open-path or CH4 was not present at all. The bug resulted in corrected fluxes of N2O equal to -9999 (that is, if your N2O fluxes are not -9999, they are not affected by this bug).
 - Definition of "relative separations". No impact on calculations, only on the output metadata.
 - Control on use of cell temperature (fixed re-initialization of column information).
 - In statistical tests (Spike count/removal and Amplitude Resolution/Drop Out) length of implied windows modified so as to scale with the length of the averaging period.
 
-** Improvements **
+**Improvements**
 
 - Handling of situations where H2O readings are not available (air density, momentum flux).
 - Control over peculiar situations in Fluxes23 (WPL section).
@@ -570,7 +750,7 @@ First public release of 3.0.0 Beta. This version introduced the Advanced Options
 
 ## 2.2.0 (2011-06-20)
 
-** Bug fixes **
+**Bug fixes**
 
 - Fixed bug concerning fluxes calculated from CH4 and N2O mole fraction measurements from closed path systems. The bug affected also fluxes calculated with CO2 mole fractions, if the paired H2O was measured as either molar density or mixing ratio. In all cases, the bug resulted in flux values =-9999 (that is, if your fluxes are not -9999, they are not affected by this bug).
 - Fixed Altitude field zeroing in the Metadata editor.
@@ -609,7 +789,7 @@ First public release of 3.0.0 Beta. This version introduced the Advanced Options
 - Changed policies for scrollbar and scrolling behavior into the tables.
 - Changed default value in some table fields.
 - Changed from QByteArrays to QString where there is the possibility of weak conversions.
-- Fixed selection of "None" variables into ** Processing Page ** combo's when there are already some variables selected.
+- Fixed selection of "None" variables into **Processing Page** combo's when there are already some variables selected.
 - Updated the manual.
 
 ## 2.0.0 (2011-04-05)
