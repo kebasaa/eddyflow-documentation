@@ -2,36 +2,43 @@
 
 Under: Advanced Settings > Processing Options > Other options > Conditional Eddy Covariance
 
-Activating **Conditional Eddy Covariance** under **Other options** will cause the **CEC Settings** button to activate. Click on it to open the CEC configuration dialog and configure the quality gates used to accept or reject partitioning results, and the channels used for partitioning. For an explanation of the CEC method itself, its output variables, and its assumptions and limitations, see [Conditional Eddy Covariance](conditional-eddy-covariance.md#top). This page documents only the dialog fields.
+Activating **Conditional Eddy Covariance** under **Other options** will cause the **CEC Settings** button to activate. Click on it to open the CEC configuration dialog, where you define which channels are partitioned and the quality conditions a flux averaging period must meet before a partitioned result is reported. For an explanation of the CEC method itself, its output variables, and its assumptions and limitations, see [Conditional Eddy Covariance](conditional-eddy-covariance.md#top). This page documents only the dialog fields.
 
-## Canopy parameter
+![The CEC Settings dialog, showing the channel pairing table and the partitioning and quality limits](../assets/cec-settings-dialog.png)
 
-- **Canopy height:** The height of the canopy above the zero-plane displacement, used by CEC to characterize the measurement height relative to the canopy.
+## Channel pairing
 
-## Partitioning quality gates
+The pairing table defines which measured channels CEC uses, instead of relying on a single fixed carbon dioxide and water vapor pair. Each row pairs one carbon dioxide channel with one water vapor channel and states what should be partitioned, so several instrument combinations can be processed in the same run. Because the channels are chosen per row, the pair may span two different analyzers, and species other than carbon dioxide and water vapor (for example carbonyl sulfide) can be partitioned as well.
 
-These settings define the data-quality conditions that a flux averaging period must meet before EddyFlow reports a CEC-partitioned result. Periods that fail a gate are still processed conventionally, but the corresponding CEC output columns are flagged or left unavailable for that period.
+- **Use:** Include this row in the run. Clearing it keeps the row but leaves it unprocessed.
+- **CO<sub>2</sub> channel:** The carbon dioxide channel for this pair, named as *species (instrument)*.
+- **H<sub>2</sub>O channel:** The water vapor channel used as the partitioning reference for this pair.
+- **Partition:** Which fluxes this row produces, for example *H<sub>2</sub>O and CO<sub>2</sub>*.
+- **Add:** Add a pairing row.
+- **Remove:** Delete the selected row.
+- **Same-analyser default:** Fill the table with the pairs implied by the project's own metadata, pairing each analyzer's carbon dioxide channel with the water vapor channel from that same instrument.
 
-- **Minimum octant-1/octant-2 ratio:** Minimum allowed ratio between the number of samples in the stomatal and non-stomatal conditional classes (the two ejection octants used by CEC). Ratios below this threshold indicate that one class is too poorly represented relative to the other for a reliable partition.
-- **Minimum data fraction per octant:** Minimum fraction of all samples in the averaging period that must fall into each of the two conditional octants (stomatal and non-stomatal). This corresponds to the conditional sample size criterion described by Zahn et al. (2022).
-- **Minimum valid data fraction:** Minimum fraction of raw records in the averaging period that must be valid (i.e., not removed by despiking or other quality tests) for CEC partitioning to be attempted.
-- **Minimum signal strength:** Minimum instrument signal strength (AGC or equivalent, depending on the gas analyzer) required for the averaging period to be used in partitioning. Low signal strength indicates degraded optical measurement quality that can bias the high-frequency fluctuations used by CEC.
-- **Maximum gap-filled fraction:** Maximum allowed fraction of the high-frequency time series that may consist of gap-filled (rather than measured) records. CEC relies on the instantaneous covariation between vertical wind and scalar fluctuations, which gap-filled records cannot reliably provide.
-- **Maximum non-stationarity:** Maximum allowed non-stationarity, evaluated using the original criterion described by Zahn et al. (2022), above which the averaging period is excluded from partitioning.
-- **Minimum flux/random-error ratio:** *(Added in engine 8.0.0.)* Minimum ratio of the total flux to its random uncertainty required before CEC attempts to partition it. This gate ensures that CEC only partitions a flux that is itself resolvable above its own noise.
-- **Non-stationarity mode:** *(Added in engine 8.0.0.)* Selects which non-stationarity criterion is applied: the original Zahn et al. (2022) criterion, which judges the stationarity of the high-frequency flux itself, or an alternative criterion that instead judges the stationarity of the partition (the conditional flux ratio) rather than the underlying flux.
-- **Per-species non-stationarity threshold:** *(Added in engine 8.0.0.)* When the alternative non-stationarity mode is selected, this sets the maximum allowed non-stationarity individually for each partitioned species (e.g., carbon dioxide, water vapor, or an additional paired species such as carbonyl sulfide).
+## Partitioning constraints
 
-## Channel pairing table
+- **Hyperbolic threshold H:** Half-width of the hyperbolic exclusion region around the origin of the joint scalar quadrant plot. Samples inside it carry little flux information and are excluded from the conditional averages. A value of zero disables the exclusion.
+- **Minimum O1 + O2 occupancy:** Minimum combined share of samples, in percent, that must fall into the two ejection octants used by the partition.
+- **Minimum per-octant occupancy:** Minimum share of samples, in percent, required in *each* of those octants individually, so that one octant cannot carry the partition on its own.
+- **Singularity band:** Width of the band around the singular solution in which the partition becomes numerically ill-conditioned; results falling inside it are rejected.
 
-The channel pairing table lets you define which measured channels CEC should use for partitioning, instead of relying on a single fixed carbon dioxide/water vapor pair. Each row in the table pairs two channels — for example, carbon dioxide and water vapor from the same gas analyzer, or carbon dioxide and water vapor from different instruments — so that partitioning can be run on more than one instrument combination in the same processing run. The table also accepts channels for other trace species, such as carbonyl sulfide (COS), allowing CEC to be applied beyond the standard evapotranspiration and net carbon dioxide flux partitioning.
+## QC/preprocessing limits
 
-Use the table to add, remove, or edit pairs:
+- **Minimum valid data:** Minimum percentage of raw records in the averaging period that must survive despiking and the other statistical tests before partitioning is attempted.
+- **Signal-strength cutoff:** Minimum instrument signal strength (AGC/RSSI, depending on the analyzer) required for the period to be partitioned. Available only when the project actually carries a signal-strength channel.
+- **Maximum stationarity:** Maximum permitted non-stationarity, in percent, above which the period is excluded.
+- **Maximum small-gap fill:** Longest run of consecutive missing samples, in samples, that may be filled before the period is rejected.
+- **Only partition a resolvable flux:** Restrict partitioning to periods where the flux exceeds its own random error by the stated multiple, so that a flux which cannot be distinguished from its noise is never split. The multiplier is entered alongside as *x random error*.
+- **Judge the partition, not the flux:** Apply the non-stationarity test to the partitioned result rather than to the underlying flux, which is an alternative to the criterion originally described by Zahn et al. (2022).
 
-- Add a pair and select the two channels (vertical wind is implicit; select the two scalar channels to be conditionally sampled together).
-- Remove a pair that is no longer needed.
-- Edit an existing pair to point to a different channel, for example after reconfiguring instruments.
+## Dialog buttons
+
+- **Restore Default Values:** Return every field on this dialog to its default.
+- **Close:** Close the dialog, keeping the current settings.
 
 !!! note
 
-    The minimum flux/random-error ratio gate and the non-stationarity mode/per-species threshold settings were introduced in engine 8.0.0 as refinements to the original Zahn et al. (2022) quality criteria. Datasets processed with earlier engine versions used only the conditional sample size, valid data fraction, signal strength, gap-filled fraction, and the original non-stationarity criterion.
+    **Only partition a resolvable flux** and **Judge the partition, not the flux** were introduced in engine 8.0.0 as refinements to the original Zahn et al. (2022) quality criteria, as was the channel pairing table. Earlier versions partitioned a single fixed carbon dioxide and water vapor pair and offered only the occupancy, valid-data, signal-strength and stationarity limits.

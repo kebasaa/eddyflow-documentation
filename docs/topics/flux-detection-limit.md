@@ -21,7 +21,13 @@ Because the detection limit depends on the noise properties of the measured time
 
 ## Enabling the calculation
 
-Detection limit calculation is controlled by a dedicated method selector in Advanced Settings. See the [Flux Detection Limit Settings dialog](flux-detection-limit-settings.md) reference for a description of the available options.
+The detection limit is switched off by default: the **Method** selector in the Flux Detection Limit dialog reads *None* until you choose a method. See the [Flux Detection Limit Settings dialog](flux-detection-limit-settings.md) reference for the available options and their parameters.
+
+## Reported values
+
+The limit is reported per gas in **covariance units**, as `<gas>_detlim` in the [full output file](output-files-full-output.md#top) and as `<GAS>_DETLIM` in the FLUXNET output.
+
+It is deliberately not scaled to a flux. What the limit qualifies is the covariance, and the flux has been through the spectral correction while the limit has not, so the two are not directly comparable without accounting for that correction.
 
 ## Use elsewhere in EddyFlow
 
@@ -29,4 +35,4 @@ Besides being reported as a diagnostic alongside flux results, the detection lim
 
 !!! note
 
-    The detection limit is reported alongside flux results in EddyFlow output files. It is a diagnostic value for a given averaging period and gas/scalar, not a filter automatically applied to the flux itself; use it, together with the random uncertainty and the quality flags, to judge whether a given flux value is meaningful.
+    The detection limit is a diagnostic value for a given averaging period and gas, not a filter automatically applied to the flux itself; use it, together with the random uncertainty and the quality flags, to judge whether a given flux value is meaningful.

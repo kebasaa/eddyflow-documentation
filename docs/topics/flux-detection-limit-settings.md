@@ -1,14 +1,22 @@
-# Flux Detection Limit Settings dialog
+# Flux detection limit settings dialog
 
-Under: Advanced Settings > Processing Options > Other options
+Under: Advanced Settings > Statistical Analysis > Flux Detection Limit
 
-Activating **Flux Detection Limit** causes the **Flux Detection Limit Settings** button to activate. Click on it to access the flux detection limit configuration dialog and configure the calculation method described in [Flux detection limit](flux-detection-limit.md).
+Click **Flux Detection Limit...** on the Statistical Analysis page to open this dialog. The button is always available: the calculation is switched on from the **Method** selector inside the dialog rather than from a checkbox on the page, and it is independent of the random uncertainty settings beside it. For the method itself, see [Flux detection limit](flux-detection-limit.md#top).
+
+![The Flux Detection Limit dialog](../assets/flux-detection-limit-settings-dialog.png)
 
 ## Detection limit method
 
-- **Calculate flux detection limit:** Enables or disables detection limit calculation. When disabled, no detection limit is calculated or reported, and the detection limit cannot be selected as the noise floor for [conditional lag borrowing](pwb-time-lag-settings.md).
-- **Detection limit method:** Selects the method used to estimate the detection limit. Currently, EddyFlow implements the method of [Wienhold et al. (1994)](references.md#Wienhold1994), which derives the detection limit from the analytical noise characteristics of the measured time series and the length of the flux averaging period.
+- **Method:** Selects how the detection limit is estimated. The default is *None*, which disables the calculation and greys out the two window fields below. Choosing a method enables them and makes the limit available both as an output column and as a selectable noise floor for conditional lag borrowing.
+- **Window offset:** Offset, in seconds, from zero lag to the start of the window in which the noise floor is evaluated. The window must sit far enough from the covariance peak that it samples noise rather than flux.
+- **Window width:** Width, in seconds, of that window.
+
+## Dialog buttons
+
+- **Restore Default Values:** Return the fields on this dialog to their defaults.
+- **Close:** Close the dialog, keeping the current settings.
 
 !!! note
 
-    The flux detection limit is a diagnostic value reported alongside flux results; enabling this option does not by itself alter or filter the computed fluxes. To use the detection limit as the noise floor for EddyUH-compatible conditional lag borrowing, select it as the **Borrowing noise floor** option in the [PWB time lag optimization settings dialog](pwb-time-lag-settings.md).
+    The limit is reported per gas in covariance units, as `<gas>_detlim` in the full output file and `<GAS>_DETLIM` in the FLUXNET file. It is deliberately not scaled to a flux: what it qualifies is the covariance, and the flux has been through the spectral correction while the limit has not.

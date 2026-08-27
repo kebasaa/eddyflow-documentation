@@ -2,15 +2,23 @@
 
 If you have an existing project from LI-COR's EddyPro or from EddyUH, you do not need to rebuild it from scratch in EddyFlow. EddyFlow can import a legacy project file and convert it to the current EddyFlow formats: Processing Project file (.eddyflow, format version 5.1.0) and metadata file (.metadata, format version 3.2.2). Because the current formats are newer than the legacy ones, imported settings are upgraded during conversion, not simply read as-is, so it is worth reviewing the result before running a full dataset through it.
 
+Both importers are reached from the **File** menu:
+
+![The File menu, showing the Import EddyPro Project and Import EddyUH Project items](../assets/file-menu-import-projects.png)
+
 ## Importing an EddyPro project
 
 The engine (v8.0.0 and later) can ingest a legacy **.eddypro** project file directly and auto-convert it into an .eddyflow/.metadata pair.
 
 **From the GUI:**
 
-1. Click **File > Import EddyPro Project**.
+1. Click **File > Import EddyPro Project...**.
 2. Select the **.eddypro** file to import.
-3. EddyFlow converts the project to the current .eddyflow (5.1.0) and .metadata (3.2.2) formats and opens it for review.
+3. EddyFlow converts the project to the current .eddyflow (5.1.0) and .metadata (3.2.2) formats, opens it for review, and confirms that nothing has been written to disk yet:
+
+    ![The confirmation shown after an EddyPro project is imported](../assets/eddypro-import-confirmation.png)
+
+4. Save the project to write the converted .eddyflow file and its metadata.
 
 **From the command line:**
 

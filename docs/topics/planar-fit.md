@@ -2,6 +2,8 @@
 
 Under: Advanced Settings > Raw data processing > Rotation Method
 
+![The Planar Fit Settings dialog](../assets/Planar_fit_settings.png)
+
 Selecting either Planar Fit option (Standard Planar Fit and Planar Fit with no velocity bias) will cause the **Planar Fit Settings** button to activate. Click on it and access the planar fit configuration dialogue. Two options are available here: if you already have a planar fit rotation matrices file created by a previous EddyFlow run, which also applies to your current dataset, select the option **Planar Fit file available** and locate the corresponding file by using the **Load** button. Otherwise, select the option **Planar Fit file not available** and enter the following settings:
 
 ## Planar fit different period

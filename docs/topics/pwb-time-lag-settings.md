@@ -1,34 +1,45 @@
 # PWB time lag optimization settings dialog
 
-Under: Advanced Settings > Processing Options > Time lags compensation > PWB Time Lag Optimization Settings
+Under: Advanced Settings > Processing Options > Time lags compensation > Time Lag Optimization Settings
 
-Selecting the **Pre-whitening block-bootstrap** time lag compensation method will cause the **PWB Time Lag Optimization Settings...** button to activate. Click on it to access the PWB configuration dialogue and enter the following settings:
+Selecting **Pre-whitening block-bootstrap (Vitale et al. 2024)** as the **Time lag detection method** changes what the **Time Lag Optimization Settings** button opens: instead of the settings for the automatic optimizer, it opens the PWB dialog described here. For the method itself, see [Detecting and compensating time lags](time-lag-detect-correct.md#top).
 
-## Bootstrap settings
+![The PWB Time Lag Optimization Settings dialog](../assets/pwb-time-lag-settings-dialog.png)
 
-- **Number of bootstrap resamples:** Set the number of block-bootstrap resamples EddyFlow generates for each flux averaging interval to build the distribution of plausible time lags. A higher number produces a smoother, more stable distribution and a more reliable lag estimate and HDI, at the cost of longer program execution.
-- **Block length:** Length, in seconds, of the contiguous blocks used to resample the pre-whitened time series. The block length should be long enough to preserve the short-range dependence structure of the turbulent signal, but short enough to allow a sufficient number of blocks to be drawn from a single flux averaging interval.
-- **Minimum valid data fraction:** Minimum fraction of valid (non-gapped, non-flagged) high-frequency data required within a flux averaging interval for PWB to attempt a lag estimate. If the valid data fraction falls below this threshold, the period is treated as if no lag could be determined, and the **Maximum carry-over** policy applies.
-- **HDI threshold:** Maximum acceptable width, in seconds, of the highest-density interval around the bootstrap lag estimate. If the HDI is wider than this threshold, the estimate is considered too uncertain to use directly, and the **Maximum carry-over** policy applies instead.
-- **Random seed:** Seed used to initialize the random number generator that drives block resampling. Setting a fixed seed makes PWB results exactly reproducible across runs on the same dataset; leave at the default to let EddyFlow pick a seed automatically.
+Time lags are detected on rotated high-frequency data, before the mixing-ratio conversion, as a pre-processing pass over the whole run.
 
-## Carry-over and detection timing
+## Using results from a previous run
 
-- **Maximum carry-over:** Maximum number of hours over which a previous, well-determined time lag estimate may be carried forward and reused for flux averaging periods where PWB could not produce an acceptable estimate (e.g., because of insufficient valid data or too wide an HDI). Setting this too high risks applying a stale lag to a period where conditions have since changed; setting it too low increases the chance of falling back to a nominal or nearest-plausible lag for many periods in sequence.
-- **Detect before WPL correction:** When enabled, PWB lag detection is performed on concentration data prior to the compensation of density fluctuations (WPL terms). Leave disabled to run detection after WPL correction has been applied.
-- **Detect on raw data:** When enabled, PWB lag detection is performed directly on raw, unprocessed high-frequency data rather than on the despiked/detrended series used elsewhere in raw data processing. This can be useful for diagnostic purposes, but is not recommended for routine processing.
+- **Time-lag file available:** Reuse the time lag assessment written by an earlier EddyFlow run. Use **Load...** to select the file. The file must correspond to the current dataset.
+- **Time lag file not available:** Perform the assessment during this run, using the settings below.
 
-## Conditional lag borrowing
+## Time lag search windows
 
-These settings implement EddyUH-compatible conditional lag borrowing between gases sharing the same intake tube (e.g., a closed-path system where CO2 and CH4 are drawn through a single sampling line).
+One row per gas, each naming the channel and its instrument.
 
-- **Borrowing noise floor:** The noise floor that a gas's own covariance-based lag estimate is judged against to decide whether it is reliable enough to keep. If the covariance associated with a gas's detected lag does not clear this noise floor, the gas is considered a candidate for lag borrowing.
-- **Borrowing donor gas:** The gas whose time lag is borrowed by another gas on the same intake tube when that gas's own estimate fails the noise-floor test above. For example, on a shared tube, a noisy CH4 (or N2O) channel can be configured to borrow the lag detected for a co-located, higher signal-to-noise CO2 channel.
+- **Minimum:** Earliest lag, in seconds, that the search will consider for that gas. Negative values allow the gas to lead the wind measurement.
+- **Maximum:** Latest lag, in seconds, considered for that gas.
+
+## Bootstrap and reliability
+
+- **Bootstrap replicates:** Number of block-bootstrap resamples drawn per averaging period. More replicates tighten the interval at the cost of processing time.
+- **Block length:** Length, in seconds, of the contiguous blocks resampled by the bootstrap. Blocks must be long enough to preserve the autocorrelation of the series.
+- **Minimum valid fraction:** Smallest share of valid samples a period may have and still be given a lag of its own.
+- **Reliable HDI threshold:** Maximum width, in seconds, of the highest-density interval for a detection to count as reliable. Wider intervals mean the peak was not resolved and the period falls back to a borrowed or carried lag.
+- **Deviation threshold:** Maximum departure, in seconds, from the surrounding reliable lags before a detection is treated as an outlier.
+- **HDI prefilter:** Smoothing applied, in seconds, to the cross-covariance function before the interval is computed.
+- **Smoothing width:** Width, in samples, of the smoothing applied to the lag series across periods.
+- **Max carry:** Longest interval, in hours, over which a reliable lag may be interpolated, carried forward, or filled backward into periods that had no reliable detection of their own.
+- **Random seed:** Seed for the bootstrap resampling, so a run can be reproduced exactly.
+
+## Dialog button
+
+- **Close:** Close the dialog, keeping the current settings.
 
 !!! note
 
-    Conditional lag borrowing only applies to gases explicitly configured as sharing an intake tube with the chosen donor gas. It has no effect on gases measured through independent sampling lines or on open path instruments.
+    Where a period has no reliable detection, the gas's own lag is used first — interpolated between the reliable lags either side, carried forward, or filled backward — and never further than **Max carry**. Only past that is another gas's lag borrowed, and only from the same analyser. The controls governing that borrowing (**Borrow a tube-mate's lag below the detection limit**, **Judged against** and **Borrow from**) sit on the Processing Options page itself rather than in this dialog; see [Advanced settings: processing options](raw-processing-options.md#top).
 
 !!! note
 
-    PWB is available starting with EddyFlow engine v7.2.1 (GUI v7.2.1 and later, 2026-06), and is based on [Vitale et al. (2024)](references.md#Vitale2024).
+    A lag is never taken from a different instrument, and never from water vapor, whose delay depends on humidity in a way the trace gases' does not. A gas whose record names no instrument neither donates nor borrows, since nothing then proves it shares a tube.

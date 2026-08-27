@@ -1,6 +1,8 @@
 # Generic binary file type
 
-If your raw data are stored in a custom binary format, chances are that EddyFlow can still import and process them. Click the **Setting…** button to access a dialog that allows you to describe the file format.
+If your raw data are stored in a custom binary format, chances are that EddyFlow can still import and process them. Select **Generic binary** as the raw file format on the Project Creation page, then click the **Settings…** button beside it to access a dialog that allows you to describe the file format.
+
+![The Generic Binary File Settings dialog](../assets/generic-binary-settings-dialog.png)
 
 First, if your raw files have an ASCII header, specify the number of lines of such headers and their [terminator character](http://en.wikipedia.org/wiki/Newline). Supported terminators are Cr+LF (typical in Windows), LF (Linux and macOS) and CR (Max OS up to version 9 and OS-9). Then, provide the number of bytes reserved for each variable (typically 2 or 4) and the binary words [endianess](http://en.wikipedia.org/wiki/endianess) (that is, the order of the bytes significance): in a multi-bytes binary word, **little endian** means that the most significant byte is the last byte (highest address) while **big endian** means that the most significant byte is the first byte (lowest address).
 
