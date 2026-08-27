@@ -25,6 +25,12 @@ EddyFlow handles those differences by expressing wind components in a fixed righ
 
 To adjust coordinates, EddyFlow changes the sign of one component of left-handed anemometers, and introduces a north offset (in addition to the one provided by the user) to rotate the original axis into the predefined system.
 
-** Note:** This offset is actually added only when calculating wind direction, and does not modify wind components. Thus, what one should expect is that EddyFlow does not modify wind components of right-handed anemometers (at least until wind components are rotated for correcting anemometer tilting), while it inverts the sign of one horizontal component of left-handed anemometers, either u or v.
+!!! note
+
+    This offset is actually added only when calculating wind direction, and does not modify wind components. Thus, what one should expect is that EddyFlow does not modify wind components of right-handed anemometers (at least until wind components are rotated for correcting anemometer tilting), while it inverts the sign of one horizontal component of left-handed anemometers, either u or v.
 
 For example, the coordinate system of an R2 (left-handed) is adjusted by inverting the sign of the u components and by adding a North offset of -30°, while coordinate system of a CSAT3 (right-handed) is adjusted solely by adding a North offset of 180°.
+
+!!! note
+
+    In addition to the coordinate and axis adjustments described above, EddyFlow offers two optional, off-by-default hardware corrections applied before the tilt-correction rotations: an inclinometer tilt correction, and, for the Metek USA-1, a head (flow-distortion) correction. See [Axis rotation for tilt correction](anemometer-tilt-correction.md) for details.

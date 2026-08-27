@@ -33,6 +33,7 @@ nav:
   - "2. Using EddyFlow":
     - "Processing Eddy Covariance Datasets": topics/tutorials.md
     - "Processing ASCII and TOB1 Files": topics/processing-ascii-and-tob1-files.md
+    - "Importing EddyPro and EddyUH Projects": topics/importing-legacy-projects.md
     - "Running EddyFlow on the SmartFlux System": topics/smartflux-settings.md
     - "Using the Metadata File Editor": topics/metadata-file-editor-using.md
     - "Metadata Retriever Tool": topics/metadata-retriever-tool.md
@@ -52,8 +53,7 @@ nav:
       - "Selecting Advanced Options": topics/selecting-advanced-options.md
       - "Command Line": topics/command-line.md
   - "3. Output Files":
-    - "Overview": topics/output-files-overview.md
-    - "Time Structure and Common Features": topics/output-files-overview.md
+    - "Overview and Time Structure": topics/output-files-overview.md
     - "List of Output Files": topics/outputs.md
     - "The Full Output File": topics/output-files-full-output.md
     - "The Stats Folder": topics/output-files-stats-folder.md
@@ -86,7 +86,10 @@ nav:
       - "Use Alternative Metadata File": topics/metadata-file-use-alternative.md
       - "Nominal Time Lag": topics/nominal-time-lag.md
       - "North Offset": topics/north-offset.md
+      - "CEC Settings Dialog": topics/cec-settings.md
+      - "Flux Detection Limit Settings": topics/flux-detection-limit-settings.md
       - "Planar Fit Configuration Dialog": topics/planar-fit.md
+      - "PWB Time Lag Optimization Settings Dialog": topics/pwb-time-lag-settings.md
       - "Raw File Name Format": topics/raw-file-name-format.md
       - "Roughness Length": topics/roughness-length.md
       - "Sensitive and Non-sensitive Variables": topics/sensitive-and-nonsensitive-variables.md
@@ -133,6 +136,7 @@ nav:
       - "Calculating the Off-season Uptake Correction": topics/calculate-offseason-uptake-correction.md
       - "Calculating Spectral Correction Factors": topics/calculate-spectral-correction-factors.md
       - "Estimating the Flux Footprint": topics/estimating-flux-footprint.md
+      - "Flux Detection Limit": topics/flux-detection-limit.md
       - "Flux Quality Flags": topics/flux-quality-flags.md
       - "High-pass Filtering Correction": topics/high-pass-filtering.md
       - "Low-pass Filtering Correction": topics/low-pass-filtering.md
@@ -141,4 +145,5 @@ nav:
     - "Analyzing Spectra and Cospectra": topics/spectral-analysis.md
     - "Changing Metadata After Collection": topics/ttp059-how-to-change-metadata.md
     - "Gas Analyzer Diagnostics": topics/diagnostics-for-gas-analyzers.md
+    - "What's New": topics/whats-new.md
   - "FAQs": reference/faqs.md

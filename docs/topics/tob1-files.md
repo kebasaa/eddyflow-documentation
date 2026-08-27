@@ -9,8 +9,12 @@ TOB1 is a binary format often used for storing raw data obtained from Campbell®
 
 Thus, files containing variables in the "IEEE4" and "FP2" formats are not supported. Similarly, files in which "FP2" variables precede "ULONG" variables are not supported.
 
-** Note:** "ULONG" variables are not actually imported (they are skipped), which implies that variables in this format must be described with the property of ** Ignore **. This is usually not a limitation, because the "ULONG" format is normally reserved to timestamp information that EddyFlow does not use anyway.
+!!! note
 
-When you select the TOB1 format, a further option activates to specify the "IEEE4" or "FP2" format. If you are unsure, select the option ** Detect automatically **. EddyFlow will rely on the header of TOB1 files to determine the actual format.
+    "ULONG" variables are not actually imported (they are skipped), which implies that variables in this format must be described with the property of **Ignore**. This is usually not a limitation, because the "ULONG" format is normally reserved to timestamp information that EddyFlow does not use anyway.
 
-When you describe TOB1 files in the ** Metadata File Editor **, just consider each variable as a column, (although the term "column" is not appropriate for unformatted binary data), and proceed as you would do with any ASCII file.
+"IEEE4" is the standard IEEE 754 32-bit floating-point encoding, while "FP2" is Campbell Scientific's compact "final storage 2" 2-byte floating-point encoding, used to reduce file size at the cost of precision.
+
+When you select the TOB1 format, a further option activates to specify the "IEEE4" or "FP2" format. If you are unsure, select the option **Detect automatically**. EddyFlow will rely on the header of TOB1 files to determine the actual format.
+
+When you describe TOB1 files in the **Metadata File Editor**, just consider each variable as a column, (although the term "column" is not appropriate for unformatted binary data), and proceed as you would do with any ASCII file.

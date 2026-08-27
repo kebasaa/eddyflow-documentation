@@ -1,12 +1,14 @@
 # Processing options
 
-The ** Advanced Settings ** page provides a variety of options that make it possible to process the eddy covariance data with customized parameters.
+The **Advanced Settings** page provides a variety of options that make it possible to process the eddy covariance data with customized parameters.
 
-** Note:** The default settings in this section correspond with the settings used by Express Mode, meaning that you can process a dataset in Advanced Mode without altering these settings, and still compute reasonable results for most datasets.
+!!! note
+
+    The default settings in this section correspond with the settings used by Express Mode, meaning that you can process a dataset in Advanced Mode without altering these settings, and still compute reasonable results for most datasets.
 
 ![](../assets/Adv_Settings_PO.png)
 
-The ** Processing Options ** tab includes the following settings. Click any of the links below for more information.
+The **Processing Options** tab includes the following settings. Click any of the links below for more information.
 
 ## Raw data processing
 
@@ -24,6 +26,10 @@ The ** Processing Options ** tab includes the following settings. Click any of t
 
 ## Other options
 
-- [Conditional Eddy Covariance](conditional-eddy-covariance.md#top)
+- [Conditional Eddy Covariance](conditional-eddy-covariance.md#top) ([CEC settings dialog](cec-settings.md#top))
 - [Quality check - flagging policy](raw-processing-options.md#Quality)
 - [Footprint estimation](raw-processing-options.md#Foot)
+
+!!! note
+
+    As of engine v8.1.0, spectral correction fitting can use any of several Kaimal-type cospectral models, rather than a single fixed formulation; see [Calculating spectra, cospectra, and ogives](calculate-spectra-cospectra-and-ogives.md) for details.

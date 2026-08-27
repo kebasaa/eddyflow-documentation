@@ -34,7 +34,9 @@ In summary, here are our recommendations:
 
 No obvious recommendation can be made here. As a general observation, using a detrending method (either *linear detrending* or one of the *running mean* implementations) becomes more important with increasing length of the flux averaging interval, to prevent long-term trends not related to turbulence (e.g., at sunrise and sunset) from turning into artificial flux contributions. The block average method, while retaining the largest amount of low frequency content (thus including possible spurious effects of trends), is the only method that obeys the Reynolds decomposition rule, on which the eddy covariance formulation is based. If you select a long flux averaging interval (1 hour, 2 hours, etc), selecting a detrending method with the proper time constant is probably the best choice, to avoid strong overestimation of fluxes induced by relevant non-turbulent trends turning into flux contributions.
 
-** Note:** Selecting the option to perform low frequency range spectral corrections will partially compensate the differences induced by different detrending methods.
+!!! note
+
+    Selecting the option to perform low frequency range spectral corrections will partially compensate the differences induced by different detrending methods.
 
 ## Time lag compensation
 
@@ -44,6 +46,8 @@ With the *Covariance Maximization* option, the circular correlation technique is
 
 Both options, however, are unsuitable for water vapor in typical closed path setups. In this case, the *Automatic time lag optimization* option is by far the most appropriate, as default time lags as well as plausibility windows are optimized as a function of relative humidity. Selecting this option, time lags for all other gases will also be optimized (with no consideration of relative humidity) by EddyFlow. The downside of using this option is a longer program execution time.
 
+The *Pre-whitening block-bootstrap (PWB)* option is worth considering whenever the cross-covariance function is noisy or poorly peaked, for example with short or turbulent intake tubes, low signal-to-noise trace-gas measurements, or short flux averaging intervals, situations in which covariance maximization is prone to locking onto a spurious peak. Because it estimates a whole distribution of plausible lags rather than a single covariance maximum, PWB provides a built-in measure of how well-determined each lag is, and can fall back on recent well-determined estimates, or borrow a lag from a co-located gas sharing the same intake tube, when the current period does not support a reliable estimate of its own.
+
 ## Compensation of density fluctuations
 
 Native measurement of most gas analyzers is gas density, i.e., absolute number of molecules in a known volume of air, that needs to be transformed into a mixing ratio measurement (i.e., mass of gas per mass of air). The air density is used in this transformation. However, air density fluctuates on account of temperature and pressure fluctuations and depending on fluctuations in content of trace gases, notably water vapor. Such fluctuations need to be compensated in order to get a proper mixing ratio measurement, no matter if you are using an open or a closed path instrument.
@@ -52,9 +56,13 @@ However, the compensation strategy differs for the two different kinds of instru
 
 The main difference between the two options for closed path systems is that the *a priori* solution can only be applied if (a) raw data are already expressed as mixing ratios (e.g., LI-7200) or (b) raw data are expressed as molar densities and all necessary high frequency measurements are available to perform the point-by-point conversion (i.e., temperature, pressure and water vapor concentration inside the instrument cell). If any of these measurements are missing, the *a priori* method cannot be applied. On the other hand, the *a posteriori* method can be applied even if some data are missing, although in this case the density fluctuations will not be fully compensated.
 
-** Note:** The *a posteriori* formulation implemented in EddyFlow differs from the one provided in Ibrom et al. (2007b) because it also includes the temperature and pressure terms neglected in that paper. This allows the method to be applied for closed path systems featuring a short sampling line, where it is not safe to assume effective attenuation of ambient temperature and pressure fluctuations.
+!!! note
 
-** Note:** If the *a priori* method is selected but any necessary raw data are missing for any given flux averaging period, EddyFlow automatically switches to the *a posteriori* method.
+    The *a posteriori* formulation implemented in EddyFlow differs from the one provided in Ibrom et al. (2007b) because it also includes the temperature and pressure terms neglected in that paper. This allows the method to be applied for closed path systems featuring a short sampling line, where it is not safe to assume effective attenuation of ambient temperature and pressure fluctuations.
+
+!!! note
+
+    If the *a priori* method is selected but any necessary raw data are missing for any given flux averaging period, EddyFlow automatically switches to the *a posteriori* method.
 
 In summary, here are our recommendations:
 
@@ -67,19 +75,23 @@ In summary, here are our recommendations:
 
 ## Add instrument sensible heat components (LI-7500)
 
-Select this option if your concentration measurements were performed with an open path LI-7500 instrument, or with an LI-7500A/RS used in the ** summer ** configuration and your data were collected in a very cold environment. This correction becomes increasingly important as the typical temperature at a site gets lower. You can customize the regression parameters if specific experiments have been conducted to optimize the correction for your instrument unit and system configuration. Otherwise, we suggest using default parameters as retrievable with the *Restore values as from Burba et al. (2008)*.
+Select this option if your concentration measurements were performed with an open path LI-7500 instrument, or with an LI-7500A/RS used in the **summer** configuration and your data were collected in a very cold environment. This correction becomes increasingly important as the typical temperature at a site gets lower. You can customize the regression parameters if specific experiments have been conducted to optimize the correction for your instrument unit and system configuration. Otherwise, we suggest using default parameters as retrievable with the *Restore values as from Burba et al. (2008)*.
 
 ## Tapering window
 
 Tapering is a data conditioning procedure necessary before the Fourier transform of a finite, non-periodic time series can be taken. Several tampering windows are available. Kaimal and Kristensen (1991) suggested the selection of the *Hamming* window in the context of environmental turbulence.
 
-** Note:** The differences introduced by different windows are minor in the calculated spectra, while there is no effect on fluxes, which are calculated before applying the tapering procedure.
+!!! note
+
+    The differences introduced by different windows are minor in the calculated spectra, while there is no effect on fluxes, which are calculated before applying the tapering procedure.
 
 ## Quality check
 
-The different flagging systems available are based on the results of the same quality tests, namely the steady state test and the well-developed turbulence test (e.g., Foken et al., 2004). The two tests provide individual flags (that can be output separately by selecting the option *Details of steady state and developed turbulence tests* in the ** Output Files ** page), which can be combined in different ways. The option *Mauder and Foken (2004) (0-1-2 system)* provides the flag "0" for high quality fluxes, "1" for intermediate quality fluxes and "2" for poor quality fluxes. This system is suitable for selecting flux results complying with international practices (e.g., FLUXNET). The other 2 systems provide finer flux flagging for more in depth analysis. Thus, the choice depends on your intentions.
+The different flagging systems available are based on the results of the same quality tests, namely the steady state test and the well-developed turbulence test (e.g., Foken et al., 2004). The two tests provide individual flags (that can be output separately by selecting the option *Details of steady state and developed turbulence tests* in the **Output Files** page), which can be combined in different ways. The option *Mauder and Foken (2004) (0-1-2 system)* provides the flag "0" for high quality fluxes, "1" for intermediate quality fluxes and "2" for poor quality fluxes. This system is suitable for selecting flux results complying with international practices (e.g., FLUXNET). The other 2 systems provide finer flux flagging for more in depth analysis. Thus, the choice depends on your intentions.
 
-** Note:** This option has no impact on calculated fluxes.
+!!! note
+
+    This option has no impact on calculated fluxes.
 
 ## Footprint estimation
 

@@ -29,3 +29,7 @@ The calculation of binned (co)spectra involves a slightly different sequence of 
 
 ![](../assets/Tapering.png)
                                                             Figure 6‑14. Top left: Shape of tapering windows available in EddyFlow. Top right: Effect of different tapering windows on a sample spectrum. Bottom: Effect (red) of the Bartlett window on a raw (gray) time series.
+
+!!! note
+
+    As of engine v8.1.0, when fitting a reference cospectrum for spectral correction purposes (see [Calculating Spectral correction factors](calculate-spectral-correction-factors.md)), EddyFlow allows you to choose among several Kaimal-type analytical cospectral models, rather than being restricted to a single, fixed formulation.

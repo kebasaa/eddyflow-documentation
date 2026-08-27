@@ -38,9 +38,11 @@ The second rotation equations are:
 
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation924.svg)
 
-The rotated vector ** u ** rot![](https://www.licor.com/support/GeneratedImages/Equations/Equation925.svg) (urot, vrot, wrot) has zero v and w components, while its u component holds the value of the mean wind speed over the flux averaging interval.
+The rotated vector **u** rot![](https://www.licor.com/support/GeneratedImages/Equations/Equation925.svg) (urot, vrot, wrot) has zero v and w components, while its u component holds the value of the mean wind speed over the flux averaging interval.
 
-** Note:** In EddyFlow rotation angles are evaluated using average wind components, but the rotation is applied sample-wise. That is, after the rotation the wind dataset is modified.
+!!! note
+
+    In EddyFlow rotation angles are evaluated using average wind components, but the rotation is applied sample-wise. That is, after the rotation the wind dataset is modified.
 
 ## Triple rotation method
 
@@ -114,3 +116,21 @@ After verifying that the coefficient b0 is not a proper estimator of the anemome
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation950.svg)
 
 with the same relationships between b1 and b2 and the tilt angles as with the original planar fit. Both planar fit methods are available in EddyFlow, with customizable planar fit settings, sectors, and more.
+
+## Inclinometer tilt correction
+
+**Off by default.** Double rotation, triple rotation, and planar fit all remove only the *mean* tilt evaluated over the flux averaging period; none of them can correct for tilt that changes *within* that period, for example due to wind-induced swinging of the anemometer mount. EddyFlow can optionally apply an **inclinometer tilt correction** (engine setting `tilt_sensor_meth`) before any of the rotation methods described above, using tilt-angle measurements from an inclinometer logged at the sonic anemometer's own sample rate. Because the inclinometer resolves tilt sample by sample, each raw wind sample is corrected for its own instantaneous tilt, rather than for a single period-average angle.
+
+Settings for this correction include:
+
+- **`tilt_sensor_v_g`**: the inclinometer's volts-per-g calibration factor, used to convert the logged voltage signal into a tilt angle.
+- **`tilt_lpf_s`**: an optional low-pass filter time constant (seconds) used to smooth the raw angle series before it is applied.
+- **`tilt_arm_x`**, **`tilt_arm_y`**, **`tilt_arm_z`**: the lever arm, in the sonic's own coordinate system, from the pivot point to the inclinometer's sensor head; required for the "swinging" mode, in which the inclinometer does not sit exactly at the pivot and its measured tilt must be corrected for its own motion about that pivot.
+
+This correction is disabled by default; if left off, EddyFlow behaves exactly as described in the rest of this page.
+
+## Metek USA-1 head correction
+
+**Off by default.** For datasets collected with a Metek USA-1 anemometer, EddyFlow can optionally apply a **head correction** (engine setting `head_corr_meth`) that compensates for flow distortion caused by the instrument's own transducers and supporting structure, ahead of the rotation methods described on this page. The correction is based on Metek's own wind-tunnel calibration tables for the USA-1 head. These tables are Metek GmbH's proprietary data and are not distributed with EddyFlow: to use this correction, the user must supply a copy of the required table files and point EddyFlow to the directory containing them via the `head_corr_dir` setting. If any of the required files are missing from that directory, the head correction is skipped for the entire run.
+
+This correction is disabled by default.

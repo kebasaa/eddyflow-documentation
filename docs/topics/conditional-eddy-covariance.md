@@ -21,6 +21,8 @@ CEC is optional and is disabled by default. To activate it:
 
 CEC requires simultaneous high-frequency measurements of carbon dioxide and water vapor in addition to the vertical wind component. The total carbon dioxide and water vapor fluxes used for partitioning are the normally processed EddyFlow fluxes, including the applicable density, spectral, and instrument corrections.
 
+Activating this option enables the **CEC Settings** button, which opens a dialog for configuring the partitioning quality gates and channel pairing. See the [CEC settings dialog](cec-settings.md) reference for a description of each field.
+
 ## Method
 
 CEC uses scalar and vertical-wind fluctuations within each flux averaging period. Here, *w'*, *q'*, and *c'* are fluctuations in vertical wind, water vapor, and carbon dioxide, respectively. The method analyzes upward-moving air parcels, or ejections (*w'* > 0), in two conditional classes:

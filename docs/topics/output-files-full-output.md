@@ -126,7 +126,7 @@ The following table summarizes all output results available in the rich output f
 | air_heat_capactiy | J K-1 kg-1 | Specific heat at constant pressure of ambient air |
 | air_molar_volume | m3 mol-1 | Molar volume of ambient air |
 | ET | mm hour-1 | Evapotranspiration flux |
-| GPP_cec | µmol m-2 s-1 | CEC photosynthetic carbon dioxide flux. Negative values indicate ecosystem carbon dioxide uptake. Available when Conditional Eddy Covariance is activated. |
+| P_cec | µmol m-2 s-1 | CEC photosynthetic carbon dioxide flux. Negative values indicate ecosystem carbon dioxide uptake. Available when Conditional Eddy Covariance is activated. |
 | Reco_cec | µmol m-2 s-1 | CEC ecosystem respiration. Positive values indicate carbon dioxide release to the atmosphere. Available when Conditional Eddy Covariance is activated. |
 | Tr_cec | mmol m-2 s-1 | CEC transpiration. Positive values indicate an upward water vapor flux. Available when Conditional Eddy Covariance is activated. |
 | E_cec | mmol m-2 s-1 | CEC evaporation. Positive values indicate an upward water vapor flux. Available when Conditional Eddy Covariance is activated. |
@@ -195,11 +195,11 @@ The following table summarizes all output results available in the rich output f
 
 ### Output format
 
-The ** Output format ** option allows you to decide to ** Output only available results ** or ** Use standard output format **.
+The **Output format** option allows you to decide to **Output only available results** or **Use standard output format**.
 
-The first option, ** Output only available results ** instructs EddyFlow to reduce the file only to results that are actually available. One advantage of this option is that it results in smaller files that are easier to read in a spreadsheet. Files do not contain columns filled with error codes for the variables that are not available.
+The first option, **Output only available results** instructs EddyFlow to reduce the file only to results that are actually available. One advantage of this option is that it results in smaller files that are easier to read in a spreadsheet. Files do not contain columns filled with error codes for the variables that are not available.
 
-The second option, ** Use standard output format ** instructs EddyFlow to create a file in a predefined standardized output format that includes columns from all possible results. One advantage of this option is that the file format does not vary in time, making it easier to import into post-processing analysis tools.
+The second option, **Use standard output format** instructs EddyFlow to create a file in a predefined standardized output format that includes columns from all possible results. One advantage of this option is that the file format does not vary in time, making it easier to import into post-processing analysis tools.
 
 ### Build continuous dataset
 
