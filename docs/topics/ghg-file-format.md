@@ -1,6 +1,6 @@
 # .ghg file type
 
-The .ghg format is the the original publisher custom raw file type, consisting of an archive containing the data file (extension ".data") and a .metadata file (extension ".metadata"). If selected, the archive will also contain LI-7700 status records as a separate file. This file format is based on ECO2S ENE format.
+The .ghg format is LI-COR's custom raw file type, consisting of an archive containing the data file (extension ".data") and a .metadata file (extension ".metadata"). If selected, the archive will also contain LI-7700 status records as a separate file. This file format is based on ECO2S ENE format.
 
 The data file is an ASCII table with a header, which has an unspecified number of rows, and data columns, which are separated by the TAB character. The header of the data file is ignored by EddyFlow. To read the content of the file, EddyFlow uses the paired .metadata file to interpret the data columns and to retrieve meta-information needed to calculate fluxes.
 
@@ -11,7 +11,7 @@ The introduction of the .metadata file inside the .ghg file, while adding a negl
 - Properly account for dynamic site parameters that change over the course of the data collection period (e.g. the canopy height of a crop);
 - To a large extent, simultaneously process files acquired with different setups.
 
-Ideally, you are not required to consider the .metadata file explicitly, as it is created and modified in the the original publisher gas analyzer configuration software, and used silently by EddyFlow. Nevertheless, all information is stored as plain text and can be retrieved and edited at any time.
+Ideally, you are not required to consider the .metadata file explicitly, as it is created and modified in LI-COR's gas analyzer configuration software, and used silently by EddyFlow. Nevertheless, all information is stored as plain text and can be retrieved and edited at any time.
 
 EddyFlow 4.0 also supports the inclusion of [biomet data](biomet-data-format.md) (with biomet metadata), which can be used in flux computations. It is also summarized in the output files. See [Supported biomet file formats](biomet-data-format.md#top).
 

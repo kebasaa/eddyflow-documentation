@@ -2,7 +2,7 @@
 
 Data processing and flux calculation with EddyFlow is based not only on raw data, but also on the metadata describing the site characteristics, the eddy covariance station setup and the raw data files themselves.
 
-Metadata may vary along the dataset. For example, think about the growing canopy of an agricultural field, which may also imply an adjustment of the measurement height of the instruments. Maintenance and movement of instruments may imply a different relative positioning and orientation of the instruments. Also, instruments can be added or changed during the data collection, or parameters such as the acquisition frequency and the duration of the raw file, can change. All these possible changes must be taken into account for proper data processing and flux computation and correction. The ideal way to do that is to collect raw data in the original publisher's .ghg format. .ghg files embed the metadata inside each raw file so, if the data logging software is updated with the current meta-information during data acquisition (and that's by far the most suitable moment for doing that!), all raw files will embed the correct metadata, and EddyFlow will be able to correctly process them without any further intervention from you.
+Metadata may vary along the dataset. For example, think about the growing canopy of an agricultural field, which may also imply an adjustment of the measurement height of the instruments. Maintenance and movement of instruments may imply a different relative positioning and orientation of the instruments. Also, instruments can be added or changed during the data collection, or parameters such as the acquisition frequency and the duration of the raw file, can change. All these possible changes must be taken into account for proper data processing and flux computation and correction. The ideal way to do that is to collect raw data in LI-COR's .ghg format. .ghg files embed the metadata inside each raw file so, if the data logging software is updated with the current meta-information during data acquisition (and that's by far the most suitable moment for doing that!), all raw files will embed the correct metadata, and EddyFlow will be able to correctly process them without any further intervention from you.
 
 However, if you collected raw files in a format other than .ghg, or if you didn't update the data logging software with the proper meta-information during acquisition of your .ghg dataset, EddyFlow provides you with the possibility of taking time-varying metadata into account. This will require a little effort on your part, to create a dynamic metadata file prior to using EddyFlow. The dynamic metadata file is a comma separated text file featuring a header with the names of the contained variables, and a sequence of records starting with a timestamp, followed by the actual values.
 
@@ -87,15 +87,15 @@ The third line says that, starting February 15th, 2011 at 10:30AM, the CO2 analy
 
 | Manufacturer | Label |
 | --- | --- |
-| the original publisher | the original publisher |
+| LI-COR | licor |
 | others | other |
 
 *Supported Gas Analyzer Models:
 
 | Model | Label |
 | --- | --- |
-| the original publisher LI-6262 | li6262 |
-| the original publisher LI-7000 | li7000 |
+| LI-COR LI-6262 | li6262 |
+| LI-COR LI-7000 | li7000 |
 | LI-7500 | li7500 |
 | LI-7500A | li7500a |
 | LI-7500RS | li7500rs |

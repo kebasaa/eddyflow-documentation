@@ -1,6 +1,6 @@
 # Using biomet data
 
-EddyFlow Software allows you to import and use biomet measurements for improved flux computation and other purposes. Biomet measurements include meteorological as well as ecological (e.g., soil and vegetation) measurements. These data are typically sampled at lower rates than the eddy covariance data (e.g., once per second) and averaged over longer time periods (e.g., 1 to 30 minutes). Traditionally, biomet data—collected by means of a datalogger—are stored in one or more files, distinct from high-speed eddy data. However, the original publisher eddy covariance systems allow you to collect .ghg files, a raw file format that bundles eddy covariance data (and the corresponding metadata) together with biomet data (and, again, the corresponding metadata). The advantages are evident:
+EddyFlow Software allows you to import and use biomet measurements for improved flux computation and other purposes. Biomet measurements include meteorological as well as ecological (e.g., soil and vegetation) measurements. These data are typically sampled at lower rates than the eddy covariance data (e.g., once per second) and averaged over longer time periods (e.g., 1 to 30 minutes). Traditionally, biomet data—collected by means of a datalogger—are stored in one or more files, distinct from high-speed eddy data. However, LI-COR eddy covariance systems allow you to collect .ghg files, a raw file format that bundles eddy covariance data (and the corresponding metadata) together with biomet data (and, again, the corresponding metadata). The advantages are evident:
 
 - Eddy covariance and biomet data (high-speed and low-speed data) corresponding to the same time span are stored together;
 - Both eddy covariance and biomet data are documented in the paired metadata files, so the whole file archive is a self-descriptive file that can be interpreted and processed by someone who did not collect those data and does not have any information regarding the site where they were collected and the instruments deployed;
@@ -19,7 +19,9 @@ EddyFlow uses biomet data for the following purposes:
 - Data of global radiation and long-wave incoming radiation can be used in the "multiple regression" version of the off-season uptake correction (Burba et al., 2008);
 - Data of photosynthetically active radiation (PAR, also called PPFD, photosynthetic photon flux density) can be used to assess day and night-time radiation loading on the surface of the instrument, to apply the appropriate coefficients and modeling of the instrument surface temperature in the off-season uptake correction.
 
-** Note:** Before using biomet data, EddyFlow screens them for quality (checks that values are within physically plausible ranges) and calculates averages over the appropriate time scale. If the resulting average values are physically implausible, EddyFlow automatically switches to classic eddy covariance data-based calculations.
+!!! note
+
+    Before using biomet data, EddyFlow screens them for quality (checks that values are within physically plausible ranges) and calculates averages over the appropriate time scale. If the resulting average values are physically implausible, EddyFlow automatically switches to classic eddy covariance data-based calculations.
 
 ## Averaging biomet data for further analysis
 

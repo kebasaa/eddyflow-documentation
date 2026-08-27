@@ -1,10 +1,12 @@
 # EddyFlow output files
 
-After clicking ** Run **, EddyFlow will generate some temporary intermediate files and compute fluxes based on the information provided in the data and metadata. These files are stored in folders and subfolders in the ** Output Directory ** you assigned in the ** Project Page **.
+After clicking **Run**, EddyFlow will generate some temporary intermediate files and compute fluxes based on the information provided in the data and metadata. These files are stored in folders and subfolders in the **Output Directory** you assigned in the **Project Page**.
 
-In these folders and files, you will find summary results. Each line in these files refers to a flux averaging period and starts with the corresponding raw file name and the timestamp of *the end* of the averaging period. File names are created with the ** Project ID** that you entered in the ** Project Page **.
+In these folders and files, you will find summary results. Each line in these files refers to a flux averaging period and starts with the corresponding raw file name and the timestamp of *the end* of the averaging period. File names are created with the **Project ID** that you entered in the **Project Page**.
 
-** Note:** Each run produces output files in the assigned directory. The output files are marked with the date and time of the run in the file name.
+!!! note
+
+    Each run produces output files in the assigned directory. The output files are marked with the date and time of the run in the file name.
 
 ## Time structure of output files
 
@@ -23,9 +25,9 @@ All text is written without spaces, except where not applicable; spaces are repl
 
 The names of output files produced by EddyFlow follow the convention:
 
-eddypro_projID_filecontent_date_time.csv
+eddyflow_projID_filecontent_date_time.csv
 
-where EddyFlow is a constant string, projID is the Output ID entered in the [Project Page](introduction-interface.md#Project3), ` filecontent ` gives a short description of the content of the file, and ` date ` and ` time ` refer to the date and time that the data were processed.
+where "eddyflow" is a constant string, projID is the Output ID entered in the [Project Page](introduction-interface.md#Project3), ` filecontent ` gives a short description of the content of the file, and ` date ` and ` time ` refer to the date and time that the data were processed.
 
 All EddyFlow results begin with the same three fields: the name of the raw file for which results are provided (or the name of the first file in case results come from several adjacent raw files), and the date and time of the *end* of the averaging period for the current result record. For example:
 

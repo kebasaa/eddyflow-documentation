@@ -2,7 +2,7 @@
 
 Along with the final results files, EddyFlow creates at least one subfolder in the user-specified output folder:
 
-..\\eddypro_stats\\: contains seven files of basic statistics calculated on all available [sensitive variables](sensitive-and-nonsensitive-variables.md), at 7 different levels of processing. These files have a static format that includes statistical data for all sensitive variables, except the analyzer's [cell in/out temperature](calculate-cell-temperature.md). Statistics for variables that are not available are replaced by the string "n/a" (not available).
+..\\eddyflow_stats\\: contains seven files of basic statistics calculated on all available [sensitive variables](sensitive-and-nonsensitive-variables.md), at 7 different levels of processing. These files have a static format that includes statistical data for all sensitive variables, except the analyzer's [cell in/out temperature](calculate-cell-temperature.md). Statistics for variables that are not available are replaced by the string "n/a" (not available).
 
 The seven levels of statistics refer to those calculated on the following datasets:
 
@@ -14,7 +14,7 @@ The seven levels of statistics refer to those calculated on the following datase
 6. After time lag compensation
 7. After detrending
 
-..\\eddypro_user_stats\\: contains seven files of basic statistics calculated on all available [non-sensitive variables](sensitive-and-nonsensitive-variables.md) (including user-defined variables and sensitive variables not used for flux computation). These files have a dynamic format, including statistics only for available non-sensitive variables. This folder and the seven files contained in it are created only if EddyFlow detects at least one non-sensitive variable.
+..\\eddyflow_user_stats\\: contains seven files of basic statistics calculated on all available [non-sensitive variables](sensitive-and-nonsensitive-variables.md) (including user-defined variables and sensitive variables not used for flux computation). These files have a dynamic format, including statistics only for available non-sensitive variables. This folder and the seven files contained in it are created only if EddyFlow detects at least one non-sensitive variable.
 
 Like the statistics calculated on sensitive variables, the seven levels of statistics refer to those calculated on the following datasets:
 
@@ -26,7 +26,9 @@ Like the statistics calculated on sensitive variables, the seven levels of stati
 6. After time lag compensation
 7. After detrending
 
-** Note:** Statistics on non-sensitive variables may result in seemingly wrong values (such as zero or not-a-number). This may happen when, for example, a variable has a constant value throughout the file, as with some instrument diagnostic variables. In these cases, however, high order statistics lose representativeness and usefulness.
+!!! note
+
+    Statistics on non-sensitive variables may result in seemingly wrong values (such as zero or not-a-number). This may happen when, for example, a variable has a constant value throughout the file, as with some instrument diagnostic variables. In these cases, however, high order statistics lose representativeness and usefulness.
 
 ## Statistics files content
 

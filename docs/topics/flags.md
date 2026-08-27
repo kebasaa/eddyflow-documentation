@@ -6,16 +6,16 @@ Before calculating fluxes, EddyFlow® Software provides two main mechanisms for 
 
 Instrument diagnostic are values (usually expressed as an integer number) reported along with each raw data record, providing indications about the status of the instrument at the moment of the measurement or about the quality of the measurement itself. Manufacturers usually specify which value or values indicate data of good quality and which, in turn, indicate data that should be discarded because quality cannot be assured. In order to be usable for eliminating individual raw data records, the diagnostic value must be available in the raw data file at the same output rate as the variable(s) to which it refers. Typically, a diagnostic value synthesizes several pieces of information in only one "word" and the manufacturer is responsible for documenting either how to "expand" the value into the individual pieces or how to interpret the resulting word to retain or discard data.
 
-Currently, EddyFlow supports instrument diagnostics for all the original publisher's eddy covariance gas analyzers (LI-7500 x, LI-7200/RS, LI-7700) and for the following sonic anemometers:
+Currently, EddyFlow supports instrument diagnostics for all of LI-COR's eddy covariance gas analyzers (LI-7500 x, LI-7200/RS, LI-7700) and for the following sonic anemometers:
 
 - Gill Instrument's WindMaster™ (WM), WindMaster Pro (WMP), and HS-50
 - Campbell® Scientific's CSAT3 and CSAT3B
 
 Note that while gas analyzers' diagnostics only eliminate the corresponding gas concentration data, anemometer's diagnostics eliminate entire data records, because when anemometric data is not available, the corresponding concentration data becomes useless for the purpose of flux computation.
 
-In order to use instrument diagnostics in EddyFlow, diagnostic values must be collected in the raw data files and properly described in the ** Metadata File Editor > Raw File Description **. Then, in ** Basic Settings Select > Items for Flux Computation **", the available diagnostic variables must be explicitly selected from the dedicated combo-boxes.
+In order to use instrument diagnostics in EddyFlow, diagnostic values must be collected in the raw data files and properly described in the **Metadata File Editor > Raw File Description**. Then, in **Basic Settings Select > Items for Flux Computation**", the available diagnostic variables must be explicitly selected from the dedicated combo-boxes.
 
-For all sonic anemometers listed above, EddyFlow will discard the corresponding data when appropriate, but will not report the diagnostic values in the ** Full Output File **. For all supported sonic anemometers, the diagnostic value is such that a value of "0" (zero) means "good data" to be retained, while a value different from zero means "bad data" to be discarded. The only exceptions to this rule are:
+For all sonic anemometers listed above, EddyFlow will discard the corresponding data when appropriate, but will not report the diagnostic values in the **Full Output File**. For all supported sonic anemometers, the diagnostic value is such that a value of "0" (zero) means "good data" to be retained, while a value different from zero means "bad data" to be discarded. The only exceptions to this rule are:
 
 - Gill WM/WMP data records labeled with the diagnostic values '0A' and '0B' shall be retained
 
@@ -67,7 +67,7 @@ The following tables list diagnostic values that can be reported for each anemom
 | 7 | 128 | Internal humidity warning | The relative humidity inside the CSAT3B block is greater than 80% | Discard the record |
 | 8 | 256 | Memory error | There is a signature mismatch from the calibration file or another section of memory. | Discard the record |
 
-For the original publisher gas analyzers, EddyFlow "expands" the individual diagnostic values and, in addition to using them to filter the corresponding gas data when appropriate, also reports their values in the ** Full Output File **.
+For LI-COR gas analyzers, EddyFlow "expands" the individual diagnostic values and, in addition to using them to filter the corresponding gas data when appropriate, also reports their values in the **Full Output File**.
 
 The following tables list diagnostic values that can be reported for each analyzer and the action taken by EddyFlow for the purpose of computing fluxes.
 
@@ -114,10 +114,12 @@ The following tables list diagnostic values that can be reported for each analyz
 
 ## Filtering with custom flags
 
-In addition to the dedicated diagnostic variables, other variables can be used to identify and eliminate bad raw data before flux computation. For example, you may want to eliminate records for which the vertical wind component is too large, or gas concentrations that take on implausible values due to instrument failure. For this reason, any variable in the EddyFlow® Software (except those marked as "Ignore" and/or "Not numeric" in the ** Raw File Description ** table) can be treated as a record flag, including variables used in flux computation.
+In addition to the dedicated diagnostic variables, other variables can be used to identify and eliminate bad raw data before flux computation. For example, you may want to eliminate records for which the vertical wind component is too large, or gas concentrations that take on implausible values due to instrument failure. For this reason, any variable in the EddyFlow® Software (except those marked as "Ignore" and/or "Not numeric" in the **Raw File Description** table) can be treated as a record flag, including variables used in flux computation.
 
-In EddyFlow, elimination of records through flags is done by setting a threshold value for the selected flag variable and by defining whether entire records should be eliminated when the variable value goes above or below the threshold. For example, if you have a data column which is set to "0" for good quality and "1" for bad quality, you can: 1) select that variable as a flag; 2) set the threshold to 0.00; and 3) select ** Discard if above threshold **. This way, all records for which the variable takes the value "1" will be eliminated from the dataset. As a second example, suppose you want to use the gas concentration as such a flag, instructing EddyFlow to eliminate all records for which a CO2 concentration falls below 300 ppm. In this case, select the CO2 variable as a flag, set the threshold to 300.00 and set the policy to "Discard if below threshold".
+In EddyFlow, elimination of records through flags is done by setting a threshold value for the selected flag variable and by defining whether entire records should be eliminated when the variable value goes above or below the threshold. For example, if you have a data column which is set to "0" for good quality and "1" for bad quality, you can: 1) select that variable as a flag; 2) set the threshold to 0.00; and 3) select **Discard if above threshold**. This way, all records for which the variable takes the value "1" will be eliminated from the dataset. As a second example, suppose you want to use the gas concentration as such a flag, instructing EddyFlow to eliminate all records for which a CO2 concentration falls below 300 ppm. In this case, select the CO2 variable as a flag, set the threshold to 300.00 and set the policy to "Discard if below threshold".
 
 Make sure you enter the flag threshold in the units specified by EddyFlow in the label following the threshold column. If units do not appear, use the same units used in the raw files.
 
-** Note:** If you describe more than one flag, EddyFlow will eliminate all records flagged by at least one test. Note also that currently the same variable cannot be used in two different flag definitions. The result of such an operation is unpredictable; most likely, only the latest flag definition with the same variable will have an effect.
+!!! note
+
+    If you describe more than one flag, EddyFlow will eliminate all records flagged by at least one test. Note also that currently the same variable cannot be used in two different flag definitions. The result of such an operation is unpredictable; most likely, only the latest flag definition with the same variable will have an effect.

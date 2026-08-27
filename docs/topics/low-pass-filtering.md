@@ -59,7 +59,9 @@ The estimation of system filtering characteristics (Step 2) is based on the *in 
 
 where f (Hz) is the natural frequency and fc (Hz) is the transfer function cut-off frequency. The latter is proportional to the inverse of the filter time constant (τc, s), ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1021.svg), and provides a quantification of amplitude attenuation of fluctuations. This filter shape was proven suitable for describing the filtering properties of EC systems featuring very long (50 m, [Hollinger et al., 1999](references.md#Hollinger1999); [Ibrom et al., 2007](references.md#Ibrom)) and long (7m, [Mammarella et al., 2009](references.md#Mammarella2009)) sampling lines.
 
-** Note:** Following Ibrom et al. (2007), cut-off frequencies are assessed by fitting the IIR function (with fc being the fitting parameter) to the ratio of ensemble gas spectra to ensemble temperature. EddyFlow uses all "high quality" spectra available in the dataset to calculate such ensemble spectra. The criteria for selecting high quality spectra described in [QA/QC of spectra and cospectra](ensemble-averages.md#top).
+!!! note
+
+    Following Ibrom et al. (2007), cut-off frequencies are assessed by fitting the IIR function (with fc being the fitting parameter) to the ratio of ensemble gas spectra to ensemble temperature. EddyFlow uses all "high quality" spectra available in the dataset to calculate such ensemble spectra. The criteria for selecting high quality spectra described in [QA/QC of spectra and cospectra](ensemble-averages.md#top).
 
 For H2O measured by closed path systems, in order to uncover the increasing attenuation as RH increases, cut-off frequencies must be determined for different RH regimes. As suggested by Ibrom et al., EddyFlow determines fc for nine classes in the range 5% < RH < 95% and fits an exponential function to the resulting RH/fc pairs:
 
@@ -85,7 +87,7 @@ The method of Ibrom et al. (2007) is deemed applicable for a vast range of EC se
 
 ## Spectral corrections after Fratini et al. (2012)
 
-In this method, the first three steps are identical to those described [here](#) for the method of [Ibrom et al. (2007)](references.md#Ibrom). The calculation of spectral correction factors (Step 4) is performed in different ways for "small" and "large" fluxes, where the threshold between small and large fluxes is set in the GUI (it is taken to be the "Minimum, unstable" values under ** Spectral and cospectra QA/QC** in ** Advanced Settings > Spectral analysis **).
+In this method, the first three steps are identical to those described [above](#spectral-corrections-after-ibrom-et-al-2007) for the method of [Ibrom et al. (2007)](references.md#Ibrom). The calculation of spectral correction factors (Step 4) is performed in different ways for "small" and "large" fluxes, where the threshold between small and large fluxes is set in the GUI (it is taken to be the "Minimum, unstable" values under **Spectral and cospectra QA/QC** in **Advanced Settings > Spectral analysis**).
 
 For small fluxes the method of [Ibrom et al. (2007)](references.md#Ibrom) is applied, i.e., the low-pass correction factor is calculated using the model:
 
@@ -130,4 +132,6 @@ where F0 is the unattenuated flux for r = 0, and km = 2Ï€nm/z is the wavenumb
 
 This formulation is then specified in the along-wind, crosswind, and vertical separations. Please refer to [Horst and Lenschow (2009)](references.md#horst2009) for further details.
 
-** Note:** When the methods of [Horst (1997)](references.md#horst1997) or [Ibrom et al. (2007)](references.md#horst1997) are selected for the low-pass filtering correction, the "band-pass" spectral correction is applied by first correcting for the high-pass filtering effects (multiplication of uncorrected fluxes by HPSCF) and then multiplying by LPSCF. Rigorously speaking, this procedure is not correct because according to the definition of the band pass correction factor, the multiplication with the LPTF and the HPTF are not commutative with the integral operator. However, the error introduced by this procedure is deemed negligible in most occasions.
+!!! note
+
+    When the methods of [Horst (1997)](references.md#horst1997) or [Ibrom et al. (2007)](references.md#horst1997) are selected for the low-pass filtering correction, the "band-pass" spectral correction is applied by first correcting for the high-pass filtering effects (multiplication of uncorrected fluxes by HPSCF) and then multiplying by LPSCF. Rigorously speaking, this procedure is not correct because according to the definition of the band pass correction factor, the multiplication with the LPTF and the HPTF are not commutative with the integral operator. However, the error introduced by this procedure is deemed negligible in most occasions.
