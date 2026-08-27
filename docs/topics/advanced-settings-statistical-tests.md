@@ -1,6 +1,6 @@
 # Statistical analysis
 
-The **Statistical Tests** tab includes all tests recommended by [Vickers and Mahrt (1997)](references.md#Vickers) and [Mauder (2003)](references.md#Mauder2013).
+The **Statistical Analysis** tab includes all tests recommended by [Vickers and Mahrt (1997)](references.md#Vickers) and [Mauder et al. (2013)](references.md#Mauder2013).
 
 !!! note
 
@@ -19,3 +19,4 @@ Click the links below to learn more about each test:
 - See [Time lags](despiking-raw-statistical-screening.md#Time)
 - See [Angle of attack](despiking-raw-statistical-screening.md#Angle)
 - See [Steadiness of horizontal wind](despiking-raw-statistical-screening.md#Steadiness)
+- See [Random uncertainty estimation](random-uncertainty-estimation.md#top) and the [Flux Detection Limit Settings dialog](flux-detection-limit-settings.md#top)
