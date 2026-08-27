@@ -75,6 +75,10 @@ Describe the anemometers used at the EC station to collect wind and sonic temper
 
 **Time response (anemometer):** Time response of the anemometer. Its inverse defines the maximum frequency of the atmospheric turbulence that the instrument is able to resolve. Consult the anemometer's specifications or user manual. See [Longitudinal and transversal path lengths and time response](longitude-transverse-pathlengths.md#top).
 
+**Acquisition frequency:** The rate at which this anemometer samples, if it is slower than the station's acquisition frequency. Leave it at the station's value unless the anemometer really is slower — an instrument with no rate of its own follows the station, so changing the station's acquisition frequency changes this one too. A slower instrument leaves gaps between its samples in the raw file, and stating its own rate here is what stops those gaps being counted as missing data.
+
+**Sampling:** Whether this instrument reports the value at an instant or the mean over its own sampling interval. It matters only when the instrument is slower than the station: the vertical wind is then paired with each of its samples the same way, either one *w* at that instant or *w* averaged over the interval the sample closes. Pairing an averaged wind against a point-sampled gas biases the covariance, so *Instantaneous* is the default and *Average* is stated deliberately when it is chosen.
+
 **+** Add a new anemometer.
 
 **-** Remove the currently selected anemometer.
@@ -118,6 +122,10 @@ Describe gas analyzers used at the EC station to collect data you want to proces
 **Extinction coefficient of water, Kw:** In Krypton or Lyman-α hygrometers, the extinction coefficients for water vapor, associated with the third-order Taylor expansion of the Lambert–Beer law around reference conditions ([van Dijk et al. 2003](references.md#vanDijk)).
 
 **Extinction coefficient of oxygen Ko:** In Krypton or Lyman-α hygrometers, the extinction coefficients for oxygen, associated with the third-order Taylor expansion of the Lambert–Beer law around reference conditions ([van Dijk et al. 2003](references.md#vanDijk)).
+
+**Acquisition frequency:** The rate at which this gas analyzer samples, if it is slower than the station's acquisition frequency. Leave it at the station's value unless the analyzer really is slower — an instrument with no rate of its own follows the station, so changing the station's acquisition frequency changes this one too. A slower instrument leaves gaps between its samples in the raw file, and stating its own rate here is what stops those gaps being counted as missing data.
+
+**Sampling:** Whether this instrument reports the value at an instant or the mean over its own sampling interval. It matters only when the instrument is slower than the station: the vertical wind is then paired with each of its samples the same way, either one *w* at that instant or *w* averaged over the interval the sample closes. Pairing an averaged wind against a point-sampled gas biases the covariance, so *Instantaneous* is the default and *Average* is stated deliberately when it is chosen.
 
 **+** Add another gas analyzer.
 
