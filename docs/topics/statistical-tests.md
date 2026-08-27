@@ -8,7 +8,7 @@ Select (on the left side) and configure (on the right side) up to 9 tests for as
 
 ### Spike count/removal
 
-The checkbox **Spike count/removal** determines whether the spike detection test is performed or not. If it is not, then spikes remain unchanged. Two spike detection methods are available: Vicker and Mahrt (1997) and Mauder et al. (2013). The method of Mauder et al. (2013) does not require any settings. For the Vickers and Mahrt (1997) method, configure the definition of spikes. For both methods, define the flagging policy by specifying the maximum percentage of accepted spikes and whether spikes shall be replaced by linear interpolation or simply eliminated from the dataset (in which case EddyFlow will replace spikes with an error code of -9999).
+The checkbox **Spike count/removal** determines whether the spike detection test is performed or not. If it is not, then spikes remain unchanged. Three spike detection methods are available: Vickers and Mahrt (1997), Mauder et al. (2013), and Consecutive difference (EddyUH). The method of Mauder et al. (2013) does not require any settings. For the Vickers and Mahrt (1997) method, configure the definition of spikes; for Consecutive difference, configure the per-variable step limits. See [Despiking](despiking-raw-statistical-screening.md#despiking) for how the three differ. For all methods, define the flagging policy by specifying the maximum percentage of accepted spikes and whether spikes shall be replaced by linear interpolation or simply eliminated from the dataset (in which case EddyFlow will replace spikes with an error code of -9999).
 
 - If both **Spike count/removal** and **Replace spikes with linear interpolation** are checked, detected spikes are removed and replaced with linear interpolation.
 - If the box **Replace spikes with linear interpolation** is NOT checked, then spikes are retained in the data (the test therefore functions as a quality test but not as a data filter).
@@ -49,4 +49,6 @@ Assesses whether the along-wind and crosswind components of the wind vector unde
 
 ## Estimation of flux random uncertainty due to sampling errors
 
-EddyFlow can calculate flux random uncertainty due to sampling errors according to two different methods: [Mann and Lenschow (1994)](references.md#Mann) and [Finkelstein and Sims (2001)](references.md#Finkelstein). See [Random uncertainty estimation](random-uncertainty-estimation.md#top).
+EddyFlow can calculate flux random uncertainty according to several methods, selected from the **Method** dropdown: [Mann and Lenschow (1994)](references.md#Mann), [Finkelstein and Sims (2001)](references.md#Finkelstein), Mahrt (1998), Billesbach (2011), and instrumental noise after [Lenschow et al. (2000)](references.md#Lenschow) as applied by [Mauder et al. (2013)](references.md#Mauder2013). See [Random uncertainty estimation](random-uncertainty-estimation.md#top) for how each method differs.
+
+The **Flux Detection Limit...** button below opens a separate dialog for a related but distinct diagnostic: not the uncertainty on a computed flux, but the smallest flux that could be resolved at all given the instrument's own noise. See [Flux detection limit](flux-detection-limit.md#top) and the [Flux Detection Limit Settings dialog](flux-detection-limit-settings.md#top).

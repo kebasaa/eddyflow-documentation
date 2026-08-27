@@ -44,7 +44,9 @@ While despiking, EddyFlow counts the number of spikes found. If, for each variab
 
 Following Mauder (2013), there are no settings to configure except the percent of spikes, and whether to perform linear interpolation between the spikes.
 
-EddyFlow also offers a third despiking method, **consecutive-difference despiking** (engine setting `despike_vm=2`), compatible with the spike-detection algorithm used by EddyUH. Rather than comparing each sample against a plausibility range computed over a moving window, this method flags a spike whenever the absolute difference between two consecutive raw samples exceeds a user-defined threshold. It is thus a simpler, purely local test, as opposed to the window-based approach of Vickers and Mahrt (1997) described above. As with the other despiking methods, detected spikes are counted and, if selected, replaced by linear interpolation of neighboring values.
+EddyFlow also offers a third despiking method, **Consecutive difference (EddyUH)** (engine setting `despike_vm=2`, EddyUH's `spi_method 1`). It is a rate-of-change limit rather than a statistical outlier test: nothing is scaled by a standard deviation and nothing iterates, so it does not take the same kind of number as the two methods above. A sample that steps further from the one before it than the stated limit is replaced and counted as a spike.
+
+Limits are set per variable, in that variable's own unit rather than as a multiple of anything: **u step limit**, **v step limit** and **w step limit** in m s⁻¹, **Sonic temperature step limit** in K, and a **step limit** for each gas in its own concentration unit. Leaving a limit at zero leaves that column undespiked entirely; the run log names every column skipped for that reason. A limit far larger than a channel's own sample-to-sample noise likewise removes nothing from it, which is worth checking for a high-precision analyzer's trace-gas channels — the defaults shipped with this method are the values used for the CH-LAE project, not universal values.
 
 ## Amplitude resolution
 
