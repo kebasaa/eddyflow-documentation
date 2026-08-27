@@ -112,6 +112,8 @@
 
 52. <span id="Nakai"></span> [Nakai, T., M. K. van der Molen, J. H. C. Gash, and Y. Kodama. 2006. Correction of sonic anemometer angle of attack errors. Agricultural and Forest Meteorology, 136: 19-30.](http://dx.doi.org/10.1016/j.agrformet.2006.01.006)
 
+52a. <span id="Peltola2014"></span> [Peltola, O., A. Hensen, C. Helfter, L. Belelli Marchesini, F. C. Bosveld, W. C. M. van den Bulk, J. A. Elbers, S. Haapanala, J. Holst, T. Laurila, A. Lindroth, E. Nemitz, T. Röckmann, A. T. Vermeulen, and I. Mammarella. 2014. Evaluating the performance of commonly used gas analysers for methane eddy covariance flux measurements: the InGOS inter-comparison field experiment. Biogeosciences, 11: 3163-3186.](https://doi.org/10.5194/bg-11-3163-2014)
+
 53. <span id="Rannik"></span> [Rannik, Ü. and T. Vesala. 1999. Autoregressive filtering versus linear detrending in estimation of fluxes by the eddy covariance method. Boundary-Layer Meteorology, 91: 258-280.](http://www.springerlink.com/content/ng463245216g6002/)
 
 54. <span id="Runkle"></span> [Runkle, B. K., C. Wille, M. Gažovič and L. Kutzbach. 2012. Attenuation Correction Procedures for Water Vapour Fluxes from Closed-Path Eddy-Covariance Systems. Boundary-Layer Meteorology, 142:1-23.](http://link.springer.com/article/10.1007/s10546-011-9689-y)

@@ -171,6 +171,10 @@ In this tab you describe the raw files, including their format and content. If n
 
 **Maximum time-lag:** Enter the maximum expected time lag for the current variable, with respect to anemometric measurements.
 
+**Error value:** The value this column carries when the instrument had no reading. -9999 by default, which EddyFlow always treats as missing — along with NaN, an unparseable word such as NA, and an empty field — so this only needs changing when the logger writes something else. Stated in the same unit as the column itself, since it is recognized in the raw file before any conversion.
+
+**Spectroscopic *a*** and **Spectroscopic *b*:** Coefficients of the polynomial correcting a closed-path analyzer's reading for water-vapor broadening of the absorption line it measures, following [Peltola et al. (2014)](references.md#Peltola2014): the reported value scales as 1 + *a*·χ<sub>q</sub> + *b*·χ<sub>q</sub>², where χ<sub>q</sub> is the water mole fraction in mol/mol. Both default to zero, leaving the column untouched, and only apply when **Remove the spectroscopic effect of water vapour** is enabled for that analyzer (see [Compensation for density fluctuations](raw-processing-options.md#Compensa)). *a* is not the linear **Gain value** above it, and *b* is not the **Offset value** — both are a separate, physically-motivated correction. If converting a coefficient from EddyUH or from Rella (2010), add one to it first: those conventions fold the dilution term into the same polynomial, so their *a* of −1 is EddyFlow's zero.
+
 **+** Add a variable.
 
 **-** Remove a variable
