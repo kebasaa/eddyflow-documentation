@@ -67,7 +67,9 @@ Now that evapotranspiration and sensible heat fluxes are fully corrected, fluxes
 
 In the event that methane fluxes are computed with data from an open path instrument other than the LI-7700, EddyFlow automatically sets the multipliers A, B, and C to unity.
 
-** Note:** The evapotranspiration flux needed for this formulation is not corrected for the WPL term (but is corrected for spectral attenuations). In the present case, of water vapor measured with an open path analyzer:
+!!! note
+
+    The evapotranspiration flux needed for this formulation is not corrected for the WPL term (but is corrected for spectral attenuations). In the present case, of water vapor measured with an open path analyzer:
 
 6‑105
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1039.svg)

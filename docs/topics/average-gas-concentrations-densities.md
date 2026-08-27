@@ -12,4 +12,6 @@ where symbols have the usual meaning (see [Converting raw gas density to mixing 
 
 These equations are combined appropriately, depending on the available measurements, to calculate unknowns.
 
-** Note:** For CH4 measurements made with the LI-7700 Open Path CH4 Analyzer, EddyFlow reports mixing ratio and mole fraction values that are corrected for spectroscopic effects. It reports average number density values that are not corrected for spectroscopic effects. Refer to the LI-7700 Instruction Manual for more information.
+!!! note
+
+    For CH4 measurements made with the LI-7700 Open Path CH4 Analyzer, EddyFlow reports mixing ratio and mole fraction values that are corrected for spectroscopic effects. It reports average number density values that are not corrected for spectroscopic effects. Refer to the LI-7700 Instruction Manual for more information.

@@ -10,6 +10,8 @@ There are three scenarios in which you need to use an alternative metadata file,
 
 In the first case, no metadata file is available, so it must be created and saved using the Metadata File Editor. Learn more about the [Metadata file editor](metadata-file-editor.md#top).
 
-In the latter two cases, a metadata file is available, so the process of creating the alternative metadata file can be greatly simplified. Unzip any .ghg file using an archive manager (such as 7-zip or ZipGenius). Locate the extracted metadata file and load it from the ** Use alternative metadata file ** ** Load ** button. Make changes if needed and save the file.
+In the latter two cases, a metadata file is available, so the process of creating the alternative metadata file can be greatly simplified. Unzip any .ghg file using an archive manager (such as 7-zip or ZipGenius). Locate the extracted metadata file and load it from the **Use alternative metadata file** **Load** button. Make changes if needed and save the file.
 
-** Important:** Using an alternative metadata file means that all .ghg files will be interpreted and processed using identical meta-information. This implies that data files must all be identical in structure and that dynamic variations of meta-information cannot be taken into account unless you provide a dynamic metadata file.
+!!! warning
+
+    Using an alternative metadata file means that all .ghg files will be interpreted and processed using identical meta-information. This implies that data files must all be identical in structure and that dynamic variations of meta-information cannot be taken into account unless you provide a dynamic metadata file.

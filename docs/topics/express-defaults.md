@@ -1,6 +1,6 @@
 # Express default settings
 
-The default settings in the ** Advanced Settings ** page correspond with the settings applied in Express Mode. These settings are given in the table below. In Express Mode, EddyFlow ignores any altered settings in the ** Advanced Settings ** page and it generates a predefined set of output files. Express Mode will not alter any user-specified settings in the ** Advanced Settings ** page.
+The default settings in the **Advanced Settings** page correspond with the settings applied in Express Mode. These settings are given in the table below. In Express Mode, EddyFlow ignores any altered settings in the **Advanced Settings** page and it generates a predefined set of output files. Express Mode will not alter any user-specified settings in the **Advanced Settings** page.
 
 | Option | Settings |
 | --- | --- |
@@ -25,4 +25,6 @@ The default settings in the ** Advanced Settings ** page correspond with the set
 | Low frequency range: | Analytic correction of high-pass filtering effects (Moncrieff et al., 2004) |
 | High frequency range: | Fully analytic method of Moncrieff et al. (1997) |
 
-** Note:** Detrending in EddyFlow Express Mode is performed by a block-averaging procedure, which calculates fluctuations around the average variable value, estimated on the whole averaging period. This implies that statistics at levels 6 and 7 are identical. However, for consistency with EddyFlow Advanced and the original ECO2S, where detrending can be performed in other ways (such as linear detrending or running mean), the distinction is maintained. Similarly, the Angle of Attack correction may not be performed, depending on the processing choice and on the anemometer model. Accordingly, statistics at levels 2, 3 and 4 may or may not coincide.
+!!! note
+
+    Detrending in EddyFlow Express Mode is performed by a block-averaging procedure, which calculates fluctuations around the average variable value, estimated on the whole averaging period. This implies that statistics at levels 6 and 7 are identical. However, for consistency with EddyFlow Advanced and the original ECO2S, where detrending can be performed in other ways (such as linear detrending or running mean), the distinction is maintained. Similarly, the Angle of Attack correction may not be performed, depending on the processing choice and on the anemometer model. Accordingly, statistics at levels 2, 3 and 4 may or may not coincide.

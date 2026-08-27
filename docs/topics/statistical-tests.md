@@ -8,10 +8,10 @@ Select (on the left side) and configure (on the right side) up to 9 tests for as
 
 ### Spike count/removal
 
-The checkbox ** Spike count/removal ** determines whether the spike detection test is performed or not. If it is not, then spikes remain unchanged. Two spike detection methods are available: Vicker and Mahrt (1997) and Mauder et al. (2013). The method of Mauder et al. (2013) does not require any settings. For the Vickers and Mahrt (1997) method, configure the definition of spikes. For both methods, define the flagging policy by specifying the maximum percentage of accepted spikes and whether spikes shall be replaced by linear interpolation or simply eliminated from the dataset (in which case EddyFlow will replace spikes with an error code of -9999).
+The checkbox **Spike count/removal** determines whether the spike detection test is performed or not. If it is not, then spikes remain unchanged. Two spike detection methods are available: Vicker and Mahrt (1997) and Mauder et al. (2013). The method of Mauder et al. (2013) does not require any settings. For the Vickers and Mahrt (1997) method, configure the definition of spikes. For both methods, define the flagging policy by specifying the maximum percentage of accepted spikes and whether spikes shall be replaced by linear interpolation or simply eliminated from the dataset (in which case EddyFlow will replace spikes with an error code of -9999).
 
-- If both ** Spike count/removal ** and ** Replace spikes with linear interpolation ** are checked, detected spikes are removed and replaced with linear interpolation.
-- If the box ** Replace spikes with linear interpolation ** is NOT checked, then spikes are retained in the data (the test therefore functions as a quality test but not as a data filter).
+- If both **Spike count/removal** and **Replace spikes with linear interpolation** are checked, detected spikes are removed and replaced with linear interpolation.
+- If the box **Replace spikes with linear interpolation** is NOT checked, then spikes are retained in the data (the test therefore functions as a quality test but not as a data filter).
 
 See also [Despiking](despiking-raw-statistical-screening.md#Spike).
 

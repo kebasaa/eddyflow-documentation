@@ -18,7 +18,9 @@ Conversion of mole densities of any gas (dgas, moles of gas per unit of volume) 
 
 where vcell,i (volume per mole of wet air) is the molar volume inside the cell, evaluated for each data sample.
 
-** Note:** Actual units are handled automatically by EddyFlow, as different gas concentrations might be measured with different units, due to their very different ambient concentrations, from parts per thousand (*mmol/mol* or *ppt*) of water vapor to parts per billion of methane (*nmol/mol* or *ppb*).
+!!! note
+
+    Actual units are handled automatically by EddyFlow, as different gas concentrations might be measured with different units, due to their very different ambient concentrations, from parts per thousand (*mmol/mol* or *ppt*) of water vapor to parts per billion of methane (*nmol/mol* or *ppb*).
 
 However, these conversions are not always feasible. In particular, conversion of mole fractions into mixing ratios is performed if the following conditions hold:
 
@@ -33,4 +35,6 @@ Conversion of molar densities into mixing ratios is performed if the following c
 
 If any of these conditions do not hold, EddyFlow applies the density correction following the classic WPL approach.
 
-** Note:** The conversion is performed before compensating eventual time lags, because water vapor, as an adsorbing/desorbing scalar, typically shows different time lags than passive scalars such as carbon dioxide ([Ibrom et al., 2007b](references.md#Ibrom)). The conversion must be performed using the water vapor concentration that was present in the cell at the moment the other scalar was measured. Compensating different time lags prior to the conversion would lead to the use of the wrong water vapor concentration sample for any given sample of the gas to be converted.
+!!! note
+
+    The conversion is performed before compensating eventual time lags, because water vapor, as an adsorbing/desorbing scalar, typically shows different time lags than passive scalars such as carbon dioxide ([Ibrom et al., 2007b](references.md#Ibrom)). The conversion must be performed using the water vapor concentration that was present in the cell at the moment the other scalar was measured. Compensating different time lags prior to the conversion would lead to the use of the wrong water vapor concentration sample for any given sample of the gas to be converted.

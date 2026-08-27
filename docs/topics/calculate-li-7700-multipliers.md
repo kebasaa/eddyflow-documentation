@@ -15,4 +15,6 @@ where groups of parameters have been conveniently created (GROUP1 and GROUP2). R
 
 The groups ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1010.svg), GROUP1 and GROUP2 are functions of air temperature (Tα), and equivalent pressure (Pe) and tabulated values are available with a resolution of 1° C and 1 kPa, for -50 to 55 °C and 50 to 115 kPa. Given actual values of Tα and Pe (the latter being a function of air pressure and water vapor mole fraction, χh2o). EddyFlow Software employs a look-up table (LUT) and performs a bi-linear interpolation to calculate the best estimates of the three groups. Once the values of ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1011.svg), GROUP1 and GROUP2 have been obtained, multipliers A, B, and C can be calculated according to equations above, and kept available for the later calculation of methane fluxes.
 
-** Note:** The multipliers, as a function of air temperature, pressure and water vapor mole fraction, must be recalculated for each averaging period.
+!!! note
+
+    The multipliers, as a function of air temperature, pressure and water vapor mole fraction, must be recalculated for each averaging period.

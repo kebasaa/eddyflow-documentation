@@ -25,7 +25,9 @@ Although not directly used for any calculation, EddyFlow also calculates ensembl
 - Absolute value of CO2 flux is greater than 2 μmol m-2 s-1 (for CO2);
 - Absolute value of CH4 flux is greater than 10-3 μmol m-2 s-1 (for CH4);
 
-** Note:** These cospectra are presented as function of the natural frequency, extending in the range defined by the inverse of the flux averaging interval to half the data acquisition sampling frequency.
+!!! note
+
+    These cospectra are presented as function of the natural frequency, extending in the range defined by the inverse of the flux averaging interval to half the data acquisition sampling frequency.
 
 ## Ensemble averaged cospectra sorted by stability regime
 

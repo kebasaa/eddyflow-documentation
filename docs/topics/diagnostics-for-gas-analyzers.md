@@ -4,7 +4,7 @@ Diagnostics are used to indicate whether your instrument is operating correctly.
 
 Detailed explanations of the diagnostic values are provided in the instruction manuals for the instruments.
 
-In the EddyFlow software, the diagnostic values of the gas analyzers are configured for processing in the ** Raw File Description ** of the ** Metadata File Editor **, as shown in the LI-7700 example in [Figure 4‑1](#settings).
+In the EddyFlow software, the diagnostic values of the gas analyzers are configured for processing in the **Raw File Description** of the **Metadata File Editor**, as shown in the LI-7700 example in [Figure 4‑1](#settings).
 
 The raw diagnostic integer values are first converted to bit values, and then the diagnostic records that are flagged are counted. A portion of an LI-7700 diagnostic output is shown in [Figure 4‑2](#excel) (no records flagged).
 

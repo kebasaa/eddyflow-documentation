@@ -16,7 +16,9 @@ Where um and vm are the measured wind components in the horizontal axes of the a
 - R2, R3, R3A, HS by Gill Instruments
 - USA-1 by Metek
 
-** Note:** The correction is already applied in the firmware of some anemometers (e.g., the CSAT3). In these cases, applying the correction in EddyFlow will result in double accounting.
+!!! note
+
+    The correction is already applied in the firmware of some anemometers (e.g., the CSAT3). In these cases, applying the correction in EddyFlow will result in double accounting.
 
 We recommend that you verify the settings in the instructions for your anemometer. Use the correction in EddyFlow according to the following scenarios.
 

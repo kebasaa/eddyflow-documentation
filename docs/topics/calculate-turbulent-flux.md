@@ -8,6 +8,8 @@ High-pass filters determine a local mean value in a time series by an averaging 
 
 Block averaging, or Reynolds averaging, is the simple operation of calculating the mean value of the variable and calculating turbulence fluctuations as individual departures from the mean. There are benefits and drawbacks to all methods, related to the amount of genuine vs. artificial (e.g. instrumental drift) low frequency information that is eliminated when the trend is removed.
 
-** Note:** A block-averaging procedure is unavoidable at the moment when fluxes are evaluated by splitting the time series into flux averaging intervals. This procedure does partially dampen low frequency contributions as well.
+!!! note
+
+    A block-averaging procedure is unavoidable at the moment when fluxes are evaluated by splitting the time series into flux averaging intervals. This procedure does partially dampen low frequency contributions as well.
 
 For a thorough discussion refer to [Moncrieff et al., 2004](references.md#Moncrieff) and [Rannik and Vesala, 1999](references.md#Rannik).

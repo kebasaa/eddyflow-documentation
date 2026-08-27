@@ -8,7 +8,9 @@ Certain WM and WMP anemometers—identified by means of the firmware version—r
 
 When, in Advanced Mode, the user selects an Angle of Attack method among those available, EddyFlow determines how it should be applied to the current dataset. This determination is based on the anemometer model and firmware version. If the selection is found to be inapplicable, EddyFlow will override the user's selection and inform about the action taken. In most scenarios, EddyFlow will simply proceed by not applying a selected Angle of Attack correction method that is not suitable for the current dataset.
 
-** Note:** Applying the wrong Angle of Attack correction method can cause an under- or overestimation of the fluxes by up to 20%.
+!!! note
+
+    Applying the wrong Angle of Attack correction method can cause an under- or overestimation of the fluxes by up to 20%.
 
 ## Finding the anemometer's firmware version
 
@@ -22,4 +24,4 @@ Gill anemometer firmware version numbers typically have three parts. The first f
 
 ## What if the anemometer's firmware version is not available?
 
-If the firmware version is not available, EddyFlow will default to ** not ** applying the 'w-boost' bug correction.
+If the firmware version is not available, EddyFlow will default to **not** applying the 'w-boost' bug correction.

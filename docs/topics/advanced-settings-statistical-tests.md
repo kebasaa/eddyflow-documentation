@@ -1,8 +1,10 @@
 # Statistical analysis
 
-The ** Statistical Tests ** tab includes all tests recommended by [Vickers and Mahrt (1997)](references.md#Vickers) and [Mauder (2003)](references.md#Mauder2013).
+The **Statistical Tests** tab includes all tests recommended by [Vickers and Mahrt (1997)](references.md#Vickers) and [Mauder (2003)](references.md#Mauder2013).
 
-** Note:** The default settings in this section correspond with the settings used by Express Mode, meaning that you can process a dataset in Advanced Mode without altering these settings, and still compute reasonable results for most datasets.
+!!! note
+
+    The default settings in this section correspond with the settings used by Express Mode, meaning that you can process a dataset in Advanced Mode without altering these settings, and still compute reasonable results for most datasets.
 
 ![](../assets/Adv_Settings_ST.png)
 

@@ -2,9 +2,11 @@
 
 Spectral corrections are needed to correct flux estimates for low and high frequency losses due to the instrument setup, intrinsic sampling limits of the instruments, and some data processing choices. An overview and some details about the spectral correction methods available in EddyFlow are provided here. This tutorial focuses on the items available to you, to select and tune the correction procedure.
 
-** Note:** The default settings in this section correspond with the settings used by Express Mode, meaning that you can process a dataset in Advanced Mode without altering these settings, and still compute reasonable results for most datasets.
+!!! note
 
-The first choice is whether to correct for the high-pass filtering losses implied by the fact that fluxes are calculated on a finite time period, and possibly by the detrending operation (e.g., linear detrending, running mean). Select ** Analytic correction for high-pass filtering effects (Moncrieff et al., 2004) ** to instruct EddyFlow to apply this correction, which affects the low frequency range of the flux cospectra.
+    The default settings in this section correspond with the settings used by Express Mode, meaning that you can process a dataset in Advanced Mode without altering these settings, and still compute reasonable results for most datasets.
+
+The first choice is whether to correct for the high-pass filtering losses implied by the fact that fluxes are calculated on a finite time period, and possibly by the detrending operation (e.g., linear detrending, running mean). Select **Analytic correction for high-pass filtering effects (Moncrieff et al., 2004)** to instruct EddyFlow to apply this correction, which affects the low frequency range of the flux cospectra.
 
 The second choice regards the application of a correction for the low-pass filtering losses, mainly related to intrinsic instrument limits (finite path lengths and time responses) and to the actual instruments deployment, such as the separation between anemometer and gas analyzer, the height above the underlying canopy or surface, the deployment of a sampling line for closed path analyzer and the way this is conditioned (e.g., insulated or heated).
 
@@ -28,7 +30,7 @@ The minimum number of spectra for valid ensemble averages is set to make sure th
 
 In fact, minimum flux values must also be set, to discriminate "good spectra." A sufficient flux ensures that developed turbulent conditions are met and that spectra are well characterized in the inertial and dissipation ranges. Water vapor minimum are indirectly set by specifying a lower limit for the latent heat flux. Similarly, good quality temperature spectra will be achieved when sensible heat flux will be above a certain threshold that you can specify.
 
-The ** Spectral Corrections ** tab includes the following options:
+The **Spectral Corrections** tab includes the following options:
 
 - [Low frequency range](spectral-corrections.md#Low)
 - [High frequency range](spectral-corrections.md#High)
