@@ -15,13 +15,17 @@ The **Processing Options** tab includes the following settings. Click any of the
 - [Wind speed measurement offsets](raw-processing-options.md#WindOffset)
 - [Fix 'w-boost' bug (WindMaster and WindMaster Pro only)](raw-processing-options.md#w-boostFix)
 - [Angle of attack correction for wind components](raw-processing-options.md#AngleAttack)
+- [Metek USA-1 head correction](raw-processing-options.md#metek-usa-1-head-correction)
+- [Inclinometer tilt correction](raw-processing-options.md#inclinometer-tilt-correction)
 - [Axis rotation for tilt correction](raw-processing-options.md#Axisrot)
 - [Detrending turbulent fluctuations](raw-processing-options.md#Turb)
 - [Time lag optimization settings](raw-processing-options.md#Time)
+- [Conditional lag borrowing](raw-processing-options.md#conditional-lag-borrowing)
 
 ## Compensation for density fluctuations
 
 - [Compensation for density fluctuations (WPL terms)](raw-processing-options.md#Compensa)
+- Remove the spectroscopic effect of water vapour, and correct the water channel itself (see [Compensation for density fluctuations](raw-processing-options.md#Compensa))
 - [Add instrument sensible heat components (LI-7500)](selecting-advanced-options.md#Add)
 
 ## Other options
