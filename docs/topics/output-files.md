@@ -10,6 +10,19 @@ EddyFlow provides a broad range of file output options. These may seem daunting,
 
 **Set Thorough:** Click this button to select a complete set of output files, providing you with all the results as well as complete diagnostic information. The computation time may increase considerably with this option.
 
+## Assessment file outputs
+
+These three options configure the whole run around producing or consuming a planar fit or spectral assessment file, rather than adjusting individual output checkboxes:
+
+- **Default, all options available:** Applies no assessment-output preset. Every option remains under manual control from this page and from Spectral Analysis and Corrections.
+- **Pre-processing run (Create Spectral Assessment File if possible):** Prepares a run that creates a new spectral assessment file, if enough data are available. Selects the required spectral assessment and output options and locks the settings that must stay fixed during that run.
+- **Production run:** Prepares a normal processing run that uses existing spectral assessment inputs and production QA/QC defaults, while leaving the usual output choices free to edit.
+
+Two related checkboxes run only one assessment step in isolation:
+
+- **Create timelag file only:** Runs only the step that creates a time lag assessment file. Requires **Time lags compensation** to be enabled with either **Automatic time lag optimization** or **Pre-whitening block-bootstrap** selected.
+- **Create planar fit file only:** Runs only the step that creates a planar fit assessment file. Requires a planar fit rotation method to be enabled with **Planar fit file not available** selected in the Planar Fit Settings.
+
 ## Results files and options
 
 **Full Output:** This is the primary EddyFlow results file. It contains fluxes, quality flags, micrometeorological variables, gas concentrations and densities, footprint estimations and diagnostic information along with ancillary variables such as uncorrected fluxes, main statistics, etc.
@@ -19,6 +32,8 @@ EddyFlow provides a broad range of file output options. These may seem daunting,
 - **Output only available results** to write on the **Full output** file only the results which are actually available, eliminating "error code" columns that are created when results are unavailable.
 - **Use standard output format** to write the **Full output** file in its predefined standard format, regardless of the results currently available. This may come in handy if you wish to import the file in a post-processing analysis tool.
 - **Error label:** Customize the error code into any string that you prefer (such as NaN). You can choose from the drop-down list or enter any string you want. The default is "-9999."
+
+**Build continuous dataset:** Fills any flux averaging period missing from the output with the error label, so the full output file has one row per period across the whole run with no gaps in the time series. This is not gap-filling — no value is estimated for the missing periods, they are simply written with the error code rather than omitted.
 
 **Biomet measurements:** Aggregated values (averages or sums) of all available biomet measurements, calculated over the same time period selected for fluxes. Biomet measurements that are recognized by EddyFlow (i.e., marked by recognized labels) are screened for physical plausibility before aggregation and they are converted to units that coincide with other EddyFlow results. All other variables are solely averaged and provided on output.
 
