@@ -86,10 +86,12 @@ Ambient measurements are data provided by external sensors, either those that ar
 
 **Photosynthetically Active Radiation (PAR, PPFD):** If measurements are available in the dataset, you can select which to use.
 
-![](../assets/dataset-selection04.png)
+![The ambient measurements table, listing the biomet variables available for flux correction](../assets/dataset-selection04.png)
 
-![](../assets/dataset-selection09.png)
-                                                            Figure 5‑1.The dataset selection page includes an option to select a global radiation measurement.
+![The global radiation and longwave incoming radiation rows, each drawn from a biomet column](../assets/dataset-selection09.png)
+                                                            Figure 5‑1. The dataset selection page includes an option to select a global radiation measurement.
+
+Each row names the biomet variable it came from and the column it occupies, so a station logging more than one sensor for the same quantity — two air temperatures, say — lists them separately and lets you choose between them. Variables the biomet files do not carry simply do not appear.
 
 ### Variables: Diagnostic measurements
 
