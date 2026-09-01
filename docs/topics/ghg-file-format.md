@@ -43,3 +43,7 @@ Sensitive meta-information in the .metadata file includes (for a description of 
 - If applicable, linear conversion information:Type of conversion (Gain/Offset);Units of the variable as stored in the raw file;Gain/Offset;Physical units of the variable, as expected after the linear conversion;
 - Nominal time-lag for the variable, based either on the displacement of the instrument from the reference anemometer (open path analyzers), or on the intake tube properties and flow rate (closed path analyzers).
 - Minimum and maximum plausible time lags, for automatic time lag determination by means of circular correlation.
+
+## Extended .ghg files
+
+EddyFlow can read archives written in an [extended .ghg format](ghg-extended-format.md), which carries instruments and attributes this format has no place for while remaining readable by EddyPro.

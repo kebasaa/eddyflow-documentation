@@ -82,6 +82,7 @@ nav:
       - "Gas Analyzer Model": topics/gas-analyzer-model.md
       - "Generic Binary File Type": topics/generic-binary-files.md
       - "GHG File Type": topics/ghg-file-format.md
+      - "Extended GHG Files": topics/ghg-extended-format.md
       - "Path Lengths and Time Response": topics/longitude-transverse-pathlengths.md
       - "Use Alternative Metadata File": topics/metadata-file-use-alternative.md
       - "Nominal Time Lag": topics/nominal-time-lag.md
