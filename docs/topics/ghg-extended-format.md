@@ -15,8 +15,10 @@ consequences make the extension safe:
 
 1. **Unknown keys are ignored.** A key neither engine's tag table names is simply
    never looked up. Adding keys changes nothing about how EddyPro reads the file.
-   The metadata editor preserves them too, because it writes through `QSettings`
-   without clearing keys it does not recognise.
+   Note this is about *reading*: EddyFlow's Metadata File Editor rewrites the
+   `[Instruments]` and `[FileDescription]` sections wholesale when it saves, so
+   the added keys do not survive a save there. That is deliberate - see
+   [In the interface](#in-the-interface) below.
 2. **Unselected columns are never validated.** A column is only inspected if the
    *project* points at it. Extra `col_N_*` blocks - a fifth gas species, a new
    record type - are invisible to a project that does not select them.
@@ -145,11 +147,40 @@ So extra gas columns are free as far as correctness goes, but they do change the
 EddyPro output header. Anything parsing that output by column position needs to
 know.
 
+## In the interface
+
+EddyFlow's Metadata File Editor **reads** the extension: open an extended archive
+and the instrument table shows the real analyser, taken from `ef_model`, with the
+geometry the file declares. The manufacturer is re-derived from that model rather
+than read, because the one written beside a stand-in describes the *stand-in* - an
+EC150 declared as `generic_open_path` says "Other".
+
+If the model named in `ef_model` is one your build of EddyFlow does not know - an
+archive written by a newer release - the interface falls back to showing the
+stand-in, which by construction it does know. The file still processes; it is
+simply described by the generic.
+
+**Saving produces a plain metadata file, and that is intended.** The stand-in
+pair exists only so an *archive* stays readable by EddyPro. A standalone
+`.metadata` is under no such obligation, so what gets written names the real
+instrument in `model` outright, keeps its geometry, and carries neither
+`ef_model` nor `ghg_format_version` - there is nothing left for them to say. So
+moving off a `.ghg`'s embedded metadata onto your own file gives you a clean
+description of your real analyser.
+
 ## Not yet carried
 
 EddyFlow's per-species records - which column supplies a gas's water vapour,
 which cell temperature and pressure it uses, its molecular weight and
-diffusivity - live in the project file and have no metadata expression. They are
-per-column attributes in all but name, so `col_N_*` keys can carry them and a
-later format version is expected to. Until then, an extended archive still needs
-an EddyFlow project to state them.
+diffusivity - live in the **project** file. A `.metadata` has never carried them
+and, by decision, still does not: `gas_<n>_moist` and `gas_<n>_cell` are project
+settings, and adding them to the format would duplicate rather than replace that.
+
+The consequence is worth stating rather than discovering. An extended archive is
+**not self-describing**: `gas_<n>_col` pins a metadata column *number* and
+`gas_<n>_instr` an instrument *name*, so a project is coupled to the layout of
+the archives it was written for, and an archive passed on without its project
+cannot say which analyser's water belongs to, say, a carbonyl sulfide column.
+
+They are per-column attributes in all but name, so `col_N_*` keys could carry
+them if a self-describing archive is ever wanted.
