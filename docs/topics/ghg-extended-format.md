@@ -101,6 +101,84 @@ what makes it plain the residual is the geometry and not the stand-in.
     the validator - they are the correction. A stand-in carrying plausible but
     wrong numbers processes cleanly and reports fluxes that are quietly wrong.
 
+## Which instruments need which treatment
+
+Two different problems wear the same clothes, and they need different files.
+
+EddyPro's vocabulary below is taken from
+[eddypro-engine](https://github.com/LI-COR-Environmental/eddypro-engine)
+`metadata_file_validation.f90`, cross-checked against
+[eddypro-gui](https://github.com/LI-COR-Environmental/eddypro-gui) and against
+the installed 7.0.9 binary. All three agree exactly.
+
+### Renamed: EddyPro knows the device under a different key
+
+Write **EddyPro's** spelling in `instr_<k>_model`. EddyFlow canonicalises it on
+read, so `instr_<k>_ef_model` is optional here and merely makes the intent
+explicit.
+
+| Instrument | EddyPro | EddyFlow |
+|---|---|---|
+| Campbell CSAT3 | `csat3` | `csi_csat3` |
+| Campbell CSAT3B | `csat3b` | `csi_csat3b` |
+
+Writing EddyFlow's prefixed spelling instead makes the file unreadable to
+EddyPro, which has no prefixed form of either.
+
+### Stood in for: EddyPro has no name for the device at all
+
+Declare the generic model **with the instrument's real geometry**, set the
+manufacturer to match it, and name the instrument in `instr_<k>_ef_model`.
+
+| Instrument | EddyFlow | Declare to EddyPro as | Manufacturer |
+|---|---|---|---|
+| Campbell CSAT3A | `csi_csat3a` | `generic_sonic` | `other_sonic` |
+| Campbell CSAT3C | `csi_csat3c` | `generic_sonic` | `other_sonic` |
+| Campbell IRGASON, sonic half | `csi_irgason_sonic` | `generic_sonic` | `other_sonic` |
+| Campbell EC150 | `csi_ec150` | `generic_open_path` | `other_irga` |
+| Campbell IRGASON, analyser half | `csi_irgason_irga` | `generic_open_path` | `other_irga` |
+| Campbell EC155 | `csi_ec155` | `generic_closed_path` | `other_irga` |
+| Campbell TGA200A | `csi_tga200a` | `generic_closed_path` | `other_irga` |
+| MIRO MGA1/5, MGA4/6, MGA9/10, MGAi-N2O | `miro_mga1_5`, `miro_mga4_6`, `miro_mga9_10`, `miro_mgai_n2o` | `generic_closed_path` | `other_irga` |
+| Aerodyne TILDAS | `aerodyne_tildas` | `generic_closed_path` | `other_irga` |
+
+!!! warning "The manufacturer has to move with the model"
+    EddyPro validates `manufacturer` and `model` against **separate** lists, and
+    its analyser firms are only `licor` and `other_irga` - it has no `csi_irga`,
+    `miro` or `aerodyne`. A stand-in that keeps the real manufacturer fails the
+    firm test rather than the model one, and the message names neither.
+
+### Identical on both sides
+
+Every Gill, Young and Metek sonic, every LI-COR analyser, and the krypton and
+Lyman-alpha hygrometers are spelt the same in both programs and need nothing.
+
+## Three places a name propagates
+
+`col_<n>_instrument` is the one that catches people, but it is not the only one.
+An instrument declared as a stand-in must be referred to by the **stand-in's**
+name everywhere EddyPro will read, and by the real name everywhere EddyFlow
+will:
+
+| Where | In a `.ghg` read by EddyPro | In an EddyFlow project |
+|---|---|---|
+| `instr_<k>_model` | the stand-in | (from `ef_model`) |
+| `col_<n>_instrument` | the stand-in | resolved from the file |
+| `master_sonic`, in the **project** | the stand-in | the real model |
+
+Getting `master_sonic` wrong is the least obvious of the three: it produces
+`At least one among u, v, w and a fast temperature is missing`, which does not
+mention instruments at all.
+
+## Saving in the Metadata File Editor drops the dual naming
+
+Opening an extended archive in EddyFlow's editor and saving writes an
+**EddyFlow-native** metadata: the real model in `instr_<k>_model`, the columns
+repointed to it, and no `ef_model` or `ghg_format_version`. This is deliberate,
+and is what the editor already does for every legacy spelling it migrates - but
+it means a saved file is no longer readable by EddyPro. Keep the archive if you
+need to keep that.
+
 ## Keys added in version 2.0
 
 | Key | Section | Meaning |
