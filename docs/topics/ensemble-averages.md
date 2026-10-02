@@ -39,3 +39,11 @@ In addition to these explicit and customizable quality criteria, there is anothe
 - If a binned (co)spectrum, normalized by the corresponding (co)variance and multiplied by natural frequency, attains at least one value larger than 10, the whole (co)spectrum is disregarded. Note that, in strict theoretical terms, such (co)spectra normalized this way shall not attain any value larger than 1. However, in order to accommodate potential numerical imprecisions, a more generous value of 10 is used here.
 - If a binned (co)spectrum, normalized by the corresponding (co)variance but not normalized with respect to frequency, attains at least one value larger than 104, the whole (co)spectrum is disregarded.
 - Gas binned spectra (but not cospectra) are disregarded if, for the same period, sonic (or fast) temperature spectrum is disregarded. This is done because sonic/fast temperature spectra and gas spectra are used to assess spectral attenuations by means of calculating an experimental transfer function given by the ratio of gas to temperature spectra. Due to specificities of the method, it is necessary to keep gas and temperature spectra in synch.
+
+## Flux thresholds in the unit of each gas
+
+The minimum and maximum flux of a gas, set in the table **Spectra, cospectra QA/QC, and attenuation assessment**, are expressed in the unit of that gas's own column in the Raw File Description: nmol m-2 s-1 for columns in ppb or nmol/mol, pmol m-2 s-1 for columns in pmol/mol, and umol m-2 s-1 otherwise. The thresholds are compared with the flux in that gas's own units, as absolute values. See [Spectral corrections](spectral-corrections.md#spectra-cospectra-qaqc-and-attenuation-assessment).
+
+## Several acquisition rates
+
+When the acquisition rate of a gas is not constant, the (co)spectra that pass the screening above are averaged separately for each rate, because spectra at different rates cannot be pooled (their noise floor and Nyquist frequency differ). See [Mixed acquisition rates](mixed-acquisition-rates.md#spectral-assessment-per-acquisition-rate).

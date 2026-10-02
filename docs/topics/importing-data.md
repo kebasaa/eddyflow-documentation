@@ -5,3 +5,11 @@ When you click the "Run" button in the EddyFlow interface, the program launches 
 At this point the software is ready to start iterative processing of all available files. With each iteration, EddyFlow reads files that are consecutive in time and loads the corresponding data. If a lag is found (e.g., because a file is missing) EddyFlow stops the importation process and deals with the data that has been imported up to that point. At the next iteration, it will start from the next file available. After completing importation, EddyFlow has loaded the *merged dataset*, comprised of all data contained in the raw files read for the current iteration.
 
 Once the merged dataset is prepared, EddyFlow extracts the data needed for the first averaging period. In EddyFlow this dataset is called the *averaging dataset*. If the merged dataset is longer than the one needed for the averaging dataset, EddyFlow will make another iteration within the same merged dataset, trying to build up a second (and third, fourth and so on) averaging dataset.
+
+## Reading raw files that change acquisition rate
+
+For LI-COR .ghg files, each archive's own acquisition frequency is checked before its data are read. If a period starts in a file at a new rate, EddyFlow re-reads the period at that rate without resampling anything; a period whose files are at different rates cannot form a single time series and is skipped (Warning(116)), and the next period starts with the file at which the rate changed. Before processing, a survey of a selection of files finds the changes, and the log opens with a list of the rates and the time each starts. When the embedded metadata of the archives is used, a dynamic metadata file cannot override an archive's acquisition frequency or file duration (Warning(118)). See [Mixed acquisition rates](mixed-acquisition-rates.md#top).
+
+## Raw data on a shared drive
+
+The **Raw data folder** may be a link to a Google Drive or Dropbox folder shared with "Anyone with the link". The folder is listed once at start-up, and files are downloaded as they are needed (the next two are fetched in the background) and deleted once they are no longer required. See [Remote folders](remote-folders.md#top).

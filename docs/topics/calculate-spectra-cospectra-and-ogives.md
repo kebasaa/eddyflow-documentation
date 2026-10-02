@@ -33,3 +33,7 @@ The calculation of binned (co)spectra involves a slightly different sequence of 
 !!! note
 
     As of engine v8.1.0, when fitting a reference cospectrum for spectral correction purposes (see [Calculating Spectral correction factors](calculate-spectral-correction-factors.md)), EddyFlow allows you to choose among several Kaimal-type analytical cospectral models, rather than being restricted to a single, fixed formulation.
+
+!!! note
+
+    When the raw files are not all at one acquisition rate, each period's (co)spectra are calculated at its own rate, up to its own Nyquist frequency. The binned frequency grid is built up to the Nyquist frequency of the highest rate, and Warning(117) reports a period at a faster rate than the grid. See [Mixed acquisition rates](mixed-acquisition-rates.md#binned-spectra-frequency-grid-warning-117).

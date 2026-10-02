@@ -1,10 +1,10 @@
 # Low-pass filtering correction
 
-See [High frequency spectral correction](selecting-advanced-options.md#High) for more information.
+See [High frequency spectral correction](selecting-advanced-options.md#high-frequency-spectral-correction) for more information.
 
-Three low-pass filtering correction procedures are available in EddyFlow, implementing the [4 steps](calculate-spectral-correction-factors.md) in different ways. The methods are named after the corresponding reference publication. The method by [Moncrieff et al. (1997)](references.md#Moncrieff2) is referred to as purely analytic, for it makes use of mathematical formulations to model flux spectral properties and to describe flux attenuations due to the instrument setup. The method by [Horst (1997)](references.md#horst1997) is analytic in nature, but it is parameterized using *in situ* information. The method by [Ibrom et al. (2007)](references.md#Ibrom), instead, is mostly based on *in situ* determinations.
+Five low-pass filtering correction procedures are available in EddyFlow, implementing the [4 steps](calculate-spectral-correction-factors.md) in different ways. The methods are named after the corresponding reference publication. The method by [Moncrieff et al. (1997)](references.md#Moncrieff) is referred to as purely analytic, for it makes use of mathematical formulations to model flux spectral properties and to describe flux attenuations due to the instrument setup. The method by [Horst (1997)](references.md#horst1997) is analytic in nature, but it is parameterized using *in situ* information. The method by [Ibrom et al. (2007)](references.md#Ibrom), instead, is mostly based on *in situ* determinations.
 
-The three methods are briefly described below. Please refer to the original papers for more in depth information.
+The methods are briefly described below. Please refer to the original papers for more in depth information.
 
 ## Spectral corrections after Moncrieff et al. (1997)
 
@@ -134,4 +134,43 @@ This formulation is then specified in the along-wind, crosswind, and vertical se
 
 !!! note
 
-    When the methods of [Horst (1997)](references.md#horst1997) or [Ibrom et al. (2007)](references.md#horst1997) are selected for the low-pass filtering correction, the "band-pass" spectral correction is applied by first correcting for the high-pass filtering effects (multiplication of uncorrected fluxes by HPSCF) and then multiplying by LPSCF. Rigorously speaking, this procedure is not correct because according to the definition of the band pass correction factor, the multiplication with the LPTF and the HPTF are not commutative with the integral operator. However, the error introduced by this procedure is deemed negligible in most occasions.
+    When the methods of [Horst (1997)](references.md#horst1997) or [Ibrom et al. (2007)](references.md#Ibrom) are selected for the low-pass filtering correction, the "band-pass" spectral correction is applied by first correcting for the high-pass filtering effects (multiplication of uncorrected fluxes by HPSCF) and then multiplying by LPSCF. Rigorously speaking, this procedure is not correct because according to the definition of the band pass correction factor, the multiplication with the LPTF and the HPTF are not commutative with the integral operator. However, the error introduced by this procedure is deemed negligible in most occasions.
+
+## Cospectral model for the analytic correction
+
+Step 1 of every correction (the reference cospectrum, see [Calculating Spectral correction factors](calculate-spectral-correction-factors.md#top)) uses an analytic cospectrum. The project setting `cosp_model` (interface: **Cospectral model**, in *High frequency range*) selects which curve is used:
+
+| Value | Label | Notes |
+| --- | --- | --- |
+| 0 | Moncrieff et al. (1997) - the default | Stable and unstable branches; the curve used by all earlier versions |
+| 1 | Kaimal et al. (1972) | Kansas cospectrum, with its own stable and unstable branches |
+| 2 | Sakai et al. (2001) - rough surfaces | single form, no stability dependence |
+| 3 | Su et al. (2003) - forest, non-flat terrain | single form, no stability dependence |
+| 4 | Moraes et al. (2008) | single form, no stability dependence |
+| 5 | Kristensen et al. (1997) | single form, broad with a long low-frequency tail |
+
+The model is a modifier of the method chosen, not a method of its own. It is used wherever a transfer function is integrated against a cospectrum: the methods of [Moncrieff et al. (1997)](references.md#Moncrieff), [Horst (1997)](references.md#horst1997), [Ibrom et al. (2007)](references.md#Ibrom) and [Fratini et al. (2012)](references.md#Fratini2012), and the case in which only the [high-pass correction](high-pass-filtering.md#top) is requested. The correction factor is a ratio of the integral of the cospectrum to the integral of the cospectrum multiplied by the transfer function, so only the *shape* of the curve matters and any constant multiplying it divides out. For this reason the normalisation constants of the published curves are not reproduced.
+
+On the analytic test data set, the six models gave gas correction factors between 1.017 and 1.056, against 1.034 with the default: about four percent of the correction, or a few tenths of a percent of the flux. The effect is therefore small compared with the choice of method, but it is systematic for a given site.
+
+The **Reynolds stress** always keeps the momentum cospectrum of Moncrieff et al. (1997). Models 2 to 5 are scalar cospectra with no momentum form, and combining a scalar model with an unrelated momentum curve for some options and not others would be worse than not offering the choice; on the test data set the stress correction was identical for all six.
+
+Models 2 to 5 have no dependence on stability, so they are applied unchanged at every z/L. In stable stratification the cospectral peak moves toward higher frequency; a neutral-form curve then puts too little flux at high frequency and **understates** the high-frequency loss. Use the stability-dependent curves (0 or 1) for sites with frequent stable conditions. The cospectral model has no influence where the correction comes from measured cospectra instead of a model.
+
+## Iterating the correction
+
+Three quantities depend on each other: the analytic cospectrum is evaluated at the stability parameter z/L; z/L is computed from the corrected sensible heat flux; and the corrected flux is what the spectral correction produces. In a single pass, the correction is computed at the stability of the uncorrected flux, which the run then goes on to revise.
+
+With **Iterate the correction** (`corr_iter_meth`) the correction and the flux levels are recomputed, using at each pass the z/L produced by the previous pass, until the loop ends. Each pass starts from the same raw covariances, so **nothing compounds**: what changes between passes is only the z/L at which the cospectrum is evaluated. The loop ends after `corr_iter_max` passes (default 4), or earlier when the largest change of any gas flux between two passes is below `corr_iter_tol` percent (default 0, which means that all passes are run). The output column `corr_iter_dev` reports that largest change, in percent, between the last two passes, for the worst gas of the period. It is written only when the loop runs.
+
+The effect is largest in strongly non-neutral conditions. On a 48-period forest test the loop changed fluxes by hundredths of a percent (latent heat +0.023 %, N2O +0.038 %, COS -0.022 %, sensible heat practically none), with a median `corr_iter_dev` of 0 % and a worst period of 0.35 %. A 1 % tolerance stopped at the second pass and came within 0.02 % of four passes. With the option off, results are bit-identical to earlier versions.
+
+## In situ assessment at more than one acquisition rate
+
+The in situ methods of Horst (1997), Ibrom et al. (2007) and Fratini et al. (2012) depend on a spectral assessment: ensemble spectra, a high-frequency noise floor, a transfer-function fit and a check of the fitted cut-off against the Nyquist frequency. All of these depend on the acquisition rate. If the rate of a gas is not constant over the assessment period (the file rate changes, or the analyser's own rate changes while the file rate does not) the assessment is carried out separately for each rate of that gas, each time only up to that rate's Nyquist frequency, and each period is corrected with the result for its own rate. The Ibrom et al. (2007) correction-factor model, derived from w'T', is fitted for each file rate. A rate without a usable result takes the next faster usable rate of the same gas (and, failing that, a slower one, and failing that the analytic method), and a gas never takes another gas's result. See [Mixed acquisition rates](mixed-acquisition-rates.md#spectral-assessment-per-acquisition-rate).
+
+## Cut-off frequency and the Nyquist check
+
+A fitted cut-off frequency is accepted only if its **magnitude** is below the Nyquist frequency of the gas it belongs to (half of its effective acquisition rate); above it the data could not have shown the attenuation. This applies to every gas and to the relative-humidity fit of water vapour. The magnitude is tested because the IIR model contains the cut-off only squared, so the fit may land on either sign; a gas with no attenuation it can resolve used to give a cut-off of about -250 Hz, which was accepted and acted as an in situ correction of about 1. A gas that fails the check is corrected with the analytic method (as is any other unfitted gas), which changes results in single-rate projects wherever this happened. See [Mixed acquisition rates](mixed-acquisition-rates.md#cut-off-frequency-versus-each-gass-own-nyquist-frequency).
+
+For the method of Fratini et al. (2012), each period's full cospectrum is sized from its own full-cospectra file; before engine version 8.1.1 it was sized from the first file of the run, which gave wrong integrals for shorter or longer periods.
