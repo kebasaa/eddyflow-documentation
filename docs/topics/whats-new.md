@@ -2,15 +2,52 @@
 
 EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
 
+## 8.1.2 (unreleased)
+
+Engine:
+
+- New feature: Pre-pass worker processes (`-j`/`--jobs`) now stop when the process that started them ends, so stopping or killing a run no longer leaves workers running; see [Command line](command-line.md#worker-processes-j-and-jobs).
+- Fix: Pre-pass workers remove their temporary folders when they finish.
+
+GUI:
+
+- New feature: The Browse button opens at the folder the field already points to, falling back to the nearest existing parent, the last place the field was browsed and the last project folder; see [Where Browse opens](introduction-interface.md).
+- Fix/Refine: Warnings and information boxes raised while the interface applies settings on your behalf (run mode, output presets, project loading) go to the message log instead of opening windows; failures and questions are unchanged.
+- Fix: A page that refreshes itself while settings are restored no longer interrupts anything.
+
+## 8.1.1 (2026-09-25)
+
+Engine:
+
+- New feature: Every input location can be a Google Drive or Dropbox shared link; raw files are downloaded on demand and removed after use. Output locations must stay local (Fatal error 122). See [Remote folders and shared links](remote-folders.md#top).
+- New feature: Projects whose GHG files change acquisition rate part way are processed in full: each period is read at its own rate, a period spanning a change is skipped (Warning 116), and the spectral assessment is done per rate. See [Mixed acquisition rates](mixed-acquisition-rates.md#top).
+- New feature: New warnings 116, 117, 118, 119 and 121 and fatal errors 120 and 122; see [Error codes](error-codes.md#top).
+- Fix: Dynamic metadata no longer overrides the acquisition frequency or file duration a GHG file states about itself (Warning 118).
+- Fix: The cut-off frequency is checked against each gas's own Nyquist frequency; gases whose fit is unresolved fall back to the analytic correction, which changes results in single-rate projects too.
+- Fix: The Fratini et al. (2012) full cospectrum is sized from each period's own file instead of the first file of the run.
+- Fix: An empty numeric setting in a metadata or project file is read as its default instead of 0.
+- Fix: Pre-pass workers (`-j`) also split the PWB cache pre-pass, and a switch placed after the project path is honoured.
+- Fix: `S4_instrument_filled` in the PWB summary is now `S4_borrowed`, and half-hourly PWB output no longer reports a stale donor gas.
+
+GUI:
+
+- New feature: **Remote drive...** buttons beside twelve input fields, with a Remote Drive link dialog and a file-browser dialog for the shared folder.
+- New feature: Minimum and maximum flux thresholds on the spectral QA/QC table and in the Time Lag Optimization dialog are shown in the gas's own unit (nmol, pmol or µmol m⁻² s⁻¹); stored values are unchanged.
+- New feature: Spectral-assessment and time-lag assessment file tests check each gas block against its prototype; a measured gas without a block now fails the test.
+- Fix: The Fluxnet output settings stay on in all three output presets.
+- Fix: Choosing a run mode applies its settings in one go instead of opening a stack of warnings.
+- Fix: An empty or unparseable number in a project or metadata file is read as the default rather than 0.
+- Fix: Create Package in SmartFlux mode downloads assessment, planar-fit and time-lag inputs from a drive first.
+
 ## 8.1.0 (2026-08-22)
 
 Engine:
 
 - New feature: Two optional sonic hardware corrections, both off by default: an inclinometer-based tilt correction for tilt that changes within an averaging period, and a Metek USA-1 head correction for flow distortion (requires user-supplied Metek calibration tables, not shipped with EddyFlow).
 - New feature: Optional iterative spectral-correction/stability convergence loop, off by default, that re-evaluates the spectral correction against updated atmospheric stability until the two agree.
-- Fix: Time-lag "borrowing" for weak gas signals can now optionally follow EddyUH's own rules for choosing the noise floor and donor gas; existing projects keep their previous behavior by default.
+- Fix: Time-lag "borrowing" for weak gas signals can now optionally use a Lenschow instrument-noise floor and the analyser's carbon dioxide as donor gas; existing projects keep their previous behavior by default.
 - New feature: New random-uncertainty method based on Lenschow et al. (2000) / Mauder et al. (2013) instrument noise.
-- New feature: New consecutive-difference despiking method (EddyUH-style), using absolute per-variable step limits instead of statistical thresholds.
+- New feature: New consecutive-difference despiking method using absolute per-variable step limits instead of statistical thresholds.
 - New feature: Selectable analytic cospectrum model used to shape spectral corrections (Moncrieff, the default, plus Kaimal, Sakai, Su, Moraes, and Kristensen).
 - New feature: Optional time-lag "borrowing" from a better-resolved tube-mate gas when a species' signal can't be distinguished from noise; off by default, requires the detection-limit method to be enabled.
 - New feature: Optional "de-baselined" covariance maximization for time-lag selection, improving handling of weak fluxes.
@@ -22,6 +59,21 @@ Engine:
 - New feature: Optional spectroscopic water-vapor correction for closed-path laser analysers, off by default, removing the effect of water on absorption-line broadening from mixing-ratio gas readings (including an optional self-broadening correction for the water channel itself).
 - New feature: Billesbach (2011) random-shuffle noise-floor method added to the random-uncertainty options; the earlier implementation of this method was broken and has been fixed.
 - Fix/Refine: Several correctness fixes and improvements to the EddyPro-project importer, which now produces a fully runnable EddyFlow project without further manual conversion.
+
+- New feature: Optional extra raw-signal diagnostics (AL1, DDI, HF5, HF10, HD5, HD10, DIP, CCF; `test_rf`), off by default, appended at the end of the FLUXNET output row.
+- New feature: Optional post-flux despiking of the whole NEE, H and LE series by STL decomposition (`test_pfd`), writing a separate `..._flux_despiking...csv` file.
+- New feature: Optional storage-flux cleaning (`test_stor_clean`) using a Tukey far-out fence by time of day, with interior gaps interpolated.
+- New feature: Fourth quality-flagging policy, Vitale et al. (2020) (`qc_meth` = 4); when spectral corrections are handed to the flux-correction stage the grade is the ITC deviation alone.
+- Fix: The `*_KID` column is now the flat-line-corrected kurtosis index of differences and changes values wherever a sensor flat-lined.
+- Fix: LI-7700 methane fluxes now apply the spectroscopic multipliers B and C, not only A (previously about 10.6 % low in the test project), and Burba surface heating is applied per gas using that gas's own analyser.
+- BREAKING: FLUXNET output carries `SPEC_CORR_LI7700_<A|B|C>_<GAS>` per gas instead of three fixed `SPEC_CORR_LI7700_A/_B/_C` columns, so the number of main fields rises from 278 to 287; positional parsers must be updated.
+- Fix: `T*` (full output) and `TSTAR` (FLUXNET) written by the flux-correction stage had the wrong sign; the values are now correct.
+- Fix: A biomet pressure given in `ATM` now converts with 101325 Pa (previously 98066.5 Pa).
+- Fix: PWB terminal fallback uses the period's own covariance maximum, which changes some lags.
+- New feature: Biomet channels accept per-channel `_gain` and `_offset` calibration, and external biomet files can take their channel description from a sidecar `.metadata` file (`biom_use_native_header` = 0).
+- Fix: Runs on GHG files with embedded biomet no longer crash.
+- New feature: Dynamic metadata can change the invalid wind sectors over time (`wdf_sec1_center` to `wdf_sec3_width`).
+- Fix/Refine: Metadata conversion type `zero_fullscale` is upgraded once on read to the exact gain and offset equivalent.
 
 GUI:
 
@@ -36,6 +88,13 @@ GUI:
 - New feature: New "Flux Detection Limit..." dialog on the Statistical Analysis page.
 - New feature: Lenschow (2000), consecutive-difference despiking, cospectral model choice, and Billesbach (2011) options added to their respective settings menus.
 - Fix: Random-uncertainty dropdown was mapping methods by row position instead of stored value, risking silently running the wrong method; corrected.
+- Fix/Refine: Measurement type entries in the Raw File Description now read "Mole fraction (wet)" and "Mixing ratio (dry)".
+- Fix: EC150, IRGASON and TILDAS geometry cells are editable, Metek instrument keys are written as the engine expects, and a malformed instrument label no longer crashes the editor.
+- Fix: Biomet variables are matched by their whole name after the positional qualifier is removed, so FLUXNET names such as SW_IN and LW_IN are offered (together with RG, R_G, RGLOBAL, R_GLOBAL, SWIN and LWIN) and sensors such as TA_1_1_1 and TA_1_3_1 are no longer merged.
+- Fix: A GHG file that cannot be extracted raises "Raw Data Unreadable" or "Biomet Data Unreadable", and the raw-data prototype filter no longer skips files.
+- New feature: The EddyUH importer's summary lists what was read from the project and the caveats about what was not carried across.
+- Fix: Converting legacy projects now writes the correct `zero_fullscale` offset.
+- Fix: SmartFlux mode no longer crashes on Ctrl+F, names its copy `<name>-smartflux.eddyflow`, and is not engaged if the copy fails to load.
 
 ## 8.0.0 (2026-08-20)
 

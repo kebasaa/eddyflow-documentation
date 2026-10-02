@@ -34,6 +34,7 @@ nav:
     - "Processing Eddy Covariance Datasets": topics/tutorials.md
     - "Processing ASCII and TOB1 Files": topics/processing-ascii-and-tob1-files.md
     - "Importing EddyPro and EddyUH Projects": topics/importing-legacy-projects.md
+    - "Remote Folders and Shared Links": topics/remote-folders.md
     - "Running EddyFlow on the SmartFlux System": topics/smartflux-settings.md
     - "Using the Metadata File Editor": topics/metadata-file-editor-using.md
     - "Metadata Retriever Tool": topics/metadata-retriever-tool.md
@@ -122,6 +123,7 @@ nav:
       - "Ensemble Averaged Spectra and Cospectra": topics/ensemble-averaged-spectra-and-cospectra.md
       - "QA/QC of Spectra and Cospectra": topics/ensemble-averages.md
       - "Importing Data": topics/importing-data.md
+      - "Mixed Acquisition Rates": topics/mixed-acquisition-rates.md
       - "Iterative Calculation of Micromet Variables": topics/iterative-calculation-of-micromet-vars.md
       - "Random Uncertainty Estimation": topics/random-uncertainty-estimation.md
       - "Detecting and Compensating Time Lags": topics/time-lag-detect-correct.md

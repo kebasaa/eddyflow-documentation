@@ -17,6 +17,10 @@
 5. <span id="Burba2"></span> [Burba, G., A. Schmidt, R. L. Scott, T. Nakai, J. Kathilankal, G. Fratini, C. Hanson, B. Law, D. K. McDermitt, R. Eckles, M. Furtaw, and M. Velgersdyk. 2012. Calculating CO2 and H2O eddy covariance fluxes from an enclosed gas analyzer using an instantaneous mixing ratio. Global Change Biology, 18: 385-399.](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2486.2011.02536.x/abstract)
 
 6. <span id="Campbell"></span> [Campbell, G. S. and J. M. Norman. 1998. Introduction to Environmental Biophysics. New York, Springer Science.](http://www.springer.com/environment/paleoenvironmental+sciences/book/978-0-387-94937-6)
+6a. <span id="Chen2010"></span> [Chen, H., J. Winderlich, C. Gerbig, A. Hoefer, C. W. Rella, E. R. Crosson, A. D. Van Pelt, J. Steinbach, O. Kolle, V. Beck, B. C. Daube, E. W. Gottlieb, V. Y. Chow, G. W. Santoni, and S. C. Wofsy. 2010. High-accuracy continuous airborne measurements of greenhouse gases (CO2 and CH4) using the cavity ring-down spectroscopy (CRDS) technique. Atmospheric Measurement Techniques, 3: 375-386.](https://doi.org/10.5194/amt-3-375-2010)
+
+6b. <span id="Cleveland1990"></span> [Cleveland, R. B., W. S. Cleveland, J. E. McRae, and I. Terpenning. 1990. STL: A seasonal-trend decomposition procedure based on loess. Journal of Official Statistics, 6(1): 3-73.](https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/stl-a-seasonal-trend-decomposition-procedure-based-on-loess.pdf)
+
 
 7. <span id="DeLigne2010"></span> [De Ligne, A. B. Heinesch, and M. Aubinet. 2010. New Transfer Functions for Correcting Turbulent Water Vapour Fluxes. Boundary-Layer Meteorology, 137: 205-221.](http://www.springerlink.com/content/t58xk37l4r007632/)
 
@@ -47,6 +51,8 @@
 20. <span id="Gockede2"></span> [Göckede, M, T. Markkanen, B. H. Charlotte, T. Foken. 2006. Update of a footprint-based approach for the characterisation of complex measurement sites, Boundary-Layer Meteorology, 118: 635–655.](http://www.springerlink.com/content/1j8mk33008129107/)
 
 21. <span id="Gockede"></span> [Göckede, M., T. Foken, M. Aubinet, M. Aurela, J. Banza, and co-authors. 2008. Quality control of CarboEurope flux data - Part 1: Coupling footprint analyses with flux data quality assessment to evaluate sites in forest ecosystems. Biogeosciences, 5: 433-450.](http://dx.doi.org/doi:10.5194/bgd-4-4025-2007)
+21a. <span id="Hartigan1985"></span> [Hartigan, J. A., and P. M. Hartigan. 1985. The dip test of unimodality. The Annals of Statistics, 13(1): 70-84.](https://doi.org/10.1214/aos/1176346577)
+
 
 22. <span id="Hollinger1999"></span> [Hollinger, D. Y., S. M. Goltz, E. A. Davidson, J. T. Lee, K. Tu, H. T. Valentine. 1999. Seasonal patterns and environmental control of carbon dioxide and water vapour exchange in an ecotonal boreal forest. Global Change Biology: 5, 891–902.](http://onlinelibrary.wiley.com/doi/10.1046/j.1365-2486.1999.00281.x/abstract)
 
@@ -75,10 +81,14 @@
 34. <span id="Kormann"></span> [Kormann, R. and F. X. Meixner. 2001. An analytical footprint model for nonneutral stratification. Boundary-Layer Meteoroogy, 99:207–224.](http://dx.doi.org/10.1023/A:1018991015119)
 
 34a. <span id="Lenschow"></span> [Lenschow, D. H., V. Wulfmeyer, and C. Senff. 2000. Measuring second- through fourth-order moments in noisy data. Journal of Atmospheric and Oceanic Technology, 17: 1330-1347.](http://dx.doi.org/10.1175/1520-0426(2000)017<1330:MSTFOM>2.0.CO;2)
+34b. <span id="Kristensen1997"></span> [Kristensen, L., J. Mann, S. P. Oncley, and J. C. Wyngaard. 1997. How close is close enough when measuring scalar fluxes with displaced sensors? Journal of Atmospheric and Oceanic Technology, 14: 814-821.](https://doi.org/10.1175/1520-0426(1997)014<0814:HCICEW>2.0.CO;2)
+
 
 35. <span id="Lee"></span> [Lee, X., J. Finnigan, and K. T. Paw U. 2004. Coordinate systems and flux bias error, in Handbook of micrometeorology: a guide for surface flux measurements, eds. X., Lee, W. J. Massman, and B. E. Law. Dordrecht, The Netherlands: Kluwer Academic, 33-66.](http://dx.doi.org/DOI:10.1007/1-4020-2265-4)
 
 36. <span id="Liu"></span> [Liu, H., G. Peters, and T. Foken. 2001. New equations for sonic temperature variance and buoyancy heat flux with an omnidirectional sonic anemometer, Boundary-Layer Meteorology, 100: 459-468.](http://dx.doi.org/DOI:10.1023/A:1019207031397)
+36a. <span id="Mahrt1998"></span> [Mahrt, L. 1998. Flux sampling errors for aircraft and towers. Journal of Atmospheric and Oceanic Technology, 15(2): 416-429.](https://doi.org/10.1175/1520-0426(1998)015<0416:FSEFAA>2.0.CO;2)
+
 
 37. <span id="Mammarella2009"></span> [Mammarella, I., S. Launiainen, T. Gronholm, and P. Keronen, J. Pumpanen, Ü. Rannik, and T. Vesala. 2009. Relative humidity effect on the high-frequency attenuation of water vapor flux measured by a closed-path eddy covariance system. Journal of Atmospheric and Oceanic Technology, 26: 1856-1866.](http://journals.ametsoc.org/doi/pdf/10.1175/2009JTECHA1179.1)
 
@@ -113,22 +123,30 @@
 52. <span id="Nakai"></span> [Nakai, T., M. K. van der Molen, J. H. C. Gash, and Y. Kodama. 2006. Correction of sonic anemometer angle of attack errors. Agricultural and Forest Meteorology, 136: 19-30.](http://dx.doi.org/10.1016/j.agrformet.2006.01.006)
 
 52a. <span id="Peltola2014"></span> [Peltola, O., A. Hensen, C. Helfter, L. Belelli Marchesini, F. C. Bosveld, W. C. M. van den Bulk, J. A. Elbers, S. Haapanala, J. Holst, T. Laurila, A. Lindroth, E. Nemitz, T. Röckmann, A. T. Vermeulen, and I. Mammarella. 2014. Evaluating the performance of commonly used gas analysers for methane eddy covariance flux measurements: the InGOS inter-comparison field experiment. Biogeosciences, 11: 3163-3186.](https://doi.org/10.5194/bg-11-3163-2014)
+52b. <span id="Nemitz2018"></span> [Nemitz, E., I. Mammarella, A. Ibrom, M. Aurela, G. G. Burba, S. Dengel, B. Gielen, A. Grelle, B. Heinesch, M. Herbst, L. Hörtnagl, L. Klemedtsson, A. Lindroth, A. Lohila, D. K. McDermitt, P. Meier, L. Merbold, D. Nelson, G. Nicolini, M. B. Nilsson, O. Peltola, J. Rinne, and M. Zahniser. 2018. Standardisation of eddy-covariance flux measurements of methane and nitrous oxide. International Agrophysics, 32(4): 517-549.](https://doi.org/10.1515/intag-2017-0042)
+
 
 53. <span id="Rannik"></span> [Rannik, Ü. and T. Vesala. 1999. Autoregressive filtering versus linear detrending in estimation of fluxes by the eddy covariance method. Boundary-Layer Meteorology, 91: 258-280.](http://www.springerlink.com/content/ng463245216g6002/)
 
 54. <span id="Runkle"></span> [Runkle, B. K., C. Wille, M. Gažovič and L. Kutzbach. 2012. Attenuation Correction Procedures for Water Vapour Fluxes from Closed-Path Eddy-Covariance Systems. Boundary-Layer Meteorology, 142:1-23.](http://link.springer.com/article/10.1007/s10546-011-9689-y)
+54a. <span id="Sakai2001"></span> Sakai, R. K., D. R. Fitzjarrald, and K. E. Moore. 2001. Importance of low-frequency contributions to eddy fluxes observed over rough surfaces. Journal of Applied Meteorology, 40(12): 2178-2192.
+
 
 55. <span id="Schot"></span> [Schotanus, P., F. Nieuwstadt, and H. de Bruin. 1983. Temperature measurement with a sonic anemometer and its application to heat and moisture fluxes, Boundary-Layer Meteorology, 26:81–93.](http://www.springerlink.com/content/kk3n5v6285506u11/)
 
 56. <span id="Smith"></span> [Smith, S. W. 1997. The scientist and engineer's guide to digital signal processing. USA: California Technical Publishing.](http://www.dspguide.com/)
 
 57. <span id="Stull"></span> [Stull, R. B. 1988. An Introduction to Boundary-Layer Meteorology. Dordrecht, The Netherlands: Kluwer Academic.](http://www.springer.com/earth+sciences+and+geography/meteorology+&+climatology/book/978-90-277-2769-5#)
+57a. <span id="Su2004"></span> Su, H.-B., H. P. Schmid, C. S. B. Grimmond, C. S. Vogel, and A. J. Oliphant. 2004. Spectral characteristics and correction of long-term eddy-covariance measurements over two mixed hardwood forests in non-flat terrain. Boundary-Layer Meteorology, 110: 213-253.
+
 
 58. <span id="Tanner"></span> [Tanner, B. D., E. Swiatek, J. P. Greene. 1993. Density fluctuations and use of the krypton hygrometer in surface flux measurements, in: Management of Irrigation and Drainage Systems: Integrated Perspectives, eds. R. G. Allen. American Society of Civil Engineers. New York. pp. 945-952.](http://cedb.asce.org/cgi/WWWdisplay.cgi?85234)
 
 59. <span id="Vickers"></span> [Vickers, D. and L. Mahrt. 1997. Quality control and flux sampling problems for tower and aircraft data. Journal of Atmospheric and Oceanic Technology, 14: 512-526.](http://dx.doi.org/10.1175/1520-0426(1997)014<0512:QCAFSP>2.0.CO;2)
+59a. <span id="Vitale2020"></span> [Vitale, D., G. Fratini, M. Bilancia, G. Nicolini, S. Sabbatini, and D. Papale. 2020. A robust data cleaning procedure for eddy covariance flux measurements. Biogeosciences, 17: 1367-1391.](https://doi.org/10.5194/bg-17-1367-2020)
 
-60. [Vitale, D., G. Fratini, C. Helfter, L. Hortnagl, K.-M. Kohonen, I. Mammarella, E. Nemitz, G. Nicolini, C. Rebmann, S. Sabbatini, and D. Papale. 2024. A pre-whitening with block-bootstrap cross-correlation procedure for temporal alignment of data sampled by eddy covariance systems. Environmental and Ecological Statistics, 31: 219-244.](https://link.springer.com/article/10.1007/s10651-024-00615-9)
+
+60. <span id="Vitale2024"></span> [Vitale, D., G. Fratini, C. Helfter, L. Hortnagl, K.-M. Kohonen, I. Mammarella, E. Nemitz, G. Nicolini, C. Rebmann, S. Sabbatini, and D. Papale. 2024. A pre-whitening with block-bootstrap cross-correlation procedure for temporal alignment of data sampled by eddy covariance systems. Environmental and Ecological Statistics, 31: 219-244.](https://link.springer.com/article/10.1007/s10651-024-00615-9)
 
 61. <span id="Webb"></span> [Webb, E. K., G. I. Pearman, and R. Leuning. 1980. Correction of flux measurements for density effects due to heat and water vapor transfer. Quarterly Journal of the Royal Meteorological Society, 106: 85–100.](http://onlinelibrary.wiley.com/doi/10.1002/qj.49710644707/abstract)
 
