@@ -19,4 +19,7 @@ Click the links below to learn more about each test:
 - See [Time lags](despiking-raw-statistical-screening.md#Time)
 - See [Angle of attack](despiking-raw-statistical-screening.md#Angle)
 - See [Steadiness of horizontal wind](despiking-raw-statistical-screening.md#Steadiness)
+- See [Consecutive-difference despiking](despiking-raw-statistical-screening.md#consecutive-difference-despiking)
+- See [Extra raw-signal diagnostics (RFlux)](despiking-raw-statistical-screening.md#extra-raw-signal-diagnostics-rflux), [Post-flux despiking (STL)](despiking-raw-statistical-screening.md#post-flux-despiking-stl) and [Storage-flux cleaning](despiking-raw-statistical-screening.md#storage-flux-cleaning) (all off by default)
+- See [Kurtosis index of differences (KID)](despiking-raw-statistical-screening.md#kurtosis-index-of-differences-kid)
 - See [Random uncertainty estimation](random-uncertainty-estimation.md#top) and the [Flux Detection Limit Settings dialog](flux-detection-limit-settings.md#top)

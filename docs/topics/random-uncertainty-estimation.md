@@ -1,6 +1,19 @@
 # Random uncertainty estimation
 
-EddyFlow can calculate flux random uncertainty due to sampling errors according to two different methods: [Mann and Lenschow (1994)](references.md#Mann) and [Finkelstein and Sims (2001)](references.md#Finkelstein). Both methods require the preliminary estimation of the Integral Turbulence time-Scale (ITS), which – for our purposes – can be defined as the integral of the cross-correlation function. The cross-correlation function is given by:
+EddyFlow offers four methods for estimating the random uncertainty of a flux, selected with the **Method** dropdown on the Statistical Analysis page (project-file key `ru_meth`):
+
+| Label in the dropdown | `ru_meth` | What it estimates |
+| --- | --- | --- |
+| Finkelstein and Sims (2001) | 1 | Sampling error (variance of the covariance) |
+| Mann and Lenschow (1994) | 2 | Sampling error (error variance of the central moment) |
+| Billesbach (2011) | 4 | Noise floor from random shuffling |
+| Lenschow et al. (2000) - instrument noise | 5 | The analyser's own white noise |
+
+The value 3 is the Mahrt (1998) estimate, which is not offered in the dropdown. The four methods answer different questions and are not interchangeable. The two sampling errors tell how much the flux would differ for another realisation of the same turbulence. The Billesbach floor tells whether a flux is distinguishable from zero. The instrument-noise estimate tells how much of the signal is the analyser's own noise, and is the smallest of the four. The sampling-error methods are described first; the other two follow.
+
+## Sampling errors: Mann and Lenschow (1994) and Finkelstein and Sims (2001)
+
+The methods of [Mann and Lenschow (1994)](references.md#Mann) and [Finkelstein and Sims (2001)](references.md#Finkelstein) require the preliminary estimation of the Integral Turbulence time-Scale (ITS), which – for our purposes – can be defined as the integral of the cross-correlation function. The cross-correlation function is given by:
 
 6‑2
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation909.svg)
@@ -43,12 +56,33 @@ The following figures exemplify the random uncertainty calculated for sensible h
 
 ![](../assets/Random_Uncert_SensHeat2.png)
 
-## Instrumental noise (Lenschow et al., 2000; Mauder et al., 2013)
+## Random shuffle: Billesbach (2011)
 
-The two sampling-error methods described above both answer the same underlying question: how much would the covariance of *w* and *c* differ, if it could be recomputed from a different, statistically equivalent realization of the same turbulent flow? EddyFlow also offers a third random-uncertainty estimator, **instrumental noise** (engine setting `ru_meth=5`), which answers a different question: how much of the measured variance or covariance is white noise contributed by the analyser itself, rather than a sampling limitation of the atmospheric signal.
+**Exact UI label:** Billesbach (2011). Project-file key: `ru_meth=4`. Method after [Billesbach (2011)](references.md#Billesbach1).
 
-Following [Lenschow et al. (2000)](references.md#Lenschow) and [Mauder et al. (2013)](references.md#Mauder2013), this method estimates instrumental noise from the autocovariance function of the raw signal. True atmospheric turbulence is correlated over short lags, whereas instrumental noise is not, so the autocovariance function of a noisy variable is smooth and physically based for lags of 1 sample and above, but shows a discontinuity at lag 0, where the (co)variance is inflated by the noise contribution. EddyFlow fits a line through the autocovariance values calculated at lags 1 to 5 samples and extrapolates it back to lag 0. The gap between this extrapolated, noise-free zero-lag value and the actual, measured zero-lag (co)variance is taken as the estimate of the noise variance.
+**Idea.** Reordering a scalar at random destroys every real correlation with the vertical wind. Whatever covariance remains after the shuffle was produced by noise alone, so its magnitude is a floor below which a flux cannot be told from zero.
+
+**Procedure.** For each period and each flux variable (momentum, sensible heat and every configured gas), the scalar series is shuffled at random 20 times; each time the covariance with the unshuffled vertical wind is computed at zero lag. The reported value is the mean of the 20 absolute covariances. The scalar is shuffled separately for each gas and each repetition, so the estimates of different gases are independent draws. The random generator is seeded once at the start of the run with a fixed seed, so a rerun with the same data gives the same numbers. No integral turbulence time-scale is computed for this method, and the ITS settings of the page do not apply to it.
+
+**What it means.** This is a noise floor, not a sampling error. It answers whether a flux is resolvable, not how uncertain it is, and it is systematically smaller than the two sampling errors above. Because it is the mean of absolute values rather than a standard deviation, it is about 0.8 of the scatter of the shuffled covariances. It is most useful for weak-flux species such as carbonyl sulfide or nitrous oxide, where the question is whether a flux has been detected at all. It is related to, but computed differently from, the [flux detection limit](flux-detection-limit.md#top), which measures the scatter of the cross-covariance function away from its peak.
+
+## Instrument noise: Lenschow et al. (2000), as applied by Mauder et al. (2013)
+
+**Exact UI label:** Lenschow et al. (2000) - instrument noise. Project-file key: `ru_meth=5`. Method after [Lenschow et al. (2000)](references.md#Lenschow) and [Mauder et al. (2013)](references.md#Mauder2013).
+
+**Idea.** The two sampling-error methods ask how much the covariance of *w* and *c* would differ if it could be recomputed from a different, statistically equivalent realization of the same turbulent flow. This method asks a different question: how much of the measured variance is white noise contributed by the analyser itself, rather than a sampling limitation of the atmospheric signal. True atmospheric turbulence is correlated over short lags, whereas instrumental noise is not, so the autocovariance function of a noisy variable is smooth for lags of one sample and above but shows a discontinuity at lag zero, where the variance is inflated by the noise.
+
+**Procedure.** For w and for each scalar:
+
+1. The autocovariance is calculated at lags 0 to 5 samples.
+2. A straight line is fitted through the values at lags 1 to 5 and extrapolated back to lag 0.
+3. The noise variance is the measured lag-0 value minus the extrapolated value.
+4. The reported uncertainty of the flux is the square root of (the scalar's noise variance multiplied by the total variance of w, divided by the number of samples). The noise variance of w is used only as a validity check.
+
+The five-lag window is fixed in samples and is not derived from the acquisition frequency, so it spans 0.1 to 0.5 s at 10 Hz and half as long at 20 Hz.
 
 !!! note
 
-    If the fitted line does not make physical sense for a given flux averaging period — specifically, if its extrapolated zero-lag intercept is not positive — EddyFlow declines to report a noise estimate for that period, rather than returning a small but misleading value.
+    The method declines a period rather than guessing. If the noise variance of either w or the scalar is not positive, which means that the extrapolated line sits at or above the measured lag-0 value, the assumption on which the method rests does not hold in that period and the estimate is reported as missing. On a low-noise analyser this can happen in most periods, which is itself informative.
+
+**What it means.** The result is the analyser's own noise and is the smallest of the four estimates. It says nothing about whether the atmosphere was sampled long enough (the sampling errors) or whether a flux is resolvable (the Billesbach floor). It can also be used as one of the noise floors for borrowing time lags from another gas on the same analyser; see [Raw processing options](raw-processing-options.md#top) and [Detecting and compensating time lags](time-lag-detect-correct.md).
