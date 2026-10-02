@@ -12,7 +12,7 @@ EddyFlow provides a broad range of file output options. These may seem daunting,
 
 ## Assessment file outputs
 
-These three radio buttons choose how the whole run is set up around producing or consuming a spectral assessment file. They do not adjust one output checkbox: choosing one applies a coordinated group of settings on this page and on **Spectral Analysis and Corrections**, and locks the ones that must stay fixed. Whatever a mode applies is applied **in one go**, as a single change to the project, and each setting a mode touches is changed only if its value actually differs. The pages refresh once at the end. Before this was fixed, choosing a mode opened a stack of warning windows, one for every setting being changed. In 8.1.2 (unreleased) any informational warning that would only announce a setting changed on your behalf goes to the interface's message log instead of opening a window.
+These three radio buttons choose how the whole run is set up around producing or consuming a spectral assessment file. They do not adjust one output checkbox: choosing one applies a coordinated group of settings on this page and on **Spectral Analysis and Corrections**, and locks the ones that must stay fixed. Whatever a mode applies is applied **in one go**, as a single change to the project, and each setting a mode touches is changed only if its value actually differs. The pages refresh once at the end. Before this was fixed, choosing a mode opened a stack of warning windows, one for every setting being changed. Since 8.1.2 any informational warning that would only announce a setting changed on your behalf goes to the interface's message log instead of opening a window.
 
 !!! note
 

@@ -145,7 +145,7 @@ Step 1 of every correction (the reference cospectrum, see [Calculating Spectral 
 | 0 | Moncrieff et al. (1997) - the default | Stable and unstable branches; the curve used by all earlier versions |
 | 1 | Kaimal et al. (1972) | Kansas cospectrum, with its own stable and unstable branches |
 | 2 | Sakai et al. (2001) - rough surfaces | single form, no stability dependence |
-| 3 | Su et al. (2003) - forest, non-flat terrain | single form, no stability dependence |
+| 3 | Su et al. (2004) - forest, non-flat terrain | single form, no stability dependence |
 | 4 | Moraes et al. (2008) | single form, no stability dependence |
 | 5 | Kristensen et al. (1997) | single form, broad with a long low-frequency tail |
 

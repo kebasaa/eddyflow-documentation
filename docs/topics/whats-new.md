@@ -2,10 +2,14 @@
 
 EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
 
-## 8.1.2 (unreleased)
+## 8.1.2 (2026-10-02)
 
 Engine:
 
+- New feature: Pre-pass work is cut into about four pieces per worker and handed to whichever worker is free, so uneven data or slower cores no longer leave workers idle; results stay identical to a serial run.
+- Fix: Engine processes opt out of Windows execution-speed throttling, so on hybrid processors they are no longer confined to the efficiency cores.
+- Fix/Refine: Progress is flushed to the console as it is written, so workers and the interface show it as it happens.
+- Fix: A gas sampled more slowly than the file rate (for example a 1 Hz laser on a 20 Hz grid) is now time-lagged by PWB at its own rate and refined at the file's, instead of failing the validity test in every period, and its spectra are built from its real sample rows; see [Time lag detection](time-lag-detect-correct.md#pwb-behaviour-in-detail).
 - New feature: Pre-pass worker processes (`-j`/`--jobs`) now stop when the process that started them ends, so stopping or killing a run no longer leaves workers running; see [Command line](command-line.md#worker-processes-j-and-jobs).
 - Fix: Pre-pass workers remove their temporary folders when they finish.
 
@@ -14,6 +18,8 @@ GUI:
 - New feature: The Browse button opens at the folder the field already points to, falling back to the nearest existing parent, the last place the field was browsed and the last project folder; see [Where Browse opens](introduction-interface.md).
 - Fix/Refine: Warnings and information boxes raised while the interface applies settings on your behalf (run mode, output presets, project loading) go to the message log instead of opening windows; failures and questions are unchanged.
 - Fix: A page that refreshes itself while settings are restored no longer interrupts anything.
+- Fix: Stop, Pause and Resume now reach every process of an engine run, the parent and all workers; on Windows closing or crashing the interface also ends the run.
+- Fix: The Su et al. cospectral model is labelled 2004 (the paper year) instead of 2003.
 
 ## 8.1.1 (2026-09-25)
 

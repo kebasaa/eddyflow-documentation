@@ -29,7 +29,7 @@ If a gas's fitted cut-off frequency lies above that gas's own Nyquist frequency 
 - **Moncrieff et al. (1997) - the default** (0): the curve EddyFlow has always used, with separate stable and unstable branches. This is the choice that reproduces results from earlier versions.
 - **Kaimal et al. (1972)** (1): the Kansas cospectrum, with stable and unstable branches of its own. It is a genuinely different curve from Moncrieff's, but the two agree closely, because Moncrieff's is a fit to the same data.
 - **Sakai et al. (2001) - rough surfaces** (2): fitted over rough surfaces, where more of the flux sits at low frequency than Kaimal's curve allows.
-- **Su et al. (2003) - forest, non-flat terrain** (3): fitted over two mixed hardwood forests in non-flat terrain.
+- **Su et al. (2004) - forest, non-flat terrain** (3): fitted over two mixed hardwood forests in non-flat terrain.
 - **Moraes et al. (2008)** (4): fitted across differing surface boundary conditions.
 - **Kristensen et al. (1997)** (5): a broader curve with a long low-frequency tail; on the test data set it gave the largest correction of the six.
 

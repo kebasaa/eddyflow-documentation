@@ -15,7 +15,7 @@ where fmax is the highest frequency, corresponding to the smallest eddies contri
 
 ## Cospectral model
 
-The "true" cospectrum of Step 1 is the analytic curve selected by the **Cospectral model** setting (`cosp_model`); the default is the curve of Moncrieff et al. (1997) described above, and Kaimal et al. (1972), Sakai et al. (2001), Su et al. (2003), Moraes et al. (2008) and Kristensen et al. (1997) are alternatives. The same choice applies to the high-pass correction, including when it is the only spectral correction requested. Because the correction factor is a ratio of two integrals of the same curve, only its shape matters. The single-form alternatives have no dependence on stability. See [Cospectral model for the analytic correction](low-pass-filtering.md#cospectral-model-for-the-analytic-correction).
+The "true" cospectrum of Step 1 is the analytic curve selected by the **Cospectral model** setting (`cosp_model`); the default is the curve of Moncrieff et al. (1997) described above, and Kaimal et al. (1972), Sakai et al. (2001), Su et al. (2004), Moraes et al. (2008) and Kristensen et al. (1997) are alternatives. The same choice applies to the high-pass correction, including when it is the only spectral correction requested. Because the correction factor is a ratio of two integrals of the same curve, only its shape matters. The single-form alternatives have no dependence on stability. See [Cospectral model for the analytic correction](low-pass-filtering.md#cospectral-model-for-the-analytic-correction).
 
 ## Order of application
 

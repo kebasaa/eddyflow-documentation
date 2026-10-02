@@ -71,9 +71,13 @@ The flux computation itself (the main pass) is not split. A project that runs no
 
 **Placement of the switch.** A switch placed after the project path (`eddyflow_rp <project> -e <home>`) used to be silently ignored. Switches are now honoured wherever they appear.
 
-**Workers stop with the parent (8.1.2, unreleased).** A worker checks, at the top of every period, that the process that started it is still running. If the parent has gone (the Stop button of the interface, Task Manager, or an error stop in the parent), the worker tidies up, writes nothing and exits with code 3, so that a leftover result code tells an orphaned worker from an ordinary failure. Before this, killing the parent left the workers running to the end of their slices. This applies to the engine only: the interface still ends only the parent process when you click Stop.
+**Workers stop with the parent (8.1.2).** A worker checks, at the top of every period, that the process that started it is still running. If the parent has gone (the Stop button of the interface, Task Manager, or an error stop in the parent), the worker tidies up, writes nothing and exits with code 3, so that a leftover result code tells an orphaned worker from an ordinary failure. Before this, killing the parent left the workers running to the end of their slices. When you run from the interface, **Stop**, **Pause** and **Resume** reach every process of the run, the parent and all workers (see below), so nothing is left running after Stop.
 
-**Temporary folders (8.1.2, unreleased).** Each worker removes its own temporary folder when it finishes.
+**Work is handed to whichever worker is free (8.1.2).** The pre-pass range is cut into about four pieces per worker, with equal shares of estimated work (a period that has a raw file weighs 1, one without weighs 0.05). The parent runs the first piece and then hands out the next ones as workers finish, so a fast core takes more pieces than a slow one and nobody waits idle while work is left. The pieces are merged in order, results stay byte-identical to a serial run, and a failed piece stops the run at once. The parent reports "n of M pieces done" as pieces finish.
+
+**Stop, Pause and Resume in the interface (8.1.2).** On Windows the engine runs inside a job object, so **Stop** ends the parent and every worker, **Pause** and **Resume** suspend and resume all of them, and closing or crashing the interface takes the whole run with it. On other systems the engine leads its own process group and the same three actions signal the group.
+
+**Temporary folders (8.1.2).** Each worker removes its own temporary folder when it finishes.
 
 !!! note
 

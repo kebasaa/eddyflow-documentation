@@ -69,7 +69,7 @@ Metadata is information that describes the raw eddy covariance data. More specif
 
     All biomet files must be formatted according the guidelines that you can find in [External biomet files](biomet-data-format.md#ExternalBiomet).
 
-## Where Browse opens (8.1.2, unreleased)
+## Where Browse opens (8.1.2)
 
 **Exact UI label:** **Browse...** (and **Load...**), on every field that takes a folder or a file.
 
@@ -84,6 +84,6 @@ A file field opens with its file already selected, but only while that file exis
 
 A shared drive link is never used as a start folder, and **Remote drive...** is not affected: it still opens the drive the field points to (see [Remote folders and shared links](remote-folders.md#top)). The Metek head correction **Table directory** now remembers its last location like the other fields. Before this change a field filled from a project could open somewhere unrelated, wherever that field had been browsed last.
 
-## Messages while settings are applied (8.1.2, unreleased)
+## Messages while settings are applied (8.1.2)
 
 When EddyFlow changes settings for you, for example when you pick a run mode or an output preset on the **Output Files** page, or when a project is loaded, warnings and information boxes that would only announce those changes are written to the interface's own message log (not the run log of the engine) instead of opening a window; each entry starts with "Not shown while settings were being applied:". Messages that report a failure that stopped something, and every question, still open a window.
