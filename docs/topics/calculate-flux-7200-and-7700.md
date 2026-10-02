@@ -75,3 +75,15 @@ Finally, CO2 fluxes are corrected for spectral attenuations:
 
 6‑120
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1051.svg)
+
+## Methane from the LI-7700: multipliers A, B and C
+
+The methane flux from the LI-7700 is corrected for air density fluctuations with the three LI-7700 multipliers A, B and C, as described in [Calculating multipliers for spectroscopic corrections (LI-7700)](calculate-li-7700-multipliers.md#how-the-multipliers-enter-the-methane-flux) and in [Calculating Fluxes for Open Path Analyzers](calculate-flux-open-path-analyzers.md#methane-with-an-li-7700-multipliers-a-b-and-c). A scales the whole flux, B the water-vapor term and C the sensible-heat term. The multipliers are computed per gas from the water vapor the gas is corrected with, which in this system is normally the water measured by the LI-7200, and recomputed in every averaging period.
+
+!!! warning "Change in methane fluxes"
+
+    Earlier versions applied only A to the LI-7700 methane flux and computed B and C without using them, which left LI-7700 methane fluxes about 10% low in magnitude on the LI-COR test archives. B and C are now applied. Fluxes of CO2 and H2O from the LI-7200 are unaffected.
+
+## Surface heating terms (Burba et al., 2008)
+
+An LI-7200 is not an LI-7500, so no instrument surface heating term is added for any gas it measures, and none is added to methane from the LI-7700. The terms apply only to gases measured by an LI-7500-family analyzer; see [Calculating Fluxes for Open Path Analyzers](calculate-flux-open-path-analyzers.md#surface-heating-burba-et-al-2008-is-applied-per-gas).

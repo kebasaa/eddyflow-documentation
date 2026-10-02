@@ -31,3 +31,24 @@ Besides using some biomet variables for flux computation and refinement, EddyFlo
 - Automatically converting units to conform with EddyFlow standard units;
 - Averaging all good measurements over the time range defined by the current time averaging period;
 - Outputting average biomet values in a separate file, using the same conventions and formats as all other EddyFlow output files, so as to be readily processed and merged, for example, with the "full output" file for further analysis.
+
+## Choosing the biomet source in the interface
+
+On the Project Creation page, tick **Biomet data :** and choose one of three sources. Biomet data are slow (below 1 Hz) measurements; all available data are screened for physical plausibility, averaged on the time scale of the fluxes, and written to a separate output file.
+
+**Use embedded files:** Reads the biomet files bundled in the LI-COR .ghg files (only available for .ghg files collected with LI-7550 embedded software 6.0.0 or newer, with a biomet system in use). EddyFlow extracts, interprets and uses the relevant variables automatically. Per-channel calibration stated in the embedded biomet metadata (`_gain`, `_offset`) is applied; see [Per-channel calibration with gain and offset](biomet-data-format.md#per-channel-calibration-with-gain-and-offset). Runs on .ghg files with embedded biomet used to end in a crash; this is fixed.
+
+**Use external file:** Use when all biomet data are in one external file, formatted as described in [Supported biomet file formats](biomet-data-format.md#external-biomet-files). Choose the file with **Load...** (dialog **Select the Biomet File**), or with **Remote drive...** to take it from a shared Google Drive or Dropbox link (see [Remote folders](remote-folders.md#top)).
+
+**Use external directory:** Use when biomet data are spread over several files. Choose the folder with **Browse...** (dialog **Select the Biomet Files Directory**) or **Remote drive...**; see [Remote folders](remote-folders.md#top). **Search in subfolders** also reads files in subfolders. **Files extension :** selects (or lets you type) the extension of the biomet files in the folder (`txt`, `dat`, `csv`, `met` and `meteo` are offered). Remove other files with the same extension from the folder to avoid conflicts. For a folder on a drive, files are filtered by the extension.
+
+In the project file the choice is stored with the other biomet settings in `[RawProcess_BiometMeasurements]`. The key `biom_use_native_header` (default `1`) switches an external file to a sidecar `.metadata` description with calibration; see [Describing an external biomet file with a sidecar metadata file](biomet-data-format.md#describing-an-external-biomet-file-with-a-sidecar-metadata-file).
+
+## Names the biomet reader recognizes
+
+Channels are identified by the FLUXNET-style label in the header, after the positional qualifier (`_X_Y_Z`) is removed, and matched whole against a list of aliases. For example, global radiation is recognized as `RG`, `R_G`, `RGLOBAL`, `R_GLOBAL`, `SWIN` or `SW_IN` and longwave incoming radiation as `LWIN` or `LW_IN`; two channels such as `TA_1_1_1` and `TA_1_3_1` are kept as two channels. The complete rules and alias list are in [Variable names, aliases and the positional qualifier](biomet-data-format.md#variable-names-aliases-and-the-positional-qualifier).
+
+## What changed in the numbers
+
+- A biomet pressure channel in `Atm` is converted with 101325 Pa (earlier: 98066.5 Pa, 3.3% low). See [Pressure units](biomet-data-format.md#pressure-units).
+- Radiation channels named with FLUXNET spellings such as `SW_IN_1_1_1` and `LW_IN_1_1_1` are now recognized and offered in the **Ambient measurements** variables; `PPFD_OUT` is no longer offered as incoming PAR.

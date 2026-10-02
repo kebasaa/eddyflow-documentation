@@ -238,6 +238,14 @@ archive written by a newer release - the interface falls back to showing the
 stand-in, which by construction it does know. The file still processes; it is
 simply described by the generic.
 
+**Metek anemometers.** Metek models are spelt identically by both programs, and the interface writes the spelling the engine reads (`usoni3_classa_mp_1`, `usoni3_cage_mp_1`), which is also what LI-COR's own .ghg files contain. A .ghg containing a Metek anemometer opens with the anemometer model filled in; earlier versions opened it with no model, and a save then wrote an empty `instr_1_model=`.
+
+**Path geometry of stood-in analysers.** The path-length and time-response cells of an **EC150**, an **IRGASON** (analyser half) and an **Aerodyne TILDAS** are editable, so the geometry that an extended file declares for the stand-in can be read, checked and corrected in the table, and a corrected value survives save and reload. These cells stay greyed out only for models whose geometry the engine builds in (the LI-COR analysers). See [Metadata File Editor](metadata-file-editor.md#gas-analyzers-information).
+
+**CSAT3C is not available in the interface.** `csi_csat3c` is in the table above and the engine accepts it, but the Metadata File Editor has no CSAT3C entry. An extended archive naming it falls back to the stand-in, like any model the build does not know, and a site with a CSAT3C cannot be configured from scratch in the editor.
+
+**Unreadable archives.** If a .ghg cannot be extracted while its metadata is being read, the interface shows **Raw Data Unreadable** (or **Biomet Data Unreadable** for the biomet part) and names the file; see [Metadata File Editor](metadata-file-editor.md#behavior-when-metadata-is-read).
+
 **Saving produces a plain metadata file, and that is intended.** The stand-in
 pair exists only so an *archive* stays readable by EddyPro. A standalone
 `.metadata` is under no such obligation, so what gets written names the real

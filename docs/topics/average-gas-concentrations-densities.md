@@ -15,3 +15,13 @@ These equations are combined appropriately, depending on the available measureme
 !!! note
 
     For CH4 measurements made with the LI-7700 Open Path CH4 Analyzer, EddyFlow reports mixing ratio and mole fraction values that are corrected for spectroscopic effects. It reports average number density values that are not corrected for spectroscopic effects. Refer to the LI-7700 Instruction Manual for more information.
+
+## Measurement type of the raw concentration (wet or dry)
+
+How a raw concentration is converted depends on what the metadata says it is (see **Measurement type** in the [Metadata file editor](metadata-file-editor.md#raw-file-description)):
+
+- **Molar/Mass density:** converted to a mole fraction with the molar volume and then to a mixing ratio with the water vapor content.
+- **Mole fraction (wet):** moles of gas per mole of **wet** air. The density-fluctuation (WPL) correction is applied to it.
+- **Mixing ratio (dry):** moles of gas per mole of **dry** air. It is already free of dilution by water vapor, so no WPL correction is applied to the flux of that gas.
+
+Much of the literature says "mole fraction" for what is really the dry mole fraction. Declaring such a quantity as **Mole fraction (wet)** makes EddyFlow apply a WPL correction that should not be applied, and the flux is off by the size of the water-vapor term. If your analyzer reports the dry quantity, choose **Mixing ratio (dry)**. The labels earlier read *Mole fraction* and *Mixing ratio*; the metadata files still store `mole_fraction` and `mixing_ratio`, so existing files behave as before.

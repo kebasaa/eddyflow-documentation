@@ -63,3 +63,7 @@ The statistics file is described below and in [Table 3‑3](#stats).
 | st_dev(var) | standard deviation of variable var |
 | skw(var) | skewness of variable var |
 | kur(var) | kurtosis of variable var |
+
+!!! note
+
+    The files of the statistics folders contain only the seven levels of basic statistics. Outputs of the newer statistical options are written elsewhere: the post-flux despiking file (`..._flux_despiking...csv`, with `test_pfd`) and the storage-cleaning file (`..._storage_cleaning...csv`, with `test_stor_clean`) are in the main output folder, and the extra raw-signal diagnostics (`test_rf`) are columns at the end of the FLUXNET file. See [List of outputs](outputs.md#top).

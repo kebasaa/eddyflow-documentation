@@ -98,6 +98,7 @@ The following table summarizes all output results available in the rich output f
 | time | HH:MM | Time of the end of the averaging period |
 | file_records | # | Number of valid records found in the raw file (or set of raw files) |
 | used_records | # | Number of valid records used for current the averaging period |
+| corr_iter_dev | % | Convergence of the iterative correction: the change in the corrected flux between the last two passes, for the gas that changed most in the averaging period. Written only when **Iterate the correction** (`corr_iter_meth`) is on. See [Spectral corrections](spectral-corrections.md#top). |
 | Tau | kg m-1 s-2 | Corrected momentum flux |
 | qc_Tau | # | Quality flag for momentum flux |
 | rand_err_Tau | kg m-1 s-2 | Random error for momentum flux, if selected |
@@ -119,6 +120,7 @@ The following table summarizes all output results available in the rich output f
 | gas_mixing_ratio | µmol mol-1(†) | Measured or estimated mixing ratio of gas |
 | gas_time_lag | s | Time lag used to synchronize gas time series |
 | gas_def_timelag | T/F | Flag: whether the reported time lag is the default (T) or calculated (F) |
+| gas_detlim | covariance units | Flux detection limit of the gas, after Wienhold et al. (1994): the noise floor of the covariance of the gas with *w*, read from the cross-covariance function away from its peak. Written when the detection limit is calculated (`detlim_meth`). Stays in covariance units and is not converted to a flux. See [Flux detection limit](flux-detection-limit.md#top). |
 | sonic_temperature | K | Mean temperature of ambient air as measured by the anemometer |
 | air_temperature | K | Mean temperature of ambient air, either calculated from high frequency air temperature readings, or estimated from sonic temperature |
 | air_pressure | Pa | Mean pressure of ambient air, either calculated from high frequency air pressure readings, or estimated based on site altitude (barometric pressure) |
@@ -153,7 +155,7 @@ The following table summarizes all output results available in the rich output f
 | L | M | Monin-Obukhov length |
 | (z-d)/L | # | Monin-Obukhov stability parameter |
 | bowen_ratio | # | Sensible heat flux to latent heat flux ratio |
-| T* | K | Scaling temperature |
+| T* | K | Scaling temperature (T* = −H/(ρ·cp·u*), negative for upward heat flux) |
 | (footprint) model | - | Model for footprint estimation |
 | x_offset | m | Along-wind distance providing <1% contribution to turbulent fluxes |
 | x_peak | m | Along-wind distance providing the highest (peak) contribution to turbulent fluxes |
@@ -204,3 +206,38 @@ The second option, **Use standard output format** instructs EddyFlow to create a
 ### Build continuous dataset
 
 Select this option to instruct EddyFlow to create a continuous dataset. For periods that have no results available (gaps), the software will introduce dummy records of "error codes" in such a way that the results files will contain a continuous time line. This is convenient since data gaps need to be recognized (especially when time series are plotted) and addressed (e.g., by means of a gap-filling procedure). However, the procedure requires a non-negligible amount of time – especially for long datasets—so it is provided as an option. The definition of the time line is based on the time stamp of the first raw file and on the selected flux averaging period.
+
+## Columns and files added or changed in recent versions
+
+This section lists what is new or different in the output, by label. Methods are described on the linked pages.
+
+### Full output file
+
+- **`corr_iter_dev`** (%, group *iterative_correction*): convergence of the iterative correction, worst gas of the period. Present only when `corr_iter_meth` is on; the column is absent otherwise, not filled with the error code.
+- **`<gas>_detlim`** (covariance units), in the *gas_densities_concentrations_and_timelags* group after `<gas>_def_timelag`: flux detection limit of the gas (Wienhold et al., 1994). Not scaled to a flux. See [Flux detection limit](flux-detection-limit.md#top).
+- **`T*`**: when the fluxes are written by `eddyflow_fcc` (any run whose spectral correction is handed to it), `T*` was the negative of the correct value in earlier versions (for example +0.0966893 where −0.0966890 is correct). Only this column and `TSTAR` in the FLUXNET file were affected, each by exactly its sign. No flux, correction or quality flag changed. Files written by `eddyflow_rp` alone were always correct.
+
+### FLUXNET output file
+
+- **`SPEC_CORR_LI7700_A_<GAS>`, `SPEC_CORR_LI7700_B_<GAS>`, `SPEC_CORR_LI7700_C_<GAS>`** (for example `SPEC_CORR_LI7700_A_CO2`): the LI-7700 multipliers A, B and C of each gas, three columns per gas. They replace the three fixed columns `SPEC_CORR_LI7700_A`, `SPEC_CORR_LI7700_B` and `SPEC_CORR_LI7700_C`. A gas not measured by an LI-7700 holds the missing-value token. The multipliers are now applied to the methane flux (see [Calculating multipliers for spectroscopic corrections (LI-7700)](calculate-li-7700-multipliers.md#how-the-multipliers-enter-the-methane-flux)).
+- **Number of columns.** The three fixed multiplier columns became three per configured gas, so the row is wider by 3 × (number of gases) − 3 columns, and the engine's internal count of leading fields in the row rose from 278 to 287. A script that reads the file **by column position** must be updated; reading by column name is unaffected.
+- **`<gas>_DETLIM`** (covariance units): detection limit, one column per configured gas, written when the detection limit is calculated (`detlim_meth`).
+- **`TSTAR`**: same sign correction as `T*` above.
+- **`U_KID`, `V_KID`, `W_KID`, `T_SONIC_KID`, `<GAS>_KID`**: always written, whether or not `test_rf` is on. The values changed: KID is now computed on the flat-line-corrected difference series, so values differ from earlier versions wherever a sensor flat-lined or digitised its output (see [Kurtosis index of differences (KID)](despiking-raw-statistical-screening.md#kurtosis-index-of-differences-kid)).
+- **`<var>_AL1`, `<var>_DDI`, `<var>_HF5`, `<var>_HF10`, `<var>_HD5`, `<var>_HD10`, `<var>_DIP`, `<var>_CCF`**: extra raw-signal diagnostics, each a family with one column for `U`, `V`, `W`, `T_SONIC` and each gas (for example `U_AL1`, `T_SONIC_DIP`, `CO2_CCF`). Written only when **Extra raw-signal diagnostics (RFlux)** (`test_rf`) is on, at the very end of the row after the biomet columns. See [Statistical tests](statistical-tests.md#top).
+
+### Other files
+
+- **`<project id>_flux_despiking<timestamp>.csv`**: written when **Post-flux despiking (STL)** (`test_pfd`) is on, with the columns `TIMESTAMP`, `NEE`, `NEE_SPIKE`, `NEE_CLEANED`, `H`, `H_SPIKE`, `H_CLEANED`, `LE`, `LE_SPIKE`, `LE_CLEANED`. See [Statistical tests](statistical-tests.md#top).
+- The processing log summary column `S4_instrument_filled` is now named `S4_borrowed`.
+- The spectral assessment file marks a gas that has more than one acquisition rate with a `rates=` token; see [Spectral corrections](spectral-corrections.md#top).
+
+### What changed in the numbers
+
+| Change | What you see |
+| --- | --- |
+| LI-7700 multipliers B and C applied | LI-7700 methane flux larger in magnitude (10.6% on the LI-COR test archives) |
+| Burba heating applied per gas | with `bu_corr=1` and several open-path analyzers, the methane flux no longer includes the LI-7500's heating |
+| T* sign in `eddyflow_fcc` | `T*` and `TSTAR` flip sign; nothing else |
+| KID on the flat-line-corrected series | `*_KID` values change where flat-lining occurred |
+| Atm biomet pressure constant | biomet channel in `Atm` 3.3% higher (now correct) |

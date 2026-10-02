@@ -50,6 +50,12 @@ The third line says that, starting February 15th, 2011 at 10:30AM, the CO2 analy
 | XXX analyzer longitudinal path length | xxx_irga_vpath_length | m | Path length of the gas analyzer in the main direction (direction between source and sensor). |
 | XXX analyzer transversal path length | xxx_irga_hpath_length | m | Path length of the gas analyzer in the cross direction. |
 | XXX analyzer time response | xxx_irga_tau | m | Analyzer's time response as provided by the manufacturer. |
+| Invalid wind sector 1, center | wdf_sec1_center | deg | Center of the first excluded wind sector. See [Time-varying invalid wind sectors](#time-varying-invalid-wind-sectors). |
+| Invalid wind sector 1, width | wdf_sec1_width | deg | Full width of the first excluded wind sector. |
+| Invalid wind sector 2, center | wdf_sec2_center | deg | Center of the second excluded wind sector. |
+| Invalid wind sector 2, width | wdf_sec2_width | deg | Full width of the second excluded wind sector. |
+| Invalid wind sector 3, center | wdf_sec3_center | deg | Center of the third excluded wind sector. |
+| Invalid wind sector 3, width | wdf_sec3_width | deg | Full width of the third excluded wind sector. |
 
 †Supported Anemometer Manufacturers:
 
@@ -123,3 +129,31 @@ In this case, you can provide dynamic metadata for 4 different instruments, and 
 - ch4_irga_model = li7700_3
 
 with the advantage the instruments for CO2 and H2O, although of the same model, are differentiated by EddyFlow thanks to the attached number.
+
+## Time-varying invalid wind sectors
+
+**Columns:** `wdf_sec1_center`, `wdf_sec1_width`, `wdf_sec2_center`, `wdf_sec2_width`, `wdf_sec3_center`, `wdf_sec3_width`. Optional, like every other column of the dynamic metadata file, and each can be omitted independently.
+
+They let the wind sectors excluded by **Apply Wind Direction Filter** (project key `wdf_apply`, Basic Settings) change part way through a run, for example when a new obstacle appears or a mast is moved, instead of using only the fixed set of sectors defined in the project (`wdf_sect_*`).
+
+How a record is interpreted:
+
+- A sector is described by its **center** and **width**, in degrees of wind direction, as for the static sectors. It excludes winds with a direction between center â width/2 and center + width/2. A sector with only one of the two values is ignored.
+- **A record that names the first sector (`wdf_sec1_center`) replaces the static sectors outright**, with up to three sectors from that record. Sectors not named in the record are no longer excluded from that time on.
+- **A record that says nothing about wind sectors leaves the regime in force standing**, whether that is the static set from the project or an earlier dynamic record. This is the same rule every other dynamic metadata field follows: a value stays valid until a later record changes it.
+- **There is no wrap at 0/360.** A sector that crosses north (for example from 350Â° to 10Â°) needs two entries: one from 350Â° to 360Â° and one from 0Â° to 10Â°, that is, center 355 with width 10 and center 5 with width 10. The static setting has the same limitation.
+- **The filter must already be on.** A dynamic metadata file can change which sectors an enabled filter uses, but it cannot switch the filter on: with `wdf_apply` off the six columns are read and ignored. A project with no dynamic metadata file, or one that never uses these columns, behaves exactly as before.
+
+Example: from 2019-01-01 the sector 90Â° to 120Â° is excluded; from 2019-06-01 the first sector widens to 80Â° to 130Â° and a second sector, 200Â° to 230Â°, is added:
+
+    date,time,wdf_sec1_center,wdf_sec1_width,wdf_sec2_center,wdf_sec2_width
+    2019-01-01,00:30,105,30,,
+    2019-06-01,00:30,105,50,215,30
+
+## Acquisition frequency and file length in dynamic metadata
+
+For raw files in a format other than .ghg, `acquisition_frequency` and `file_length` in the dynamic metadata file apply as described in the table. A .ghg file, however, states its own acquisition frequency and file duration, and these describe the data actually recorded. **Dynamic metadata no longer overrides the acquisition frequency or the file duration of a .ghg file.** If the dynamic metadata file states values that differ from those embedded in the .ghg files, the embedded values are used and the run log says so once with **Warning(118)**: "The dynamic metadata file states an acquisition frequency or file duration that differs from the one embedded in the GHG files. The GHG files' own values are used, as they describe the data actually recorded." This matters when the rate changes during the dataset: see [Mixed acquisition rates](mixed-acquisition-rates.md#top). The metadata retriever still reads every file at its own rate. Other dynamic fields (heights, separations, instruments) still override the embedded values.
+
+## Choosing the file in the interface
+
+**Use dynamic metadata file :** (checkbox on the Project Creation page) enables the dynamic metadata file; **Load** opens the dialog **Select the Dynamic Metadata File**. **Remote drive...** takes the file from a shared Google Drive or Dropbox link; see [Remote folders](remote-folders.md#top). Used with an alternative metadata file or with the metadata embedded in .ghg files; see [Use alternative metadata file](metadata-file-use-alternative.md#top).

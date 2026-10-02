@@ -75,3 +75,24 @@ In the event that methane fluxes are computed with data from an open path instru
                                                             ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1039.svg)
 
 Finally, corrected fluxes (Level 3) of CO2 and CH4, in systems with open path instruments, coincide with fluxes at Level 2, which thus provide the most accurate flux estimate available with EddyFlow.
+
+## Methane with an LI-7700: multipliers A, B and C
+
+When methane is measured by an LI-7700, the Level 2 methane flux is corrected with the formulation of [Webb et al. (1980)](references.md#Webb) as modified in the LI-7700 manual, which uses the spectroscopic multipliers A, B and C together: A scales the whole corrected flux, B the water-vapor (evapotranspiration) term and C the sensible-heat term. The evapotranspiration flux used in the B term is the spectrally corrected one **before** the WPL term (E1), and the sensible heat flux in the C term is the fully corrected H3. The formula and the multipliers are described in [Calculating multipliers for spectroscopic corrections (LI-7700)](calculate-li-7700-multipliers.md#how-the-multipliers-enter-the-methane-flux).
+
+!!! warning "Change in methane fluxes"
+
+    Earlier versions applied only multiplier A. B and C were computed and written to the FLUXNET file but applied to nothing, so LI-7700 methane fluxes were too small in magnitude (10.6% low on the LI-COR test archives, where B is 1.417 and C is 1.322). They are now applied. Methane fluxes from an LI-7700 therefore change; nothing else does.
+
+## Surface heating (Burba et al., 2008) is applied per gas
+
+The instrument surface heating terms of [Burba et al. (2008)](references.md#Burba) (`bu_corr=1`) describe the body of an LI-7500, LI-7500A, LI-7500RS or LI-7500DS warming the air in its own sampling path. They are therefore added to the sensible heat flux used in the WPL term of a gas **only if that gas is measured by an LI-7500-family analyzer**, and are zero for every other gas. This is decided gas by gas, using the analyzer that measures the gas:
+
+- A CO2 or H2O flux from an LI-7500 beside an LI-7700 keeps the Burba terms.
+- The methane flux from the LI-7700 does not receive the LI-7500's heating. Earlier versions switched the correction on or off for the whole site, so with an LI-7500 and an LI-7700 side by side the methane flux collected the LI-7500's heating terms.
+
+The change matters only for projects with `bu_corr=1` and more than one open-path analyzer, and then only for the gases not measured by the LI-7500.
+
+## Second hygrometer in the flux-correction program
+
+When a project hands the spectral correction to the second program (`eddyflow_fcc`), that program recomputes the fluxes. For a **second hygrometer** on an open-path analyzer (a water channel other than the primary one, which is processed like a trace gas), its WPL term was a thousand times too large in `eddyflow_fcc` in earlier versions, because the water and trace-gas density factors were mixed up. The first program (`eddyflow_rp`) was correct and `eddyflow_fcc` now agrees with it. Only second-hygrometer fluxes written by `eddyflow_fcc` were affected.
