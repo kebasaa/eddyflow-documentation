@@ -10,6 +10,8 @@ Files info is where you enter information about the raw files and output files.
 
 **Raw data directory:** Click **Browse…** to specify the folder that contains the raw data. If data are also contained in subfolders, select the **Search in subfolders** box.
 
+**Remote drive...:** Click this button, next to **Browse...**, to read the raw data from a Google Drive or Dropbox folder shared with **Anyone with the link** instead of from a local folder. The field then shows a name such as `Google Drive: site/2019-03`. Raw files are downloaded one at a time as they are needed, and nothing is kept after the run. See [Remote folders and shared links](remote-folders.md#top).
+
 **Search in subfolders:** Check this box if data are in subfolders in the selected directory. EddyFlow will process files that are in the **Raw data directory** and its **subfolders** if this box is checked.
 
 **Detect Dataset Dates:** Click this button to ask EddyFlow to retrieve the starting and ending date of the raw dataset contained in the *Raw data directory*. You can override this automatic setting by using the **Select a different period** option.
@@ -22,7 +24,7 @@ Files info is where you enter information about the raw files and output files.
 
 **Raw file name format:** For raw files other than .ghg, your entry in this field should indicate which parts of the file name are the year, month (mm if using dd for day, omit if using ddd), day (dd for day of month or ddd for day of year), hour (HH), minute (MM), and the extension of the file. See [Raw file name format](raw-file-name-format.md#top).
 
-**Output directory:** Specify where the output files will be stored. Click the **Browse…** button and navigate to the desired directory. You can also edit it directly from this text box. The software will create subfolders inside the selected output directory.
+**Output directory:** Specify where the output files will be stored. Click the **Browse…** button and navigate to the desired directory. You can also edit it directly from this text box. The software will create subfolders inside the selected output directory. The output directory must be a local folder: it has no **Remote drive...** button, and a shared link pasted into it is refused.
 
 **Output ID:** Enter the ID. This string will be appended to each output file so a short ID is recommended. Again, the graphical interface does not allow the use of characters that result in file names unacceptable to the underlying operating system (for Windows® these include: \\ /: @ ? * " < >).
 

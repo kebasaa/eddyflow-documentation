@@ -51,16 +51,39 @@ Metadata is information that describes the raw eddy covariance data. More specif
 
 **Load:** Load an existing metadata file. If you use the Metadata File Editor to create and save a new metadata file from scratch, its path will appear here.
 
+**Remote drive...:** Choose the alternative metadata file from a Google Drive or Dropbox folder shared with **Anyone with the link**. The file is copied next to the project, and the project then points at the copy, so that the **Metadata File Editor** can update it. See [Remote folders and shared links](remote-folders.md#top).
+
 **Use dynamic metadata file:** Check this option and provide the corresponding path to instruct EddyFlow to use an externally-created file that contains time changing metadata, such as canopy height, instrument separations and more. See [Time-varying (dynamic) metadata](dynamic-metadata.md#top).
+
+**Remote drive...:** Next to **Load**, picks the dynamic metadata file from a shared Google Drive or Dropbox folder. See [Remote folders and shared links](remote-folders.md#top).
 
 ## Biomet data
 
 **Biomet data:** Select this option and choose the source of biomet data. Biomet data are slow (< 1Hz) measurements of biological and meteorological variables that complement eddy covariance measurements. Some biomet measurements can be used to improve flux results (ambient temperature, relative humidity and pressure, global radiation, PAR and long-wave incoming radiation). All biomet data available are screened for physical plausibility, averaged on the same time scale of the fluxes, and provided in a separate output file if requested.
 
 - **Use embedded files:** Choose this option to use data from biomet files embedded in the .ghg files. This option is only available for files collected with the original SmartFlux System or SmartFlux 2 and 3 Systems, provided a biomet system was used during data collection. EddyFlow will automatically read biomet files from the files, interpret them and extract relevant variables.
-- **Use external file:** Choose this option if you have all biomet data collected in a single external file. Provide the path to this file by using the **Load...** button.
-- **Use external directory:** Choose this option if you have biomet data collected in more than one external file, and provide the path to the directory that contains those files by using the **Browse...** button.
+- **Use external file:** Choose this option if you have all biomet data collected in a single external file. Provide the path to this file by using the **Load...** button. **Remote drive...** picks the file from a shared drive instead (see [Remote folders and shared links](remote-folders.md#top)).
+- **Use external directory:** Choose this option if you have biomet data collected in more than one external file, and provide the path to the directory that contains those files by using the **Browse...** button. **Remote drive...** picks a folder of a shared Google Drive or Dropbox instead (see [Remote folders and shared links](remote-folders.md#top)).
 
 !!! warning
 
     All biomet files must be formatted according the guidelines that you can find in [External biomet files](biomet-data-format.md#ExternalBiomet).
+
+## Where Browse opens (8.1.2, unreleased)
+
+**Exact UI label:** **Browse...** (and **Load...**), on every field that takes a folder or a file.
+
+The file or folder dialog opens at the first of these places that exists:
+
+1. The path the field already holds.
+2. The location the field was given, even if it has since gone: the dialog opens at the nearest folder above it that still exists.
+3. The folder where that field was last browsed. This is remembered separately for each field.
+4. The folder of the project that was opened last.
+
+A file field opens with its file already selected, but only while that file exists. For the **Raw data directory** and the **Output directory**, the value the project held before the field was cleared is used, so a folder that has gone still points the dialog at its nearest parent.
+
+A shared drive link is never used as a start folder, and **Remote drive...** is not affected: it still opens the drive the field points to (see [Remote folders and shared links](remote-folders.md#top)). The Metek head correction **Table directory** now remembers its last location like the other fields. Before this change a field filled from a project could open somewhere unrelated, wherever that field had been browsed last.
+
+## Messages while settings are applied (8.1.2, unreleased)
+
+When EddyFlow changes settings for you, for example when you pick a run mode or an output preset on the **Output Files** page, or when a project is loaded, warnings and information boxes that would only announce those changes are written to the interface's own message log (not the run log of the engine) instead of opening a window; each entry starts with "Not shown while settings were being applied:". Messages that report a failure that stopped something, and every question, still open a window.

@@ -22,6 +22,19 @@ If a run fails at a particular raw file but that same file processes correctly o
 
 For datasets spanning many months or years, expect substantially longer processing times, particularly with spectral corrections, Advanced Mode planar fit, or time lag optimization pre-passes enabled. Use the `-j`/`--jobs` command-line option (see [Command Line](command-line.md#top)) to parallelize the planar fit and time lag pre-passes across multiple CPU cores and reduce run time.
 
+## Problems with shared drives (Google Drive and Dropbox)
+
+A **Remote Drive** warning in the interface, or **Fatal error(120)**, **Warning(121)** or **Fatal error(122)** in the run log, points at an input read from a shared link. Check these first:
+
+- The folder or file is shared with **Anyone with the link**. Open the link in a browser where you are not signed in to confirm.
+- The link is a Google Drive or Dropbox share link, and it points at a folder where a folder is needed and a file where a file is needed.
+- The computer can reach the internet, both in the interface and while the run is going.
+- `curl` is available (`curl.exe` ships with Windows 10 and later). Its absence stops the run with Fatal error(120).
+- The **Output directory** is a local folder. A link there is refused (Fatal error(122)).
+- A single raw file that fails to download three times is skipped with Warning(121); the periods that needed it are lost or reduced. Rerun when the connection is stable.
+
+See [Remote folders and shared links](remote-folders.md#troubleshooting) for the complete list of messages and their causes.
+
 ## Still stuck?
 
 Consult the [Calculation Reference](software-reference.md#top) and [Interface Feature Reference](software-reference-introduction.md#top) sections for details on any specific setting, or check the project's GitHub repository for known issues.
