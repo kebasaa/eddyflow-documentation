@@ -119,18 +119,48 @@ with the same relationships between b1 and b2 and the tilt angles as with the or
 
 ## Inclinometer tilt correction
 
-**Off by default.** Double rotation, triple rotation, and planar fit all remove only the *mean* tilt evaluated over the flux averaging period; none of them can correct for tilt that changes *within* that period, for example due to wind-induced swinging of the anemometer mount. EddyFlow can optionally apply an **inclinometer tilt correction** (engine setting `tilt_sensor_meth`) before any of the rotation methods described above, using tilt-angle measurements from an inclinometer logged at the sonic anemometer's own sample rate. Because the inclinometer resolves tilt sample by sample, each raw wind sample is corrected for its own instantaneous tilt, rather than for a single period-average angle.
+Project-file keys `tilt_sensor_meth`, `tilt_sensor_v_g`, `tilt_lpf_s`, `tilt_arm_x`, `tilt_arm_y`, `tilt_arm_z`; interface entry **Inclinometer tilt correction (fast inclination channels)** (see [Advanced settings: processing options](raw-processing-options.md#inclinometer-tilt-correction)). **Off by default.**
 
-Settings for this correction include:
+**Idea.** Double rotation, triple rotation and planar fit all remove only the *mean* tilt evaluated over the flux averaging period; none of them can correct a tilt that changes *within* that period, for example the wind-induced swinging of a mast. An inclinometer logged at the sonic anemometer's own sample rate resolves the tilt sample by sample, so each raw wind sample can be corrected for its own instantaneous tilt instead of a single period-average angle. The correction is applied to the raw wind before any of the rotation methods described above.
 
-- **`tilt_sensor_v_g`**: the inclinometer's volts-per-g calibration factor, used to convert the logged voltage signal into a tilt angle.
-- **`tilt_lpf_s`**: an optional low-pass filter time constant (seconds) used to smooth the raw angle series before it is applied.
-- **`tilt_arm_x`**, **`tilt_arm_y`**, **`tilt_arm_z`**: the lever arm, in the sonic's own coordinate system, from the pivot point to the inclinometer's sensor head; required for the "swinging" mode, in which the inclinometer does not sit exactly at the pivot and its measured tilt must be corrected for its own motion about that pivot.
+**Procedure.**
+
+1. Read the inclinometer channels from the raw data. They are ordinary extra columns named `theta`, `phi` and `psi`, declared in the **Raw File Description**. A channel that is absent contributes a zero angle; if none is found the correction is skipped and the log says so.
+2. Convert each voltage to an angle, angle = -asin(V / `tilt_sensor_v_g`), with `tilt_sensor_v_g` the sensitivity in volts per g (default 4). A reading beyond full scale is clamped to plus or minus 90 degrees.
+3. Optionally smooth each angle series with a centred running mean of `tilt_lpf_s` seconds (default 0 = no smoothing).
+4. **Position** (`tilt_sensor_meth` = 1): rotate each wind vector by the angles of that sample.
+5. **Position and swinging** (`tilt_sensor_meth` = 2): in addition, add a term for the motion of the sonic head about the mast pivot, built from the lever arm (`tilt_arm_x/y/z`, metres, default -1.5 on each axis) and the time derivatives of the angles.
+
+**Assumptions and limitations.**
+
+- The channels hold the inclinometer's output **voltage**, not an angle. A wrong sensitivity gives a wrong angle in proportion.
+- The third angle, `psi`, is read and discarded (treated as zero); the correction is a two-angle correction even with three channels declared.
+- The swinging term is a single scalar added equally to u, v and w, not the vector velocity of a point on a rotating body. The units are right (radians per second times metres is metres per second), so it is easy to overlook. No choice of lever arm turns a scalar into a vector; the lever-arm default is a starting point, not a measurement of your mast, and a wrong arm adds a velocity that is not there. If you want the physical correction, use **Position** only.
+- Smoothing the angle is not smoothing the wind. A window long compared with the swinging period removes the sway the correction is meant to catch.
+- The correction reaches the **flux computation only**. The planar-fit and time-lag pre-passes run before the angle columns exist, so the planar fit is fitted to winds this correction has not touched. The effect is second order, because the correction targets variation within a period, not the mean.
+- It assumes a series already in the sonic's true frame, and is applied before any axis rotation.
 
 This correction is disabled by default; if left off, EddyFlow behaves exactly as described in the rest of this page.
 
 ## Metek USA-1 head correction
 
-**Off by default.** For datasets collected with a Metek USA-1 anemometer, EddyFlow can optionally apply a **head correction** (engine setting `head_corr_meth`) that compensates for flow distortion caused by the instrument's own transducers and supporting structure, ahead of the rotation methods described on this page. The correction is based on Metek's own wind-tunnel calibration tables for the USA-1 head. These tables are Metek GmbH's proprietary data and are not distributed with EddyFlow: to use this correction, the user must supply a copy of the required table files and point EddyFlow to the directory containing them via the `head_corr_dir` setting. If any of the required files are missing from that directory, the head correction is skipped for the entire run.
+Project-file keys `head_corr_meth`, `head_corr_dir`; interface entry **Metek USA-1 head correction (three-dimensional flow distortion)** (see [Advanced settings: processing options](raw-processing-options.md#metek-usa-1-head-correction)). **Off by default.**
+
+**Idea.** The transducers and supporting structure of a Metek USA-1 deflect the flow before the sonic measures it, by an amount that depends on the direction the wind comes from. Metek measured this in a wind tunnel and published three tables of Fourier coefficients over elevation angle, one each for wind speed, azimuth and elevation, evaluated at three, six and nine times the azimuth.
+
+**Procedure.**
+
+1. Read the three tables `phicorr.dat`, `ucorr.dat` and `alphacorr.dat` from the directory `head_corr_dir`, once per run. Each has twenty rows, one per elevation from -50 to +45 degrees in steps of five, giving the elevation and then the coefficients C0, C3, S3, C6, S6, C9 and S9.
+2. For `head_corr_meth` = 2 (data already carrying Metek's online two-dimensional correction), first undo that correction with the closed form Metek publishes for it. For `head_corr_meth` = 1 (raw data) this step is omitted. Applying the three-dimensional correction on top of an un-undone two-dimensional one would count the horizontal part twice.
+3. For each sample, interpolate the tables at the sample's elevation and evaluate the speed, azimuth and elevation corrections at the sample's azimuth, then apply them to the wind vector.
+
+The correction runs on the raw wind, sample by sample, before the inclinometer correction and before any rotation, in all three raw-data passes of the processing run (so, unlike the inclinometer correction, the pre-passes see the corrected wind).
+
+**Assumptions and limitations.**
+
+- The three table files are Metek GmbH's measurements and are **not distributed** with EddyFlow. You must supply your own copy and point `head_corr_dir` at its directory. If any of the three is missing, or a table has fewer than twenty rows, the correction is **declined for the whole run** and the run log says so, rather than correcting some periods and not others. The fluxes then come out as if it had never been switched on.
+- The tables were measured on one-inner-bar USA-1 models. Nothing in the metadata distinguishes the variants, so the match is not checked.
+- Choosing the wrong **Applies to** entry costs a percent or so of the horizontal wind.
+- The correction compensates the instrument's own head only; it does not replace the angle-of-attack correction used for Gill sonic anemometers (see [Angle of attack correction](angle-of-attack-correction.md#top)) and is unrelated to the flow-distortion correction applied by anemometer firmware (see [Head or flow distortion correction](flow-distortion-correction.md#top)).
 
 This correction is disabled by default.

@@ -28,11 +28,39 @@ Applies only to vertical mount Gill sonic anemometers with the same geometry of 
 
 #### Metek USA-1 head correction
 
-Applies only to the Metek USA-1. Corrects for flow distortion caused by the instrument's own transducers and supports, using Metek's own wind-tunnel calibration tables. Off by default. See [Metek USA-1 head correction](anemometer-tilt-correction.md#metek-usa-1-head-correction).
+**Exact UI label:** Metek USA-1 head correction (three-dimensional flow distortion). Project-file keys: `head_corr_meth`, `head_corr_dir`. Off by default.
+
+The transducers and supports of a Metek USA-1 deflect the flow before the sonic measures it, by an amount that depends on where the wind comes from. Metek characterized this in a wind tunnel and published three tables of Fourier coefficients over elevation angle, one each for wind speed, azimuth and elevation, evaluated at three, six and nine times the azimuth. When the box is ticked EddyFlow applies them sample by sample to the raw wind, before the inclinometer correction and before any axis rotation. The method, its assumptions and limitations are described in [Metek USA-1 head correction](anemometer-tilt-correction.md#metek-usa-1-head-correction).
+
+- **Applies to :** (`head_corr_meth`) Tells EddyFlow what state the logged wind is in.
+    - **Raw, uncorrected data:** The logger applied nothing, so the three-dimensional correction is applied to the wind as recorded.
+    - **Data already carrying Metek's online 2-D correction:** The sonic's own two-dimensional correction is first undone with the closed form Metek publishes for it, and the full three-dimensional correction is applied to what is left. Applying the three-dimensional correction on top of the two-dimensional one without undoing it would count the horizontal part twice. If you do not know which your logger wrote, the sonic's configuration states it; guessing wrongly costs a percent or so of the horizontal wind.
+- **Table directory :** (`head_corr_dir`) The folder holding `phicorr.dat`, `ucorr.dat` and `alphacorr.dat`. Each file has twenty comma-separated rows, one per elevation from -50 to +45 degrees in steps of five, carrying the elevation followed by C0, C3, S3, C6, S6, C9 and S9. The folder is read once per run, not once per averaging period. The file browser is titled "Select the Metek Head Correction Table Directory". Next to **Browse...** a **Remote drive...** button lets you pick the folder from a shared Google Drive or Dropbox link, see [Remote folders](remote-folders.md#top).
+
+!!! warning
+
+    The three table files are Metek GmbH's measurements and are **not shipped** with EddyFlow. Without all three files the correction is declined for the **whole run** (it does not correct some periods and not others) and the run log says so; the fluxes then come out exactly as if the option had never been switched on. A directory holding a file with fewer than twenty rows is declined in the same way.
+
+The correction applies to one-inner-bar USA-1 models, which is what the tables were measured on. Nothing in the metadata distinguishes the variants, so this is not checked. It runs in all three raw-data passes of the processing run, including the pre-passes. See also [Head or flow distortion correction](flow-distortion-correction.md#top).
 
 #### Inclinometer tilt correction
 
-Corrects for anemometer tilt that changes *within* a flux averaging period, using tilt-angle measurements from an inclinometer logged at the sonic's own sample rate — something double rotation, triple rotation and planar fit cannot do, since each of those removes only the *mean* tilt over the period. Off by default. See [Inclinometer tilt correction](anemometer-tilt-correction.md#inclinometer-tilt-correction).
+**Exact UI label:** Inclinometer tilt correction (fast inclination channels). Project-file keys: `tilt_sensor_meth`, `tilt_sensor_v_g`, `tilt_lpf_s`, `tilt_arm_x`, `tilt_arm_y`, `tilt_arm_z`. Off by default.
+
+A mast that leans or sways tilts the sonic with it. Double rotation, triple rotation and planar fit remove only the *mean* tilt over an averaging period; none can remove a tilt that changes *within* one. An inclinometer logged at the same rate as the wind can, sample by sample, and that is what this option does. Method details and limitations: [Inclinometer tilt correction](anemometer-tilt-correction.md#inclinometer-tilt-correction).
+
+**Where the angles come from.** Ordinary extra raw columns named `theta`, `phi` and `psi`, declared in the **Raw File Description** like any other channel. There is nothing to configure about which column is which, because there is only one sonic and the name is the whole of it. A channel that is absent contributes a zero angle and leaves that axis alone; if none of the three is found, the correction is skipped and the log says so. The columns hold the inclinometer's **output voltage**, not an angle: the angle is -asin(V / sensitivity). The `psi` column is read and then discarded (treated as zero), so this is a two-angle correction even though three channels may be declared.
+
+- **Correct for :** (`tilt_sensor_meth`)
+    - **Position:** Rotates the measured wind vector by the inclination of the moment. This is the unambiguous part of the correction and the one to use unless you have a reason not to.
+    - **Position and swinging:** Adds a term for the motion of the sonic head as the mast swings, built from the lever arm and the time derivatives of the angles. That term is a **single scalar** added equally to u, v and w, not a velocity vector (the velocity of a point on a rotating body would have three different components). No lever arm turns a scalar into a vector. If you want the physical correction, use **Position** and treat the swinging mode as unavailable.
+- **Sensitivity :** (`tilt_sensor_v_g`, volts per g, default 4) Turns the logged voltage into an angle. Check your inclinometer's data sheet before trusting the default. A reading beyond full scale is clamped to plus or minus a right angle, rather than producing an undefined arc sine that would spread through every wind component of that sample.
+- **Smoothing :** (`tilt_lpf_s`, seconds, default 0 = "no smoothing") A centred running mean over the angle series, to keep inclinometer noise out of the correction. It smooths what the mast is *believed* to be doing, not what the sonic measured. A window that is too long also removes the genuine sway the correction exists to catch, so keep it short against the swinging period.
+- **Lever arm :** (`tilt_arm_x`, `tilt_arm_y`, `tilt_arm_z`, metres, default -1.5 on each axis) The vector from the pivot point of the mast to the sonic head in the sonic's own axes. Used only by **Position and swinging**; **Position** ignores it. The default is a starting point, not a measurement of your mast, and a wrong arm adds a velocity that is not there.
+
+!!! note
+
+    The correction reaches the flux computation only. The planar-fit and time-lag pre-passes run before the angle columns exist, so a planar fit is fitted to winds this correction has not touched. The effect is second order, because the correction targets variation within a period rather than the mean.
 
 #### Axis rotation for tilt correction
 
@@ -47,7 +75,7 @@ Select the appropriate method for compensating anemometer tilt with respect to l
 
 ![](../assets/Planar_fit_settings.png)
 
-- **Planar fit file available:** If you got a satisfying planar fit assessment in a previous run with EddyFlow, which applies to the current dataset, you can use the same assessment by providing the path to the file eddyflow_planar_fit_ID.txt. This file, which contains the results of the assessment, was generated by EddyFlow in the previous run. This will shorten program execution time and assure full comparability between current and previous results.
+- **Planar fit file available:** If you got a satisfying planar fit assessment in a previous run with EddyFlow, which applies to the current dataset, you can use the same assessment by providing the path to the file eddyflow_planar_fit_ID.txt. This file, which contains the results of the assessment, was generated by EddyFlow in the previous run. This will shorten program execution time and assure full comparability between current and previous results. Next to **Load...** a **Remote drive...** button lets you select the file from a shared Google Drive or Dropbox link, see [Remote folders](remote-folders.md#top).
 - **Planar fit file not available:** Choose this option and provide the following information if you need to calculate (sector-wise) planar fit rotation matrices for your dataset. The planar fit assessment will be completed first, and then the raw data processing and flux computation procedures will automatically be performed.
 - **Start:** Starting date of the time period to be used for planar fit assessment. As a general recommendation, select a time period during which the instrument setup and the canopy height and structure did not undergo major modifications. Results obtained using a given time period (e.g., 2 weeks) can be used for processing a longer time period, in which major modifications did not occur at the site. The higher the *Number of wind sectors* and the *Minimum number of elements per sector*, the longer the period should be.
 - **End:** End date of the time period to be used for planar fit assessment. As a general recommendation, select a time period during which the instrument setup and the canopy height and structure did not undergo major modifications. Results obtained using a given time period (e.g., 2 weeks) can be used for processing a longer time period, in which major modifications did not occur at the site. The higher the *Number of wind sectors* and the *Minimum number of elements per sector*, the longer the period should be.
@@ -88,25 +116,45 @@ Choose one from among the following detrending methods:
 - **Covariance maximization:** Calculates the most likely time lag within a plausible window, based on the covariance maximization procedure. The window is defined by the **Minimum time lags** and **Maximum time lags** stored inside the .ghg files or entered in the **Alternative metadata file** (for files other than .ghg), for each variable. See [Detecting and compensating for time lags](time-lag-detect-correct.md#top).
 - **Covariance maximization with default:** Similar to the **Covariance maximization**, calculates the most likely time lag based on the covariance maximization procedure. However, if a maximum of the covariance is not found inside the window (but at one of its extremes), the time lag is set to the **Nominal time lag** value stored inside the .ghg files or in the alternative metadata file.
 - **Automatic time lag optimization:** Select this option and configure it by clicking on the **Time lag optimization Settings...** to instruct EddyFlow to perform a statistical optimization of time lags. It will calculate nominal time lags and plausibility windows and apply them in the raw data processing step. For water vapor, the assessment is performed as a function of relative humidity.
-- **Pre-whitening block-bootstrap:** Select this option and configure it by clicking on the **PWB Time Lag Optimization Settings...** to instruct EddyFlow to detect time lags via pre-whitening and block-bootstrap resampling of the cross-covariance function, based on [Vitale et al. (2024)](references.md#Vitale2024). This method is generally more robust than covariance maximization for noisy or short-tube setups, and also supports conditional lag borrowing between co-located gases sharing an intake tube. See [Detecting and compensating for time lags](time-lag-detect-correct.md#top) and [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top).
+- **Pre-whitening block-bootstrap:** Select this option and configure it by clicking on the **PWB Time Lag Optimization Settings...** to instruct EddyFlow to detect time lags via pre-whitening and block-bootstrap resampling of the cross-covariance function, based on [Vitale et al. (2024)](references.md#Vitale2024). This method is generally more robust than covariance maximization for noisy or short-tube setups, and it has its own borrowing of a tube-mate's lag between co-located gases sharing an intake tube (see [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top)). See [Detecting and compensating for time lags](time-lag-detect-correct.md#top) and [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top).
+
+#### Subtract the cross-covariance baseline
+
+**Exact UI label:** Subtract the cross-covariance baseline. Project-file key: `covmax_debaseline`. Off by default.
+
+Chooses the time lag by the largest *departure* of the cross-covariance function from the straight line joining the two ends of the search window, instead of by its largest absolute value. A weak flux often sits on a sloping cross-covariance, caused by a trend or by a neighbouring stronger correlation, and the plain maximum then lands on whichever end of the window the slope is highest at rather than on the peak. Removing the line takes the slope away and leaves the peak.
+
+- It changes **which lag is selected** and nothing about the covariance reported there: the flux at the chosen lag is computed exactly as before.
+- It is a modifier of the covariance-maximization methods, not a method of its own, and has no effect with **Constant**.
+- With the baseline removed the two ends of the window score zero by construction, so the maximum can never land on an end. **Covariance maximization with default** therefore stops falling back to the nominal time lag. For a weak flux that safety net is worth replacing rather than just losing; conditional lag borrowing (below) is one way to do so.
+
+See [Detecting and compensating for time lags](time-lag-detect-correct.md#baseline-subtracted-covariance-maximization).
 
 #### Conditional lag borrowing
 
-These controls sit alongside the **Time lag detection method** selector and apply regardless of which method is chosen:
+Gases drawn down one tube share a transport delay. A species whose cross-covariance peak cannot be told from noise has nothing of its own to detect, so it can take the lag of a gas on the same analyser that resolved its peak (Nemitz et al., 2018). The controls below sit alongside the **Time lag detection method** selector and apply regardless of which method is chosen. They act in the main raw-data processing pass, after each gas's own lag has been found. Method description: [Detecting and compensating for time lags](time-lag-detect-correct.md#conditional-lag-borrowing).
 
-- **Subtract the cross-covariance baseline:** Removes the background level of the cross-covariance function before searching it for a peak, which can make a weak peak easier to resolve on a noisy channel.
-- **Borrow a tube-mate's lag below the detection limit:** If a gas's own lag detection does not clear the chosen noise floor, EddyFlow can reuse the lag detected for a better-resolved gas measured on the same intake tube, rather than accept an unreliable detection.
-- **Detection limits to clear:** Multiple of the noise floor that a gas's own detection must exceed before it is trusted; below this threshold, borrowing is considered.
-- **Judged against:** The noise floor a detection is compared to — either the [flux detection limit](flux-detection-limit.md#top) or the Lenschow et al. (2000) instrumental-noise estimate from [random uncertainty estimation](random-uncertainty-estimation.md#top).
-- **Borrow from:** Which gas on the same tube to borrow a lag from — either the best-resolved gas on the analyser, or a specific gas such as carbon dioxide.
+- **Borrow a tube-mate's lag below the detection limit:** (`tlag_borrow_meth`, off by default) Switches borrowing on. A gas borrows when the covariance at its own lag does not clear the chosen noise floor, and also when its maximum lands on an end of the search window, where a maximization goes when there is no interior peak. With the default noise floor the control stays greyed unless the flux detection limit is switched on under **Statistical Analysis** (`detlim_meth`, see [Flux detection limit](flux-detection-limit.md#top)); without it there is nothing to compare a covariance against, and the engine refuses the combination. The detection limit is not needed when **Lenschow instrument noise (EddyUH)** is chosen under **Judged against**.
+- **Detection limits to clear :** (`tlag_borrow_snr`, default 3, range 0.1 to 100) How far above its noise floor a gas's covariance must stand to keep its own lag. Three is the value of Nemitz et al. A lower number means fewer gases borrow, a higher one means more. A gas that clears the threshold keeps its own lag and becomes eligible to donate.
+- **Judged against :** (`tlag_borrow_noise`) The noise floor the covariance is compared with.
+    - **The flux detection limit:** (`0`, default) The scatter of the cross-covariance far from its peak, where there is no flux. It measures what the covariance itself does with nothing in it. Requires the detection limit to be on.
+    - **Lenschow instrument noise (EddyUH):** (`1`) The step in the autocovariance at zero lag, which is the analyser's own white noise ([Lenschow et al., 2000](references.md#Lenschow); [Mauder et al., 2013](references.md#Mauder2013); see [Random uncertainty estimation](random-uncertainty-estimation.md#instrument-noise-lenschow-et-al-2000-as-applied-by-mauder-et-al-2013)). It is measured from the series in hand, so it needs nothing else switched on. It is a smaller floor than the detection limit and therefore lets more gases keep their own lag.
+- **Borrow from :** (`tlag_borrow_donor`) Which gas on the same analyser donates the lag.
+    - **The best-resolved gas on the analyser:** (`0`, default) Ranks the eligible tube-mates by how far each stands above the noise and takes the strongest.
+    - **The analyser's carbon dioxide (EddyUH):** (`1`) Always takes the lag from the carbon dioxide on that analyser. It is usually the best-resolved channel on a trace-gas analyser anyway, and it is the same donor in every period, which makes the lag population easier to defend. Carbon dioxide can then never borrow. If the analyser measures no carbon dioxide, or its carbon dioxide did not clear the threshold either, nothing is borrowed.
 
-A lag is never borrowed from a different instrument, and never from water vapor, since its delay depends on humidity in a way the trace gases' does not.
+Rules that always hold:
+
+- The donor must itself have cleared the threshold, and the set of trusted donors is fixed before any borrowing, so a borrowed lag is never borrowed again.
+- Lags are borrowed only between gases on the **same analyser**. A different instrument shares no tube, and a gas whose record names no instrument neither donates nor borrows.
+- **Water vapor is never borrowed for or from.** Its lag is the one every other gas's water covariance is taken at, and moving it would move the water term of every density correction with it.
+- A borrowed lag is **not a detected lag**. It is flagged in `<gas>_def_timelag` in the same way as a nominal-lag fallback (the flag does not distinguish the two) and the run log names the donor.
 
 ### Time lag optimization settings
 
 ![](../assets/Time_Lag_Opt_Window.png)
 
-- **Time lag file available:** If you have a satisfactory time lag assessment from a previous run and these results apply to the current dataset, you can use the time lag assessment by providing the path to the file named ` eddyflow_timelag_opt_ID.txt `, which was generated by EddyFlow in the previous run. It contains the results of the assessment. This will shorten program execution time and assure full comparability between current and previous results.
+- **Time lag file available:** If you have a satisfactory time lag assessment from a previous run and these results apply to the current dataset, you can use the time lag assessment by providing the path to the file named ` eddyflow_timelag_opt_ID.txt `, which was generated by EddyFlow in the previous run. It contains the results of the assessment. This will shorten program execution time and assure full comparability between current and previous results. Next to **Load...** a **Remote drive...** button lets you select the file from a shared Google Drive or Dropbox link, see [Remote folders](remote-folders.md#top).
 - **Time lag file not available:** Choose this option and provide the following information if you need to optimize time lags for your dataset. Time lag optimization will be completed first, and then the raw data processing and flux computation procedures will automatically be performed.
 - **Start:** Starting date of the time period to be used for time lag optimization. This time should not be shorter than about 1-2 months. As a general recommendation, select a time period during which the instrument setup did not undergo major modifications. Results obtained using a given time period (e.g., 2 months) can be used for processing a longer time period, in which major modifications did not occur in the setup. The stricter the threshold setup in this dialogue, the longer the period should be in order to get robust results.
 - **End:** End date of the time period to be used for time lag optimization. This time should not be shorter than about 1-2 months. As a general recommendation, select a time period during which the instrument setup did not undergo major modifications. Results obtained using a given time period (e.g. 2 months) can be used for processing a longer time period, in which major modifications did not occur in the setup. The stricter the threshold setup in this dialogue, the longer the period should be in order to get robust results.
@@ -119,9 +167,10 @@ A lag is never borrowed from a different instrument, and never from water vapor,
 
 #### Passive gasses
 
-- **Minimum (absolute) CO2 flux:** CO2 time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
-- **Minimum (absolute) CH4 flux:** CH4 time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
-- **Minimum (absolute) 4th gas flux:** 4th gas time lags corresponding to fluxes smaller than this value will not be considered in the time lag optimization. Selecting high-enough fluxes assures that well developed turbulent conditions are met and the correlation function is well characterized.
+One **Minimum (absolute) <gas> flux** row is shown for each gas that has a column in the **Raw File Description** (water vapor uses the latent heat flux above instead). For each, time lags corresponding to fluxes smaller in magnitude than the value are not considered in the time lag optimization. Selecting high-enough fluxes ensures that well developed turbulent conditions are met and the correlation function is well characterized.
+
+- **Minimum (absolute) CO2 flux:**, **Minimum (absolute) CH4 flux:**, **Minimum (absolute) 4th gas flux:** The label carries the gas name used in the project.
+- **Unit:** each row is shown in the unit that follows the gas's **own** column in the **Raw File Description**: a column in ppb or nmol/mol gives nmol m-2 s-1, a column in pmol/mol gives pmol m-2 s-1, and anything else gives µmol m-2 s-1. The default offered is scaled to match; with one fixed unit, a trace-gas default such as that for COS or N2O would sit above every flux the gas can produce and no lag would pass. The values are stored in the project, and passed to the engine, in µmol m-2 s-1, so projects saved earlier read back unchanged.
 
 #### Time lag searching windows
 
@@ -138,9 +187,13 @@ With an **open-path IRGA**, only molar density can be treated, and the way densi
 
 With a **closed-path IRGA**, the strategy is to convert raw data to mixing ratio any time it is possible to accurately do so. If that's not possible, the *a posteriori* formulation of [Ibrom et al. (2007)](references.md#Ibrom) - revising WPL for closed-path systems – is applied, including all density fluctuation terms that can be included. Note that here, however, EddyFlow also includes the pressure-induced fluctuations terms, which were instead neglected in the original paper.
 
-**Remove the spectroscopic effect of water vapour:** For closed-path gases, removes the spectroscopic (dilution and pressure-broadening) influence of water vapor on the measured concentration before it is converted to a mixing ratio.
+**Remove the spectroscopic effect of water vapour:** (`spectro_meth`, `1` = `chen_10`, `0` = none; off by default) For closed-path laser analysers. Water vapor broadens the absorption lines such an analyser measures, so the mixing ratio it reports depends on humidity beyond simple dilution. Each affected column is divided, sample by sample, by 1 + *a*·χq + *b*·χq², using the water its own analyser read at the same instant ([Peltola et al., 2014](references.md#Peltola2014); applied point by point after Chen et al., 2010).
 
-**Also correct the water channel (EddyUH form, unpublished):** Applies an equivalent self-correction to the water vapor channel itself, following an as-yet unpublished EddyUH formulation. Available only when the spectroscopic correction above is active.
+- Enter *a* and *b* per column in the **Raw File Description** (`col_<N>_spectro_a`, `col_<N>_spectro_b`). A column that leaves them at zero is not touched, and neither is an open-path analyser.
+- The correction is independent of the density compensation above: the bias is in what the instrument reported, whether or not WPL is applied.
+- **The coefficients are spectroscopic only**, so the identity is *a* = *b* = 0. Some published tables fold the dilution term into the same polynomial, with *a* = -1, *b* = 0 meaning pure dilution and no spectroscopy. EddyFlow corrects the density separately, so to carry such a value across, add one to *a* (for example, a published *a* of -1.39 becomes -0.39). Entering a dilution-inclusive value unchanged would count the dilution twice.
+
+**Also correct the water channel (EddyUH form, unpublished):** (`spectro_water`, `1` = on, off by default) Applies the same division to each hygrometer against its own reading, which is water self-broadening. This is **not part of the published Peltola et al. (2014) result**, which derives the effect of water on *another* gas's absorption lines; the coefficient used for the water channel has no published derivation. The option offers the idea in the same point-by-point form used for every other column. Select it deliberately, and report that you did. It does nothing unless the correction above is on and the hygrometer's own coefficients are non-zero.
 
 **Add instrument sensible heat component (LI-7500 only):** Only applies to the LI-7500. It takes into account air density fluctuations due to temperature fluctuations induced by heat exchange processes at the instrument surfaces, as from [Burba et al. (2008)](references.md#Burba). This may be needed for data collected in very cold environments. See [Calculating the off-season uptake correction (LI-7500 only)](calculate-offseason-uptake-correction.md#top).
 
@@ -166,6 +219,7 @@ Select the quality flagging policy. Flux quality flags are obtained from the com
 - **[Mauder and Foken, 2004](references.md#Mauder):** Policy described in the documentation of the TK2 eddy covariance software that also constituted the standard of the CarboEurope IP project and is now a de facto standard in networks such as ICOS, AmeriFlux and FLUXNET. "0" means high quality fluxes, "1" means fluxes are suitable for budget analysis, "2" means fluxes that should be discarded from the resulting dataset due to bad quality.
 - **[Foken, 2003](references.md#Foken):** A system based on 9 quality grades. "0" is best, "9" is worst. The system of Mauder and Foken (2004) and of Göckede et al. (2006) are based on a rearrangement of this system.
 - **[Göckede et al., 2006](references.md#Gockede2):** A system based on 5 quality grades. "0" is best, "5" is worst.
+- **Vitale et al. (2020) (0-1-2 severity system):** (`qc_meth` = 4) A fourth policy that grades each flux 0 (ok), 1 (moderate) or 2 (severe) from a wider set of tests than the three systems above. On the common project that hands spectral corrections off to the flux-correction stage, this grade is computed from the ITC deviation alone. See [Flux quality flags](flux-quality-flags.md#top) for the tests and the conditions under which the wider set applies.
 
 #### Footprint estimation
 
@@ -174,3 +228,13 @@ Select whether to calculate flux footprint estimations and which method should b
 - **[Kljun et al. (2004)](references.md#Kljun):** A crosswind integrated parameterization of footprint estimations obtained with a 3D Lagrangian model by means of a scaling procedure.
 - **[Kormann and Meixner (2001)](references.md#Kormann):** A crosswind integrated model based on the solution of the two dimensional advection-diffusion equation given by van Ulden (1978) and others for power-law profiles in wind velocity and eddy diffusivity.
 - **[Hsieh et al. (2000)](references.md#Hsieh):** A crosswind integrated model based on the former model of Gash (1986) and on simulations with a Lagrangian stochastic model.
+
+#### Parallelise the planar fit and time lag pre-passes
+
+**Exact UI label:** Parallelise the planar fit and time lag pre-passes. Off by default. Last control in the **Other options** group.
+
+Before computing any flux, EddyFlow may walk every averaging period once, to fit the planar-fit planes or to optimise the time lags (and, with the pre-whitening method, to build its time-lag cache). On a long dataset this walk dominates the run. Each period is independent of the others, so with this box ticked the range is split across the processor cores and the pieces are joined back in order.
+
+- **Results do not change:** the planar-fit coefficients and the optimised time lags come out identical to a serial run. It has no effect on a project that runs no pre-pass, nor on the flux computation itself, which is not split.
+- **A setting of this computer, not of the project:** it is remembered between sessions but is not saved in the project file, so a colleague opening the same project decides for themselves.
+- **Unticked** means one worker (serial); ticked lets the engine use every core. It corresponds to the `-j` / `--jobs` option of the command line, see [Command line](command-line.md#top).

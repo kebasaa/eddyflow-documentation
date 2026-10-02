@@ -4,7 +4,7 @@ Under: Advanced Settings > Raw data processing > Rotation Method
 
 ![The Planar Fit Settings dialog](../assets/Planar_fit_settings.png)
 
-Selecting either Planar Fit option (Standard Planar Fit and Planar Fit with no velocity bias) will cause the **Planar Fit Settings** button to activate. Click on it and access the planar fit configuration dialogue. Two options are available here: if you already have a planar fit rotation matrices file created by a previous EddyFlow run, which also applies to your current dataset, select the option **Planar Fit file available** and locate the corresponding file by using the **Load** button. Otherwise, select the option **Planar Fit file not available** and enter the following settings:
+Selecting either Planar Fit option (Standard Planar Fit and Planar Fit with no velocity bias) will cause the **Planar Fit Settings** button to activate. Click on it and access the planar fit configuration dialogue. Two options are available here: if you already have a planar fit rotation matrices file created by a previous EddyFlow run, which also applies to your current dataset, select the option **Planar Fit file available** and locate the corresponding file by using the **Load** button (project key `pf_file`; the file browser is titled "Select the Planar Fit File"). Next to **Load** a **Remote drive...** button lets you select the file from a shared Google Drive or Dropbox link, see [Remote folders](remote-folders.md#top). Otherwise, select the option **Planar Fit file not available** and enter the following settings:
 
 ## Planar fit different period
 
@@ -36,4 +36,4 @@ The proper rotation matrix will then be used for each flux averaging period, acc
 
 !!! note
 
-    As of engine v8.1.0, the planar fit and time lag optimization pre-passes (Advanced Mode step 1) can be parallelised across multiple CPU cores using the command-line `-j` / `--jobs` option (see [Command Line](command-line.md#top)). This can substantially speed up step 1 for large datasets.
+    As of engine v8.1.0, the planar fit and time lag optimization pre-passes (Advanced Mode step 1) can be parallelised across multiple CPU cores. In the interface, tick **Parallelise the planar fit and time lag pre-passes** (see [Advanced settings: processing options](raw-processing-options.md#parallelise-the-planar-fit-and-time-lag-pre-passes)); on the command line use the `-j` / `--jobs` option (see [Command Line](command-line.md#top)). The planar-fit coefficients are identical to those of a serial run, and this can substantially speed up step 1 for large datasets.

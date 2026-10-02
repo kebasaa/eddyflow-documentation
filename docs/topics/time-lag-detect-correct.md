@@ -97,15 +97,65 @@ The figure below shows the results of a time lag optimization procedure using 6 
 
     During the following phase of raw data processing, the actual nominal, minimum, and maximum time lags are determined as a function of the current value of relative humidity.
 
+## Baseline-subtracted covariance maximization
+
+Project-file key `covmax_debaseline`, interface label **Subtract the cross-covariance baseline** (off by default). It is a modifier of the two covariance maximization methods above, not a sixth method.
+
+**Idea.** A weak flux often sits on a sloping cross-covariance function, for instance because of a trend in one of the series or a neighbouring stronger correlation. The plain maximum of the absolute covariance then falls on whichever end of the search window the slope is highest at, instead of on the peak.
+
+**Procedure.**
+
+1. Compute the cross-covariance function inside the search window, as for the ordinary method.
+2. Draw the straight line (the chord) between its values at the two ends of the window and subtract it.
+3. Choose the lag with the largest departure from the chord.
+
+The lag selected can differ from the plain maximum; the covariance reported at that lag is the ordinary covariance, computed exactly as before.
+
+**Consequences and limitations.**
+
+- After the subtraction both window ends score zero, so the selected lag can never land on an end of the window. **Covariance maximization with default** falls back to the nominal lag precisely when the maximum lands on an end, so with this modifier on that fallback stops firing. For a weak flux this safety net is worth replacing rather than losing; [conditional lag borrowing](#conditional-lag-borrowing) is intended for that.
+- It does nothing with **Constant**, which does not search.
+- A window that is too wide for the lag structure still gives a poor chord; keep the **Minimum** and **Maximum time lags** plausible.
+
+## Conditional lag borrowing
+
+Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `tlag_borrow_donor`; interface controls **Borrow a tube-mate's lag below the detection limit**, **Detection limits to clear**, **Judged against**, **Borrow from** (see [Advanced settings: processing options](raw-processing-options.md#conditional-lag-borrowing)). Off by default.
+
+**Idea.** Gases drawn through the same intake tube share the same transport delay. A trace gas whose cross-covariance with *w* cannot be distinguished from noise has no peak of its own to detect, and the lag a maximization returns for it is close to a random draw over the search window. A gas on the same analyser that resolves its peak is measuring that same delay, so its lag is the best estimate available for the weak gas (Nemitz et al., 2018).
+
+**Procedure**, applied in each averaging period after the lag of every gas has been found by the chosen method and before the series are shifted:
+
+1. For each gas compute the signal-to-noise ratio: the absolute covariance at its own lag divided by the noise floor chosen under **Judged against**. The floor is either the flux detection limit ([Wienhold et al., 1994](references.md#Wienhold1994); see [Flux detection limit](flux-detection-limit.md#top)), which is the scatter of the cross-covariance far from the peak, or the instrumental noise ([Lenschow et al., 2000](references.md#Lenschow); [Mauder et al., 2013](references.md#Mauder2013)), which is the step in the autocovariance at zero lag.
+2. A gas is *trusted* if its ratio is at least **Detection limits to clear** (default 3). The trusted set is fixed before any borrowing happens, so a borrowed lag can never become a donor and the result does not depend on column order.
+3. A gas that is not trusted, or whose lag landed on an end of its search window, takes the lag of a donor. The donor is the trusted gas on the same analyser with the highest ratio, or, if **The analyser's carbon dioxide (EddyUH)** is chosen, the carbon dioxide of that analyser provided it is trusted.
+4. The borrowed lag is applied in place of the gas's own. The lag that the gas's own maximization found remains in the output of actual lags, so the two differing is the record that a lag was taken from elsewhere.
+
+**Rules and limitations.**
+
+- The detection-limit floor requires the flux detection limit to be on (`detlim_meth`); the engine refuses the combination otherwise. The instrumental-noise floor is measured from the series itself and needs nothing else.
+- Water vapor is never borrowed for or from.
+- A lag is never taken from a different instrument, and a gas whose record names no instrument neither donates nor borrows.
+- With the carbon dioxide donor, nothing is borrowed if the analyser measures no carbon dioxide, and carbon dioxide itself never borrows.
+- Borrowing trades a noisy number for a biased one: two gases down one tube can differ systematically by a few tenths of a second. It is intended for gases whose own detection is unreliable, not as a general replacement for detection.
+- A borrowed lag is flagged in `<gas>_def_timelag` like a nominal-lag fallback, and the run log names the donor.
+- Borrowing is separate from the borrowing inside the pre-whitening block-bootstrap method (below). The first asks whether a peak stands above the noise in this period; the second asks whether a bootstrap could not settle on a lag across periods.
+
 ## Pre-whitening block-bootstrap (PWB)
 
 The pre-whitening block-bootstrap method, based on [Vitale et al. (2024)](references.md#Vitale2024), is a statistical alternative to the covariance maximization procedures above. Rather than reading a single time lag off the raw cross-covariance function, PWB first pre-whitens the anemometric and scalar time series to remove their autocorrelation structure, then repeatedly resamples the pre-whitened series in contiguous blocks (a block-bootstrap) to build a distribution of plausible time lags for the current flux averaging interval. The final lag estimate, together with a highest-density interval (HDI) describing its uncertainty, is derived from this distribution, rather than from a single peak-picking operation on the raw covariance function.
 
 Because it relies on a distribution of resampled estimates instead of a single covariance maximum, PWB tends to be more robust than covariance maximization in situations where the cross-covariance function is noisy or shows multiple local maxima of similar magnitude, for example with short or turbulent intake tubes, low signal-to-noise trace-gas measurements, or short flux averaging intervals. In these conditions, a classic covariance-maximization search can lock onto a spurious peak, whereas PWB's bootstrap distribution makes it possible to judge how well-determined the lag actually is, and to fall back gracefully (via the **Maximum carry-over** setting) on a recent, well-determined estimate when the current period does not support one.
 
-PWB also supports EddyUH-compatible conditional lag borrowing between gases that share the same intake tube. When the covariance associated with a gas's own lag estimate does not clear a configurable noise floor, that gas can borrow its time lag from another, better-behaved gas measured on the same tube (for example, a noisy CH4 channel borrowing the lag detected for a co-located CO2 channel), instead of falling back to a generic nominal or default value.
+PWB settles every averaging period's lag with the whole run in view. When a pre-pass has read the run, each period is settled in this order: the HDI pre-filter, then the reliability classes S1 and S2, then the gas's *own* lag in three forms (interpolated between the reliable lags either side, carried forward, or filled backward, never further than **Max carry**), and only then a lag borrowed from another gas on the same analyser, then that gas's median, and finally a terminal fallback. The gas's own lag comes first on purpose: two gases down one tube have measurably different delays, so borrowing trades a stale number for a biased one. Live detection without a pre-pass keeps a causal classifier that can only look backwards. A column in the output names which step settled each period.
 
 Select *Pre-whitening block-bootstrap* to enable the method, and click on the **PWB Time Lag Optimization Settings...** button to configure the bootstrap, detection-timing, and lag-borrowing parameters. See [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top) for a description of each field.
+
+### PWB behaviour in detail
+
+- **Terminal fallback:** a period that no earlier step could settle uses the lag of its own covariance maximum (the lag found by covariance maximization in that period), not a generic default. This changes lags compared with earlier versions; on one test dataset 10 of 21 settled lags changed.
+- **Borrowed lags are labelled `S4_borrowed`:** the log column formerly named `S4_instrument_filled` is now `S4_borrowed`, and the summary line reads for example `S1/S2=0, S4_borrowed=7`. A class that cannot be classified prints a NOTE. Donors are counted from the settled table, and the detection summary no longer counts borrowed lags as detections.
+- **Stale donors cleared:** the columns `donor_gas`, `carry_hours`, `fallback_source` and `fallback_used` are blanked before the post-pass, so the half-hourly table no longer reports a stale donor (for example water vapor borrowing from water vapor).
+- **Pre-pass parallelism:** the PWB cache pre-pass (`tlag_meth` = 5 with `to_mode` = 1) is split across the worker processes of the `-j` / `--jobs` option, like the planar-fit and time-lag pre-passes, and the settled table is post-processed once, in the parent process. See [Command line](command-line.md#top).
 
 !!! note
 
