@@ -92,6 +92,7 @@ nav:
       - "Flux Detection Limit Settings": topics/flux-detection-limit-settings.md
       - "Planar Fit Configuration Dialog": topics/planar-fit.md
       - "PWB Time Lag Optimization Settings Dialog": topics/pwb-time-lag-settings.md
+      - "Timelag Preliminary Assessment Dialog": topics/timelag-preliminary-assessment.md
       - "Raw File Name Format": topics/raw-file-name-format.md
       - "Roughness Length": topics/roughness-length.md
       - "Sensitive and Non-sensitive Variables": topics/sensitive-and-nonsensitive-variables.md

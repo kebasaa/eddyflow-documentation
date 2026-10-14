@@ -118,6 +118,8 @@ Choose one from among the following detrending methods:
 - **Automatic time lag optimization:** Select this option and configure it by clicking on the **Time lag optimization Settings...** to instruct EddyFlow to perform a statistical optimization of time lags. It will calculate nominal time lags and plausibility windows and apply them in the raw data processing step. For water vapor, the assessment is performed as a function of relative humidity.
 - **Pre-whitening block-bootstrap:** Select this option and configure it by clicking on the **PWB Time Lag Optimization Settings...** to instruct EddyFlow to detect time lags via pre-whitening and block-bootstrap resampling of the cross-covariance function, based on [Vitale et al. (2024)](references.md#Vitale2024). This method is generally more robust than covariance maximization for noisy or short-tube setups, and it has its own borrowing of a tube-mate's lag between co-located gases sharing an intake tube (see [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top)). See [Detecting and compensating for time lags](time-lag-detect-correct.md#top) and [PWB time lag optimization settings dialog](pwb-time-lag-settings.md#top).
 
+**Timelag preliminary assessment...:** Detects the time lags of a random sample of the half-hours, or of all of them, over a wide search window per gas, ignoring the nominal, minimum and maximum time lags of the metadata, and charts where they fall. Suggests a nominal, minimum and maximum time lag per gas, which can be edited and set in the metadata. Needs a raw data folder. See [Timelag preliminary assessment](timelag-preliminary-assessment.md#top).
+
 #### Subtract the cross-covariance baseline
 
 **Exact UI label:** Subtract the cross-covariance baseline. Project-file key: `covmax_debaseline`. Off by default.
@@ -186,6 +188,15 @@ One **Minimum (absolute) <gas> flux** row is shown for each gas that has a colum
 With an **open-path IRGA**, only molar density can be treated, and the way density fluctuations are accounted for in EddyFlow is by following the classic formulation of Webb et al. (1980).
 
 With a **closed-path IRGA**, the strategy is to convert raw data to mixing ratio any time it is possible to accurately do so. If that's not possible, the *a posteriori* formulation of [Ibrom et al. (2007)](references.md#Ibrom) - revising WPL for closed-path systems – is applied, including all density fluctuation terms that can be included. Note that here, however, EddyFlow also includes the pressure-induced fluctuations terms, which were instead neglected in the original paper.
+
+The decision is made **gas by gas, from the measure type** each gas has in the Raw File Description - which is why one project-wide box is enough for analysers that report differently:
+
+- A **mixing ratio** (moles of gas per mole of dry air) is never corrected, ticked or not: its density effects are already gone. An analyser that reports dry mixing ratios - a MIRO for its CO<sub>2</sub>, N<sub>2</sub>O and COS, for instance - is therefore not corrected twice.
+- A **mole fraction** (per mole of wet air) or a **molar density** is corrected as above. A MIRO's water, reported as a mole fraction of wet air, still is - as it must be, which is why switching an analyser off wholesale would be wrong.
+- **Every hygrometer** gets its own evapotranspiration, corrected after its own path type with its own air and cell; a second hygrometer's `LE_<n>` and `ET_<n>` are corrected like the bare `LE` and `ET`.
+- **Each gas takes its water** - the humidity and the water-vapour flux in its correction - from the hygrometer its record names (`gas_<i>_moist`). A gas whose water is the biomet RH, which has no flux, uses the designated hygrometer's evapotranspiration, and the run log says so.
+
+With the box **unticked**, no gas is density-corrected: nothing is converted, and every flux keeps its level 1 value before the closed-path spectral correction, as in EddyPro. To leave one analyser uncorrected, give its gases the measure type it really reports rather than unticking the box.
 
 **Remove the spectroscopic effect of water vapour:** (`spectro_meth`, `1` = `chen_10`, `0` = none; off by default) For closed-path laser analysers. Water vapor broadens the absorption lines such an analyser measures, so the mixing ratio it reports depends on humidity beyond simple dilution. Each affected column is divided, sample by sample, by 1 + *a*·χq + *b*·χq², using the water its own analyser read at the same instant ([Peltola et al., 2014](references.md#Peltola2014); applied point by point after Chen et al., 2010).
 

@@ -22,18 +22,21 @@ where vcell,i (volume per mole of wet air) is the molar volume inside the cell, 
 
     Actual units are handled automatically by EddyFlow, as different gas concentrations might be measured with different units, due to their very different ambient concentrations, from parts per thousand (*mmol/mol* or *ppt*) of water vapor to parts per billion of methane (*nmol/mol* or *ppb*).
 
-However, these conversions are not always feasible. In particular, conversion of mole fractions into mixing ratios is performed if the following conditions hold:
+The conversion happens only with **Compensate density fluctuations (WPL terms)** ticked, and only where it is feasible. Conversion of mole fractions into mixing ratios is performed if the following conditions hold:
 
-1. The gas was measured by the same instrument that measured water vapor;
+1. The water the gas's record names (`gas_<i>_moist`; by default the H<sub>2</sub>O on the gas's own analyser) is a closed-path hygrometer in the project. It may sit on a different analyser from the gas - EddyFlow then says so with Warning(106) - but the biomet RH has no fast series and cannot be used;
 2. Water vapor is available as (or convertible into) mole fraction.
 
 Conversion of molar densities into mixing ratios is performed if the following conditions hold:
 
-1. The gas was measured by the same instrument that measured water vapor;
-2. Water vapor is available as (or convertible into) mole fraction;
-3. Fast cell temperature and pressure readings are available in the raw files.
+1. Both conditions above hold;
+2. Fast cell temperature and pressure readings for the gas's own analyser are available in the raw files.
 
-If any of these conditions do not hold, EddyFlow applies the density correction following the classic WPL approach.
+Each hygrometer is converted in the same way, with its own cell. If any of these conditions do not hold, EddyFlow applies the density correction to the flux instead, following Ibrom et al. (2007) on a closed path and Webb et al. (1980) on an open one.
+
+!!! note
+
+    A gas already reported as a **mixing ratio** (moles per mole of dry air) is neither converted nor corrected, whether or not the box is ticked: its density effects are already gone. The decision is made per gas, from the measure type in the Raw File Description, so an analyser that reports dry mixing ratios - such as a MIRO for its trace gases - is never corrected twice, while its water, if reported as a mole fraction of wet air, still is. To leave an analyser uncorrected, give its gases the measure type it really reports; do not untick the box, which switches the correction off for every gas.
 
 !!! note
 
