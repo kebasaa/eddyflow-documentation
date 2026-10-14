@@ -67,7 +67,15 @@ A chart of the lags found for one gas, as a histogram or as a time series:
 - **Include lags at the window edges:** A lag at either end of the search window is where the covariance was still rising, not a peak. Such lags are always drawn, stacked in grey on top of the others; ticked, they also count towards the suggestions. Unticked by default.
 - **Only half-hours above the flux threshold:** Use only the half-hours whose flux cleared the minimum flux of the automatic time lag optimization (`gas_<i>_to_min_flux`, and `to_le_min_flux` for water vapor, set in the [Time lag optimization settings](time-lag-detect-correct.md#automatic-time-lag-optimization)). A weak flux gives a poorly defined lag, but the threshold is compared with the signed flux, so for a gas that is mostly taken up rather than emitted it may drop every half-hour. Unticked by default, and not available with PWB, which judges each detection itself.
 
-Lines mark the suggested **nominal** lag (solid) and the **min** and **max** of the window (dashed), vertical in the histogram and horizontal in the time series. They follow any edit to the suggestions. Below the chart, a line gives how many half-hours are shown, the window searched and, if any, how many lags fell at a window edge.
+Lines mark the suggested **nominal** lag (solid) and the **min** and **max** of the window (dashed), vertical in the histogram and horizontal in the time series.
+
+Both views can be zoomed:
+
+- **Drag** across the chart to zoom to that stretch. The histogram zooms along the lag axis, and its count axis fits the bars in view, so a small peak is no longer flattened by a tall one outside. The time series zooms along the time axis, and also along the lag axis if a box is dragged.
+- **Mouse wheel:** zoom in or out around the point under the cursor. In the time series, **Shift**+wheel zooms the lag axis.
+- **Double-click** to show everything again. While zoomed, a note in the corner of the chart says so.
+
+The zoom is reset when another gas or view is chosen, and saved charts always show everything. They follow any edit to the suggestions. Below the chart, a line gives how many half-hours are shown, the window searched and, if any, how many lags fell at a window edge.
 
 ## Suggested time lags
 
