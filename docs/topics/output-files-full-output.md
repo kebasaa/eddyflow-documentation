@@ -101,16 +101,20 @@ The following table summarizes all output results available in the rich output f
 | corr_iter_dev | % | Convergence of the iterative correction: the change in the corrected flux between the last two passes, for the gas that changed most in the averaging period. Written only when **Iterate the correction** (`corr_iter_meth`) is on. See [Spectral corrections](spectral-corrections.md#top). |
 | Tau | kg m-1 s-2 | Corrected momentum flux |
 | qc_Tau | # | Quality flag for momentum flux |
-| rand_err_Tau | kg m-1 s-2 | Random error for momentum flux, if selected |
+| rand_err_Tau | kg m-1 s-2 | Random error for momentum flux, if selected. Like every `rand_err_*` and `lod_*` column, multiplied by the flux's spectral correction factor when **Spectrally correct the random uncertainty** is checked (off by default); see [Random uncertainty estimation](random-uncertainty-estimation.md#spectral-correction-of-the-random-uncertainty) |
+| lod_Tau | kg m-1 s-2 | Limit of detection α · RE for momentum flux, only with **Limit of detection (Langford et al. 2015)**; see [Random uncertainty estimation](random-uncertainty-estimation.md#far-lag-cross-covariance-and-limit-of-detection-langford-et-al-2015) |
 | H | W m-2 | Corrected sensible heat flux |
 | qc_H | # | Quality flag for sensible heat flux |
-| rand_err_H | W m-2 | Random error for momentum flux, if selected |
+| rand_err_H | W m-2 | Random error for sensible heat flux, if selected |
+| lod_H | W m-2 | Limit of detection for sensible heat flux, only with Langford et al. (2015) |
 | LE | W m-2 | Corrected latent heat flux |
 | qc_LE | # | Quality flag latent heat flux |
 | rand_err_LE | W m-2 | Random error for latent heat flux, if selected |
+| lod_LE | W m-2 | Limit of detection for latent heat flux, only with Langford et al. (2015) |
 | gas_flux | µmol m-2 s-1(†) | Corrected gas flux |
 | qc_gas_flux | # | Quality flag for gas flux |
 | rand_err_gas_flux | µmol s-1 m-2(†) | Random error for gas flux, if selected |
+| lod_gas_flux | µmol s-1 m-2(†) | Limit of detection for gas flux, only with Langford et al. (2015) |
 | H_strg | W m-2 | Estimate of storage sensible heat flux |
 | LE_strg | W m-2 | Estimate of storage latent heat flux |
 | gas_strg | µmol s-1 m-2(†) | Estimate of storage gas flux |

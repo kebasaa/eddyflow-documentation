@@ -90,6 +90,7 @@ nav:
       - "North Offset": topics/north-offset.md
       - "CEC Settings Dialog": topics/cec-settings.md
       - "Flux Detection Limit Settings": topics/flux-detection-limit-settings.md
+      - "Limit of Detection Settings (Langford et al. 2015)": topics/limit-of-detection-settings.md
       - "Planar Fit Configuration Dialog": topics/planar-fit.md
       - "PWB Time Lag Optimization Settings Dialog": topics/pwb-time-lag-settings.md
       - "Timelag Preliminary Assessment Dialog": topics/timelag-preliminary-assessment.md

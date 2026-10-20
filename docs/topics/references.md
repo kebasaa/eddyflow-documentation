@@ -81,6 +81,8 @@
 34. <span id="Kormann"></span> [Kormann, R. and F. X. Meixner. 2001. An analytical footprint model for nonneutral stratification. Boundary-Layer Meteoroogy, 99:207–224.](http://dx.doi.org/10.1023/A:1018991015119)
 
 34a. <span id="Lenschow"></span> [Lenschow, D. H., V. Wulfmeyer, and C. Senff. 2000. Measuring second- through fourth-order moments in noisy data. Journal of Atmospheric and Oceanic Technology, 17: 1330-1347.](http://dx.doi.org/10.1175/1520-0426(2000)017<1330:MSTFOM>2.0.CO;2)
+
+34b. <span id="Langford2015"></span> [Langford, B., W. Acton, C. Ammann, A. Valach, and E. Nemitz. 2015. Eddy-covariance data with low signal-to-noise ratio: time-lag determination, uncertainties and limit of detection. Atmospheric Measurement Techniques, 8: 4197-4213.](https://doi.org/10.5194/amt-8-4197-2015)
 34b. <span id="Kristensen1997"></span> [Kristensen, L., J. Mann, S. P. Oncley, and J. C. Wyngaard. 1997. How close is close enough when measuring scalar fluxes with displaced sensors? Journal of Atmospheric and Oceanic Technology, 14: 814-821.](https://doi.org/10.1175/1520-0426(1997)014<0814:HCICEW>2.0.CO;2)
 
 
@@ -88,6 +90,8 @@
 
 36. <span id="Liu"></span> [Liu, H., G. Peters, and T. Foken. 2001. New equations for sonic temperature variance and buoyancy heat flux with an omnidirectional sonic anemometer, Boundary-Layer Meteorology, 100: 459-468.](http://dx.doi.org/DOI:10.1023/A:1019207031397)
 36a. <span id="Mahrt1998"></span> [Mahrt, L. 1998. Flux sampling errors for aircraft and towers. Journal of Atmospheric and Oceanic Technology, 15(2): 416-429.](https://doi.org/10.1175/1520-0426(1998)015<0416:FSEFAA>2.0.CO;2)
+
+36b. <span id="Maier2022"></span> [Maier, R., L. Hörtnagl, and N. Buchmann. 2022. Greenhouse gas fluxes (CO2, N2O and CH4) of pea and maize during two cropping seasons: Drivers, budgets, and emission factors for nitrous oxide. Science of the Total Environment, 849: 157541.](https://doi.org/10.1016/j.scitotenv.2022.157541)
 
 
 37. <span id="Mammarella2009"></span> [Mammarella, I., S. Launiainen, T. Gronholm, and P. Keronen, J. Pumpanen, Ü. Rannik, and T. Vesala. 2009. Relative humidity effect on the high-frequency attenuation of water vapor flux measured by a closed-path eddy covariance system. Journal of Atmospheric and Oceanic Technology, 26: 1856-1866.](http://journals.ametsoc.org/doi/pdf/10.1175/2009JTECHA1179.1)
@@ -135,6 +139,8 @@
 55. <span id="Schot"></span> [Schotanus, P., F. Nieuwstadt, and H. de Bruin. 1983. Temperature measurement with a sonic anemometer and its application to heat and moisture fluxes, Boundary-Layer Meteorology, 26:81–93.](http://www.springerlink.com/content/kk3n5v6285506u11/)
 
 56. <span id="Smith"></span> [Smith, S. W. 1997. The scientist and engineer's guide to digital signal processing. USA: California Technical Publishing.](http://www.dspguide.com/)
+
+56a. <span id="Spirig2005"></span> [Spirig, C., A. Neftel, C. Ammann, J. Dommen, W. Grabmer, A. Thielmann, A. Schaub, J. Beauchamp, A. Wisthaler, and A. Hansel. 2005. Eddy covariance flux measurements of biogenic VOCs during ECHO 2003 using proton transfer reaction mass spectrometry. Atmospheric Chemistry and Physics, 5: 465-481.](https://doi.org/10.5194/acp-5-465-2005)
 
 57. <span id="Stull"></span> [Stull, R. B. 1988. An Introduction to Boundary-Layer Meteorology. Dordrecht, The Netherlands: Kluwer Academic.](http://www.springer.com/earth+sciences+and+geography/meteorology+&+climatology/book/978-90-277-2769-5#)
 57a. <span id="Su2004"></span> Su, H.-B., H. P. Schmid, C. S. B. Grimmond, C. S. Vogel, and A. J. Oliphant. 2004. Spectral characteristics and correction of long-term eddy-covariance measurements over two mixed hardwood forests in non-flat terrain. Boundary-Layer Meteorology, 110: 213-253.
