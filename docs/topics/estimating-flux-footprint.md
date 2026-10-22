@@ -17,12 +17,12 @@ A footprint estimation is provided according to the "simple footprint parameteri
 Peak contributing distance (m):
 
 6‑121
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1052.svg), ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1053.svg)
+                                                            \(x_{peak} = X^*_{peak} h_m \left(\frac{\sigma_w}{u_*}\right)^{-0.8}\), \(X^* = c - d\)
 
 NN% contribution (m):
 
 6‑122
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1054.svg), ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1055.svg)
+                                                            \(x_{NN\%} = X^*_{NN\%} h_m \left(\frac{\sigma_w}{u_*}\right)^{-0.8}\), \(X^*_{NN\%} = L'_{NN\%} \cdot c - d\)
 
 The second equation is used to provide the offset distance (NN = 1) and the 10% to 90% distances. In these equations, parameters c and d are calculated using Eqs. 13 to 16 in Kljun et al. (2004) (where the roughness length enters as a parameter). The distance L' is tabulated for each percentage between 0 and 95% (see Figure A1 in the referenced paper). The FORTRAN source code for this calculation, along with the tabulated values of L', were shared by the main author of the model, Natascha Kljun, for being embedded into ECO2S, and subsequently, EddyFlow. We gratefully acknowledge Dr. Kljun for this contribution. All other quantities are routinely calculated by EddyFlow.
 
@@ -38,24 +38,26 @@ The footprint parameterization is valid only in certain ranges of micrometeorolo
 
 This is a crosswind integrated model based on the solution of the two dimensional advection-diffusion equation given, e.g., by van Ulden (1978) for power-law profiles in wind velocity and eddy diffusivity. Contributing distances are calculated according to (Eq. 21 in the original paper):
 
-6‑123
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1056.svg)
+$$
+f_x = \frac{1}{\Gamma(\mu)} \frac{\xi^{\mu}}{x^{1+\mu}} e^{-\xi/x} \tag{6-123}
+$$
 
 where x is the distance from the location of the anemometer measured in the wind direction, ξ = ξ(z) is a flux length scale that depends on the height above the ground z, μ is a dimensionless model constant and Γ(μ) is the gamma function. The equation is actually used to calculate x, given the fraction of the flux contribution of interest (10%, 30%, etc.). The equation for the peak distance is explicitly derived by the authors (Eq. 22), by merely finding the maximum from the former equation:
 
 6‑124
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1057.svg) .
+                                                            \(x_{peak} = \frac{\xi}{1+\mu}\) .
 
 ## Footprint model from Hsieh et al. (2000)
 
 This is a crosswind integrated model based on the former model of Gash (1986) and on simulations with a Lagrangian stochastic model. Contributing distances are calculated according to (Eq. 17 in the original paper):
 
-6‑125
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1058.svg)
+$$
+f_{x,z} = \frac{1}{k^2 x^2} D z_u^P |L|^{1-P} \exp\left(-\frac{1}{k^2 x} D z_u^P |L|^{1-P}\right) \tag{6-125}
+$$
 
 where, again, x and z are the upwind distance from the measuring location and the measuring height, L is the Monin-Obukhov length and k, D, P, zu are model-specific parameters.
 
 Similar to Kormann and Meixner (2001), the equation above is actually used to calculate x, given the fraction of the flux contribution of interest (10%, 30%, etc.). The equation for the peak distance is explicitly derived by the authors (Eq. 19), by merely finding the maximum from the former equation:
 
 6‑126
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1059.svg) .
+                                                            \(x_{peak} = \frac{D z_u^P |L|^{1-P}}{2k^2}\) .

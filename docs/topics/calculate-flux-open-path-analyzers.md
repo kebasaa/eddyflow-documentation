@@ -26,23 +26,27 @@ Furthermore, uncorrected momentum flux and friction velocity are corrected using
 
 As a first step after spectral correction, evapotranspiration flux E is corrected with the WPL term, following the formulation proposed in [Webb et al. (1980, eq. 42b)](references.md#Webb):
 
-6‑96
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1031.svg)
+$$
+E_2 = (1+\mu\sigma)E_1 + (1+\mu\sigma)\frac{H_1}{\rho_a c_p}\frac{\rho_w}{T_a} \tag{6-96}
+$$
 
-where μ = Md /Mh2o, and ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1032.svg) (that is, corrected for instrument-related sensible heat fluxes) if an LI-7500 was used for water vapor concentration.
+where μ = Md /Mh2o, and \(H_1 \equiv \widetilde{H}\) (that is, corrected for instrument-related sensible heat fluxes) if an LI-7500 was used for water vapor concentration.
 
 Hence, Level 2 water vapor and latent heat fluxes are simply calculated as:
 
-6‑97
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1033.svg)
+$$
+F_{2,h_2o} = E_2\cdot 10^3\cdot M_{h_2o} \tag{6-97}
+$$
 
-6‑98
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1034.svg)
+$$
+LE_2 = \lambda\cdot E_2 \tag{6-98}
+$$
 
 Now sensible heat flux is corrected for humidity effects following [van Dijk et al. (2004)](references.md#vanDijk), revising [Schotanus et al. (1983)](references.md#Schot) as explained in [Calculating Fluxes, Level 1, 2, and 3](calculate-flux-level-123.md).
 
-6‑99
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1035.svg)
+$$
+H_2 = H_1 - \rho_a c_p\cdot\alpha\left(T_s\cdot\frac{E_2}{\rho_a} + Q\cdot\overline{w'{T_s}'}\right) \tag{6-99}
+$$
 
 where α=0.51, and then it is spectrally corrected to get the first fully corrected flux:
 
@@ -50,20 +54,23 @@ where α=0.51, and then it is spectrally corrected to get the first fully correc
 
 Now that sensible heat is fully corrected, evapotranspiration flux is corrected again, adding the WPL terms with the revised H:
 
-6‑101
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1036.svg)
+$$
+E_3 = (1+\mu\sigma)E_1 + (1+\mu\sigma)\frac{H_3}{\rho_a c_p}\frac{\rho_w}{T_a} \tag{6-101}
+$$
 
 where, again, H3 contains the additional sensible heat contributions when an LI-7500 is used. Water vapor and latent heat fluxes are easily refined:
 
-6‑102
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1037.svg)
+$$
+F_{3,h_2o} = E_3\cdot 10^{-3}\cdot M_{h_2o} \tag{6-102}
+$$
 
 6‑103LE3 = λ · E3
 
 Now that evapotranspiration and sensible heat fluxes are fully corrected, fluxes of other gases such as carbon dioxide and methane can be corrected for air density fluctuations, according to [Webb et al. (1980 eq. 44)](references.md#Webb). For carbon dioxide, we get:
 
-6‑104
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1038.svg)
+$$
+F_{2,ch_4} = A\cdot\left(F_{1,ch_4} + B\cdot\mu\cdot E_{NO\_WPL}\frac{d_{ch_4}}{\rho_d} + C\cdot(1+\mu\sigma)\frac{H_3}{\rho_a c_p}\frac{d_{ch_4}}{T_a}\right) \tag{6-104}
+$$
 
 In the event that methane fluxes are computed with data from an open path instrument other than the LI-7700, EddyFlow automatically sets the multipliers A, B, and C to unity.
 
@@ -71,8 +78,9 @@ In the event that methane fluxes are computed with data from an open path instru
 
     The evapotranspiration flux needed for this formulation is not corrected for the WPL term (but is corrected for spectral attenuations). In the present case, of water vapor measured with an open path analyzer:
 
-6‑105
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1039.svg)
+$$
+E_{NO\_WPL} = E_1 \tag{6-105}
+$$
 
 Finally, corrected fluxes (Level 3) of CO2 and CH4, in systems with open path instruments, coincide with fluxes at Level 2, which thus provide the most accurate flux estimate available with EddyFlow.
 

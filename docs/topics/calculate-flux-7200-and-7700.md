@@ -20,10 +20,11 @@ Fluxes from the LI-7200 are not spectrally corrected at this stage, because the 
 
 Whenever possible, air density fluctuation effects in closed path systems are addressed by converting raw gas concentration measurements into mixing ratios (see [Converting to Mixing Ratios](converting-to-mixing-ratio.md)). However, when this is not possible due to unavailability of necessary raw information, the correction is implemented following the WPL approach, as refined by [Ibrom et al. (2007b)](references.md#Ibrom). As a first step, evapotranspiration flux is corrected for the WPL term using the formulation proposed in [Webb et al. (1980, eq. 42b)](references.md#Webb), properly modified to account for the fact that the relevant sensible heat flux is measured inside the cell of the LI-7200 (and not in ambient conditions):
 
-6‑109
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1040.svg)
+$$
+E_2 = (1+\mu\sigma)E_1 + \left(1+\mu\sigma\right)\cdot\frac{\overline{w'T'_c}}{T_c}\rho_w - (1+\mu\sigma)\cdot\frac{\overline{w'P'_c}}{P_c}\rho_w \tag{6-109}
+$$
 
-where ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1041.svg) and ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1042.svg) are covariances of w and cell temperature pressure respectively, evaluated after dislodging the cell temperature time series using the time lag of CO2. If covariance ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1043.svg) or ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1044.svg) are not available, they are assumed negligible and E1 is corrected only for the dilution term due to water vapor:
+where \(\overline{w'{T_c}'}\) and \(\overline{w'{P_c}'}\) are covariances of w and cell temperature pressure respectively, evaluated after dislodging the cell temperature time series using the time lag of CO2. If covariance \(\overline{w'{T_c}'}\) or \(\overline{w'{P_c}'}\) are not available, they are assumed negligible and E1 is corrected only for the dilution term due to water vapor:
 
 6‑110E2 = (1 + μσ)E1
 
@@ -39,8 +40,9 @@ Fully corrected latent heat and water vapor flux can now be calculated:
 
 Now, ambient sensible heat flux is corrected for humidity effects following [van Dijk et al. (2004)](references.md#vanDijk), revising [Schotanus et al. (1983)](references.md#Schot) as explained in [Calculating Fluxes Level 1 2 and 3](calculate-flux-level-123.md).
 
-6‑114
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1045.svg)
+$$
+H_2 = H_1 - \rho_a c_p\cdot\alpha\cdot\left(T_s\cdot\frac{E_2}{\rho_a} + Q\cdot\overline{w'{T_s}'}\right) \tag{6-114}
+$$
 
 Then it is spectrally corrected to get fully corrected sensible heat flux:
 
@@ -48,33 +50,39 @@ H3 = H2 · SCFw,Ts
 
 Next, level 2 CO2 flux is calculated by applying the correction for air density fluctuations. EddyFlow uses a formulation similar to [Webb et al. (1980 eq. 24)](references.md#Webb), where, however, sensible heat flux and latent heat flux are evaluated in the cell and using the time lag of CO2:
 
-6‑115
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1046.svg)
+$$
+F_{2,co_2} = \frac{v_c}{v_a}\left(F_{1,co_2} + \mu\sigma\cdot\frac{E_{cell}}{\rho_w}d_{co_2} + (1+\mu\sigma)\frac{H_{cell}}{\rho_a c_p T_c}d_{co_2} - (1+\mu\sigma)\frac{\overline{w'P'_c}}{P_c}d_{co_2}\right) \tag{6-115}
+$$
 
 where Ecell and Hcell are calculated as:
 
-6‑116
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1047.svg)
+$$
+E_{cell} = \overline{w'd'_{h_2o}}\Big|_{\tau\_co_2}\cdot M_{h_2o} \tag{6-116}
+$$
 
-6‑117
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1048.svg)
+$$
+H_{cell} = \rho_a c_p\cdot\overline{w'{T_c}'}\Big|_{\tau\_co_2} \tag{6-117}
+$$
 
 and the subscript τ_co2 indicates that covariances are evaluated at time lags of CO2. The factor vc / va is needed to compute ambient quantities from cell quantities.
 
 Methane fluxes are evaluated similarly to in a manner similar to [fluxes for the LI-7500 and LI-7700 analyzers](calculate-flux-open-path-analyzers.md):
 
-6‑118
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1049.svg)
+$$
+F_{2,ch_4} = A\cdot\left(F_{1,ch_4} + B\cdot\mu\cdot E_{NO\_WPL}\frac{d_{ch_4}}{\rho_d} + C\cdot(1+\mu\sigma)\frac{H_3}{\rho_a c_p}\frac{d_{ch_4}}{T_a}\right) \tag{6-118}
+$$
 
 where now, the spectrally corrected, not-WPL-corrected evapotranspiration flux is calculated as:
 
-6‑119
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1050.svg)
+$$
+E_{NO\_WPL} = E_1\cdot SCF_{w,h_2o} \tag{6-119}
+$$
 
 Finally, CO2 fluxes are corrected for spectral attenuations:
 
-6‑120
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1051.svg)
+$$
+F_{3,co_2} = F_{2,co_2}\cdot SCF_{w,co_2} \tag{6-120}
+$$
 
 ## Methane from the LI-7700: multipliers A, B and C
 

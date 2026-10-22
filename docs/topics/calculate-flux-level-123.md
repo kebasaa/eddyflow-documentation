@@ -8,15 +8,17 @@ Correction of air temperature estimated via sonic temperature for the effects of
 
 This correction was firstl described in [Schotanus et al. (1983)](references.md#Schot) and is applied in EddyFlow according to the revision described in [van Dijk et al. (2004, eq. 3.53)](references.md#vanDijk).
 
-6‑88 ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1028.svg)
+6‑88 \(\bar{T}_a = \frac{\bar{T}_s}{1+\alpha\bar{Q}}\)
 
-6‑89
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1029.svg)
+$$
+w'{\bar{T}_a}' = w'{\bar{T}_s}' - \alpha\bar{Q}w'{\bar{T}_s}' - \alpha\bar{T}_s w'\bar{Q}' \tag{6-89}
+$$
 
 where α=0.51, Q is specific humidity and covariance (w'Q') ̅ (m s-1) is calculated from evapotranspiration flux (E, kg m-2 s-1):
 
-6‑90
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1030.svg)
+$$
+w'\bar{Q}' = \frac{E}{\rho_a} \tag{6-90}
+$$
 
 ## Correction of gas fluxes for air density fluctuation effects (WPL terms)
 

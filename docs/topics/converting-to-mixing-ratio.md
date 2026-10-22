@@ -6,15 +6,17 @@ For closed path gas analyzers, data may be converted to mixing ratios. At this p
 
 Conversion from mole fractions of any gas (χgas, moles of gas per mole of wet air) into mixing ratios is performed according to:
 
-6‑21
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation951.svg)
+$$
+r_{gas,i} = \chi_{gas,i}\frac{1}{1-\chi_{h_2o,i}} \tag{6-21}
+$$
 
 where χh2o,i is the mole fraction of water vapor and the subscript i is used to stress that these are "instantaneous" values (individual data samples).
 
 Conversion of mole densities of any gas (dgas, moles of gas per unit of volume) into mixing ratios is performed according to:
 
-6‑22
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation952.svg)
+$$
+r_{gas,i} = d_{gas,i}\frac{v_{cell,i}}{1-\chi_{h_2o,i}} \tag{6-22}
+$$
 
 where vcell,i (volume per mole of wet air) is the molar volume inside the cell, evaluated for each data sample.
 

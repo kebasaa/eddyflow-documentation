@@ -2,10 +2,11 @@
 
 See [Add instrument sensible heat components (LI-7500)](selecting-advanced-options.md#Add) for more information.
 
-When CO2 and H2O molar densities are measured with the an LI-7500 in cold environments (low temperatures below -10 °C), a correction should be applied to account for the additional instrument-related sensible heat flux, due to instrument surface heating/cooling. The correction is not needed with the LI-7500A/RS/DS unless the analyzer was configured for the **summer** setting but used in a very cold environment. The correction is fully described and tested in literature ([Burba et al., 2008](references.md#Burba); [Grelle and Burba, 2007](references.md#Grelle); [Jarvi et al., 2009](references.md#Jarvi)). EddyFlow implements the correction according to Table 1, Method 4 of [Burba et al. (2008)](references.md#Burba), which involves calculating a corrected sensible heat flux (![](https://www.licor.com/support/GeneratedImages/Equations/Equation1005.svg)) by adding estimated sensible heat fluxes from key instrument surface elements, including the bottom window (Hbot), top window (Htop), and spar (Hspar)—to the ambient sensible heat flux (H):
+When CO2 and H2O molar densities are measured with the an LI-7500 in cold environments (low temperatures below -10 °C), a correction should be applied to account for the additional instrument-related sensible heat flux, due to instrument surface heating/cooling. The correction is not needed with the LI-7500A/RS/DS unless the analyzer was configured for the **summer** setting but used in a very cold environment. The correction is fully described and tested in literature ([Burba et al., 2008](references.md#Burba); [Grelle and Burba, 2007](references.md#Grelle); [Jarvi et al., 2009](references.md#Jarvi)). EddyFlow implements the correction according to Table 1, Method 4 of [Burba et al. (2008)](references.md#Burba), which involves calculating a corrected sensible heat flux (\(\widetilde{H}\)) by adding estimated sensible heat fluxes from key instrument surface elements, including the bottom window (Hbot), top window (Htop), and spar (Hspar)—to the ambient sensible heat flux (H):
 
-6‑72
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1006.svg)
+$$
+\widetilde{H} = H + H_{bot} + H_{top} + 0.15\cdot H_{spar} \tag{6-72}
+$$
 
 where the factor 0.15 accounts for the possibility that the heat flux may or may not enter the instrument path.
 
