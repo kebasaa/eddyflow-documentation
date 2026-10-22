@@ -14,8 +14,9 @@ where the subscript d is used for quantities referring to dry air, and where Md 
 
 Calculated from water vapor mole fraction as:
 
-6‑33
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation968.svg)
+$$
+\rho_{\mathit{h2o}} = \frac{\chi_{\mathit{h2o}} \cdot M_{\mathit{h2o}}}{v_a} \tag{6-33}
+$$
 
 ## Water vapor partial pressure (e, Pa)
 
@@ -23,14 +24,15 @@ Calculated from the ideal gas law:
 
 6‑34e = ρh2oRh2oTa
 
-where ![](https://www.licor.com/support/GeneratedImages/Equations/Equation969.svg), is the water vapor gas constant.
+where \(R_{\mathit{h2o}} = \mathfrak{R} / M_{\mathit{h2o}}\ \left(J kg^{-1} K^{-1}\right)\), is the water vapor gas constant.
 
 ## Water vapor partial pressure at saturation (es, Pa)
 
 Calculated after [Campbell and Norman (1998)](references.md#Campbell) as:
 
-6‑35
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation970.svg)
+$$
+e_s = T_a^{-8.2}\, e^{77.345 + 0.0057 \cdot T_a - 7235 \cdot T_a^{-1}} \tag{6-35}
+$$
 
 (e=2.7182, the base of the exponential function, not the water vapor partial pressure)
 
@@ -38,8 +40,9 @@ Calculated after [Campbell and Norman (1998)](references.md#Campbell) as:
 
 RH is computed according to its definition as:
 
-6‑36
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation971.svg)
+$$
+RH = \frac{e}{e_s} \cdot 100 \tag{6-36}
+$$
 
 ## Water vapor pressure deficit (VPD, Pa)
 
@@ -51,8 +54,9 @@ It is given by the difference between actual water vapor pressure and its satura
 
 It is calculated after [Campbell and Norman (1998)](references.md#Campbell) as:
 
-6‑38
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation972.svg)
+$$
+T_{\mathit{dew}} = 240.97 \cdot \frac{\ln\left(\frac{e}{0.611}\right)}{17.502 - \ln\left(\frac{e}{0.611}\right)} + 273.16 \tag{6-38}
+$$
 
 where e is intended to be in *kPa*.
 
@@ -67,7 +71,7 @@ This is given simply by the difference between total (ambient) pressure and wate
 It is calculated after [Ibrom et al. (2007b)](references.md#Ibrom) as:
 
 6‑40
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation973.svg),
+                                                            \(v_d = v_a \frac{P_a}{P_d}\),
 
 this formula has the same result as the direct application of the ideal gas law.
 
@@ -76,23 +80,23 @@ this formula has the same result as the direct application of the ideal gas law.
 From the ideal gas law:
 
 6‑41
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation974.svg),
+                                                            \(\rho_d = \frac{P_d}{R_d T_a}\),
 
-where ![](https://www.licor.com/support/GeneratedImages/Equations/Equation975.svg) is the dry air gas constant.
+where \(R_d = \mathfrak{R} / M_d\ \left(J kg^{-1} K^{-1}\right)\) is the dry air gas constant.
 
 ## Moist air mass density (ρd, kg m-3)
 
 It is given by the sum of dry air and water vapor mass densities:
 
 6‑42
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation976.svg) .
+                                                            \(\rho_a = \rho_d + \rho_{\mathit{h2o}}\) .
 
 ## Dry air heat capacity at constant pressure (cp,d, J kg-1 K-1)
 
 It is calculated as a function of temperature as:
 
 6‑43
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation977.svg),
+                                                            \(c_{p,d} = 1005 + \frac{(T_a + 23.12)^2}{3364}\),
 
 where Ta is expressed in degrees Celsius.
 
@@ -100,8 +104,9 @@ where Ta is expressed in degrees Celsius.
 
 It is calculated as a function of temperature and relative humidity as:
 
-6‑44
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation978.svg)
+$$
+c_{p,\mathit{h2o}} = 1859 + 0.13 RH + \left(0.193 + 5.6 \cdot 10^{-3} RH\right) \cdot T_a + \left(10^{-3} + 5 \cdot 10^{-5} RH\right) \cdot T_a^{2} \tag{6-44}
+$$
 
 where Ta is expressed in degrees Celsius.
 
@@ -110,19 +115,20 @@ where Ta is expressed in degrees Celsius.
 It is calculated according to its definition as:
 
 6‑45
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation979.svg) .
+                                                            \(Q = \frac{\rho_{\mathit{h2o}}}{\rho_a}\) .
 
 ## Refining ambient temperature (Ta, K)
 
 If ambient air temperature was calculated from sonic temperature, it is now corrected for the effect of ambient moisture content [(van Dijk, 2004](references.md#vanDijk), eq. 3.49):
 
 6‑46
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation980.svg) .
+                                                            \(\widetilde{T}_a = \frac{T_a}{1 + 0.51 Q}\) .
 
 Otherwise, if ambient air temperature was calculated by averaging raw data of ambient air temperature, Ta does not need a correction. In this case, a temperature mapping factor (Tmap) is calculated to rescale covariances that involve sonic temperature fluctuations arising from possible errors in the estimation of the acoustic path length of the anemometer ([van Dijk, 2004](references.md#vanDijk)):
 
-6‑47
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation981.svg)
+$$
+T_{\mathit{map}} = \frac{T_a}{T_s} \Rightarrow \overline{T_s\,'x'} \rightarrow \overline{T_s\,'x'} \cdot T_{\mathit{map}} \tag{6-47}
+$$
 
 where x is any other variable, notably w.
 
@@ -134,8 +140,9 @@ Cell temperature is now updated to account for the effect of ambient moisture co
 
 It is calculated as a function of ambient moisture content as:
 
-6‑48
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation982.svg)
+$$
+c_p = c_{p,d}\,(1 - Q) + c_{p,\mathit{h2o}} Q \tag{6-48}
+$$
 
 ## Specific evaporation heat (λ, J kg-1)
 
@@ -147,5 +154,6 @@ It is calculated as a function of ambient air temperature:
 
 It is given by:
 
-6‑50
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation983.svg)
+$$
+\sigma = \frac{\rho_{\mathit{h2o}}}{\rho_d} \tag{6-50}
+$$

@@ -4,5 +4,6 @@ In the logarithmic wind profile, the roughness length is the height at which win
 
 If not entered explicitly, EddyFlow computes the roughness length as
 
-5‑2
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation900.svg)
+$$
+z_0 = 0.15 \times \mathit{canopy\ height} \tag{5-2}
+$$

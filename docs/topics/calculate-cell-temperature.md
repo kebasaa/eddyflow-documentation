@@ -2,8 +2,9 @@
 
 The LI-7200 Enclosed CO2/H2O Analyzer features two fast measurements of the cell temperature: one at the inlet (Tin) and one at the outlet (Tout) of the cell. It computes the average cell temperature (Tcell) with a weighted average of these two fast measurements as:
 
-6‑1
-                                                            ![Tcell=0.8*Tout+0.2*Tin](https://www.licor.com/support/GeneratedImages/Equations/Equation908.svg)
+$$
+T_{\mathit{cell}} = 0.8 \cdot T_{\mathit{out}} + 0.2 \cdot T_{\mathit{in}} \tag{6-1}
+$$
 
 You can select either or all of the three temperatures as outputs, which are stored in the raw files.
 

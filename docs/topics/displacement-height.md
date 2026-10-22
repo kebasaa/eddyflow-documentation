@@ -4,5 +4,6 @@ The displacement height (or zero plane displacement height) of a vegetated surfa
 
 If not entered explicitly, EddyFlow computes the displacement height as:
 
-5‑1
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation899.svg)
+$$
+d = 0.67 \times \mathit{Canopy\ Height} \tag{5-1}
+$$

@@ -6,39 +6,39 @@ Tilt correction algorithms have been developed to correct wind statistics for an
 
 ## Double rotation method
 
-With this method, the anemometer tilt is compensated by rotating raw wind components to nullify the average cross-stream and vertical wind components, evaluated on the time period defined by the flux averaging length. The rationale is that cross and perpendicular wind components average to zero during such time periods. In the first rotation, the measured wind vector um≡(um,vm,wm) is rotated about the z axis into a temporary vector utmp, using a rotation angle θ such that the average crosswind wind component vanishes (![](https://www.licor.com/support/GeneratedImages/Equations/Equation916.svg) =0).
+With this method, the anemometer tilt is compensated by rotating raw wind components to nullify the average cross-stream and vertical wind components, evaluated on the time period defined by the flux averaging length. The rationale is that cross and perpendicular wind components average to zero during such time periods. In the first rotation, the measured wind vector um≡(um,vm,wm) is rotated about the z axis into a temporary vector utmp, using a rotation angle θ such that the average crosswind wind component vanishes (\(\bar{v}\) =0).
 
-6‑8
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation917.svg)
+$$
+\theta = \tan^{-1}\left({}^{v_{m}}\!/_{u_{m}}\right) \tag{6-8}
+$$
 
 The first rotation equations are:
 
-6‑9
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation918.svg)
-                                                              
+$$
+\begin{gathered}
+u_{tmp} = u_{m}\cos\theta + v_{m}\sin\theta \\
+v_{tmp} = -u_{m}\sin\theta + v_{m}\cos\theta \\
+w_{tmp} = w_{m}
+\end{gathered} \tag{6-9}
+$$
 
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation919.svg)
-                                                              
+The second rotation is performed about the new y-axis, using the angle ϕ that nullifies wtmp:
 
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation920.svg)
-
-The second rotation is performed about the new y-axis, using the angle Ï• that nullifies wtmp:
-
-6‑10
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation921.svg)
+$$
+\phi = \tan^{-1}\left({}^{w_{tmp}}\!/_{u_{tmp}}\right) \tag{6-10}
+$$
 
 The second rotation equations are:
 
-6‑11
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation922.svg)
-                                                              
+$$
+\begin{gathered}
+u_{rot} = u_{tmp}\cos\phi + w_{tmp}\sin\phi \\
+v_{rot} = v_{tmp} \\
+w_{rot} = -u_{tmp}\sin\phi + w_{tmp}\cos\phi
+\end{gathered} \tag{6-11}
+$$
 
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation923.svg)
-                                                              
-
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation924.svg)
-
-The rotated vector **u** rot![](https://www.licor.com/support/GeneratedImages/Equations/Equation925.svg) (urot, vrot, wrot) has zero v and w components, while its u component holds the value of the mean wind speed over the flux averaging interval.
+The rotated vector **u** rot\(\equiv\) (urot, vrot, wrot) has zero v and w components, while its u component holds the value of the mean wind speed over the flux averaging interval.
 
 !!! note
 
@@ -46,65 +46,73 @@ The rotated vector **u** rot![](https://www.licor.com/support/GeneratedImages/Eq
 
 ## Triple rotation method
 
-The "triple rotation" method involves the first two rotations as described in 2.9.1 and a third rotation around the new x axis, where the roll rotation angle ψ is defined to nullify the cross-stream stress component ![](https://www.licor.com/support/GeneratedImages/Equations/Equation926.svg):
+The "triple rotation" method involves the first two rotations as described in 2.9.1 and a third rotation around the new x axis, where the roll rotation angle ψ is defined to nullify the cross-stream stress component \(\left(\overline{v'_{rot}w'_{rot}}\right)\):
 
-6‑12
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation927.svg)
+$$
+\psi = \frac{1}{2}\tan^{-1}\left(\frac{2\overline{\nu_{rot}w_{rot}}}{\overline{v^{2}_{rot}}-w^{2}_{rot}}\right) \tag{6-12}
+$$
 
 The third rotation equations are:
 
-6‑13
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation928.svg)
-                                                              
+$$
+\begin{gathered}
+\tilde{u}_{rot} = u_{rot} \\
+\tilde{v}_{rot} = v_{rot}\cos\varphi + w_{rot}\sin\varphi \\
+\tilde{w}_{rot} = -v_{rot}\sin\varphi + w_{rot}\cos\varphi
+\end{gathered} \tag{6-13}
+$$
 
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation929.svg)
-                                                              
-
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation930.svg)
-
-Where ![](https://www.licor.com/support/GeneratedImages/Equations/Equation931.svg) is the triple rotated wind vector.
+Where \(\tilde{u}_{rot} \equiv (\tilde{u}_{rot}, \tilde{v}_{rot}, \tilde{w}_{rot})\) is the triple rotated wind vector.
 
 ## The "traditional" planar fit method
 
-The planar fit method ([Wilczak et al., 2001](references.md#Wilczak)) is based on the assessment of the anemometer tilt with respect to long-term local streamlines. This method is deemed more suitable in case of complex or sloping topography, when the mean vertical wind component or cross-stream stresses might actually differ from zero ([Lee et al., 2004](references.md#Lee)). In the planar fit method, the tilting is assessed by fitting a plane to the actual measurements of the average vertical wind component ![](https://www.licor.com/support/GeneratedImages/Equations/Equation932.svg), as a function of the horizontal components, ![](https://www.licor.com/support/GeneratedImages/Equations/Equation933.svg) and ![](https://www.licor.com/support/GeneratedImages/Equations/Equation934.svg) . The rationale is that if the anemometer is tilted with respect to the local streamlines, a certain amount of the horizontal wind speed will be found in the measured vertical component, and ![](https://www.licor.com/support/GeneratedImages/Equations/Equation935.svg) will show a certain proportionality to (a linear combination of) ![](https://www.licor.com/support/GeneratedImages/Equations/Equation936.svg) and ![](https://www.licor.com/support/GeneratedImages/Equations/Equation937.svg):
+The planar fit method ([Wilczak et al., 2001](references.md#Wilczak)) is based on the assessment of the anemometer tilt with respect to long-term local streamlines. This method is deemed more suitable in case of complex or sloping topography, when the mean vertical wind component or cross-stream stresses might actually differ from zero ([Lee et al., 2004](references.md#Lee)). In the planar fit method, the tilting is assessed by fitting a plane to the actual measurements of the average vertical wind component \(\bar{w}_{m}\), as a function of the horizontal components, \(\bar{u}_{m}\) and \(\bar{v}_{m}\) . The rationale is that if the anemometer is tilted with respect to the local streamlines, a certain amount of the horizontal wind speed will be found in the measured vertical component, and \(\bar{w}\) will show a certain proportionality to (a linear combination of) \(\bar{u}\) and \(\bar{v}\):
 
-6‑14
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation938.svg)
+$$
+\bar{w}_{m} = b_{0} + b_{1}\bar{u}_{m} + b_{2}\bar{v}_{m} \tag{6-14}
+$$
 
-The fitting procedure involves a bilinear regression to determine the fitting parameters b0, b1 and b2. The two (partial) planar fit rotation angles are then defined so as to place the z axis perpendicular to the plane of the local streamlines and thus to nullify the long-term mean of the individual ![](https://www.licor.com/support/GeneratedImages/Equations/Equation939.svg) values:
+The fitting procedure involves a bilinear regression to determine the fitting parameters b0, b1 and b2. The two (partial) planar fit rotation angles are then defined so as to place the z axis perpendicular to the plane of the local streamlines and thus to nullify the long-term mean of the individual \(\bar{w}\) values:
 
-6‑15
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation940.svg)
+$$
+u_{pf} = M_{pf} \cdot u_{m} \tag{6-15}
+$$
 
 where the rotation matrix Mpf is defined as:
 
-6‑16
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation941.svg)
+$$
+M_{pf} = \begin{pmatrix} m_{11} & m_{12} & m_{13} \\ m_{21} & m_{22} & m_{23} \\ m_{31} & m_{32} & m_{33} \end{pmatrix} = \begin{pmatrix} \cos\alpha & 0 & -\sin\alpha \\ 0 & 1 & 0 \\ \sin\alpha & 0 & \cos\alpha \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & \cos\beta & \sin\beta \\ 0 & \sin\beta & \cos\beta \end{pmatrix} \tag{6-16}
+$$
 
 and angles α and β are linked to the fitting plane coefficients by:
 
-6‑17
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation942.svg)
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation943.svg)
+$$
+\begin{gathered}
+\sin\alpha = \frac{-b_{1}}{\sqrt{b_{1}^{2}+b_{2}^{2}+1}} \\
+\sin\beta = \frac{b_{2}}{\sqrt{b_{2}^{2}+1}}
+\end{gathered} \tag{6-17}
+$$
 
-6‑18
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation944.svg)
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation945.svg)
+$$
+\begin{gathered}
+\cos\alpha = \frac{\sqrt{b_{2}^{2}+1}}{\sqrt{b_{1}^{2}+b_{2}^{2}+1}} \\
+\cos\beta = \frac{1}{\sqrt{b_{2}^{2}+1}}
+\end{gathered} \tag{6-18}
+$$
 
 Equations 42-44 in [Wilczak et al., (2001)](references.md#Wilczak) provide a different formulation for the elements mij, valid also for large tilt angles. This is the formulation implemented in EddyFlow.
 
 A third rotation, similar to the first rotation in [the Double Rotation Method](#Double), will align the wind vector with the main wind direction.
 
-6‑19
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation946.svg)
-                                                              
+$$
+\begin{gathered}
+u_{rot} = u_{of}\cos\theta + v_{pf}\sin\theta \\
+v_{rot} = -u_{pf}\sin\theta + v_{pf}\cos\theta \\
+w_{rot} = w_{pf}
+\end{gathered} \tag{6-19}
+$$
 
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation947.svg)
-                                                              
-
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation948.svg)
-
-with ![](https://www.licor.com/support/GeneratedImages/Equations/Equation949.svg) .
+with \(\theta = \tan^{-1}\left(\frac{v_{pf}}{u_{pf}}\right)\) .
 
 The planar fit method can be applied "sector-wise". In EddyFlow you can define a number of (equally wide) wind sectors. The calculations will then be performed for each sector independently, and the appropriate rotation matrix will be applied, depending on the current wind direction.
 
@@ -112,8 +120,9 @@ The planar fit method can be applied "sector-wise". In EddyFlow you can define a
 
 After verifying that the coefficient b0 is not a proper estimator of the anemometer bias in the measurement of vertical wind component as suggested by [Wiczak et al (2001)](references.md#Wilczak), [van Dijk et al. (2004)](references.md#vanDijk) proposed a revision of the method, which assumes that any bias in the measurement of w is already accounted for in the anemometer calibration and thus that the fitting plane passes through the origin (b0=0). Under these hypotheses the planar fit method reduces to
 
-6‑20
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation950.svg)
+$$
+\bar{w}_{m} = b_{1}\bar{u}_{m} + b_{2}\bar{v}_{m} \tag{6-20}
+$$
 
 with the same relationships between b1 and b2 and the tilt angles as with the original planar fit. Both planar fit methods are available in EddyFlow, with customizable planar fit settings, sectors, and more.
 

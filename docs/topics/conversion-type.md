@@ -4,7 +4,8 @@ EddyFlow allows a linear transformation to take each variable, either sensitive 
 
 Conversions are performed according to:
 
-5‑3
-                                                            ![Xout=A*Xin+B](https://www.licor.com/support/GeneratedImages/Equations/Equation901.svg)
+$$
+X_{\mathit{out}} = \mathrm{Gain} \cdot X_{\mathit{in}} + \mathrm{Offset} \tag{5-3}
+$$
 
 Xout is the output value, Xin is the input value, Gain is the gain value, and Offset is the offset value

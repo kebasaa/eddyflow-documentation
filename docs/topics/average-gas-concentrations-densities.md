@@ -2,11 +2,13 @@
 
 After having calculated ambient and cell molar volumes, for each available gas EddyFlow can calculate average concentrations expressed as mole fractions and mixing ratios, as well as average molar densities. The equations used are:
 
-6‑30
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation966.svg)
+$$
+r_{\mathit{gas}} = \chi_{\mathit{gas}}\,\frac{1}{1-\chi_{\mathit{h2o}}} \tag{6-30}
+$$
 
-6‑31
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation967.svg)
+$$
+r_{\mathit{gas}} = d_{\mathit{gas}}\,\frac{v}{1-\chi_{\mathit{h2o}}} \tag{6-31}
+$$
 
 where symbols have the usual meaning (see [Converting raw gas density to mixing ratio](converting-to-mixing-ratio.md)) used here to indicate mean values, averaged over the flux averaging interval, and v is either ambient air molar volume, va, or cell molar volume vc, depending on whether gases are measured from an open path or a closed path system, respectively.
 

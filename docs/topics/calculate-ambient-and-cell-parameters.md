@@ -24,8 +24,9 @@ where Pa0=101.3 kPa.
 
 Ambient air molar volume (va, m3mol-1) is calculated using ambient air temperature and pressure as:
 
-6‑28
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation964.svg)
+$$
+v_a = \frac{\mathfrak{R} T_a}{P_a} \tag{6-28}
+$$
 
 where ℜ = 8.314 J mol-1K-1, the universal gas constant.
 
@@ -47,8 +48,9 @@ In order of priority, cell pressure (Pc, Pa) is calculated as:
 
 Cell air molar volume (vc, m3 mol-1) is calculated using cell temperature and pressure as:
 
-6‑29
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation965.svg)
+$$
+v_c = \frac{\mathfrak{R} T_c}{P_c} \tag{6-29}
+$$
 
 where ℜ = 8.314 J mol-1K-1, the universal gas constant.
 
