@@ -22,8 +22,9 @@ In the Raw File Description table, you can enter **Nominal time lags** for varia
 
 A certain degree of uncertainty in the control over the flow rate (closed path) and the variability of wind regimes (open path) suggests an automatic time lag detection procedure, normally performed for each flux averaging period. Typically the detection is accomplished via the "covariance maximization" procedure, consisting of the determination of the time lag that maximizes the covariance of two variables, within a window of plausible time lags (e.g., [Fan et al., 1990](references.md#Fan)):
 
-6‑23
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation953.svg)
+$$
+Cov_{Max}=Cov(j_\tau)=\max_{j=m,..,M}\left(\sum_{i=1}^{N-j} w_i h_{i+j}\right) \tag{6-23}
+$$
 
 In this equation, N is the total number of samples in the current flux averaging interval; m and M are the discrete counterparts of the minimum and maximum plausible time lags, respectively; τ is the best time lag estimate, and jτ is its discrete counterpart. You can toggle between discrete indices and actual times in seconds by dividing the formers by the acquisition frequency (fa, Hz), e.g., τ = jτ • fa-1.
 
@@ -43,18 +44,20 @@ EddyFlow also provides the possibility of analyzing the actual time lags found i
 
 For passive gases, whose time lag is not expected to depend on climatic conditions or other drivers, the nominal time lag is calculated as the median of all calculated time lags:
 
-6‑24
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation954.svg)
+$$
+\tau_{nom}=\mathit{median}(\tau_i) \tag{6-24}
+$$
 
 where, for convenience, τi represents all time lags calculated from the available dataset.
 
 The plausibility window is defined as:
 
-6‑25
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation955.svg)
-                                                              
-
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation956.svg)
+$$
+\begin{gathered}
+\tau_{min}=\tau_{nom}-z*\mathit{median}(|\tau_i-\tau_{nom}|)/0.6745 \\
+\tau_{max}=\tau_{nom}+z*\mathit{median}(|\tau_i-\tau_{nom}|)/0.6745
+\end{gathered} \tag{6-25}
+$$
 
 where z is a user-selectable parameter, whose optimal value was heuristically determined to be around 1.5.
 
@@ -70,14 +73,13 @@ where z is a user-selectable parameter, whose optimal value was heuristically de
 
 The time lag of water vapor is a strong function of relative humidity (and secondarily, a function of temperature). Thus, for water vapor, nominal time lags and plausibility windows are assessed for relative humidity classes in the range 0 to 100%. In each class, the same definitions used for passive gases are also used:
 
-6‑26
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation957.svg)
-                                                              
-
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation958.svg)
-                                                              
-
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation959.svg)
+$$
+\begin{gathered}
+\tau_{nom,class}=\mathit{median}(\tau_{i,class}) \\
+\tau_{min,class}=\tau_{nom,class}-z*\mathit{median}(|\tau_{i,class}-\tau_{nom,class}|)/0.6745 \\
+\tau_{max,class}=\tau_{nom,class}+z*\mathit{median}(|\tau_{i,class}-\tau_{nom,class}|)/0.6745
+\end{gathered} \tag{6-26}
+$$
 
 where now the subscript class indicates that a different value is calculated for each class. Here also z is a user-selectable parameter, with an optimal value around 1.5.
 

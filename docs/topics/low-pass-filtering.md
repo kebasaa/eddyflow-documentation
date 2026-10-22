@@ -12,18 +12,21 @@ In this method, true cospectra estimation (Step 1) is performed by using analyti
 
 In Step 3, flux attenuation in the high frequency end is estimated by applying the calculated LPTF to the estimated true flux cospectrum. Considering that the flux is given by the integration of the cospectrum over the whole frequency range, a low-pass spectral correction factor (LPSCF) can be calculated in Step 4 as:
 
-6‑77
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1013.svg)
+$$
+LPSCF = \frac{\int_0^{f_{\max}} CO_F(f)\,df}{\int_0^{f_{\max}} CO_F(f)\cdot LPTF(f)\,df} \tag{6-77}
+$$
 
 More accurately, when the method by Moncrieff et al. (1997) is selected for the low-pass filtering correction, a band-pass transfer function (BPTF) is calculated by multiplication of the HPTF and the LPTF. This BPTF is then applied to the analytic cospectra, to derive a Band Pass Spectral Correction (BPSCF) factor according to:
 
-6‑78
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1014.svg)
+$$
+BPSCF = \frac{\int_0^{f_{\max}} CO_F(f)\,df}{\int_0^{f_{\max}} CO_F(f)\cdot BPTF(f)\,df} \tag{6-78}
+$$
 
 The fractional flux loss ΔF/F is given by:
 
-6‑79
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1015.svg)
+$$
+\frac{\Delta F}{F_{true}} = \frac{F_{true}-F_{meas}}{F_{true}} = \frac{\int_0^{f_{\max}} CO_F(f)\,df-\int_0^{f_{\max}} CO_F(f)\cdot BPTF(f)\,df}{\int_0^{f_{\max}} CO_F(f)\,df} = 1-\frac{1}{SCF} \tag{6-79}
+$$
 
 where Ftrue is the "true" flux (not affected by spectral attenuations) and Fmeas is the measured, or uncorrected flux.
 
@@ -41,10 +44,11 @@ In summary Massman's correction is applicable to all open-path systems and to cl
 
 This method is also based on an analytic formulation for the high frequency spectral losses and of the flux cospectra. However, here the integrals are solved analytically to derive a simple equation for the flux attenuation (Eq. 11 in Horst, 1997):
 
-6‑80
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1016.svg)
+$$
+LPSCF^{-1} = \frac{F_{meas}}{T_{true}} = \frac{1}{1+(2\pi\cdot n_m \tau_c \bar{u}/z)^a} \tag{6-80}
+$$
 
-where τc is the time constant of the filter implied by the EC system, α is a stability dependent constant, z is the measured height above the canopy, ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1017.svg) is the averaging wind speed at that height and nm is the (normalized) frequency at which the cospectrum attains its maximum (peak frequency), ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1018.svg) . The time constant τc is linked to the transfer function cut-off frequency fc (the frequency at which the function reduces the power by a factor of 2) by the relation: ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1019.svg) . The original paper provides parameterizations for α and nm, while the average wind speed is a standard result provided by EddyFlow. The time constant, however, is assessed in EddyFlow using the procedure described in the following section. In particular, for water vapor fluxes measured with closed path systems, the time constant is assessed as a function of relative humidity, as described hereafter.
+where τc is the time constant of the filter implied by the EC system, α is a stability dependent constant, z is the measured height above the canopy, \(\bar{u}\) is the averaging wind speed at that height and nm is the (normalized) frequency at which the cospectrum attains its maximum (peak frequency), \(n=f\cdot z/\bar{u}\) . The time constant τc is linked to the transfer function cut-off frequency fc (the frequency at which the function reduces the power by a factor of 2) by the relation: \(2\pi\tau_c=1/f_c\) . The original paper provides parameterizations for α and nm, while the average wind speed is a standard result provided by EddyFlow. The time constant, however, is assessed in EddyFlow using the procedure described in the following section. In particular, for water vapor fluxes measured with closed path systems, the time constant is assessed as a function of relative humidity, as described hereafter.
 
 ## Spectral corrections after Ibrom et al. (2007)
 
@@ -54,10 +58,11 @@ In the first step, assuming spectral similarity ([De Ligne et al., 2010](referen
 
 The estimation of system filtering characteristics (Step 2) is based on the *in situ* determination of the system cut-off frequency, assuming that the Eddy Covariance system acts on the true gas spectra (S) as a low-pass filter, in such a way that measured spectra (Sm) are attenuated at the high frequency end. Mathematically, this effect is described with a first-order recursive, infinite impulse response (IIR) filter. The discrete Fourier transform (HIIR) of the amplitude of such filter is well approximated by the Lorentzian:
 
-6‑81
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1020.svg)
+$$
+H_{IIR}(f|f_c) = \frac{S_m(f)}{S(f)} = \frac{1}{1+(f/f_c)^2} \tag{6-81}
+$$
 
-where f (Hz) is the natural frequency and fc (Hz) is the transfer function cut-off frequency. The latter is proportional to the inverse of the filter time constant (τc, s), ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1021.svg), and provides a quantification of amplitude attenuation of fluctuations. This filter shape was proven suitable for describing the filtering properties of EC systems featuring very long (50 m, [Hollinger et al., 1999](references.md#Hollinger1999); [Ibrom et al., 2007](references.md#Ibrom)) and long (7m, [Mammarella et al., 2009](references.md#Mammarella2009)) sampling lines.
+where f (Hz) is the natural frequency and fc (Hz) is the transfer function cut-off frequency. The latter is proportional to the inverse of the filter time constant (τc, s), \(f^{-1}_c=2\pi\tau_c\), and provides a quantification of amplitude attenuation of fluctuations. This filter shape was proven suitable for describing the filtering properties of EC systems featuring very long (50 m, [Hollinger et al., 1999](references.md#Hollinger1999); [Ibrom et al., 2007](references.md#Ibrom)) and long (7m, [Mammarella et al., 2009](references.md#Mammarella2009)) sampling lines.
 
 !!! note
 
@@ -65,8 +70,9 @@ where f (Hz) is the natural frequency and fc (Hz) is the transfer function cut-o
 
 For H2O measured by closed path systems, in order to uncover the increasing attenuation as RH increases, cut-off frequencies must be determined for different RH regimes. As suggested by Ibrom et al., EddyFlow determines fc for nine classes in the range 5% < RH < 95% and fits an exponential function to the resulting RH/fc pairs:
 
-6‑82
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1022.svg)
+$$
+f_c(RH)=\exp(E_1\cdot RH^2+E_2\cdot RH+E_3) \tag{6-82}
+$$
 
 where E1, E2, and E3 are regression parameters.
 
@@ -76,8 +82,9 @@ For passive gases, instead, a unique cut-off frequency is assessed for the whole
 
 Once cut-off frequencies have been assessed, the low-pass spectral correction factor (Step 4) is calculated using the parameterization:
 
-6‑83
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1023.svg)
+$$
+LFSCF = \frac{d_1 U}{d_2+f_c}+1 \tag{6-83}
+$$
 
 where U is the average wind speed and d1 and d2 are site-specific parameters to be determined using collected turbulence data. The actual procedure, which makes use of "degraded temperature time series," is described in detail in the original paper.
 
@@ -91,20 +98,23 @@ In this method, the first three steps are identical to those described [above](#
 
 For small fluxes the method of [Ibrom et al. (2007)](references.md#Ibrom) is applied, i.e., the low-pass correction factor is calculated using the model:
 
-6‑84
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1024.svg)
+$$
+LFSCF = \frac{d_1 U}{d_2+f_c}+1 \tag{6-84}
+$$
 
 However, refer to section 2.3 and Appendix A in [Fratini et al. (2012)](references.md#Fratini2012) for subtle differences in the parameterization of the model and how they improve it.
 
 For large fluxes, refining and simplifying the approach described by [Hollinger et al. (1999)](references.md#Hollinger1999), low-pass spectral correction factors (LPSCF), for each flux averaging interval are calculated using the following equation:
 
-6‑85
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1025.svg)
+$$
+LPSCF = \frac{\int_{f_{\min}}^{f_{\max}} CO_H(f)\,df}{\int_{f_{\min}}^{f_{\max}} (f)\,H_{IIR(f|f_c)}\,df} \tag{6-85}
+$$
 
 where COH is the current sensible heat (H, W m-2) cospectrum. The value of the cut-off frequency in the denominator is calculated from:
 
-6‑86
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1026.svg)
+$$
+f_c(RH)=\exp(E_1 RH^2+E_2 RH+E_3) \tag{6-86}
+$$
 
 as in [Ibrom et al. (2007)](references.md#Ibrom), using the current value of RH.
 
@@ -125,10 +135,11 @@ Thus, the method is available in two versions:
 
 The correction procedure is based on the following formulation for the dependency of the flux (F(r)) as a function of the distance between the instruments (r), Eq. 13 in the original paper:
 
-6‑87
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1027.svg)
+$$
+F(r)=F_0\exp(-k_m r) \tag{6-87}
+$$
 
-where F0 is the unattenuated flux for r = 0, and km = 2Ï€nm/z is the wavenumber at the peak of the wavenumber-weighted cospectrum, kCo(k), nm = fm z / U, fm is the frequency at the peak of the cospectrum, and U is the wind speed.
+where F0 is the unattenuated flux for r = 0, and km = 2πnm/z is the wavenumber at the peak of the wavenumber-weighted cospectrum, kCo(k), nm = fm z / U, fm is the frequency at the peak of the cospectrum, and U is the wind speed.
 
 This formulation is then specified in the along-wind, crosswind, and vertical separations. Please refer to [Horst and Lenschow (2009)](references.md#horst2009) for further details.
 

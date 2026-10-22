@@ -8,8 +8,9 @@ In Step 2, an analytical formulation is used of the transfer function that descr
 
 In Step 3, flux attenuation in the low frequency end is estimated by "applying" the calculated HPTF to the modeled flux cospectrum. When it is done in the frequency domain, "applying" simply means a frequency-wise multiplication. Considering that a flux is proportional to the integral of the corresponding cospectrum over the whole frequency range, a high-pass spectral correction factor (HPSCF) can be calculated in Step 4 as:
 
-6‑76
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation1012.svg)
+$$
+HPSCF = \frac{\int_0^{f_{\max}} CO_F(f)\,df}{\int_0^{f_{\max}} CO_F(f)\cdot HPTF(f)\,df} \tag{6-76}
+$$
 
 where fmax is the highest frequency, corresponding to the smallest eddies contributing to the true flux.
 

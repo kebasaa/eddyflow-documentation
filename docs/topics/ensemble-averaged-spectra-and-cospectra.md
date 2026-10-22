@@ -33,8 +33,9 @@ Although not directly used for any calculation, EddyFlow also calculates ensembl
 
 EddyFlow sorts and averages cospectra according to the atmospheric stability regime, defined by the value of the Monin-Obukhov length (L). Ensemble averaged cospectra are provided for unstable (-650 < L < 0) and stable (0 < L < 1000) stratifications. Before being considered for ensemble averaging, cospectra are screened for quality. Cospectra corresponding to stable stratifications are filtered using the same "soft" criteria described above, while cospectra corresponding to unstable stratifications are filtered using the flux thresholds entered by the user in the spectral correction configuration page (default values are used if the spectral correction page is not configured; default values are visible in the interface). In addition, EddyFlow fits Massman's model to the ensemble of individual cospectra.
 
-6‑27
-                                                            ![](https://www.licor.com/support/GeneratedImages/Equations/Equation960.svg)
+$$
+\frac{nCo_{wc}(f)}{w'c'} = A_0 \frac{f/f_p}{\left(1+(f/f_p)^{2\mu}\right)^{\frac{1.1667}{\mu}}} \tag{6-27}
+$$
 
 where n (Hz) is the natural frequency, f = (z-d)* n/U is the normalized frequency and A0, fp and μ are regression parameters. To perform this step, individual cospectra are expressed as a function of the normalized frequency. The overall normalized frequency range is defined *a priori* in EddyFlow and extends from 1/4 Hz up to 200 Hz. This is a wide range, which implies that often empty frequency bins are found in the output file, corresponding to normalized frequency ranges where no actual cospectral values were found. Finally, in the same output file, identified by the string ` ensemble_cospectra_by_stability ` in the name, "ideal" Kaimal cospectra are also found. For the stable regime, this is only a function of the normalized frequency. However, for the stable range, ideal cospectra are also a function of z/L. Thus EddyFlow outputs Kaimal cospectra corresponding to two extremely stable conditions, namely z/L = 0.01 (near neutral stratification) and z/L = 10 (strongly stable stratification).
 

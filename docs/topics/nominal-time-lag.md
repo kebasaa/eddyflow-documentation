@@ -8,24 +8,30 @@ For these reasons, a range of plausible time lags can be specified by providing 
 
 If not set explicitly, **or if any of the time lag values are zero**, EddyFlow will set nominal, minimum, and maximum time lag values according to meta-information available. However, if the user-provided or calculated time lags are very close to zero, EddyFlow will use a safety margin of 0.3 to determine the minimum (τmin = τmin -0.3) and maximum (τmax = τmax +0.3) time lags. Specifically, for closed path systems a nominal time lag (*τ*nom) is set by calculating the nominal transit time of the airflow along the intake tube, based on tube volume and the flow rate:
 
-5‑4
-                                                            ![tnom=(tubelength*cross section)/flow rate](https://www.licor.com/support/GeneratedImages/Equations/Equation902.svg)
+$$
+\tau_{nom} = \frac{\mathit{tubelength}\cdot\mathit{tube\ cross\ section}}{\mathit{flowrate}} \tag{5-4}
+$$
 
-5‑5
-                                                            ![tmin=tnom-2](https://www.licor.com/support/GeneratedImages/Equations/Equation903.svg)
+$$
+\tau_{min}=\tau_{nom}-2\cdot\tau_{nom} \tag{5-5}
+$$
 
-5‑6
-                                                            ![tmax=tnom+2*tnom](https://www.licor.com/support/GeneratedImages/Equations/Equation904.svg)
+$$
+\tau_{max}=\tau_{nom}+2\cdot\tau_{nom} \tag{5-6}
+$$
 
 The range is set asymmetrically because it is more likely that the time lag will increase (due, for example, to lower flow rates caused by clogged filters), rather than decrease. The constant 2 in the last equation is replaced by 10 for water vapor, as the time lag of water vapor is observed to exhibit a strong dependence on relative humidity (e.g., [Ibrom et al., 2007b](references.md#Ibrom2))
 
 For open path systems, by contrast, the nominal time lag is set to zero as the most likely value in sites that lack a prevailing wind direction. Minimum and maximum values are calculated based on the separation between the gas analyzer and the anemometer and a 0.5 m/s average wind speed:
 
-5‑7
-                                                            ![tnom=0](https://www.licor.com/support/GeneratedImages/Equations/Equation905.svg)
+$$
+\tau_{nom}=0 \tag{5-7}
+$$
 
-5‑8
-                                                            ![tmin=-sensor separation/0.5](https://www.licor.com/support/GeneratedImages/Equations/Equation906.svg)
+$$
+\tau_{min} = \frac{-\mathit{sensorseparation}}{0.5} \tag{5-8}
+$$
 
-5‑9
-                                                            ![tmax=sensor separation/0.5](https://www.licor.com/support/GeneratedImages/Equations/Equation907.svg)
+$$
+\tau_{max} = \frac{\mathit{sensorseparation}}{0.5} \tag{5-9}
+$$
