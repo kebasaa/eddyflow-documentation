@@ -30,6 +30,8 @@
 
 10. [van Dijk, A., W. Kohsiek, H. de Bruin. 2003. Oxygen Sensitivity of Krypton and Lyman-α Hygrometers, Journal of Atmospheric and Oceanic Technology, 20, pp. 143-151.](http://journals.ametsoc.org/doi/pdf/10.1175/1520-0426(2003)020<0143:OSOKAL>2.0.CO;2)
 
+10a. <span id="Eugster1995"></span> [Eugster, W. and W. Senn. 1995. A cospectral correction model for measurement of turbulent NO<sub>2</sub> flux. Boundary-Layer Meteorology, 74: 321-340.](https://doi.org/10.1007/BF00712375)
+
 11. <span id="Fan"></span> [Fan, S. M., Wofsy, S. C., Bakwin, P. S., Jacob, D. J. and Fitzjarrald, D. R. 1990. Atmosphere-biosphere exchange of CO2 and O3 in the Central Amazon Forest. Journal of Geophysical Research, 95: 16851-16864.](http://dx.doi.org/doi:10.1029/JD095iD10p16851)
 
 12. <span id="Finkelstein"></span> [Finkelstein, P. L., and P. F. Sims. 2001. Sampling error in eddy correlation flux measurements. Journal of Geophysical Research, 106: 3503-3509.](http://dx.doi.org/doi:10.1029/2000JD900731)

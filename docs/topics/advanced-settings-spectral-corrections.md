@@ -12,8 +12,9 @@ The second choice regards the application of a correction for the low-pass filte
 
 ![](../assets/Adv_Settings_SC.png)
 
-Five methods are available:
+Six methods are available:
 
+- The analytic method of [Eugster and Senn (1995)](references.md#Eugster1995),
 - The analytic method of [Moncrieff et al. (1997)](references.md#Moncrieff2),
 - The analytic method of [Massman (2000, 2001)](references.md#Massman2000),
 - The semi-analytic method of [Horst (1997)](references.md#horst1997)
@@ -21,6 +22,8 @@ Five methods are available:
 - The *in situ* method of [Fratini et al. (2012)](references.md#Fratini2012).
 
 The methods by Moncrieff et al. (1997) and by Massman (2000, 2001) model all major sources of flux attenuation by means of a mathematical formulation. When using these methods, no further information is needed, so all of the fields in this page are deactivated. These methods are suggested for open path EC systems or for closed path systems if the sampling line is short and heated. The reason is that this method may seriously underestimate the attenuation (and hence the correction)—notably for water vapor—when the sampling line is long (and the attenuation is strong) and not heated because of the dependency of attenuation of H2O on relative humidity, which has been clearly recognized in recent research.
+
+The method by Eugster and Senn (1995) is analytic too, and needs one value per gas: the damping time constant *L* of the gas measurement, entered in the list that appears below the method menu when the method is selected. A gas without a value uses the response time of its analyser. See [Low-pass filtering correction](low-pass-filtering.md#spectral-corrections-after-eugster-and-senn-1995).
 
 Separately from which low-pass method is selected, a **Cospectral model** control chooses the analytic cospectrum the correction is integrated against (default [Moncrieff et al. (1997)](references.md#Moncrieff); alternatives Kaimal et al. 1972, Sakai et al. 2001, Su et al. 2003, Moraes et al. 2008 and Kristensen et al. 1997), and (since engine v8.1.0) an **Iterate the correction** option can repeat the correction and the flux computation together until the stability each assumes agrees with the stability the other produces. Both are off or at their default unless changed, so that a project keeps its earlier numbers. See [Correction of low-pass filtering effects](spectral-corrections.md#correction-of-low-pass-filtering-effects) for the controls and [Low-pass filtering correction](low-pass-filtering.md#cospectral-model-for-the-analytic-correction) for the method.
 

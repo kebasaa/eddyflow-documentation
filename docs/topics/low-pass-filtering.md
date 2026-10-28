@@ -2,9 +2,56 @@
 
 See [High frequency spectral correction](selecting-advanced-options.md#high-frequency-spectral-correction) for more information.
 
-Five low-pass filtering correction procedures are available in EddyFlow, implementing the [4 steps](calculate-spectral-correction-factors.md) in different ways. The methods are named after the corresponding reference publication. The method by [Moncrieff et al. (1997)](references.md#Moncrieff) is referred to as purely analytic, for it makes use of mathematical formulations to model flux spectral properties and to describe flux attenuations due to the instrument setup. The method by [Horst (1997)](references.md#horst1997) is analytic in nature, but it is parameterized using *in situ* information. The method by [Ibrom et al. (2007)](references.md#Ibrom), instead, is mostly based on *in situ* determinations.
+Six low-pass filtering correction procedures are available in EddyFlow, implementing the [4 steps](calculate-spectral-correction-factors.md) in different ways. The methods are named after the corresponding reference publication. The method by [Moncrieff et al. (1997)](references.md#Moncrieff) is referred to as purely analytic, for it makes use of mathematical formulations to model flux spectral properties and to describe flux attenuations due to the instrument setup. The method by [Horst (1997)](references.md#horst1997) is analytic in nature, but it is parameterized using *in situ* information. The method by [Ibrom et al. (2007)](references.md#Ibrom), instead, is mostly based on *in situ* determinations. The method by [Eugster and Senn (1995)](references.md#Eugster1995) is analytic as well, but describes the damping of each gas measurement by a single time constant that you provide.
 
 The methods are briefly described below. Please refer to the original papers for more in depth information.
+
+## Spectral corrections after Eugster and Senn (1995)
+
+[Eugster and Senn (1995)](references.md#Eugster1995) developed this correction for NO<sub>2</sub> fluxes measured with a chemiluminescence analyser behind a 5 m sampling tube. It relies only on the similarity of scalar cospectra, so it applies to any gas whose measurement is damped at high frequencies, and EddyFlow applies it to every gas.
+
+The damping is described by analogy with an inductance *L* in an alternating-current circuit, which acts as a first-order low-pass filter. At natural frequency *f*, the cospectrum of the vertical wind with the measured gas concentration is damped by
+
+$$
+Co_{w,c_{meas}}(f) = \frac{1}{1+4\pi^2 f^2 L^2}\,Co_{w,c}(f)
+$$
+
+*L* is a time constant in seconds. It lumps together every source of damping of the gas signal: the flow in the sampling tube, any reaction or measurement cell, and the response of the analyser. The measurement height, wind speed and stability enter through the undamped cospectrum, a model after [Kaimal et al. (1972)](references.md#Kaimal) with coefficients adjusted by Eugster and Senn (their Eqs. 26-28).
+
+Integrating the damped cospectrum gives the measurable fraction ξ of the flux, and the spectral correction factor is 1/ξ. Here *z* is the measurement height above the zero-plane displacement, \(\bar{u}\) the mean wind speed and ζ = *z*/*L*<sub>MO</sub> the stability parameter.
+
+- Unstable and neutral stratification (ζ ≤ 0). The integral has no closed form, so Eugster and Senn fitted one to its numerical solution (Eq. 32):
+
+    $$
+    \xi = 0.725\,\arctan\left[1.24\,\ln\left(\frac{z}{\bar{u}L}+1\right)+0.21\right]
+    $$
+
+    The fit tends to 1.14 rather than 1 as *L* goes to zero, so EddyFlow caps ξ at 1.
+
+- Stable stratification (0 < ζ ≤ 2). The integral is solved analytically after rounding one exponent of the cospectral model from 2.1 to 2 (Eq. 33):
+
+    $$
+    \xi = \frac{3}{\sqrt{6}}\,\frac{z}{\bar{u}}\,\frac{\sqrt{6}\,z/\bar{u}-4\pi L n_0}{3\,(z/\bar{u})^2-8\pi^2 L^2 n_0^2},
+    \qquad n_0 = 0.23\,(1+6.4\,\zeta)^{3/4}
+    $$
+
+    The numerator and the denominator share the root \(z/\bar{u} = 4\pi L n_0/\sqrt{6}\), where the expression reads 0/0. EddyFlow evaluates the equivalent form with that factor cancelled, which is defined everywhere:
+
+    $$
+    \xi = \frac{z/\bar{u}}{z/\bar{u} + 4\pi L n_0/\sqrt{6}}
+    $$
+
+Both equations were fitted for −2 ≤ ζ ≤ 2. The unstable fit does not depend on ζ, so it is used for any ζ ≤ 0; above 2, ζ is held at 2. When **Iterate the correction** is selected, ζ is the one the iteration converges on.
+
+For example, at \(z/\bar{u}\) = 1 s and *L* = 0.35 s the correction factor in unstable conditions is 1.274 (Eugster and Senn, Table III). For their LMA-3 analyser with a 6 mm, 5 m teflon tube, *L* was 0.30-0.35 s, and the correction factors ranged from 1.05 to 1.31.
+
+**Discarded fluxes.** Eugster and Senn advise against using a flux of which less than 40 % was measurable. When ξ < 0.4 (a correction factor above 2.5), EddyFlow sets that gas's flux to the error value for that averaging period, and for the water vapor record also the evapotranspiration and latent heat flux. The correction factor itself is still reported, so the output shows why the flux is missing. The other gases are not affected: the discard is applied after every WPL term has used the water vapor flux.
+
+**The time constant *L*.** *L* is set separately for each gas, in the list that appears under the method menu when the method is selected (`gas_<i>_es_tau` in the project file). A gas left at **Analyser response time** uses the response time τ of its analyser from the metadata, which usually covers the analyser alone and not the tube. A value of 0 means no high-frequency damping. *L* is the time constant of the same first-order filter whose cut-off frequency *f*<sub>c</sub> an *in situ* spectral assessment fits (see [Ibrom et al. (2007)](#spectral-corrections-after-ibrom-et-al-2007)), so \(L = 1/(2\pi f_c)\) converts one into the other. Eugster and Senn determined *L* by fitting the damped model cospectrum to measured cospectra of the gas flux.
+
+**Other fluxes and the low frequency range.** The method corrects gas fluxes only; momentum and sensible heat fluxes are corrected as with [Moncrieff et al. (1997)](#spectral-corrections-after-moncrieff-et-al-1997). When the high-pass filtering correction is selected, its factor is multiplied into each gas's correction factor, as for the other analytic methods.
+
+The method is fully analytic: it needs no spectral assessment, runs in the first step of the engine, and can be applied to a dataset of any length. In the FLUXNET output, `SPECTRAL_CORRECTION_METHOD` is 7.
 
 ## Spectral corrections after Moncrieff et al. (1997)
 
