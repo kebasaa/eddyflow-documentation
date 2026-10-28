@@ -2,6 +2,46 @@
 
 EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
 
+## 8.1.3 (2026-10-07)
+
+Engine:
+
+- New feature: Limit of detection after Langford et al. (2015), as a random uncertainty method and as a flux detection limit. The random error is the scatter of the cross-covariance far from the time lag (RMSE or standard deviation), in a window of ±150-180 s, ±160-180 s or one placed automatically from the integral turbulence scale; the limit of detection is α times that error. New `lod_*` columns in the full output and a `_LOD` family in the FLUXNET output; see [Random uncertainty estimation](random-uncertainty-estimation.md#far-lag-cross-covariance-and-limit-of-detection-langford-et-al-2015).
+- New feature: Random uncertainties can be reported spectrally corrected, as Langford et al. (2015) recommend, for every random uncertainty method. Off by default, as in EddyPro; see [Spectral correction of the random uncertainty](random-uncertainty-estimation.md#spectral-correction-of-the-random-uncertainty).
+- New feature: High-frequency spectral correction after Eugster and Senn (1995), for every gas, with a damping time constant per gas. A gas flux of which less than 40 % was measurable is discarded. Opt-in; see [Spectral corrections after Eugster and Senn (1995)](low-pass-filtering.md#spectral-corrections-after-eugster-and-senn-1995).
+- New feature: A preliminary time-lag assessment on a random sample of the half-hours, for the interface's new dialog; see [Timelag preliminary assessment](timelag-preliminary-assessment.md).
+- Change: Every hygrometer's evapotranspiration is WPL-corrected after its own path type, with its own air and cell, and each gas's WPL takes its water flux from the hygrometer its record names. Numbered `LE_<n>`, `ET_<n>` and water fluxes of a second hygrometer move where that made a difference; the bare LE and ET do not.
+- Change: The essentials file names, for each gas, which H2O its moisture terms belong to. FCC refuses an essentials file written by an earlier version (Error 107); re-run RP to regenerate it.
+- Change: The time-lag optimization and PWB summaries list every gas of the run, not only those present in its last half-hour.
+- Change: RP and FCC link the Fortran runtime statically on Windows; `libgfortran-5.dll` is no longer needed.
+- Fix: With WPL switched off, the gases were still density-corrected; each gas now keeps its level 1 flux.
+- Fix: FCC ignored express mode, so a command-line run of an express project finished its fluxes with the project's own settings rather than the express ones.
+- Fix: A gas that takes its water from the biomet RH lost its LI-7700 multipliers and its dilution in half-hours without a usable RH; they now follow the hygrometer the site's humidity falls back to.
+- Fix: The metadata output had different columns and units depending on whether FCC ran, and RP scaled the error code with the value it stands for (a missing tube length came out as -999900).
+- Fix: The numbered `H_<n>` of a second hygrometer lacked the sensible heat spectral correction, and a few fluxes were multiplied by the error code instead of being reported as missing (methane at about -8e8 when the LI-7700 multipliers were missing).
+- Fix: A period with no gas data reported Error 69, which read as the in situ spectral correction having failed.
+- Fix: A raw file or embedded biomet table shorter than its stated header stopped the run with "End of file"; it is now skipped for its period. When no embedded biomet table gives a value, the end of the run says so and names `biomet_header_rows` as the likely cause.
+- Fix: Split runs: what the end of the run reads from the last period came from the parent's own piece, download failures and PWB peaks outside the window were undercounted, and a run whose workers had lost their files waited a day before giving up. It now stops within about a minute.
+- Fix: An occasional crash inside `ucrtbase.dll` on formatted reads and writes on Windows; formatted output is also faster.
+- Fix: A home directory passed as `-e "C:\dir\"` created stray folders; a path with a double quote in it now stops the run before anything is created. See [Command line](command-line.md).
+- Fix: `SPECTRAL_CORRECTION_METHOD` wrote no field for a method without a code, shifting every later column of the FLUXNET output.
+- New feature: For the interface, the engine reports which passes lie ahead and the progress of the pass under way over all processes.
+
+GUI:
+
+- New feature: "Limit of detection (Langford et al. 2015)" in the random uncertainty menu and in the Flux Detection Limit dialog, with one settings dialog for both; see [Limit of detection settings](limit-of-detection-settings.md).
+- New feature: "Spectrally correct the random uncertainty", a checkbox below the random uncertainty settings.
+- New feature: "Eugster and Senn (1995) - Fully analytic", first in the high-frequency spectral correction menu, which is now in order of publication. Selecting it shows the damping time constant *L* of each gas; see [Spectral corrections](spectral-corrections.md#correction-of-low-pass-filtering-effects).
+- New feature: "Timelag preliminary assessment..." detects the time lags of a sample of the half-hours, charts them per gas and suggests nominal lags and windows that can be set in the metadata; see [Timelag preliminary assessment](timelag-preliminary-assessment.md).
+- New feature: Offline help is a build of this documentation, so "Use Offline Help" works again, and dialogs that had no help now have a question mark.
+- Fix: The help question marks and buttons open this documentation; they pointed at a host that does not exist.
+- Fix: The estimated time to completion and the progress bar are right in a parallel run and cover the whole run.
+- Fix: Stopping a run, or closing the window, no longer harms a run in another EddyFlow window.
+- Fix: The tooltips of the high-frequency method menu sat one row off.
+- Fix: The list of recent projects keeps 20 projects, whatever the size of the window.
+- Change: "Run in parallel on all processor cores" is ticked by default where the setting has not been stored yet.
+- Change: "EddyFlow Forum" and "Instruction Manual (PDF)" are gone from the Help menu: there is no forum and no PDF manual.
+
 ## 8.1.2 (2026-10-02)
 
 Engine:
