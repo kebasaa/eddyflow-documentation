@@ -48,7 +48,7 @@ $$
 \tau_{nom}=\mathit{median}(\tau_i) \tag{6-24}
 $$
 
-where, for convenience, τi represents all time lags calculated from the available dataset.
+where, for convenience, τi represents all time lags calculated from the available dataset. Only half-hours whose flux exceeds the gas's **Minimum (absolute) flux** in magnitude contribute, so an uptake flux counts as much as an emission of the same size: the threshold is there because a weak covariance gives a poorly defined peak, and the sign does not change that. A time lag found at either end of the search window is left out too.
 
 The plausibility window is defined as:
 
