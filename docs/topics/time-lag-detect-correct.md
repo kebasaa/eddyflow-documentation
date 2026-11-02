@@ -123,7 +123,7 @@ The lag selected can differ from the plain maximum; the covariance reported at t
 
 ## Conditional lag borrowing
 
-Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `tlag_borrow_donor`; interface controls **Borrow a tube-mate's lag below the detection limit**, **Detection limits to clear**, **Judged against**, **Borrow from** (see [Advanced settings: processing options](raw-processing-options.md#conditional-lag-borrowing)). Off by default.
+Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `tlag_borrow_donor`, `tlag_borrow_pairs`; interface controls **Borrow a tube-mate's lag below the detection limit**, **Detection limits to clear**, **Judged against**, **Borrow from** (see [Advanced settings: processing options](raw-processing-options.md#conditional-lag-borrowing)). Off by default.
 
 **Idea.** Gases drawn through the same intake tube share the same transport delay. A trace gas whose cross-covariance with *w* cannot be distinguished from noise has no peak of its own to detect, and the lag a maximization returns for it is close to a random draw over the search window. A gas on the same analyser that resolves its peak is measuring that same delay, so its lag is the best estimate available for the weak gas (Nemitz et al., 2018).
 
@@ -131,7 +131,7 @@ Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `t
 
 1. For each gas compute the signal-to-noise ratio: the absolute covariance at its own lag divided by the noise floor chosen under **Judged against**. The floor is either the flux detection limit ([Wienhold et al., 1994](references.md#Wienhold1994); see [Flux detection limit](flux-detection-limit.md#top)), which is the scatter of the cross-covariance far from the peak, or the instrumental noise ([Lenschow et al., 2000](references.md#Lenschow); [Mauder et al., 2013](references.md#Mauder2013)), which is the step in the autocovariance at zero lag.
 2. A gas is *trusted* if its ratio is at least **Detection limits to clear** (default 3). The trusted set is fixed before any borrowing happens, so a borrowed lag can never become a donor and the result does not depend on column order.
-3. A gas that is not trusted, or whose lag landed on an end of its search window, takes the lag of a donor. The donor is the trusted gas on the same analyser with the highest ratio, or, if **The analyser's carbon dioxide (EddyUH)** is chosen, the carbon dioxide of that analyser provided it is trusted.
+3. A gas that is not trusted, or whose lag landed on an end of its search window, takes the lag of a donor. The donor is the trusted gas on the same analyser with the highest ratio, or, if **The analyser's carbon dioxide (EddyUH)** is chosen, the carbon dioxide of that analyser provided it is trusted. Under **Chosen per gas** a gas that names a donor takes that gas's lag provided it is trusted, eligible and on the same analyser, and a gas that names none is treated as under the first rule.
 4. The borrowed lag is applied in place of the gas's own. The lag that the gas's own maximization found remains in the output of actual lags, so the two differing is the record that a lag was taken from elsewhere.
 
 **Rules and limitations.**
@@ -140,6 +140,7 @@ Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `t
 - Water vapor is never borrowed for or from.
 - A lag is never taken from a different instrument, and a gas whose record names no instrument neither donates nor borrows.
 - With the carbon dioxide donor, nothing is borrowed if the analyser measures no carbon dioxide, and carbon dioxide itself never borrows.
+- A donor named per gas is never replaced by another: if it is not trusted in a period, nothing is borrowed for that period, for the same reason the carbon dioxide rule does not fall back.
 - Borrowing trades a noisy number for a biased one: two gases down one tube can differ systematically by a few tenths of a second. It is intended for gases whose own detection is unreliable, not as a general replacement for detection.
 - A borrowed lag is flagged in `<gas>_def_timelag` like a nominal-lag fallback, and the run log names the donor.
 - Borrowing is separate from the borrowing inside the pre-whitening block-bootstrap method (below). The first asks whether a peak stands above the noise in this period; the second asks whether a bootstrap could not settle on a lag across periods.
