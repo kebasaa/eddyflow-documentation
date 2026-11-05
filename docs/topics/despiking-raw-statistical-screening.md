@@ -102,7 +102,7 @@ Third and fourth order moments are calculated on the whole time series and varia
 
 ## Discontinuities
 
-The goal of this test is to detect discontinuities that lead to semi-permanent changes, as opposed to sharp changes associated with smaller-scale fluctuations ([Vickers and Mahrt, 1997](references.md#Vickers)). Discontinuities in the data are detected using the Haar transform, which calculates the difference in some quantity over two half-window means. Large values of the transform identify changes that are coherent on the scale of the window.
+The goal of this test is to detect discontinuities that lead to semi-permanent changes, as opposed to sharp changes associated with smaller-scale fluctuations ([Vickers and Mahrt, 1997](references.md#Vickers)). Discontinuities in the data are detected using the Haar transform, which calculates the difference in some quantity over two half-window means. Large values of the transform identify changes that are coherent on the scale of the window. Gas molar densities are converted to mole fractions before the half-windows are compared. The test on the variance compares the variances (squared standard deviations) of the two half-windows with the variance of the whole window, so its transform is dimensionless.
 
 ![](../assets/discontinuities.png)
                                                             Figure 6‑9. Example of a time series featuring a "permanent" change in the mean value.
