@@ -110,6 +110,8 @@ Choose one from among the following detrending methods:
 
     For the linear detrending the unit is minutes, while for the running means it is seconds.
 
+A column with missing samples (an instrument slower than the file, or samples removed by filtering) is detrended on its valid samples only. Linear detrending fits the trend against the time (row position) of the valid samples, and the running mean is the mean of the valid samples in the trailing window. The exponential running mean decays according to the time elapsed since the previous valid sample, and starts at the first valid sample when the beginning of the period is missing.
+
 **Time lags compensation:** Select the method to compensate for time lags between anemometric measurements and any other high frequency measurements included in the raw files. Time lags arise mainly due to physical distances between sensors, and to the passage of air into/through sampling lines. Uncheck this box to instruct EddyFlow not to compensate time lags (not recommended).
 
 - **Constant:** EddyFlow will apply constant time lags for all flux averaging intervals, using the **Nominal time lag** stored inside the .ghg files or in the **Alternative metadata file** (for files other than .ghg). This method is indicated for situations of very low fluxes, when the automatic detection of the time lag is problematic, or for measurements characterized by high signal-to-noise ratios, typical of trace-gas measurements (e.g. N2O, N3, etc.).
