@@ -155,14 +155,14 @@ This test assesses whether the along-wind and crosswind components of the wind v
 
 **Procedure.**
 
-1. After the last period has been computed, the NEE, H and LE series of the run are ordered in time. Periods without a value are kept as gaps.
+1. After the last period has been computed, the published final fluxes FC, H and LE of the run (spectrally corrected, Level 3) are ordered in time. Periods without a value are kept as gaps.
 2. Each series x is transformed as log10(x + 1000) and decomposed with a robust STL (seasonal smoothing across days with a window of 7 days, a trend window of 7 days, 20 robustness iterations), plus a long-run and a short-run smooth of the trend. The back-transformed sum of the components is the expected signal, and the residual is the observation minus that signal.
 3. The periods are split into ten classes by deciles of the expected signal. Within each class the residuals are tested with a Laplace-distribution outlier test at the 1 % significance level, using the class median and a robust scale. Periods flagged by the test are spikes. A class with fewer than 10 values is not testable and all of its values are flagged.
 4. A flagged period is reported with the `*_SPIKE` column set to 1, and its `*_CLEANED` value is set to missing.
 
 **Assumptions and limitations.** The series needs a regular averaging period giving at least 4 periods per day and at least 10 days of data (480 half-hourly periods); shorter or coarser runs are skipped and the run log says why. The decomposition expects a repeating daily cycle, so heavily gapped series are poorly characterised. The step is run by the flux computation and correction step (FCC) after all periods have been processed, so it is available only when the run goes through FCC. It does not alter the full output or FLUXNET files.
 
-**Outputs.** File `<project id>_flux_despiking<timestamp>.csv` with the columns `TIMESTAMP`, `NEE`, `NEE_SPIKE`, `NEE_CLEANED`, `H`, `H_SPIKE`, `H_CLEANED`, `LE`, `LE_SPIKE`, `LE_CLEANED`. Missing values are written with the project's error label.
+**Outputs.** File `<project id>_flux_despiking<timestamp>.csv` with the columns `TIMESTAMP`, `NEE`, `NEE_SPIKE`, `NEE_CLEANED`, `H`, `H_SPIKE`, `H_CLEANED`, `LE`, `LE_SPIKE`, `LE_CLEANED`. `NEE` is FC, without the storage term. Missing values are written with the project's error label.
 
 ## Storage-flux cleaning
 

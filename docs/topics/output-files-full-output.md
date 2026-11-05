@@ -233,7 +233,7 @@ This section lists what is new or different in the output, by label. Methods are
 
 ### Other files
 
-- **`<project id>_flux_despiking<timestamp>.csv`**: written when **Post-flux despiking (STL)** (`test_pfd`) is on, with the columns `TIMESTAMP`, `NEE`, `NEE_SPIKE`, `NEE_CLEANED`, `H`, `H_SPIKE`, `H_CLEANED`, `LE`, `LE_SPIKE`, `LE_CLEANED`. See [Statistical tests](statistical-tests.md#top).
+- **`<project id>_flux_despiking<timestamp>.csv`**: written when **Post-flux despiking (STL)** (`test_pfd`) is on, with the columns `TIMESTAMP`, `NEE`, `NEE_SPIKE`, `NEE_CLEANED`, `H`, `H_SPIKE`, `H_CLEANED`, `LE`, `LE_SPIKE`, `LE_CLEANED`. `NEE` is the final CO2 flux FC, without the storage term. See [Statistical tests](statistical-tests.md#top).
 - The processing log summary column `S4_instrument_filled` is now named `S4_borrowed`.
 - The spectral assessment file marks a gas that has more than one acquisition rate with a `rates=` token; see [Spectral corrections](spectral-corrections.md#top).
 
