@@ -16,6 +16,7 @@ The first row in the file (when opened in a spreadsheet) gives the top-level hea
 ### Corrected fluxes
 
 - Net vertical turbulent fluxes of momentum, sensible heat, latent heat and all available gases, calculated from uncorrected fluxes, by correcting for spectral attenuations, air density fluctuations and instrument-specific effects, as applicable. Quality flags and random uncertainty estimates are provided for all fluxes.
+- A project without a hygrometer (no water vapor record) has no LE and ET columns in the full output, and its FLUXNET LE and ET columns carry the error label. No other gas is then used as water vapor, whether for the latent heat flux, the humidity gating of PWB or the relative-humidity classes of the time-lag optimization.
 
 ### Conditional eddy covariance partitioning
 
