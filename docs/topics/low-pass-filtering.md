@@ -133,7 +133,7 @@ $$
 LFSCF = \frac{d_1 U}{d_2+f_c}+1 \tag{6-83}
 $$
 
-where U is the average wind speed and d1 and d2 are site-specific parameters to be determined using collected turbulence data. The actual procedure, which makes use of "degraded temperature time series," is described in detail in the original paper.
+where U is the average wind speed and d1 and d2 are site-specific parameters to be determined using collected turbulence data. The actual procedure, which makes use of "degraded temperature time series," is described in detail in the original paper. EddyFlow fits one pair for unstable and one for stable conditions. Where the fit for the stability of an averaging period failed, no Ibrom correction factor exists for it, and the gas is corrected with the analytic method of [Moncrieff et al. (1997)](#spectral-corrections-after-moncrieff-et-al-1997) instead, as is any gas whose transfer function could not be assessed in situ.
 
 This spectral correction scheme only deals with flux attenuations induced by attenuation of the scalar spectra. Other sources of flux underestimation to be considered are intrinsic to the instrument deployment. Among them, relevant flux losses might come from the physical separation between the anemometer and the gas analyzer sampling volumes. While streamwise sensor displacement can be accounted for by compensating scalar time lags (assuming Taylor's hypothesis of frozen turbulence), we suggest applying a further correction factor to account for any crosswind and/or vertical displacement, following the procedure proposed by [Horst and Lenschow](references.md#horst1997) (2009, Eqs. 16–18 and 28–30): These are multiplicative factors, that are applied after fluxes have been partially corrected with the method proposed here. Find more details [here](#Correcti).
 
@@ -164,6 +164,8 @@ f_c(RH)=\exp(E_1 RH^2+E_2 RH+E_3) \tag{6-86}
 $$
 
 as in [Ibrom et al. (2007)](references.md#Ibrom), using the current value of RH.
+
+The same model is used for every gas in an averaging period for which no full cospectrum of sensible heat is available (for example a gap in the full cospectra folder), since the direct method has nothing to work from. The momentum and sensible heat fluxes keep their own correction factors in such a period. A gas whose fit of the model failed for the period's stability, or whose transfer function could not be fitted at all, is corrected with the analytic method of [Moncrieff et al. (1997)](#spectral-corrections-after-moncrieff-et-al-1997) instead, as with [Ibrom et al. (2007)](#spectral-corrections-after-ibrom-et-al-2007).
 
 Similar to the method of [Ibrom et al. (2007)](references.md#Ibrom), this method only corrects flux attenuations induced by attenuation of the scalar spectra. Potential further losses due to instrument separation can be corrected following the method of [Horst and Lenschow (2009)](references.md#horst2009) as described [elsewhere](#Correcti) (See [Correction for spectral losses due to physical instrument separation](#Correcti)
 
