@@ -84,7 +84,7 @@ The drop-outs test attempts to detect (relatively) short periods in which the ti
 ![](../assets/dropout.png)
                                                             Figure 6‑6. Dropouts appear as short-lived periods in which the variable sticks to values statistically different from the overall trend.
 
-The test attempts to detecting drop-outs as too many consecutive values falling within bins too distant from the mean value of the time series. Extreme bins (as opposed to central bins) are expected to have smaller numbers of consecutive data points. Furthermore, fluxes are more sensitive to drop-outs in the extreme bins. Thus, thresholds are defined differently for extreme and central bins.
+The test attempts to detecting drop-outs as too many consecutive values falling within bins too distant from the mean value of the time series. Extreme bins (as opposed to central bins) are expected to have smaller numbers of consecutive data points. Furthermore, fluxes are more sensitive to drop-outs in the extreme bins. Thus, thresholds are defined differently for extreme and central bins. The percentages of drop-outs are computed as real (not whole-number) fractions of the samples, and the variable is hard-flagged when either the central or the extreme percentage exceeds its limit.
 
 ## Absolute limits
 
