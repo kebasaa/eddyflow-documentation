@@ -23,6 +23,16 @@ Engine:
 - Fix: A planar-fit file read by a later run keeps its sector boundaries relative to the north offset of the first sector, instead of shifting them by that offset. The counterclockwise option for a sector with too few periods takes the fit of the nearest valid sector counterclockwise; such a sector was double-rotated. See [Planar fit settings](raw-processing-options.md#planar-fit-settings).
 - Fix: A gas whose analyser has no cell temperature or pressure record, or no reading of it in a period, uses the ambient air temperature and pressure for its cell molar volume instead of another analyser's cell. A single-analyser project is unchanged. See [Average cell molar volume](calculate-ambient-and-cell-parameters.md#average-cell-molar-volume-closed-path-systems-only).
 
+- Fix: A very short analyzer path length (a mistyped value, or dynamic metadata) no longer makes the spectral correction factor of an analytic method negative and near zero: the path-averaging transfer function tends to 1 as the path vanishes.
+- Fix: The `*_ABSLIM_NREX` columns count the values the absolute-limits test eliminated: zero when the test only flags, the number removed when it filters.
+- Fix: A missing vapor pressure deficit is written as the error label in the FCC outputs, not as -999900.
+- Fix: In a LI-COR .ghg period whose first archive is skipped, the instruments' acquisition rates are taken from the first archive actually read, so a good period is no longer dropped with Warning(116).
+- Fix: The random error after Mahrt (1998) divides by the windows that hold data. A window without valid samples no longer lowers the random error and raises the nonstationarity ratio (M98) used by the Vitale et al. (2020) quality flags.
+- Fix: The stationarity test (Foken and Wichura, 1996) averages the sub-period covariances that exist; a missing sub-period no longer produces a deviation of millions of percent.
+- Fix: The time-lag optimization recognises a lag at the edge of its search window to within half a sample, so edge-pinned lags stay out of the optimization dataset.
+- Fix: The time-lag optimization fills sparse relative-humidity classes of water vapor by interpolating between the classes that have enough data, instead of from empty ones, and a lag as long as the averaging period leaves the variable missing for that period.
+- Fix: With conditional time-lag borrowing, a gas that borrows a lag has its water-vapor and cell-temperature terms evaluated at the borrowed lag, the one its flux uses.
+- Fix: The water-vapor covariance used in the WPL term of a gas is taken at the lag of the hygrometer that measured it, matched by analyzer identity rather than by model, when two analyzers of the same model are in use.
 GUI:
 
 - New feature: **UTC offset**, directly under Longitude in the metadata editor's Station tab. While neither the metadata file nor you have set it, it is filled in from the coordinates: round(longitude/15) at once, then the standard offset of the site's time zone looked up online at timeapi.io once the coordinates stop changing (only the coordinates are sent). **Look up** asks again. See [Metadata file editor](metadata-file-editor.md#station).
