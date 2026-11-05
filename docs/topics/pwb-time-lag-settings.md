@@ -46,7 +46,7 @@ Gases on one analyser share a detected lag in the borrowing step described below
 
 !!! note
 
-    A lag is never taken from a different instrument, and never from water vapor, whose delay depends on humidity in a way the trace gases' does not. A gas whose record names no instrument neither donates nor borrows, since nothing then proves it shares a tube.
+    A lag is never taken from a different instrument, and never from water vapor, whose delay depends on humidity in a way the trace gases' does not. For the same reason water vapor never takes another gas's lag, as in the conditional lag borrowing. A gas whose record names no instrument neither donates nor borrows, since nothing then proves it shares a tube.
 
 !!! note
 
