@@ -44,7 +44,7 @@ While despiking, EddyFlow counts the number of spikes found. If, for each variab
 
     At each of the 20 iterations of the procedure, a spike that was detected (and replaced) at the previous repetition can appear again as a spike, due to the changed plausibility range; it is replaced again by linear interpolation, however it is not counted again for the purpose of flagging.
 
-Following Mauder (2013), there are no settings to configure except the percent of spikes, and whether to perform linear interpolation between the spikes.
+Following Mauder (2013), there are no settings to configure except the percent of spikes, and whether to perform linear interpolation between the spikes. With this method, a spike is replaced by linear interpolation from the last good sample before it to the first good sample after it. Missing samples, including the empty rows between the samples of an instrument slower than the file's rate, are skipped and never used as interpolation end points. A spike with no good sample before it is flagged but left unchanged.
 
 EddyFlow also offers a third despiking method, **Consecutive difference (EddyUH)** (`despike_vm=2`), described in [Consecutive-difference despiking](#consecutive-difference-despiking) below.
 
