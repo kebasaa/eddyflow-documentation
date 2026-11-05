@@ -137,6 +137,8 @@ The following table summarizes all output results available in the rich output f
 | Reco_cec | µmol m-2 s-1 | CEC ecosystem respiration. Positive values indicate carbon dioxide release to the atmosphere. Available when Conditional Eddy Covariance is activated. |
 | Tr_cec | mmol m-2 s-1 | CEC transpiration. Positive values indicate an upward water vapor flux. Available when Conditional Eddy Covariance is activated. |
 | E_cec | mmol m-2 s-1 | CEC evaporation. Positive values indicate an upward water vapor flux. Available when Conditional Eddy Covariance is activated. |
+| gas_stomatal_cec, gas_nonstomatal_cec | gas flux units | CEC stomatal and non-stomatal parts of any other partitioned gas, for example `cos_stomatal_cec` (experimental). Written with `gas_total_cec`, `r_gas_cec`, `cec_ns_gas` and `qc_cec_gas`. Available for each gas partitioned in the CEC Settings table. |
+| cec_sign_cos | – | 1 when the CEC stomatal part of carbonyl sulfide came out as emission, 0 for uptake or zero (experimental). Written for every partitioned carbonyl sulfide channel. Every CEC column ends in its pairing's suffix: the analyzer of the gas that sorts the octants, such as `_li7200_1`, with `_cos` added when carbonyl sulfide sorts them. See [Conditional Eddy Covariance](conditional-eddy-covariance.md#output-variables) for every CEC column and how to read it. |
 | water_vapor_density | kg m-3 | Ambient mass density of water vapor |
 | e | Pa | Ambient water vapor partial pressure |
 | es | Pa | Ambient water vapor partial pressure at saturation |

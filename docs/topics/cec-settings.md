@@ -6,17 +6,19 @@ Activating **Conditional Eddy Covariance** under **Other options** will cause th
 
 ![The CEC Settings dialog, showing the channel pairing table and the partitioning and quality limits](../assets/cec-settings-dialog.png)
 
-## Channel pairing
+## Fluxes to partition
 
-The pairing table defines which measured channels CEC uses, instead of relying on a single fixed carbon dioxide and water vapor pair. Each row pairs one carbon dioxide channel with one water vapor channel and states what should be partitioned, so several instrument combinations can be processed in the same run. Because the channels are chosen per row, the pair may span two different analyzers, and species other than carbon dioxide and water vapor (for example carbonyl sulfide) can be partitioned as well.
+The table lists one row per flux to partition. Each row says which flux is split, and which two channels sort the air parcels it is split over. By default it shows water vapor and carbon dioxide for every carbon dioxide channel, each sorted by its own analyzer's channels. Channels are named *species (instrument)*.
 
-- **Use:** Include this row in the run. Clearing it keeps the row but leaves it unprocessed.
-- **CO<sub>2</sub> channel:** The carbon dioxide channel for this pair, named as *species (instrument)*.
-- **H<sub>2</sub>O channel:** The water vapor channel used as the partitioning reference for this pair.
-- **Partition:** Which fluxes this row produces, for example *H<sub>2</sub>O and CO<sub>2</sub>*.
-- **Add:** Add a pairing row.
+- **Flux to partition:** Any gas channel. Water vapor is split into evaporation and transpiration, carbon dioxide into respiration and photosynthesis, and any other gas (for example carbonyl sulfide) into a stomatal and a non-stomatal part. Choosing a flux sets the other two columns to the channels on its own analyzer.
+- **Water channel:** The water vapor channel whose moist updrafts are sorted. *(same analyser)* uses the water vapor channel on the octant gas's analyzer, and keeps doing so if the gas records are reordered.
+- **Octants from:** The gas whose sign sorts each moist updraft into stomatal and non-stomatal: carbon dioxide, as published by Zahn et al. (2022), or carbonyl sulfide, marked *experimental*. Carbonyl sulfide octants count soil uptake carried in moist updrafts as stomatal, so use them only where the ground is a net COS source or negligible, and compare them with a carbon dioxide–octant row.
+- **Warning column:** A warning icon marks a row whose water and octant gas sit on different analyzers. An information icon marks an experimental row: a flux other than water or carbon dioxide, or carbonyl sulfide octants. A note under the table appears while any row is experimental. Hover over a cell for the columns its flux produces and how to read them.
+- **Add:** Add a row for the first channel not yet partitioned, carbonyl sulfide first, with the water and octant gas on its own analyzer.
 - **Remove:** Delete the selected row.
-- **Same-analyser default:** Fill the table with the pairs implied by the project's own metadata, pairing each analyzer's carbon dioxide channel with the water vapor channel from that same instrument.
+- **Same-analyser default:** Fill the table again with water vapor and carbon dioxide for every carbon dioxide channel, each sorted by the channels on its own analyzer.
+
+Rows that share an octant gas and a water channel are one *pairing* to the engine, and their output columns share one suffix: the octant gas's analyzer, with `_cos` added for carbonyl sulfide octants. The engine runs at most 8 pairings and at most 4 fluxes per pairing besides its own water and octant gas; an edit that would exceed this, or that partitions the same flux twice in the same octants, is refused with the reason. See [Conditional Eddy Covariance](conditional-eddy-covariance.md#interpreting-the-results) for how to read the results of each kind of row.
 
 ## Partitioning constraints
 
@@ -41,4 +43,4 @@ The pairing table defines which measured channels CEC uses, instead of relying o
 
 !!! note
 
-    **Only partition a resolvable flux** and **Judge the partition, not the flux** were introduced in engine 8.0.0 as refinements to the original Zahn et al. (2022) quality criteria, as was the channel pairing table. Earlier versions partitioned a single fixed carbon dioxide and water vapor pair and offered only the occupancy, valid-data, signal-strength and stationarity limits.
+    **Only partition a resolvable flux** and **Judge the partition, not the flux** were introduced in engine 8.0.0 as refinements to the original Zahn et al. (2022) quality criteria, as was the channel pairing table. Earlier versions partitioned a single fixed carbon dioxide and water vapor pair and offered only the occupancy, valid-data, signal-strength and stationarity limits. Since 8.1.8 the table lists one row per flux, and carbonyl sulfide can sort the octants (experimental); projects using it are saved in project format 5.2.0, which older engines refuse.
