@@ -2,6 +2,12 @@
 
 EddyFlow can correctly process data acquired with LI-COR gas analyzers, as well as data from instruments from other manufacturers. Gas analyzers other than LI-COR instruments are considered as "generic analyzers." You can specify a "Generic Open Path" or "Generic Closed Path" analyzer. The main difference between processing data from a LI-COR instrument and a generic instrument is that for the latter ones, there are no model-specific corrections implemented. This means that you can get robust flux estimates from non-LI-COR instruments as long as your data do not need to undergo a processing step that is specific to your instrument. Data from such analyzers are processed in a "standard" way and according to the selected processing options, mainly depending on whether the instrument is open or closed path. Also, for such unknown instruments you need to specify the path lengths and time response, which are needed to estimate the associated high-frequency losses.
 
-As a notable exception, EddyFlow correctly processes data from open and closed path Krypton or Lyman-α hygrometers, by applying the required oxygen correction ([Tanner et al., 1993](references.md#Tanner); [Van Dijk et al., 2003](references.md#vanDijk)).
+As a notable exception, EddyFlow correctly processes data from open and closed path Krypton or Lyman-α hygrometers, by applying the required oxygen correction ([Tanner et al., 1993](references.md#Tanner); [Van Dijk et al., 2003](references.md#vanDijk)). The correction factor is
+
+$$
+1 + 0.23\,\frac{k_o}{k_w}\,\frac{\beta\,\lambda}{c_p\,T}
+$$
+
+where *k*<sub>o</sub> and *k*<sub>w</sub> are the hygrometer's extinction coefficients for oxygen and water vapor, β is the Bowen ratio, λ the latent heat of vaporization, *c*<sub>p</sub> the specific heat of air and *T* the air temperature. It is applied to the water vapor flux, LE, E and ET, as well as to the water vapor covariance and variance.
 
 In the case of a LI-COR instrument, the most suitable corrections are applied automatically (and in the correct sequence) by EddyFlow, ensuring the most accurate flux estimates.
