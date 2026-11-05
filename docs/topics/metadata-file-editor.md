@@ -33,6 +33,8 @@ Under this tab, provide information that describes the research station. This in
 
 **Longitude:** Longitude at the site. Use E and W for east and west longitudes, respectively.
 
+**UTC offset:** The number of hours the timestamps are ahead of UTC, as standard time: daylight saving is ignored. It is stored as `utc_offset` in the `[Site]` section of the metadata file. Together with the latitude, the longitude and the equation of time, it gives the apparent solar time of the middle of each averaging period, at which EddyFlow computes the potential radiation (`SW_IN_POT`); the potential radiation decides day and night when the biomet data have neither global radiation (Rg) nor PPFD. While neither the metadata file nor you have set it, the interface fills it from the coordinates: with round(longitude/15) at once, then, once the coordinates stop changing, with the standard offset of the site's time zone looked up online at timeapi.io, which receives the coordinates only. **Look up** asks again. A metadata file without the key (older files, metadata embedded in .ghg archives, imported EddyPro projects) makes the engine assume round(longitude/15), and the run log says so. Set the offset yourself if your logger keeps another time, such as UTC.
+
 **Reset Metadata:** Reset the default settings in the Metadata File Editor. Does not affect other settings of the project.
 
 **Save metadata as...:** Save the metadata file with a new file name. To save the processing project, use the file menu or toolbar.

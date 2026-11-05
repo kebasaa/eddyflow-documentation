@@ -10,7 +10,7 @@ $$
 
 where the factor 0.15 accounts for the possibility that the heat flux may or may not enter the instrument path.
 
-Additional sensible heat fluxes are calculated according to equations in the same Table 1 ([Nobel's (1983)](references.md) formulation) and the implied surface temperatures are estimated either with linear equations similar to those in Eqs. 3-8 in [Burba et al. (2008)](references.md#Burba), using slope and offset parameters from Table 3 in the same paper, or with multiple linear regression relationships between instrument temperatures and controlling factors (Table 2 in [Burba et al., 2008](references.md#Burba)). Corrected sensible heat flux is only used for calculating WPL terms when gas densities are measured by an LI-7500.
+Additional sensible heat fluxes are calculated according to equations in the same Table 1 ([Nobel's (1983)](references.md) formulation) and the implied surface temperatures are estimated either with linear equations similar to those in Eqs. 3-8 in [Burba et al. (2008)](references.md#Burba), using slope and offset parameters from Table 3 in the same paper, or with multiple linear regression relationships between instrument temperatures and controlling factors (Table 2 in [Burba et al., 2008](references.md#Burba)). Corrected sensible heat flux is only used for calculating WPL terms when gas densities are measured by an LI-7500. The daytime or night-time regression is chosen from the global radiation or PPFD of the biomet data; when the biomet data have neither, it is chosen from the potential radiation, computed at apparent solar time from the latitude, longitude and [UTC offset](metadata-file-editor.md#station) of the site and the equation of time, for the middle of each averaging period.
 
 !!! note
 

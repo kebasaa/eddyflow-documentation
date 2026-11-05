@@ -19,6 +19,7 @@ When you begin editing the **Metadata File Editor**, EddyFlow will prompt you to
                                                                     **Roughness length:** See [Roughness length](roughness-length.md#top).
                                                                     **Altitude:** Elevation above sea level of the flux site.
                                                                     **Latitude and Longitude:** WGS84 coordinates in decimal degrees.
+                                                                    **UTC offset:** Directly under Longitude. The number of hours the timestamps are ahead of UTC, as standard time (daylight saving ignored), used to compute the potential radiation at apparent solar time. Filled in from the coordinates until you set it; **Look up** asks timeapi.io again for the site's time zone. See [UTC offset](metadata-file-editor.md#station).
 4. Configure the Instruments Tab. It has fields for anemometers and gas analyzers:
 5. ![](../assets/Project_Page_MetaIns2.png)
 6. For Anemometer Info, enter:
