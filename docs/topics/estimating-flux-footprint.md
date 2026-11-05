@@ -8,6 +8,8 @@ EddyFlow features three crosswind-integrated flux footprint models, useful to es
 - Offset distance: the area between the anemometer and the offset provides up to 1% of the total flux.
 - 10%, 30%, 50%, 70%, 90%: the area between the anemometer and the NN% distance provides NN% of the total flux.
 
+Every model needs the friction velocity u\*, the stability parameter z/L and the Obukhov length. In an averaging period that lacks any of them, no footprint is computed and all footprint distances carry the error value.
+
 Hereafter, a short introduction to the implemented models is provided. Please refer to the respective papers for in-depth information and for an informed selection of the method to be used. The default option in EddyFlow is the parameterization of Kljun et al. (2004), merely because it is the newest 'model' and it is a thoroughly validated one. However, at this stage we explicitly don't advocate the use of a particular model among those available.
 
 ## Footprint parameterization from Kljun et al (2004)
