@@ -54,6 +54,8 @@ $$
 
 where ℜ = 8.314 J mol-1K-1, the universal gas constant.
 
+Each gas uses the cell temperature and pressure of its own analyser. A gas whose analyser has no cell temperature or pressure record, or no reading of it in the averaging period, uses the ambient air temperature or pressure for its cell molar volume, never the cell of another analyser.
+
 ## Ambient temperature, pressure and humidity from biomet data
 
 If biomet data are used, the averaged biomet air temperature, air pressure and relative humidity replace the estimates above for the same averaging period, provided the averages are physically plausible; if they are not, EddyFlow falls back to the calculation described above. The biomet channels are recognized by their FLUXNET-style names (for example `TA`, `PA`, `RH`, with or without a positional qualifier such as `_1_1_1`; see [Variable names, aliases and the positional qualifier](biomet-data-format.md#variable-names-aliases-and-the-positional-qualifier)). A biomet pressure channel stated in `Atm` is converted with 101325 Pa per atmosphere (earlier versions used 98066.5 Pa, which put such a channel 3.3% low); see [Using biomet data](using-biomet-data.md#top).
