@@ -25,12 +25,12 @@ The two tests are known as the *steady state test* and the *developed turbulent 
 | Nonstationarity ratio of [Mahrt (1998)](references.md#Mahrt1998), for the flux's own variable | above 2 and up to 3 | above 3 |
 | KID (see [Kurtosis index of differences (KID)](despiking-raw-statistical-screening.md#kurtosis-index-of-differences-kid)) of each variable | above 30 and up to 50 | above 50 |
 | AL1 | above 0.5 and up to 0.75 | 0.5 or below |
-| DDI | 150 x f to below 300 x f samples (f = acquisition frequency in Hz, so as many samples as 150 s to 300 s of data) | 300 x f samples or more |
-| HF5 and HF10 | HF5 above 2 % of the samples of a 30-minute period, or HF10 above 0.5 % | HF5 above 4 %, or HF10 above 1 % |
+| DDI | a twelfth to below a sixth of the samples (150 s to 300 s of data in a 30-minute period) | a sixth of the samples or more |
+| HF5 and HF10 | HF5 above 2 % of the samples, or HF10 above 0.5 % | HF5 above 4 %, or HF10 above 1 % |
 | HD5 and HD10 | the same limits as HF5 and HF10 | the same limits as HF5 and HF10 |
 | DIP (p-value) | 0.01 to 0.05 | below 0.01 |
 
-The variables checked are u, v and w for momentum flux, the sonic temperature and w for sensible heat, and the gas and w for a gas flux. KID, AL1, DDI, HF, HD and DIP are evaluated on each of these variables. The percentage limits for HF and HD are fractions of the number of samples in 30 minutes at the acquisition frequency. For momentum flux, the DIP test is applied asymmetrically to u and v, as in the original procedure: the severe DIP test includes u and w but not v, and the moderate DIP test includes v and w but not u.
+The variables checked are u, v and w for momentum flux, the sonic temperature and w for sensible heat, and the gas and w for a gas flux. KID, AL1, DDI, HF, HD and DIP are evaluated on each of these variables. The limits for DDI, HF and HD are fractions of the number of samples the column should have in the averaging period, at its own acquisition rate, so they scale with the length of the period and with an instrument slower than the file. Gas columns in molar density are converted to mole fractions (µmol mol⁻¹, water vapor mmol mol⁻¹) before the flat-line and spike tests. For momentum flux, the DIP test is applied asymmetrically to u and v, as in the original procedure: the severe DIP test includes u and w but not v, and the moderate DIP test includes v and w but not u.
 
 !!! warning
 
