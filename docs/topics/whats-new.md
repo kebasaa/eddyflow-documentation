@@ -2,6 +2,17 @@
 
 EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
 
+## 8.1.9 (2026-11-05)
+
+Engine:
+
+- Change: Two CEC pairings sorted by the same octant gas, such as one gas split once with each analyzer's water, are told apart by the water's analyzer instead of a number: `_miro_mga4_6_2_cos_h2o_li7200_1` beside `_miro_mga4_6_2_cos`. Pairings still sharing a suffix after that are numbered `_1`, `_2`; a pairing that shares nothing keeps its name. See [Splitting one gas several ways](conditional-eddy-covariance.md#splitting-one-gas-several-ways).
+- New feature (experimental): `cec_noisy_octants` for every CEC pairing sorted by carbonyl sulfide octants, 1 in a period where that sorting was mostly noise. The other gases of such a pairing are then split near 50/50 under quality code 1. Warning(124) says so once per pairing per run. See [Carbonyl sulfide](conditional-eddy-covariance.md#carbonyl-sulfide-experimental).
+
+GUI:
+
+- New feature: One flux can be partitioned several ways in CEC Settings, for example carbonyl sulfide by carbon dioxide octants and by carbonyl sulfide octants side by side. **Duplicate** adds the selected row's flux again with the next octant gas or water not yet used for it, **Add** offers second versions once every channel has a row, and a new **Columns end in** column shows each row's output suffix. Rows are sorted alphabetically and re-sorted after every edit, pairings are saved in a fixed order, and the dialog opens larger. See [CEC settings dialog](cec-settings.md#fluxes-to-partition).
+
 ## 8.1.8 (2026-11-05)
 
 Engine:

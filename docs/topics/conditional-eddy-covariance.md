@@ -49,7 +49,19 @@ The octants are defined by *w'*, *q'* and *c'* alone. Any further gas is summed 
 
 A *pairing* is one octant gas and one water channel, plus every further gas sorted by the octants those two define. The CEC Settings table lists one row per flux; rows that share an octant gas and a water channel are one pairing. By default, EddyFlow creates one pairing per carbon dioxide channel, with the water vapor channel on the same analyzer, and reports water and carbon dioxide.
 
-Every column of a pairing ends in the same suffix: the analyzer the octant gas is on, for example `_li7200_1` or `_miro_mga4_6_2`. When carbonyl sulfide sorts the octants, `_cos` is added (`_miro_mga4_6_2_cos`). Two pairings that would otherwise share a suffix are numbered `_1`, `_2`.
+Every column of a pairing ends in the same suffix: the analyzer the octant gas is on, for example `_li7200_1` or `_miro_mga4_6_2`. When carbonyl sulfide sorts the octants, `_cos` is added (`_miro_mga4_6_2_cos`). Where two pairings would otherwise share a suffix, one whose water channel is on another analyzer adds `_h2o_` and that analyzer (`_miro_mga4_6_2_h2o_li7200_1`); pairings still sharing a suffix after that, such as two hygrometers on one analyzer, are numbered `_1`, `_2`. The CEC Settings table shows each row's suffix under **Columns end in**.
+
+### Splitting one gas several ways
+
+One flux can be partitioned by several pairings at once, and each version gets its own columns. This is how the choices described under [Interpreting the results](#interpreting-the-results) are compared in a single run:
+
+| Rows for one COS channel on a MIRO | Columns end in | Compares |
+| --- | --- | --- |
+| COS, MIRO water, MIRO CO<sub>2</sub> octants | `_miro_mga4_6_2` | The published octants (reference) |
+| COS, MIRO water, MIRO COS octants | `_miro_mga4_6_2_cos` | COS octants against CO<sub>2</sub> octants: a difference in `cos_stomatal_cec` points to soil COS uptake |
+| COS, LI-7200 water, MIRO CO<sub>2</sub> octants | `_miro_mga4_6_2_h2o_li7200_1` | The sensitivity to the hygrometer |
+
+The versions share the total flux, so `cos_total_cec` is the same in each; only the split differs. Read the versions together, period by period, and only where every version has quality code 1. A version that mixes analyzers (the third row) is flagged in the table and is a weaker measurement.
 
 ## Output variables
 
@@ -96,6 +108,7 @@ For a further gas, and for carbonyl sulfide when it sorts the octants, the colum
 | --- | --- |
 | `cec_n_o1`, `cec_n_o2` | Number of samples in the non-stomatal and stomatal octants. |
 | `cec_frac_o1`, `cec_frac_o2` | The same as a fraction of all valid samples. |
+| `cec_noisy_octants` | Only for a pairing sorted by carbonyl sulfide octants (experimental): 1 where the octant gas's own two octant fluxes cancelled (its ratio within 0.2 of -1), meaning the sorting was mostly instrument noise; 0 where the sorting carried a signal or one octant was too sparse to fill; the error code where the period was rejected. See [Carbonyl sulfide](#carbonyl-sulfide-experimental). |
 
 ### Quality codes
 
@@ -135,6 +148,8 @@ With **carbon dioxide octants** (the default), the sorting is independent of COS
 - **At night**, the stomatal octant is nearly empty because there is no photosynthesis to draw carbon dioxide down, so periods fall back to code 3 and the whole COS flux is assigned to the non-stomatal component. Nocturnal uptake through incompletely closed stomata is therefore counted as ground exchange. Treat night-time `cos_nonstomatal_cec` as an upper bound on soil exchange.
 
 With **carbonyl sulfide octants** (experimental), an updraft that lost COS counts as stomatal. This holds only where the ground is a net COS source or negligible: soil uptake carried in moist updrafts is then counted as stomatal and inflates the canopy's uptake. Where the soil gives COS off, COS and carbon dioxide octants sort the same parcels. Run a carbon dioxide–octant row beside a COS-octant row: where their stomatal components agree, soil uptake is negligible; where the COS-octant stomatal component is clearly more negative, the soil is taking COS up.
+
+Carbonyl sulfide is measured with much more noise at 10 Hz than carbon dioxide, and its octants can fail without any quality code saying so. Sorting a gas by its own sign always puts a positive flux in one octant and a negative one in the other. When that sign is mostly noise, the two cancel: the COS split itself is refused as singular (code 4), but every other gas in the same pairing, water included, is then split over parcels sorted almost at random and comes out close to half stomatal and half non-stomatal, with code 1. On a test night at CH-LAE, water sorted by COS octants gave *r*<sub>ET</sub> = 0.94–0.97 in every period, where carbon dioxide octants gave 1.1–6.3. EddyFlow flags such periods with `cec_noisy_octants` = 1 and writes Warning(124) to the run log. Treat flagged periods of a COS-octant pairing as unresolved. Raising the **Hyperbolic threshold H**, or using **Only partition a resolvable flux**, leaves fewer of them.
 
 To turn the stomatal COS flux into gross primary productivity, scale it by the leaf relative uptake (LRU):
 
