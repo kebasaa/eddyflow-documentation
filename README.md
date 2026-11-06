@@ -1,4 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![DOI](https://zenodo.org/badge/1276839437.svg)](https://doi.org/10.5281/zenodo.24011244)
 
 ![EddyFlow](img/app-logo.svg)
 
@@ -51,6 +52,10 @@ Build the site strictly:
 mkdocs build --strict
 ```
 
+## How to Cite
+
+Muller, J.D. (2026). *eddyflow-documentation: Documentation for the EddyFlow software*. DOI: https://doi.org/10.5281/zenodo.24011244
+
 ## License
 
-This fork of EddyPro 6.2.2 and its documentation are released with and will retain the [GNU General Public License (GPL) v3.0](LICENSE).
+This software is distributed under the [GNU General Public License (GPL) v3.0](LICENSE). Any modification of the code in this repository may only be released under the same license, and with attribution of authorship of the original code (i.e., citation above).
