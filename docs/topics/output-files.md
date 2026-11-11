@@ -10,6 +10,10 @@ EddyFlow provides a broad range of file output options. These may seem daunting,
 
 **Set Thorough:** Click this button to select a complete set of output files, providing you with all the results as well as complete diagnostic information. The computation time may increase considerably with this option. The same applies to the **Fluxnet output settings** checkboxes, which stay on.
 
+## Keep raw-processing results
+
+**Keep raw-processing results for a faster correction-only re-run** (`keep_parent_fluxnet_file`, section `[FluxCorrection_SpectralAnalysis_General]`) keeps the intermediate FLUXNET file that raw processing hands to the flux correction. Without it, the flux correction deletes that file when it finishes. Keeping it costs one extra file in the output folder, next to the binned and full cospectra. In exchange, a later Advanced run in which only flux-correction settings changed can skip the raw processing and re-run only the flux correction. See [Using results from previous runs](using-prev-results.md#top). The box is checked by default, also for projects saved by earlier versions. It is greyed out in SmartFlux configuration mode, and the key is left out of SmartFlux packages.
+
 ## Assessment file outputs
 
 These three radio buttons choose how the whole run is set up around producing or consuming a spectral assessment file. They do not adjust one output checkbox: choosing one applies a coordinated group of settings on this page and on **Spectral Analysis and Corrections**, and locks the ones that must stay fixed. Whatever a mode applies is applied **in one go**, as a single change to the project, and each setting a mode touches is changed only if its value actually differs. The pages refresh once at the end. Before this was fixed, choosing a mode opened a stack of warning windows, one for every setting being changed. Since 8.1.2 any informational warning that would only announce a setting changed on your behalf goes to the interface's message log instead of opening a window.

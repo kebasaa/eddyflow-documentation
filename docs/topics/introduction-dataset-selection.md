@@ -28,7 +28,7 @@ Files info is where you enter information about the raw files and output files.
 
 **Output ID:** Enter the ID. This string will be appended to each output file so a short ID is recommended. Again, the graphical interface does not allow the use of characters that result in file names unacceptable to the underlying operating system (for Windows® these include: \\ /: @ ? * " < >).
 
-**Previous output directory:** This is the path of a directory containing results from previous run(s). EddyFlow will attempt to speed up the flux computation procedure by checking for any partial results obtained from previous run(s). If they are contained in this folder EddyFlow will check the settings against the current settings to determine if these data are suitable as an intermediate starting point in the current data processing session. See [Using results from previous runs](using-prev-results.md#top).
+**Results of a previous run:** There is no separate field for them. When you start an Advanced run, EddyFlow looks in the output directory for the results of an earlier run. If only flux-correction settings have changed since then, it offers to re-run only the flux correction. See [Using results from previous runs](using-prev-results.md#top).
 
 **Missing sample allowance:** Select the maximum percent of missing samples that are allowed in each output file. If the number of missing values exceeds this setting the file will be ignored in the dataset. The maximum is 40%.
 
