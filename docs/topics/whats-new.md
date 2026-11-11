@@ -2,6 +2,13 @@
 
 EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
 
+## 8.1.10
+
+GUI:
+
+- Change: The EddyPro and EddyUH importers are in the new **File > Import** submenu. See [Importing EddyPro and EddyUH projects](importing-legacy-projects.md#top).
+- New feature: **File > Export > EddyPro Project...** writes the open project as an EddyPro 7 project with a `<name>_EP.metadata` beside it. A dialog first asks which metadata column fills each of EddyPro's four gas slots. Instruments, methods and options EddyPro does not have are replaced by its generic instruments and its defaults rather than refused, and a report, also saved beside the export, lists exactly what changed. See [Exporting a project to EddyPro](exporting-eddypro-projects.md#top).
+
 ## 8.1.9 (2026-11-05)
 
 Engine:

@@ -39,6 +39,7 @@ nav:
     - "Processing Eddy Covariance Datasets": topics/tutorials.md
     - "Processing ASCII and TOB1 Files": topics/processing-ascii-and-tob1-files.md
     - "Importing EddyPro and EddyUH Projects": topics/importing-legacy-projects.md
+    - "Exporting a Project to EddyPro": topics/exporting-eddypro-projects.md
     - "Remote Folders and Shared Links": topics/remote-folders.md
     - "Running EddyFlow on the SmartFlux System": topics/smartflux-settings.md
     - "Using the Metadata File Editor": topics/metadata-file-editor-using.md

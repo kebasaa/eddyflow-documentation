@@ -12,7 +12,7 @@ Upon entering the application, you will see the welcome page, which includes opt
 
 In the top left of the EddyFlow window, you will see four menus.
 
-The **File** menu provides options to create a **New Project** (Ctrl+N), **Open Project...** (Ctrl+O), reopen one from **Open Recent**, **Close** the current project (Ctrl+W), **Save** it (Ctrl+S), or **Save As…** to save a copy with a new file name (Ctrl+Shift+S). It also holds **Import EddyPro Project...** and **Import EddyUH Project...**, which convert a legacy project to the current EddyFlow format (see [Importing EddyPro and EddyUH projects](importing-legacy-projects.md#top)), and **SmartFlux Configuration** (Ctrl+F), which switches the interface into SmartFlux mode.
+The **File** menu provides options to create a **New Project** (Ctrl+N), **Open Project...** (Ctrl+O), reopen one from **Open Recent**, **Close** the current project (Ctrl+W), **Save** it (Ctrl+S), or **Save As…** to save a copy with a new file name (Ctrl+Shift+S). It also holds the **Import** submenu, whose **EddyPro Project...** and **EddyUH Project...** convert a legacy project to the current EddyFlow format (see [Importing EddyPro and EddyUH projects](importing-legacy-projects.md#top)), the **Export** submenu, whose **EddyPro Project...** writes the open project for EddyPro (see [Exporting a project to EddyPro](exporting-eddypro-projects.md#top)), and **SmartFlux Configuration** (Ctrl+F), which switches the interface into SmartFlux mode.
 
 ![The File menu](../assets/File_Menu.png)
 
