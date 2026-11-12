@@ -11,12 +11,11 @@ With a purely analytic spectral correction method (or none), and without ensembl
 
 When only flux-correction settings changed since the last run, RP would compute the same intermediate results again. EddyFlow can then skip it and re-run only FCC on the results the previous run left in the output folder. Examples of such settings are the spectral assessment limits and periods, the low-frequency correction, the footprint model, the quality flagging scheme and the result files.
 
-Every time you start a run in Advanced mode, the **Advanced run** dialog asks how to treat the previous run in the output folder. If date subsets are set, the same dialog also shows them. In its **Previous run** section:
+When you start a run in Advanced mode and the output folder holds results of an earlier run, the **Advanced run** dialog asks how to treat them. If date subsets are set, the same dialog also shows them. When the output folder holds no earlier run, the run starts straight away as a full run (after the date check, if date subsets are set). In the dialog's **Previous run** section:
 
 - **Flux correction only (reuse the raw-processing results)** is selected when it is possible. A note reminds you that EddyFlow compares the settings, not the contents of the metadata, biomet or raw data files. Use this option only if those files are unchanged since the previous run.
 - **Full re-run (raw processing and flux correction)** processes the raw data again.
 - When **Flux correction only** is not possible, it is greyed out and the dialog lists the reasons. It names any setting that requires raw processing again, and explains how to keep the raw-processing results next time.
-- When the output folder holds no previous run, both choices are greyed out and the run is a full run.
 
 The buttons decide what happens to the files the chosen run makes obsolete:
 
