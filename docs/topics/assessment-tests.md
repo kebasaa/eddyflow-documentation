@@ -57,6 +57,8 @@ If the sample file is incomplete, the message is "The spectral assessment templa
 
 ### Scientific test
 
+The file always holds each gas's own fit. A gas corrected with another gas's transfer function ([Taking a gas's transfer function from another gas on the same analyser](spectral-corrections.md#taking-a-gass-transfer-function-from-another-gas-on-the-same-analyser)) takes it when the fluxes are corrected, so its own implausible fit stays in the file to be seen.
+
 Each gas is judged by its block name, not by its position in the file. Before, the first monthly block was always read as CO2 and the second as CH4, whatever their headers said, and nothing past the second block was examined.
 
 #### Water vapor (primary hygrometer and any additional hygrometer block)

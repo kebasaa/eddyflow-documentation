@@ -68,6 +68,41 @@ When the loop runs, the full output and FLUXNET files get an extra column, `corr
 
     The **Spectral assessment file**, the **binned cospectra folder** and the **full cospectra folder** fields have a **Remote drive...** button beside **Browse...** / **Load...**. It lets you pick the file or folder from a Google Drive or Dropbox folder shared with "Anyone with the link"; see [Remote folders](remote-folders.md#top).
 
+### Taking a gas's transfer function from another gas on the same analyser
+
+The in situ transfer function of a gas is fitted to the ratio of its ensemble spectrum to the temperature spectrum. For a gas whose spectra are dominated by noise, such as carbonyl sulfide (COS) or nitrous oxide (N2O) measured by a laser analyser, that fit follows the noise rather than the attenuation. At CH-LAE the assessment gave COS a cut-off of 0.002 Hz with `Fn` 0.036 and N2O 0.035 Hz with `Fn` 0.069. CO2 measured by the same analyser gave 0.54 Hz with `Fn` 0.46. A closed-path analyser does not attenuate below 0.01 Hz, and an `Fn` far below 1 means the gas-to-temperature ratio is already wrong at the low frequencies where the fit normalises it.
+
+What the fit measures (tube attenuation, cell flushing, and the sensor's response and averaging) belongs to the analyser and its inlet, not to the species. Sensor separation is corrected separately. Gases drawn through one analyser therefore share one transfer function, and a noisy gas can be corrected with the fit of a gas on the same analyser that can be fitted. The one property that does depend on the species is wall sorption. It is strong for water vapour, which is why water's cut-off falls with relative humidity, negligible for CO2, CH4, N2O and CO, and small for COS. Two rules follow:
+
+- **Same analyser only.** A gas on another analyser has another tube, flow and cell, so its fit says nothing about this gas. The analyser has to be named in the metadata.
+- **No water on either side.** Water's transfer function comes from its humidity regression, and a passive gas has no such dependence.
+
+**Gas Sources...** (beside the two assessment-file options) opens a list with one row per gas that has at least one such gas beside it. Each row offers:
+
+- **Automatic** (default): the gas's own fit, unless automatic selection (below) is on and the fit looks implausible.
+- **Own assessment:** always the gas's own fit, also when it looks implausible. This is how a suggestion is overruled.
+- **Another gas on the same analyser:** always that gas's fit.
+
+With a spectral assessment file selected, each row also shows the gas's own `Fn` and `fc` from the file, and marks the fit when it looks implausible. A line beside the button names those gases.
+
+**Automatically use a donor gas for implausible transfer functions:** (`sa_auto_source`, off by default) A gas left on **Automatic** takes the fit of the best-resolved gas on its analyser (the one with the highest `Fn`) when its own fit looks implausible:
+
+- it has no positive cut-off, or `Fn` is below 0.2, or
+- its cut-off is more than four times higher or lower than that gas's.
+
+One analyser gives one response, so the cut-offs of its gases should agree. The rule is applied for each month class. The option is off and greyed while the run creates the spectral assessment (the pre-processing run of the [Assessment run mode](#assessment-run-mode)), because that run is where each gas's own fit is made and judged.
+
+In both cases:
+
+- The choice applies when the fluxes are corrected, whether the fits come from the assessment file or are computed in the same run.
+- The spectral assessment file always keeps each gas's own fit.
+- A gas whose chosen source has no fit for a month is corrected with the analytic method for that month, not with its own fit.
+- A gas keeps its own flux limits for the Fratini et al. (2012) method.
+
+Each setting is stored per gas as `gas_<i>_sa_source` in `[FluxCorrection_SpectralAnalysis_General]`: absent for automatic, `0` for the gas's own fit, and otherwise the gas record it takes the fit from.
+
+The run log lists every gas that takes another gas's fit, or would, with both fits. The run then ends with a **Suggested settings** block. It is the last message before "Program EddyFlow executed gracefully" and gathers every suggestion the run made: the transfer-function sources and the flux limits for the spectral assessment. Only `fc` enters the correction; `Fn` is shown because the rule uses it to judge the fit. A source that automatic selection applied in every month is saved into the `processing_*.eddyflow` project in the output folder as `gas_<i>_sa_source`, so the project kept with the results names what corrected them. With **Automatically configure spectral assessment after this run** on, the sources that would have been taken are written there too, as they are for flux limits.
+
 ### Spectra, cospectra QA/QC, and attenuation assessment
 
 This table sets, for every quantity and gas of the project, which spectra and cospectra enter the ensemble averages and over which frequency range the transfer function is fitted. **Restore Default Values** on the title row resets the whole table; each gas returns to the default for its own species. Rows: **Friction velocity**, **Latent heat flux** (only if the project measures water vapour), **Sensible heat flux**, and one row `<gas> flux` for every gas record that has a column in the raw data (two analysers measuring CO2 get two rows, labelled with the analyser). Columns:
@@ -91,7 +126,7 @@ The default offered is scaled to match. (Previously the defaults of COS and N2O 
 
 The three radio buttons of the Output Files page configure the whole run around producing or consuming a spectral assessment file. Selecting one applies all its settings together as a single change.
 
-- **Pre-processing run (Create Spectral Assessment File if possible):** Prepares a run that creates a new spectral assessment file if enough data are available. It selects an in situ low-pass method if none is selected (Fratini et al. 2012 by default), sets **Binned spectra files not available**, turns on the binned (co)spectra and the full w/Ts cospectra outputs, sets **Full w/Ts cospectra files not available**, and turns off the Vickers and Mahrt filter and the Foken filter for moderate quality, so that the assessment sees all spectra that pass the flux limits. It locks settings that must stay fixed during the run. It is refused with a warning titled "Create Spectral Assessment File" if there are no raw data, the assessment period is invalid, the period holds fewer averaging periods than **Minimum number of (co)spectra for valid averages**, or a chosen binned or full cospectra folder is not valid.
+- **Pre-processing run (Create Spectral Assessment File if possible):** Prepares a run that creates a new spectral assessment file if enough data are available. It selects an in situ low-pass method if none is selected (Fratini et al. 2012 by default), sets **Binned spectra files not available**, turns on the binned (co)spectra and the full w/Ts cospectra outputs, sets **Full w/Ts cospectra files not available**, and turns off the Vickers and Mahrt filter and the Foken filter for moderate quality, so that the assessment sees all spectra that pass the flux limits. It locks settings that must stay fixed during the run, and turns off **Automatically use a donor gas for implausible transfer functions** (see [Taking a gas's transfer function from another gas on the same analyser](#taking-a-gass-transfer-function-from-another-gas-on-the-same-analyser)). It is refused with a warning titled "Create Spectral Assessment File" if there are no raw data, the assessment period is invalid, the period holds fewer averaging periods than **Minimum number of (co)spectra for valid averages**, or a chosen binned or full cospectra folder is not valid.
 - **Production run:** Prepares a normal run that uses existing assessment inputs and production QA/QC defaults: an in situ low-pass method is selected (Fratini by default if none), **Binned spectra files available** and **Full w/Ts cospectra files available** are set, the assessment file option is set to use an existing file, and the (co)spectra filters of Vickers and Mahrt and of Foken (low and moderate quality) are turned on. Ensemble spectra and cospectra and full-spectra outputs are turned off. Normal output choices remain available.
 - **Default, all options available:** Applies no preset; everything is controlled manually from the Output Files page and this page.
 

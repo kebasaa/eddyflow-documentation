@@ -2,6 +2,17 @@
 
 EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting with version 7.0.4. This is why the version numbering below jumps from the EddyPro-era `.9` (i.e. 7.0.9) directly to `7.0.4`, and why entries from 7.0.4 onward use full `x.y.z` version numbers instead of the decimal-suffix shorthand used in older EddyPro-era entries below.
 
+## Unreleased
+
+Engine:
+
+- New feature: A gas can be corrected with the in situ transfer function of another gas on the same analyser (`gas_<i>_sa_source`). Water never takes part, and a pairing across analysers is refused. With `sa_auto_source` on, a gas left on automatic takes the best-resolved gas's fit when its own looks implausible (`Fn` below 0.2, or a cut-off more than four times off). A source applied this way in every month is saved into the output `processing_*.eddyflow`. See [Taking a gas's transfer function from another gas on the same analyser](spectral-corrections.md#taking-a-gass-transfer-function-from-another-gas-on-the-same-analyser).
+- Change: Every suggestion a run makes (transfer-function sources and flux limits for the spectral assessment) is printed together as the last message before "Program EddyFlow executed gracefully".
+
+GUI:
+
+- New feature: **Gas Sources...** and **Automatically use a donor gas for implausible transfer functions** in the assessment section of Spectral Corrections. With an assessment file selected, each gas's own `Fn` and `fc` are shown and implausible fits are marked. The automatic option is off during the pre-processing run.
+
 ## 8.1.10
 
 GUI:

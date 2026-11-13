@@ -45,4 +45,6 @@ The minimum flux values are entered per gas in the table **Spectra, cospectra QA
 
 If the acquisition rate of the files, or of an analyser inside the files, changes during the run, the assessment is done separately at each rate and each period is corrected with the result for its own rate; a gas whose fitted cut-off is above its own Nyquist frequency is corrected with the analytic method. See [Mixed acquisition rates](mixed-acquisition-rates.md#top).
 
+A gas whose own fit follows noise, such as COS or N2O on a laser analyser, can be corrected with the transfer function of another gas on the same analyser, chosen per gas with **Gas Sources...** or automatically with **Automatically use a donor gas for implausible transfer functions**. Water never takes part. See [Taking a gas's transfer function from another gas on the same analyser](spectral-corrections.md#taking-a-gass-transfer-function-from-another-gas-on-the-same-analyser).
+
 The assessment file, the binned cospectra folder and the full cospectra folder can be chosen from a shared Google Drive or Dropbox folder with the **Remote drive...** button; see [Remote folders](remote-folders.md#top).
