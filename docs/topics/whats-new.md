@@ -15,6 +15,10 @@ Engine:
 - New feature: Two optional column groups at the end of the FLUXNET file, after innFLUX, each off by default: `W_THETA`/`W_THETA_V` (`out_theta_flux`) and the far-lag noise mean, SD and flux signal-to-noise ratio of the Langford limit of detection (`out_lod_noise_stats`). See [Full output](output-files-full-output.md#top).
 - New feature: A gas can be corrected with the in situ transfer function of another gas on the same analyser (`gas_<i>_sa_source`). Water never takes part, and a pairing across analysers is refused. With `sa_auto_source` on, a gas left on automatic takes the best-resolved gas's fit when its own looks implausible (`Fn` below 0.2, or a cut-off more than four times off). A source applied this way in every month is saved into the output `processing_*.eddyflow`. See [Taking a gas's transfer function from another gas on the same analyser](spectral-corrections.md#taking-a-gass-transfer-function-from-another-gas-on-the-same-analyser).
 - Change: Every suggestion a run makes (transfer-function sources and flux limits for the spectral assessment) is printed together as the last message before "Program EddyFlow executed gracefully".
+- New feature: `power_of_two=2` computes the (co)spectra on the largest number of records with no prime factor above 13: nearly as fast as a power of two, but at most 1% of a period is left out (0.15% on average), where a power of two leaves out 9% of 30 minutes at 20 Hz and 43% at 32 Hz. An engine from before reads 2 as "all records".
+- Fix: (Co)spectra are computed on one stretch where every variable has data, so each gas stays in step with *w*. A variable whose first records were missing, filtered, or left empty by a negative time lag used to be shifted against *w* by that many records, in its cospectrum and in the covariance it was normalised by. Binned and full (co)spectra, ogives and the in situ transfer functions fitted from them change for the affected periods; fluxes do not.
+- Fix: The "denoised ensemble averaged spectrum" columns of the spectral assessment showed the raw spectra whenever a later gas slot had no noise range. The fitted transfer functions were not affected.
+- Fix: A PWB half-hourly time-lag table with gap-filled periods could not be read back (its `corr_pw` and `cv_99` columns held asterisks), so a run reusing it stopped before its first period. Such tables are now read as they are, the columns are written as -9999.000000, and every reason a table is refused is logged.
 
 GUI:
 
@@ -23,6 +27,7 @@ GUI:
 - New feature: **Cumulated covariance (innFLUX, Striednig et al. 2020)** in the time lag method list, with its settings and the clock-drift reference gases under **Time Lag Optimization Settings...**.
 - New feature: **Peak smoothing** and **Peak sign** under **Subtract the cross-covariance baseline** (Advanced Settings > Processing Options), and two checkboxes under **Fluxnet output settings** for the potential temperature fluxes and the detection-limit noise and flux signal-to-noise ratio. All off by default; every tooltip names the source (innFLUX, Striednig et al. 2020).
 - New feature: **Gas Sources...** and **Automatically use a donor gas for implausible transfer functions** in the assessment section of Spectral Corrections. With an assessment file selected, each gas's own `Fn` and `fc` are shown and implausible fits are marked. The automatic option is off during the pre-processing run.
+- New feature: **Use nearly all samples, at a fast FFT length**, beside **Use power-of-two samples to speed up the FFT** (Advanced Settings > Spectral Analysis and Corrections). Ticking one unticks the other; with neither, every sample is used.
 
 ## 8.1.10
 

@@ -8,7 +8,10 @@ However, the full (co)spectra dataset is difficult to handle because of the size
 
 Calculation of the full (co)spectra involves the following sequence of operations:
 
-1. First, if one selects this option, raw time series are limited to a number of records equal to the power-of-two closest to the available number of records for the current flux averaging period. This step guarantees that the Fourier transforms are performed at the fastest speed possible. If you do not select this option, all available samples are used, but the computation slows down.
+1. First, the time series of all variables are cut to the stretch on which every one of them has data, so that each gas stays in step with *w*. Records missing or removed at the start or end of a variable, and the records a time-lag compensation leaves empty, fall outside it; gaps inside it are filled by linear interpolation. Then, depending on the options **Use power-of-two samples to speed up the FFT** and **Use nearly all samples, at a fast FFT length** (Advanced Settings > Spectral Analysis and Corrections; only one can be selected):
+    * *Power of two*: the series are limited to the largest power of two not exceeding the available number of records. The Fourier transform is then as fast as it can be, but up to half of the period can be left out: 32768 of the 36000 records of 30 minutes at 20 Hz (91%), and of the 57600 records of 30 minutes at 32 Hz (57%).
+    * *Fast FFT length*: the series are limited to the largest number of records, not exceeding those available, that has no prime factor larger than 13. The Fourier transform is nearly as fast as with a power of two, and at most 1% of the records are left out (0.15% on average): 36000 records stay 36000.
+    * *Neither*: all available records are used. This can be very slow when their number has a large prime factor, which is more likely once a time lag has removed a few records at one end.
 2. If applicable, statistics (variances and covariances) are now re-evaluated on the reduced time series and used later for (co)spectra normalization.
 3. Fourier transform is performed by means of an FFT (Fast Fourier Transform) algorithm.
 4. Full (co)spectra can now be calculated and output as selected by the user.
