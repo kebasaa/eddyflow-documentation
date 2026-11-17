@@ -60,7 +60,7 @@ When the loop runs, the full output and FLUXNET files get an extra column, `corr
 
 **Spectral assessment file not available:** The assessment is performed as an intermediate step, after all binned (co)spectra of the current dataset have been calculated and before the fluxes are calculated and corrected.
 
-**Automatically configure spectral assessment after this run:** When an on-the-fly assessment finds eligible spectra that were excluded by the flux limits, saves data-driven flux-limit recommendations to the output processing project. The current run is not changed; rerun using the generated processing project.
+With **Spectral assessment file not available**, the option **Automatically configure spectral assessment after this run** on the Output Files page saves the flux limits and transfer-function sources the assessment recommends to the output processing project; see [Assessment file outputs](output-files.md#assessment-file-outputs).
 
 **Minimum number of (co)spectra for valid averages:** (`sa_min_smpl`) The minimum number of spectra that must be found in each class for the corresponding ensemble average to be valid. Classes are currently defined only for H2O with respect to ambient relative humidity: 9 classes between RH = 5 % and RH = 95 %. A number that is too high may leave some classes without an average; one that is too small gives a poor characterisation of the average spectra. The higher the number, the longer the period needed. With several acquisition rates the count applies to each rate separately.
 
@@ -101,7 +101,7 @@ In both cases:
 
 Each setting is stored per gas as `gas_<i>_sa_source` in `[FluxCorrection_SpectralAnalysis_General]`: absent for automatic, `0` for the gas's own fit, and otherwise the gas record it takes the fit from.
 
-The run log lists every gas that takes another gas's fit, or would, with both fits. The run then ends with a **Suggested settings** block. It is the last message before "Program EddyFlow executed gracefully" and gathers every suggestion the run made: the transfer-function sources and the flux limits for the spectral assessment. Only `fc` enters the correction; `Fn` is shown because the rule uses it to judge the fit. A source that automatic selection applied in every month is saved into the `processing_*.eddyflow` project in the output folder as `gas_<i>_sa_source`, so the project kept with the results names what corrected them. With **Automatically configure spectral assessment after this run** on, the sources that would have been taken are written there too, as they are for flux limits.
+The run log lists every gas that takes another gas's fit, or would, with both fits. The run then ends with a **Suggested settings** block. It is the last message before "Program EddyFlow executed gracefully" and gathers every suggestion the run made: the transfer-function sources and the flux limits for the spectral assessment. Only `fc` enters the correction; `Fn` is shown because the rule uses it to judge the fit. A source that automatic selection applied in every month is saved into the `processing_*.eddyflow` project in the output folder as `gas_<i>_sa_source`, so the project kept with the results names what corrected them. With **Automatically configure spectral assessment after this run** (Output Files > Assessment File Outputs) on, the sources that would have been taken are written there too, as they are for flux limits.
 
 ### Spectra, cospectra QA/QC, and attenuation assessment
 

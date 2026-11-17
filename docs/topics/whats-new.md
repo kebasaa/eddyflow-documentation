@@ -28,6 +28,7 @@ GUI:
 - New feature: **Peak smoothing** and **Peak sign** under **Subtract the cross-covariance baseline** (Advanced Settings > Processing Options), and two checkboxes under **Fluxnet output settings** for the potential temperature fluxes and the detection-limit noise and flux signal-to-noise ratio. All off by default; every tooltip names the source (innFLUX, Striednig et al. 2020).
 - New feature: **Gas Sources...** and **Automatically use a donor gas for implausible transfer functions** in the assessment section of Spectral Corrections. With an assessment file selected, each gas's own `Fn` and `fc` are shown and implausible fits are marked. The automatic option is off during the pre-processing run.
 - New feature: **Use nearly all samples, at a fast FFT length**, beside **Use power-of-two samples to speed up the FFT** (Advanced Settings > Spectral Analysis and Corrections). Ticking one unticks the other; with neither, every sample is used.
+- Change: **Automatically configure spectral assessment after this run** moves from Spectral Analysis and Corrections to Output Files, under **Assessment File Outputs**, beside the run modes. The project key `automatic_spectra_config` is unchanged.
 
 ## 8.1.10
 

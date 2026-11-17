@@ -56,6 +56,8 @@ Two related checkboxes run only one assessment step in isolation:
 - **Create timelag file only:** (`tlag_assessment_only`) Runs only the step that creates a time lag assessment file. Requires **Time lags compensation** to be enabled with either **Automatic time lag optimization** or **Pre-whitening block-bootstrap** selected. It is unavailable while the pre-processing or production run mode, or SmartFlux configuration mode, is active.
 - **Create planar fit file only:** (`rot_pf_assessment_only`) Runs only the step that creates a planar fit assessment file. Requires a planar fit rotation method to be enabled with **Planar fit file not available** selected in the Planar Fit Settings. It is unavailable under the same conditions.
 
+**Automatically configure spectral assessment after this run:** (`automatic_spectra_config`) When an on-the-fly assessment finds eligible spectra that were excluded by the flux limits, saves data-driven flux-limit recommendations to the output processing project (`processing_*.eddyflow` in the output folder), together with the transfer-function sources it would take. The current run is not changed; rerun using the generated processing project. It acts in any run that makes a spectral assessment: a **Pre-processing run**, or **Default, all options available** with **Spectral assessment file not available** selected on **Spectral Analysis and Corrections**.
+
 ## Results files and options
 
 **Full Output:** This is the primary EddyFlow results file. It contains fluxes, quality flags, micrometeorological variables, gas concentrations and densities, footprint estimations and diagnostic information along with ancillary variables such as uncorrected fluxes, main statistics, etc.
