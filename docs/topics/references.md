@@ -144,9 +144,15 @@
 
 56a. <span id="Spirig2005"></span> [Spirig, C., A. Neftel, C. Ammann, J. Dommen, W. Grabmer, A. Thielmann, A. Schaub, J. Beauchamp, A. Wisthaler, and A. Hansel. 2005. Eddy covariance flux measurements of biogenic VOCs during ECHO 2003 using proton transfer reaction mass spectrometry. Atmospheric Chemistry and Physics, 5: 465-481.](https://doi.org/10.5194/acp-5-465-2005)
 
+56b. <span id="Striednig2020"></span> [Striednig, M., M. Graus, T. D. Märk, and T. G. Karl. 2020. InnFLUX – an open-source code for conventional and disjunct eddy covariance analysis of trace gas measurements: an urban test case. Atmospheric Measurement Techniques, 13: 1447-1465.](https://doi.org/10.5194/amt-13-1447-2020)
+
+56c. <span id="innFLUX"></span> innFLUX v1.2.0 (2023-01-14), MATLAB code, University of Innsbruck. Release notes: v1.2.0 added the `driftfix` clock-drift tool, based on a routine by M. Graus. Not described in Striednig et al. (2020).
+
 57. <span id="Stull"></span> [Stull, R. B. 1988. An Introduction to Boundary-Layer Meteorology. Dordrecht, The Netherlands: Kluwer Academic.](http://www.springer.com/earth+sciences+and+geography/meteorology+&+climatology/book/978-90-277-2769-5#)
 57a. <span id="Su2004"></span> Su, H.-B., H. P. Schmid, C. S. B. Grimmond, C. S. Vogel, and A. J. Oliphant. 2004. Spectral characteristics and correction of long-term eddy-covariance measurements over two mixed hardwood forests in non-flat terrain. Boundary-Layer Meteorology, 110: 213-253.
 
+
+57b. <span id="Taipale2010"></span> [Taipale, R., T. M. Ruuskanen, and J. Rinne. 2010. Lag time determination in DEC measurements with PTR-MS. Atmospheric Measurement Techniques, 3: 853-862.](https://doi.org/10.5194/amt-3-853-2010)
 
 58. <span id="Tanner"></span> [Tanner, B. D., E. Swiatek, J. P. Greene. 1993. Density fluctuations and use of the krypton hygrometer in surface flux measurements, in: Management of Irrigation and Drainage Systems: Integrated Perspectives, eds. R. G. Allen. American Society of Civil Engineers. New York. pp. 945-952.](http://cedb.asce.org/cgi/WWWdisplay.cgi?85234)
 

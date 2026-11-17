@@ -121,6 +121,32 @@ The lag selected can differ from the plain maximum; the covariance reported at t
 - It does nothing with **Constant**, which does not search.
 - A window that is too wide for the lag structure still gives a poor chord; keep the **Minimum** and **Maximum time lags** plausible.
 
+## Smoothed peak search (innFLUX)
+
+**Origin:** innFLUX, [Striednig et al. (2020)](references.md#Striednig2020), Sect. 2.3.2, and its routine `find_covariance_peak.m` (innFLUX v1.2.0, University of Innsbruck). Smoothing the cross-covariance before the peak is taken follows [Taipale et al. (2010)](references.md#Taipale2010).
+
+Project-file keys `covmax_smooth_len` and `covmax_peak_sign` in `[RawProcess_Settings]`, interface labels **Peak smoothing** and **Peak sign** under **Subtract the cross-covariance baseline**. **Both are off by default**, and off the lag is chosen exactly as before. Like the baseline subtraction, they modify the two covariance maximization methods; they are not a method of their own.
+
+**Peak smoothing** (`covmax_smooth_len`, rows; 0 is off) smooths the cross-covariance function with a normalised Hamming window of that many rows before the extremum is taken. The window runs forwards and backwards (MATLAB `filtfilt`), so it does not move a peak. innFLUX uses 15 rows. A noisy function then gives one clear peak rather than the highest of several spikes.
+
+**Peak sign** (`covmax_peak_sign`) chooses which extremum is the lag:
+
+| Value | Interface | Lag at |
+|---|---|---|
+| 0 | Largest absolute covariance | the largest \|cov\| (default, as before) |
+| 1 | Largest positive covariance | the largest cov |
+| 2 | Decided by the derivative (innFLUX) | the largest cov if the function rises to a peak, the most negative cov if it falls to a trough |
+
+For value 2, innFLUX looks at the first difference of the cross-covariance, smoothed by a 100-row moving average: around a positive peak it reaches its maximum before its minimum, around a negative one the other way round. EddyFlow applies the same rule on its own lag axis (a positive lag means the scalar is delayed), on which the ordering reads the same.
+
+**How it is computed.** The cross-covariance is computed a little beyond each end of the search window (the smoothing length, or 100 rows for the derivative rule), so the values searched are never affected by how the smoothing treats the ends of the function. The lags agree exactly with a line-by-line port of innFLUX's routine on 360 test functions (`tests/innflux/compare.py` in the engine repository).
+
+**Limitations.**
+
+- Ignored under stochastic detrending, which detrends each shifted window on its own; the run log says so.
+- With **Subtract the cross-covariance baseline** on as well, the chord is subtracted from the smoothed function.
+- Where the window comes close to the length of the averaging period, smoothed values near its ends cannot be formed and are not chosen.
+
 ## Conditional lag borrowing
 
 Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `tlag_borrow_donor`, `tlag_borrow_pairs`; interface controls **Borrow a tube-mate's lag below the detection limit**, **Detection limits to clear**, **Judged against**, **Borrow from** (see [Advanced settings: processing options](raw-processing-options.md#conditional-lag-borrowing)). Off by default.
