@@ -95,7 +95,7 @@ Describe gas analyzers used at the EC station to collect data you want to proces
 
 !!! note
 
-    EddyFlow supports multiple gas analyzers and hygrometers at the same station, for a combined total of up to 64 gas channels across all instruments. If your station has several instruments measuring the same or different species (for example, two CO2/H2O analyzers, or a CO2/H2O analyzer plus a separate CH4 or N2O analyzer), describe each instrument as its own entry using the **+** button.
+    EddyFlow supports multiple gas analyzers and hygrometers at the same station, for a combined total of up to 128 gas channels across all instruments. If your station has several instruments measuring the same or different species (for example, two CO2/H2O analyzers, or a CO2/H2O analyzer plus a separate CH4 or N2O analyzer), describe each instrument as its own entry using the **+** button.
 
 **Manufacturer:** Specify the manufacturer of the gas analyzer. For gas analyzers other than LI-COR, select *Other*. This field is mandatory.
 

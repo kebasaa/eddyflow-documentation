@@ -6,6 +6,8 @@ EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting wi
 
 Engine:
 
+- Change: Up to 128 gases per project (was 64), 320 raw columns and 64 custom variables, so a PTR-MS dataset with a tracer per mass fits one run. Output depends only on the gases a project configures. Processing is a little faster per period; an engine process uses about 80 MB more memory.
+- Fix: A project with many gases no longer has its Fluxnet header cut: the output line length now grows with the gas ceiling.
 - New feature: Planar-fit moving windows and a bootstrap of the tilt angles, after innFLUX ([Striednig et al. 2020](references.md#Striednig2020)); both off by default, and recorded in the planar-fit file so it can be reused. See [Moving windows and tilt-angle uncertainty](planar-fit.md#moving-windows-and-tilt-angle-uncertainty-innflux).
 - New feature: Optional per-period cross-covariance functions, one file per period in `eddyflow_ccf`, for the gases that ask for them (`gas_<i>_out_ccf`; `out_ccf_max_lag_s`, `out_ccf_decim`), after innFLUX's step 1 files. Off by default. See [Output files](outputs.md#top).
 - New feature: Time lag method 6, the cumulated covariance after innFLUX ([Striednig et al. 2020](references.md#Striednig2020), after [Park et al. 2013](references.md#Park2013)), with an optional clock-drift correction after innFLUX v1.2.0's `driftfix` (unpublished). Off unless chosen. See [Cumulated covariance (innFLUX)](time-lag-detect-correct.md#cumulated-covariance-innflux).
