@@ -6,6 +6,9 @@ EddyFlow is an open-source fork of EddyPro, maintained by ETH Zurich starting wi
 
 Engine:
 
+- New feature: Planar-fit moving windows and a bootstrap of the tilt angles, after innFLUX ([Striednig et al. 2020](references.md#Striednig2020)); both off by default, and recorded in the planar-fit file so it can be reused. See [Moving windows and tilt-angle uncertainty](planar-fit.md#moving-windows-and-tilt-angle-uncertainty-innflux).
+- New feature: Optional per-period cross-covariance functions, one file per period in `eddyflow_ccf`, for the gases that ask for them (`gas_<i>_out_ccf`; `out_ccf_max_lag_s`, `out_ccf_decim`), after innFLUX's step 1 files. Off by default. See [Output files](outputs.md#top).
+- New feature: Time lag method 6, the cumulated covariance after innFLUX ([Striednig et al. 2020](references.md#Striednig2020), after [Park et al. 2013](references.md#Park2013)), with an optional clock-drift correction after innFLUX v1.2.0's `driftfix` (unpublished). Off unless chosen. See [Cumulated covariance (innFLUX)](time-lag-detect-correct.md#cumulated-covariance-innflux).
 - New feature: Smoothed covariance peak search after innFLUX ([Striednig et al. 2020](references.md#Striednig2020)), off by default: `covmax_smooth_len` smooths the cross-covariance with a Hamming window before the lag is taken, and `covmax_peak_sign` chooses the largest absolute, the largest positive, or (innFLUX's rule) the derivative-decided extremum. See [Smoothed peak search (innFLUX)](time-lag-detect-correct.md#smoothed-peak-search-innflux).
 - New feature: Two optional column groups at the end of the FLUXNET file, after innFLUX, each off by default: `W_THETA`/`W_THETA_V` (`out_theta_flux`) and the far-lag noise mean, SD and flux signal-to-noise ratio of the Langford limit of detection (`out_lod_noise_stats`). See [Full output](output-files-full-output.md#top).
 - New feature: A gas can be corrected with the in situ transfer function of another gas on the same analyser (`gas_<i>_sa_source`). Water never takes part, and a pairing across analysers is refused. With `sa_auto_source` on, a gas left on automatic takes the best-resolved gas's fit when its own looks implausible (`Fn` below 0.2, or a cut-off more than four times off). A source applied this way in every month is saved into the output `processing_*.eddyflow`. See [Taking a gas's transfer function from another gas on the same analyser](spectral-corrections.md#taking-a-gass-transfer-function-from-another-gas-on-the-same-analyser).
@@ -13,6 +16,9 @@ Engine:
 
 GUI:
 
+- New feature: **innFLUX extras** in the Planar Fit Settings: moving windows and bootstrap resamples, both off by default.
+- New feature: **Cross-covariance functions (innFLUX)** on the Output Files page: a list of gases, none ticked by default, the half-width and every n-th lag.
+- New feature: **Cumulated covariance (innFLUX, Striednig et al. 2020)** in the time lag method list, with its settings and the clock-drift reference gases under **Time Lag Optimization Settings...**.
 - New feature: **Peak smoothing** and **Peak sign** under **Subtract the cross-covariance baseline** (Advanced Settings > Processing Options), and two checkboxes under **Fluxnet output settings** for the potential temperature fluxes and the detection-limit noise and flux signal-to-noise ratio. All off by default; every tooltip names the source (innFLUX, Striednig et al. 2020).
 - New feature: **Gas Sources...** and **Automatically use a donor gas for implausible transfer functions** in the assessment section of Spectral Corrections. With an assessment file selected, each gas's own `Fn` and `fc` are shown and implausible fits are marked. The automatic option is off during the pre-processing run.
 

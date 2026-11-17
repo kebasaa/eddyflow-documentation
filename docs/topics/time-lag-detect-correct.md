@@ -147,6 +147,63 @@ For value 2, innFLUX looks at the first difference of the cross-covariance, smoo
 - With **Subtract the cross-covariance baseline** on as well, the chord is subtracted from the smoothed function.
 - Where the window comes close to the length of the averaging period, smoothed values near its ends cannot be formed and are not chosen.
 
+## Cumulated covariance (innFLUX)
+
+**Origin:** innFLUX, [Striednig et al. (2020)](references.md#Striednig2020), Sect. 2.3.2 (`innFLUX_step2.m`), who credit [Park et al. (2013)](references.md#Park2013) with summing covariance functions. The clock-drift correction follows the `driftfix` tool of [innFLUX v1.2.0](references.md#innFLUX) (unpublished; a routine by M. Graus adapted by M. Striednig), with robust LOWESS after [Cleveland (1979)](references.md#Cleveland1979).
+
+Time lag method 6, `tlag_meth=6`, interface label **Cumulated covariance (innFLUX, Striednig et al. 2020)**. It is **off by default**, like every method other than the project's own choice. Its settings are under **Time Lag Optimization Settings...** while it is selected.
+
+**Idea.** A weak flux has no peak that a single averaging period can find, and that covers most trace gases a PTR-MS measures. Taking the largest |cov| period by period then picks noise, which also biases the flux upwards. Summed over many periods the noise averages out, and the transport lag stands out. In a closed-path system that lag is nearly constant.
+
+**Procedure.**
+
+1. A pre-pass over the run computes, for every period and gas, the cross-covariance over the gas's time lag optimization window. Covariance maximization then picks its own lag inside that window. The pre-pass also records four filter values for the period:
+    - u*;
+    - the completeness of the sonic data, as a share of the period's expected records;
+    - the completeness of the gas at its own sampling rate;
+    - the steady-state test's relative deviation: the mean of five sub-period covariances against the whole period's, as innFLUX computes it.
+2. For each gas and each date segment, the absolute cross-covariance functions of every period that passes all four filters are summed.
+3. The sum is smoothed with a Hamming window and the lag at its largest value is taken. That lag is used for every period of the segment.
+
+| Key | Default (innFLUX's) | Meaning |
+|---|---|---|
+| `tlag_cum_filter_len` | 15 rows | Hamming smoothing of the summed function (0 off) |
+| `tlag_cum_min_ustar` | 0.3 m/s | a period is summed only above this u* |
+| `tlag_cum_min_compl_sonic` | 0.95 | and above this sonic completeness |
+| `tlag_cum_min_compl_gas` | 0.5 | and above this gas completeness |
+| `tlag_cum_max_sst` | 0.3 | and below this steady-state deviation |
+| `tlag_cum_segments` | empty | segment boundaries, `yyyy-mm-ddTHH:MM`, comma-separated. Empty means one lag over the whole run. A period belongs to the segment its start time falls in. |
+
+A gas with no period that passes in a segment keeps its nominal lag there, and is flagged as the default.
+
+### Clock-drift correction
+
+When the clock of the data logger drifts against the analyser's, the time lag drifts with it, and it jumps wherever the clock is reset. With **Correct for clock drift** (`tlag_drift_meth=1`; off by default) the procedure is:
+
+1. Collect the per-period lags of the gases marked as references (`gas_<i>_tlag_drift_ref=1`, the **Reference gases** list). Only periods that pass the filters above are used.
+2. Smooth them over one day with a robust LOWESS.
+3. Look for jumps, where that one-day curve rises faster than `tlag_drift_jump_thr` (default −0.8 s per day).
+4. Smooth again over `tlag_drift_span_d` days (default 5) within each stretch between jumps.
+
+The drift is taken relative to its median. It is applied to every gas on the reference gases' analyser:
+
+- every period's function is shifted by the drift before summing;
+- the drift is added back to the summed lag, which is innFLUX's `lagtime3`.
+
+`tlag_drift_max_s` (default 10 s) bounds the drift. The pre-pass keeps the functions that much wider, so a larger value costs memory and disk space.
+
+innFLUX places each jump with MATLAB's `risetime`. EddyFlow uses the midpoint of the first 10 % and 90 % crossings within two days instead.
+
+**Outputs** (in the output folder):
+
+- `<id>_cumcov_timelags_<stamp>.csv`: one lag per gas and segment, with the number of periods summed.
+- `<id>_cumcov_function_<gas>_<stamp>.csv`: the summed absolute and signed functions per segment, by lag.
+- `<id>_tlag_drift_<stamp>.csv`, with the drift correction: the drift for every period and gas.
+
+The method code in the Fluxnet file is 6.
+
+**Checks.** The drift estimate agrees with a port of innFLUX's MATLAB tool to 1e-12 s, and recovers an injected drift and jump to within 0.2 s RMS (`tests/innflux/compare.py` in the engine repository). A pre-pass split across processes gives the same sums as a serial one, because the records are summed in period order by the parent.
+
 ## Conditional lag borrowing
 
 Project-file keys `tlag_borrow_meth`, `tlag_borrow_snr`, `tlag_borrow_noise`, `tlag_borrow_donor`, `tlag_borrow_pairs`; interface controls **Borrow a tube-mate's lag below the detection limit**, **Detection limits to clear**, **Judged against**, **Borrow from** (see [Advanced settings: processing options](raw-processing-options.md#conditional-lag-borrowing)). Off by default.

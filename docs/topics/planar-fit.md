@@ -37,3 +37,30 @@ The proper rotation matrix will then be used for each flux averaging period, acc
 !!! note
 
     As of engine v8.1.0, the planar fit and time lag optimization pre-passes (Advanced Mode step 1) can be parallelised across multiple CPU cores. In the interface, tick **Parallelise the planar fit and time lag pre-passes** (see [Advanced settings: processing options](raw-processing-options.md#parallelise-the-planar-fit-and-time-lag-pre-passes)); on the command line use the `-j` / `--jobs` option (see [Command Line](command-line.md#top)). The planar-fit coefficients are identical to those of a serial run, and this can substantially speed up step 1 for large datasets.
+
+## Moving windows and tilt-angle uncertainty (innFLUX)
+
+**Origin:** innFLUX, [Striednig et al. (2020)](references.md#Striednig2020), Sect. 2.3.1 and Fig. 1 (`innFLUX_step0.m`), on the planar fit of [Wilczak et al. (2001)](references.md#Wilczak). Both options are **off by default**. They are set under **innFLUX extras** in the Planar Fit Settings.
+
+**Moving windows** (`pf_mw_num`, `pf_mw_width`; interface **Moving windows**, **Window width**):
+
+- They replace the sectors with N overlapping windows, centred every 360/N degrees.
+- Each window is fitted to every period whose wind direction lies within half the width of its centre.
+- A period is rotated with the window centred nearest its own wind direction.
+- innFLUX fits 360 windows of 30 degrees, one per degree. EddyFlow allows up to 360.
+- Because the windows overlap, neighbouring directions share most of their data. The tilt then changes smoothly with wind direction instead of jumping at sector boundaries.
+
+**Tilt-angle uncertainty** (`pf_boot_n`, `pf_boot_seed`; interface **Bootstrap resamples**, **Bootstrap seed**):
+
+- Each sector's or window's periods are resampled with replacement, and the plane is fitted again to each resample.
+- The standard deviations of the pitch and roll angles over the resamples are written to the planar-fit file. innFLUX uses 1000 resamples.
+- The rotation itself does not change.
+- The seed is applied per sector, so the same seed always gives the same uncertainties.
+
+**Reusing the file.** When either option is used, it is recorded in the planar-fit file:
+
+- moving windows as a `Moving_window_sectors:` line, followed by one row per window with its plane coefficients, tilt uncertainties and rotation matrix;
+- the bootstrap as a `Bootstrap:` line and a table after the rotation matrices.
+
+A reused file (**Planar fit file available**) is applied with the windows it holds, whatever the project's own settings say; the run log notes any difference. With both options off, the file is written exactly as before.
+

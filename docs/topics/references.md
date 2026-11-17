@@ -19,6 +19,8 @@
 6. <span id="Campbell"></span> [Campbell, G. S. and J. M. Norman. 1998. Introduction to Environmental Biophysics. New York, Springer Science.](http://www.springer.com/environment/paleoenvironmental+sciences/book/978-0-387-94937-6)
 6a. <span id="Chen2010"></span> [Chen, H., J. Winderlich, C. Gerbig, A. Hoefer, C. W. Rella, E. R. Crosson, A. D. Van Pelt, J. Steinbach, O. Kolle, V. Beck, B. C. Daube, E. W. Gottlieb, V. Y. Chow, G. W. Santoni, and S. C. Wofsy. 2010. High-accuracy continuous airborne measurements of greenhouse gases (CO2 and CH4) using the cavity ring-down spectroscopy (CRDS) technique. Atmospheric Measurement Techniques, 3: 375-386.](https://doi.org/10.5194/amt-3-375-2010)
 
+6a. <span id="Cleveland1979"></span> [Cleveland, W. S. 1979. Robust locally weighted regression and smoothing scatterplots. Journal of the American Statistical Association, 74: 829-836.](https://doi.org/10.1080/01621459.1979.10481038)
+
 6b. <span id="Cleveland1990"></span> [Cleveland, R. B., W. S. Cleveland, J. E. McRae, and I. Terpenning. 1990. STL: A seasonal-trend decomposition procedure based on loess. Journal of Official Statistics, 6(1): 3-73.](https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/stl-a-seasonal-trend-decomposition-procedure-based-on-loess.pdf)
 
 
@@ -130,6 +132,8 @@
 
 52a. <span id="Peltola2014"></span> [Peltola, O., A. Hensen, C. Helfter, L. Belelli Marchesini, F. C. Bosveld, W. C. M. van den Bulk, J. A. Elbers, S. Haapanala, J. Holst, T. Laurila, A. Lindroth, E. Nemitz, T. Röckmann, A. T. Vermeulen, and I. Mammarella. 2014. Evaluating the performance of commonly used gas analysers for methane eddy covariance flux measurements: the InGOS inter-comparison field experiment. Biogeosciences, 11: 3163-3186.](https://doi.org/10.5194/bg-11-3163-2014)
 52b. <span id="Nemitz2018"></span> [Nemitz, E., I. Mammarella, A. Ibrom, M. Aurela, G. G. Burba, S. Dengel, B. Gielen, A. Grelle, B. Heinesch, M. Herbst, L. Hörtnagl, L. Klemedtsson, A. Lindroth, A. Lohila, D. K. McDermitt, P. Meier, L. Merbold, D. Nelson, G. Nicolini, M. B. Nilsson, O. Peltola, J. Rinne, and M. Zahniser. 2018. Standardisation of eddy-covariance flux measurements of methane and nitrous oxide. International Agrophysics, 32(4): 517-549.](https://doi.org/10.1515/intag-2017-0042)
+
+52c. <span id="Park2013"></span> [Park, J.-H., A. H. Goldstein, J. Timkovsky, S. Fares, R. Weber, J. Karlik, and R. Holzinger. 2013. Eddy covariance emission and deposition flux measurements using proton transfer reaction - time of flight - mass spectrometry (PTR-TOF-MS): comparison with PTR-MS measured vertical gradients and fluxes. Atmospheric Chemistry and Physics, 13: 1439-1456.](https://doi.org/10.5194/acp-13-1439-2013)
 
 
 53. <span id="Rannik"></span> [Rannik, Ü. and T. Vesala. 1999. Autoregressive filtering versus linear detrending in estimation of fluxes by the eddy covariance method. Boundary-Layer Meteorology, 91: 258-280.](http://www.springerlink.com/content/ng463245216g6002/)
