@@ -23,7 +23,7 @@ Engine:
 GUI:
 
 - New feature: **innFLUX extras** in the Planar Fit Settings: moving windows and bootstrap resamples, both off by default.
-- New feature: **Cross-covariance functions (innFLUX)** on the Output Files page: a list of gases, none ticked by default, the half-width and every n-th lag.
+- New feature: **Cross-covariance functions (innFLUX)** on the Output Files page: one checkbox per gas, none ticked by default, the half-width and every n-th lag.
 - New feature: **Cumulated covariance (innFLUX, Striednig et al. 2020)** in the time lag method list, with its settings and the clock-drift reference gases under **Time Lag Optimization Settings...**.
 - New feature: **Peak smoothing** and **Peak sign** under **Subtract the cross-covariance baseline** (Advanced Settings > Processing Options), and two checkboxes under **Fluxnet output settings** for the potential temperature fluxes and the detection-limit noise and flux signal-to-noise ratio. All off by default; every tooltip names the source (innFLUX, Striednig et al. 2020).
 - New feature: **Gas Sources...** and **Automatically use a donor gas for implausible transfer functions** in the assessment section of Spectral Corrections. With an assessment file selected, each gas's own `Fn` and `fc` are shown and implausible fits are marked. The automatic option is off during the pre-processing run.
