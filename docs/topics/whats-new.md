@@ -19,6 +19,7 @@ Engine:
 - Fix: (Co)spectra are computed on one stretch where every variable has data, so each gas stays in step with *w*. A variable whose first records were missing, filtered, or left empty by a negative time lag used to be shifted against *w* by that many records, in its cospectrum and in the covariance it was normalised by. Binned and full (co)spectra, ogives and the in situ transfer functions fitted from them change for the affected periods; fluxes do not.
 - Fix: The "denoised ensemble averaged spectrum" columns of the spectral assessment showed the raw spectra whenever a later gas slot had no noise range. The fitted transfer functions were not affected.
 - Fix: A PWB half-hourly time-lag table with gap-filled periods could not be read back (its `corr_pw` and `cv_99` columns held asterisks), so a run reusing it stopped before its first period. Such tables are now read as they are, the columns are written as -9999.000000, and every reason a table is refused is logged.
+- Fix: A gas with no spectral transfer function of its own that takes a tube-mate's (Gas Sources, or automatic selection) gets an `Info>` line naming the donor instead of Warning(110). Reading a spectral assessment file no longer raises Warning(110), which describes an assessment made in the run; a file without a fit for some gases, and no tube-mate to take one from, raises the new Warning(111), which names them. See [Run errors](error-codes.md#top).
 
 GUI:
 
