@@ -31,6 +31,7 @@ GUI:
 - New feature: **Use nearly all samples, at a fast FFT length**, beside **Use power-of-two samples to speed up the FFT** (Advanced Settings > Spectral Analysis and Corrections). Ticking one unticks the other; with neither, every sample is used.
 - Change: **Automatically configure spectral assessment after this run** moves from Spectral Analysis and Corrections to Output Files, under **Assessment File Outputs**, beside the run modes. The project key `automatic_spectra_config` is unchanged.
 - New feature: Before an Advanced run, a moved or renamed planar fit, time lag or spectral assessment file opens an **Input Files Not Found** window instead of letting the engine stop on it. Each file has a line with **Browse...** and **Remote drive...**, pre-filled with a similar file found nearby and highlighted when it differs from the project's saved path; the project is saved with the new paths. See [Overview of advanced processing](advanced-mode.md#missing-planar-fit-time-lag-or-spectral-assessment-files).
+- Change: The **Pre-processing run** switches **Filter (co)spectra according to Vickers and Mahrt (1997) test results** on and locks it; it used to switch it off. Selecting it while any of the four tests the filter reads is off opens a note naming them. See [Output files](output-files.md#top).
 
 ## 8.1.10
 
